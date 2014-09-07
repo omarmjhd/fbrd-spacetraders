@@ -1,5 +1,17 @@
 package model;
 
+/**
+ * This class represents a Ship object. A ship contains cargo, weapons, shields,
+ * gadgets, and crew. It also has fuel, a purchasing price, and NPC disposition
+ * modifiers.
+ *
+ *
+ * It might be a good idea to use a custom linked list with a maximum size
+ * rather than arrays to store cargo
+ *
+ * @author ngraves3
+ *
+ */
 public class Ship {
 
     private String name;
@@ -20,6 +32,8 @@ public class Ship {
     private int numCrew = 0;
 
     private int maxFuel;
+
+    private int currentFuel;
 
     private int minTechLevel; // use for validation purposes
     private int fuelCost;
@@ -45,7 +59,12 @@ public class Ship {
         policeAggression = police;
         pirateAggression = pirate;
         this.size = size;
+        currentFuel = maxFuel;
     }
+
+    /*
+     * All ships are exactly the same except for stats
+     */
 
     /**
      * Makes a new "Flea" ship
@@ -93,63 +112,104 @@ public class Ship {
         return new Ship("Bumblebee", 25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
     }
 
+    /**
+     * Returns the number of empty slots for cargo
+     *
+     * @return number of empty slots for cargo
+     */
+    public int cargoRoomLeft() {
+        return cargo.length - numCargo;
+    }
+
+    /**
+     * Adds cargo to the ship
+     *
+     * @param item
+     */
+    public void addCargo(Goods item) throws IllegalStateException {
+        if (numCargo >= cargo.length) {
+            throw new IllegalStateException("Cargo bay is full");
+        }
+        cargo[numCargo] = item;
+        numCargo++;
+    }
+
+    /**
+     * Removes the last cargo from the ship
+     *
+     * @return Goods the good removed from cargo
+     */
+    public Goods removeCargo() throws IllegalStateException {
+        if (numCargo < 1) {
+            throw new IllegalStateException("No cargo in ship");
+        }
+        numCargo--;
+        Goods retval = cargo[numCargo];
+        cargo[numCargo] = null;
+        return retval;
+
+    }
+
+    /**
+     * Looks through the cargo to find the given item.
+     *
+     * @param item
+     *        the item to look for
+     * @return the matching item if found or null if no items match
+     * @throws IllegalStateException
+     *         if no cargo in ship
+     * @throws IllegalArgumentException
+     *         if item is null
+     */
+    public Goods removeCargo(Goods item) throws IllegalStateException, IllegalArgumentException {
+        if (numCargo < 1) {
+            throw new IllegalStateException("No cargo in ship");
+        } else if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+
+        for (int i = 0; i < cargo.length; i++) {
+            if (cargo[i].equals(item)) {
+                /*
+                 * cargo[i] == the item to search for. since items are same,
+                 * just return the item to search for
+                 */
+                cargo[i] = null;
+                return item;
+            }
+        }
+
+        /*
+         * No matching item found in the list
+         */
+        return null;
+    }
+
+    /*
+     * Getter methods below
+     */
+
     public String getName() {
         return name;
     }
 
-    public Goods[] getCargo() {
-        return cargo;
+    public int cargoSize() {
+        return cargo.length;
     }
 
-    public Weapon[] getWeapons() {
-        return weapons;
+    public int weaponsSize() {
+        return weapons.length;
     }
 
-    public Shield[] getShields() {
-        return shields;
+    public int shieldsSize() {
+        return shields.length;
     }
 
-    public Gadget[] getGadgets() {
-        return gadgets;
+    public int crewSize() {
+        return crew.length;
     }
 
-    public Crew[] getCrew() {
-        return crew;
-    }
-
-    public int getMaxFuel() {
-        return maxFuel;
-    }
-
-    public int getMinTechLevel() {
-        return minTechLevel;
-    }
-
-    public int getFuelCost() {
-        return fuelCost;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getBounty() {
-        return bounty;
-    }
-
-    public int getHullStrength() {
-        return hullStrength;
-    }
-
-    public int getPoliceAggression() {
-        return policeAggression;
-    }
-
-    public int getPirateAggression() {
-        return pirateAggression;
-    }
-
-    public int getSize() {
-        return size;
+    public int gadgetSize() {
+        return gadgets.length;
     }
 }
