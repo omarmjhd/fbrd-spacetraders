@@ -4,6 +4,7 @@
 .project
 .classpath
 bin/
+out/
 
 # generic files
 *~
