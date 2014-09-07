@@ -1,0 +1,17 @@
+# java files
+*.class
+*.iml
+.project
+.classpath
+bin/
+
+# generic files
+*~
+*.lock
+*.DS_Store
+*.sw
+*.out
+
+# gradle
+/.gradle
+/build
