@@ -1,6 +1,5 @@
 package view;
 
-import controller.Controller;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -11,22 +10,36 @@ import model.GameModel;
 
 import java.io.IOException;
 
+/**
+ * Main application class
+ *
+ * @author Joshua Winchester
+ */
 public class Main extends Application {
 
     private static Stage primaryStage;
-    private static Controller controller;
     private static GameModel game;
 
+    /**
+     * Starts the game
+     *
+     * @param primaryStage the Primary window where the game take place.
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         Main.primaryStage = primaryStage;
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
         Main.game = GameModel.getInstance();
 
-        setScene("screens/startscreen.fxml");
+        Main.setScene("screens/startscreen.fxml");
     }
 
+    /**
+     * Changes the scene currently displayed
+     *
+     * @param fxmlURI the URI of the .fxml file representing the scene
+     */
     public static void setScene(String fxmlURI) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -41,6 +54,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Exits the game
+     */
     @Override
     public void stop() {
         Platform.exit();
@@ -50,15 +66,21 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * Gets the primary window of the game
+     * @return the Games Stage
+     */
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Gets the Game model.
+     *
+     * @return The game model
+     */
     public static GameModel getGame() {
         return game;
     }
 
-    public static Controller getController() {
-        return controller;
-    }
 }

@@ -12,6 +12,11 @@ import view.Main;
 
 import javax.naming.OperationNotSupportedException;
 
+/**
+ * This class handles all button presses and handing of information from the model to the view.
+ *
+ * @author Joshua Winchester
+ */
 public class Controller {
 
     public Slider engSlide;
@@ -51,7 +56,11 @@ public class Controller {
         Main.setScene("screens/configscreen.fxml");
     }
 
-
+    /**
+     * Creates the Game from the slider values when the user presses the button.
+     *
+     * @param actionEvent
+     */
     public void createGame(ActionEvent actionEvent) {
         int pilotSkill = (int) pilotSlide.getValue();
         int fightSkill = (int) fightSlide.getValue();
@@ -92,6 +101,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Sends the user back to the main menu
+     *
+     * @param actionEvent
+     */
     public void returnToMainMenu(ActionEvent actionEvent) {
         Main.setScene("screens/startscreen.fxml");
     }
