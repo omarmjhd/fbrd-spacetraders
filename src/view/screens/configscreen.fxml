@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+   <children>
+      <Canvas height="480.0" layoutX="10.0" layoutY="16.0" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Text fontSmoothingType="LCD" layoutX="88.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Character!" wrappingWidth="464.13671875" AnchorPane.topAnchor="13.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
+               <stops>
+                  <Stop color="#bf0101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <font>
+            <Font name="Courier New Bold Italic" size="35.0" />
+         </font>
+      </Text>
+      <Button focusTraversable="false" layoutX="526.0" layoutY="428.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="GO!" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="Courier New Bold Italic" size="20.0" />
+         </font>
+      </Button>
+      <Label focusTraversable="false" layoutX="393.0" layoutY="129.0" text="Available Skill Points:" AnchorPane.rightAnchor="48.0">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="592.0" layoutY="129.0" text="30" AnchorPane.rightAnchor="29.0">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="105.0" layoutY="53.0" prefHeight="47.0" prefWidth="430.0" text="Use the sliders below to allocate your players skill points. Choose wisely you only have 30 skill points to use." wrapText="true">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="34.0" layoutY="189.0" prefHeight="249.0" prefWidth="325.0" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="34.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="75.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
+            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Engineering" textAlignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Trading" textAlignment="CENTER" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Fighting" textAlignment="CENTER" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Investing" textAlignment="CENTER" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Piloting" textAlignment="CENTER" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+      <TextField layoutX="105.0" layoutY="126.0" prefHeight="25.0" prefWidth="250.0" promptText="Character Name">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
