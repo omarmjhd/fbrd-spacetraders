@@ -82,4 +82,15 @@ public class Player {
         }
         addMoney(income);
     }
+
+    @Override
+    public String toString() {
+        String retval = "Name: " + name + "\n";
+        retval += "Piloting skill: " + PILOT_SKILL + "\n";
+        retval += "Fighting skill: " + FIGHT_SKILL + "\n";
+        retval += "Engineering skill: " + ENG_SKILL + "\n";
+        retval += "Trading Skill: " + TRADE_SKILL + "\n";
+        retval += "Investing Skill: " + INVEST_SKILL + "\n";
+        return retval;
+    }
 }

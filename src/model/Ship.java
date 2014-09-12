@@ -14,7 +14,11 @@ package model;
  */
 public class Ship {
 
-    private String name;
+    private enum ShipName {
+        Flea, Gnat, Firefly, Mosquito, Bumblebee;
+    }
+
+    private ShipName name;
 
     private Goods[] cargo;
     private int numCargo = 0;
@@ -44,7 +48,7 @@ public class Ship {
     private int pirateAggression;
     private int size;
 
-    private Ship(String name, int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
+    private Ship(ShipName name, int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
         this.name = name;
         cargo = new Goods[cargoSize];
         weapons = new Weapon[weaponSize];
@@ -72,7 +76,7 @@ public class Ship {
      * @return flea Ship
      */
     public static Ship makeFlea() {
-        return new Ship("Flea", 10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0);
+        return new Ship(ShipName.Flea, 10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0);
 
     }
 
@@ -82,7 +86,7 @@ public class Ship {
      * @return new Gnat ship
      */
     public static Ship makeGnat() {
-        return new Ship("Gnat", 15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1);
+        return new Ship(ShipName.Gnat, 15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1);
     }
 
     /**
@@ -91,7 +95,7 @@ public class Ship {
      * @return returns a new ship
      */
     public static Ship makeFirefly() {
-        return new Ship("Firefly", 20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1);
+        return new Ship(ShipName.Firefly, 20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1);
     }
 
     /**
@@ -100,7 +104,7 @@ public class Ship {
      * @return a new Ship
      */
     public static Ship makeMosquito() {
-        return new Ship("Mosquito", 15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1);
+        return new Ship(ShipName.Mosquito, 15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1);
     }
 
     /**
@@ -109,7 +113,7 @@ public class Ship {
      * @return a new Ship
      */
     public static Ship makeBumblebee() {
-        return new Ship("Bumblebee", 25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
+        return new Ship(ShipName.Bumblebee, 25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
     }
 
     /**
@@ -189,7 +193,7 @@ public class Ship {
      * Getter methods below
      */
 
-    public String getName() {
+    public ShipName getName() {
         return name;
     }
 
@@ -212,4 +216,5 @@ public class Ship {
     public int gadgetSize() {
         return gadgets.length;
     }
+
 }
