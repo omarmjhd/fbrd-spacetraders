@@ -1,6 +1,7 @@
 # java files
 *.class
 *.iml
+.idea/
 .project
 .classpath
 bin/
