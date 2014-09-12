@@ -1,51 +1,44 @@
 package view;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.GameModel;
 
 import java.io.IOException;
 
 public class Main extends Application {
 
-    protected Stage primaryStage;
-    private Controller controller;
+    private static Stage primaryStage;
+    private static Controller controller;
+    private static GameModel game;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.primaryStage = primaryStage;
+        Main.primaryStage = primaryStage;
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
+        Main.game = GameModel.getInstance();
 
-        initRootStage();
+        setScene("screens/startscreen.fxml");
     }
 
-    private void initRootStage() {
+    public static void setScene(String fxmlURI) {
         try {
-            // Loads the root layout from fxml file
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("screens/startscreen.fxml"));
+            loader.setLocation(Main.class.getResource(fxmlURI));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
+            Scene newPane = new Scene(root);
+            primaryStage.setScene(newPane);
             primaryStage.show();
-
-            controller = loader.getController();
-            controller.setMainApp(this);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void setScene(Scene scene) {
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
 
     @Override
@@ -57,7 +50,15 @@ public class Main extends Application {
         launch(args);
     }
 
-    public Stage getPrimaryStage() {
+    public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static GameModel getGame() {
+        return game;
+    }
+
+    public static Controller getController() {
+        return controller;
     }
 }

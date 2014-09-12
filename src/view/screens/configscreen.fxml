@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.canvas.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
-
-<AnchorPane maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <Canvas height="480.0" layoutX="10.0" layoutY="16.0" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text fontSmoothingType="LCD" layoutX="88.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Your Character!" wrappingWidth="464.13671875" AnchorPane.topAnchor="13.0">
@@ -25,7 +23,7 @@
             <Font name="Courier New Bold Italic" size="35.0" />
          </font>
       </Text>
-      <Button focusTraversable="false" layoutX="526.0" layoutY="428.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="GO!" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button focusTraversable="false" layoutX="519.0" layoutY="391.0" mnemonicParsing="false" onAction="#createGame" prefHeight="38.0" prefWidth="107.0" text="GO!" AnchorPane.bottomAnchor="51.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Courier New Bold Italic" size="20.0" />
          </font>
@@ -58,11 +56,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
-            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Slider blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Slider fx:id="engSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
+            <Slider fx:id="tradeSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Slider fx:id="fightSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Slider fx:id="investSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Slider fx:id="pilotSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Engineering" textAlignment="CENTER">
                <GridPane.margin>
                   <Insets top="5.0" />
@@ -90,10 +88,15 @@
             </Label>
          </children>
       </GridPane>
-      <TextField layoutX="105.0" layoutY="126.0" prefHeight="25.0" prefWidth="250.0" promptText="Character Name">
+      <TextField fx:id="playerName" layoutX="105.0" layoutY="126.0" prefHeight="25.0" prefWidth="250.0" promptText="Character Name">
          <font>
             <Font name="Courier New" size="15.0" />
          </font>
       </TextField>
+      <Button focusTraversable="false" layoutX="519.0" layoutY="443.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="19.0" prefWidth="107.0" text="Back to menu.">
+         <font>
+            <Font name="Courier New Bold Italic" size="11.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
