@@ -4,16 +4,16 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javax.naming.OperationNotSupportedException;
 import model.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
-import javax.naming.OperationNotSupportedException;
-
 /**
- * This class handles all button presses and handing of information from the model to the view.
+ * This class handles all button presses and handing of information from the
+ * model to the view.
  *
  * @author Joshua Winchester
  */
@@ -73,31 +73,17 @@ public class Controller {
 
         if (total <= 30 && !name.equals("")) {
             Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
-            Action response = Dialogs.create()
-                .owner(Main.getPrimaryStage())
-                .title("Player Created!")
-                .message("Use this Character?: \n" + player.toString())
-                .lightweight()
-                .showConfirm();
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
                 Main.getGame().setPlayer(player);
                 Main.getGame().getPlayer().addMoney(1000);
                 System.out.println("Player Created");
+                System.out.println(Main.getGame().getPlayer());
             }
         } else if (total >= 30) {
-            Action response = Dialogs.create()
-                    .owner(Main.getPrimaryStage())
-                    .title("To Many Skill Points")
-                    .message("You have used " + total + " skill points. You are only allowed 30. \n Try again.")
-                    .lightweight()
-                    .showWarning();
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
         } else {
-            Action response = Dialogs.create()
-                    .owner(Main.getPrimaryStage())
-                    .title("Invalid Name")
-                    .message("You have not entered a name.")
-                    .lightweight()
-                    .showWarning();
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
     }
 
