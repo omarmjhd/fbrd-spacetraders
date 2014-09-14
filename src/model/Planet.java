@@ -19,9 +19,30 @@ public class Planet {
         this.tech = tech;
     }
 
+    /**
+     * Returns the name of the planet
+     *
+     * @return name: String
+     */
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Planet)) {
+            return false;
+        } else if (o == this) {
+            return true;
+        }
+        Planet p = (Planet) o;
+        return name.equals(p.getName());
+
+    }
+
     @Override
     public int hashCode() {
-        return name.hashCode() + resource.hashCode() + tech.hashCode();
+        return name.hashCode();
 
     }
 }
