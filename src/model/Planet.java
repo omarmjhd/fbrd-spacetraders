@@ -11,6 +11,7 @@ public class Planet {
     private Resource resource;
     private TechLevel tech;
     private String name;
+    private TradeInteraction marketplace;
 
     public Planet(String name, Resource resource, TechLevel tech) {
         this.name = name;

@@ -16,16 +16,26 @@ public class SolarSystem {
     private Point pos;
     private Set<Planet> planets;
 
-    public SolarSystem(String name, int x, int y) {
-        this(name, new Point(x, y));
+    public SolarSystem(String name, int x, int y, Planet... varPlanets) {
+        this(name, new Point(x, y), varPlanets);
     }
 
-    public SolarSystem(String name, Point pos) {
+    public SolarSystem(String name, Point pos, Planet... varPlanets) {
         this.name = name;
         this.pos = pos;
         planets = new HashSet<Planet>();
+        for (Planet p : varPlanets) {
+            planets.add(p);
+        }
     }
 
+    /**
+     * Returns distance between 2 SolarSystems
+     *
+     * @param other
+     *        a SolarSystem
+     * @return int distance between 2 SolarSystems
+     */
     public int distance(SolarSystem other) {
         return pos.distance(other.getPosition());
     }
