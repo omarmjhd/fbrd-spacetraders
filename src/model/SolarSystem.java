@@ -30,6 +30,10 @@ public class SolarSystem {
         }
     }
 
+    public SolarSystem(String name, int x, int y, Collection<Planet> varPlanets) {
+        this(name, new Point(x, y), varPlanets);
+    }
+
     public SolarSystem(String name, Point pos, Collection<Planet> varPlanets) {
         this.name = name;
         this.pos = pos;
