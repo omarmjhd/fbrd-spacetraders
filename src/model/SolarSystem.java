@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +28,14 @@ public class SolarSystem {
         for (Planet p : varPlanets) {
             planets.add(p);
         }
+    }
+
+    public SolarSystem(String name, Point pos, Collection<Planet> varPlanets) {
+        this.name = name;
+        this.pos = pos;
+        planets = new HashSet<Planet>();
+        planets.addAll(varPlanets);
+
     }
 
     /**
