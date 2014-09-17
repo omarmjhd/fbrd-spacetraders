@@ -44,4 +44,18 @@ public class SolarSystem {
         return pos;
     }
 
+    @Override
+    public String toString() {
+        String planetString = "";
+
+        for (Planet p: planets) {
+
+            planetString = planetString + " " + p.toString();
+
+        }
+
+        return "Solar System Name: " + name + " Point: " + pos.toString() + planetString;
+
+    }
+
 }

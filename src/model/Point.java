@@ -24,4 +24,11 @@ class Point {
     public int distance(Point other) {
         return (int) Math.sqrt(x * x + y * y);
     }
+
+
+    @Override
+    public String toString() {
+
+        return "(" + x + "," + y + ")";
+    }
 }
