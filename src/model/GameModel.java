@@ -68,8 +68,25 @@ public class GameModel {
         return player;
     }
 
-    public void createUniverse(int number) {
+    /**
+     * Creates a universe with number of planets equal to the length of our
+     * default list of planet names
+     */
+    public void createUniverse() {
+        createUniverse(Math.min(planetNames.length, solarSystemNames.length) - 1);
+    }
 
+    /**
+     * create universe with specified number of planets
+     *
+     * @param number
+     *        of planets
+     */
+    public void createUniverse(int number) {
+        if (number >= planetNames.length || number >= solarSystemNames.length) {
+            throw new IllegalArgumentException(
+                            "Number is bigger than planet names");
+        }
         for (int i = 0; i < number; i++) {
             Random rand = new Random();
             int resourceNum =  rand.nextInt(resources.length);
@@ -82,7 +99,6 @@ public class GameModel {
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
-            System.out.println(planet.toString());
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);

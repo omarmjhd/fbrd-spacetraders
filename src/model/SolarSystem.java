@@ -67,7 +67,8 @@ public class SolarSystem {
 
         }
 
-        return "Solar System Name: " + name + " Point: " + pos.toString() + planetString;
+        return "Solar System Name: " + name + "\nPoint: " + pos.toString()
+                        + "\n" + planetString;
 
     }
 

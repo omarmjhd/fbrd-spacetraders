@@ -1,7 +1,6 @@
 package model;
 
 
-import java.util.HashSet;
 
 /**
  * A planet in a SolarSystem. It has a tech level, resources, and a name.
@@ -52,7 +51,8 @@ public class Planet {
     @Override
     public String toString() {
 
-        return "Planet Name: " + name + " Planet Resources: " + resource + " Planet Tech: " + tech;
+        return "Planet Name: " + name + "\n\tPlanet Resources: " + resource
+                        + "\n\tPlanet Tech: " + tech;
 
     }
 }
