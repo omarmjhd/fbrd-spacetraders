@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javax.naming.OperationNotSupportedException;
 import model.Player;
 import org.controlsfx.control.action.Action;
@@ -25,7 +26,7 @@ public class Controller {
     public Slider investSlide;
     public Slider pilotSlide;
     public TextField playerName;
-    public int skillPoints;
+    public Label skillPoints;
 
     /**
      * Ends the game when the quit button is pressed
@@ -49,7 +50,7 @@ public class Controller {
     }
 
     /**
-     * Stats a new game by sending the player to the character creation screen.
+     * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
      */
@@ -63,16 +64,22 @@ public class Controller {
      * @param actionEvent
      */
     public void sliders(ActionEvent actionEvent) {
+        String currentValue = skillPoints.getText();
+        int currentInt = Integer.parseInt(currentValue); 
         int pilotSkill = (int) pilotSlide.getValue();
         int fightSkill = (int) fightSlide.getValue();
         int engSkill = (int) engSlide.getValue();
         int tradeSkill = (int) tradeSlide.getValue();
         int investSkill = (int) investSlide.getValue();
-        skillPoints -= pilotSkill;
-        skillPoints -= fightSkill;
-        skillPoints -= engSkill;
-        skillPoints -= tradeSkill;
-        skillPoints -= investSkill;
+        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+        if (total > 30) {
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used " 
+                    + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+        } else {
+            currentInt -= total;
+        }
+        //tradeSlide.set soething TODO aka set cap
+        skillPoints = new Label("" + currentInt);
     }
 
     /**
