@@ -1,0 +1,39 @@
+apply plugin: 'java'
+
+defaultTasks 'jar'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+sourceSets {
+
+    main {
+
+        java {
+	     srcDir 'src'
+	}    
+
+    }
+
+}
+
+
+processResources {
+
+    from(zipTree('lib/controlsfx-8.0.6.jar'))
+    from(fileTree(dir: 'src', include: '**/*.fxml', exclude: '**/*.java'))
+}
+
+
+jar {
+
+    manifest {
+    	   attributes 'Class-Path' : '.' , 'Main-Class' : 'view.Main'
+    }
+
+
+}
+
+dependencies {
+	     compile files('lib/controlsfx-8.0.6.jar')
+}
