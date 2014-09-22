@@ -25,6 +25,7 @@ public class Controller {
     public Slider investSlide;
     public Slider pilotSlide;
     public TextField playerName;
+    public int skillPoints;
 
     /**
      * Ends the game when the quit button is pressed
@@ -54,6 +55,24 @@ public class Controller {
      */
     public void startGame(ActionEvent actionEvent) {
         Main.setScene("screens/configscreen.fxml");
+    }
+
+    /**
+     * Listens for slider change values
+     *
+     * @param actionEvent
+     */
+    public void sliders(ActionEvent actionEvent) {
+        int pilotSkill = (int) pilotSlide.getValue();
+        int fightSkill = (int) fightSlide.getValue();
+        int engSkill = (int) engSlide.getValue();
+        int tradeSkill = (int) tradeSlide.getValue();
+        int investSkill = (int) investSlide.getValue();
+        skillPoints -= pilotSkill;
+        skillPoints -= fightSkill;
+        skillPoints -= engSkill;
+        skillPoints -= tradeSkill;
+        skillPoints -= investSkill;
     }
 
     /**
