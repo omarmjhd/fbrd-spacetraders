@@ -68,23 +68,25 @@ public class Controller {
      *
      */
    public void sliders() {
-       System.out.println("changing sliders");
        String currentValue = skillPoints.getText();
        int currentInt = Integer.parseInt(currentValue);
+       System.out.println(currentInt);
        int pilotSkill = (int) pilotSlide.getValue();
        int fightSkill = (int) fightSlide.getValue();
        int engSkill = (int) engSlide.getValue();
        int tradeSkill = (int) tradeSlide.getValue();
        int investSkill = (int) investSlide.getValue();
+
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+
        if (total > 30) {
            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used "
                    + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
        } else {
-           currentInt -= total;
+           currentInt = 30 - total;
        }
        //sliders can't add more skill points than # points left
-
+        //TODO LOCK SLIDERS WHEN AT MAX
 
        //displays the skillPoints left
        skillPoints.setText("" + currentInt);
