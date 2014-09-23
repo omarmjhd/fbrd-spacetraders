@@ -49,16 +49,7 @@ public class Player {
     }
 
     public void buyShip(Ship otherShip) {
-        /*
-         * Need to transfer all items from current ship to new ship
-         */
-        while (ship.cargoRoomLeft() < ship.cargoSize() && otherShip.cargoRoomLeft() > 0) {
-            otherShip.addCargo(ship.removeCargo());
-        }
-
-        /**
-         * Need to the same thing for weapons, shields, crew, gadgets
-         */
+        ship.transferCargo(otherShip);
         ship = otherShip;
     }
 
