@@ -30,6 +30,10 @@ public class Planet {
         return name;
     }
 
+    public TechLevel getTechLevel() {
+        return tech;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || !(o instanceof Planet)) {

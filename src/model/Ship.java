@@ -172,6 +172,10 @@ public class Ship {
             throw new IllegalArgumentException("Item cannot be null");
         }
 
+        /*
+         * Should decouple this removal from removeCargo() and encapsulate in
+         * the data structure
+         */
         for (int i = 0; i < cargo.length; i++) {
             if (cargo[i].equals(item)) {
                 /*
@@ -179,6 +183,16 @@ public class Ship {
                  * just return the item to search for
                  */
                 cargo[i] = null;
+
+                /*
+                 * Slide all other items into the appropriate slot
+                 */
+                for (int j = i; j < (cargo.length - 1); j++) {
+                    cargo[j] = cargo[j + 1];
+                }
+
+                numCargo--;
+
                 return item;
             }
         }

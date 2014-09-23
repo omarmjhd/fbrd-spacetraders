@@ -63,25 +63,26 @@ public class Player {
      * @param item
      * @param quantity
      */
-    public void buyCargo(Goods item, int quantity) {
-        if (quantity <= ship.cargoRoomLeft() && (item.price() * quantity) <= money) {
+    public void buyCargo(Goods item, int quantity, Planet planet) {
+        if (quantity <= ship.cargoRoomLeft()
+                        && (item.price(planet.getTechLevel()) * quantity) <= money) {
             for (int i = 0; i < quantity; i++) {
                 ship.addCargo(item);
             }
         } else if (quantity > ship.cargoRoomLeft()) {
             System.out.println("Not enought room for cargo; only " + ship.cargoRoomLeft() + " available");
-        } else if ((item.price() * quantity) > money) {
+        } else if ((item.price(planet.getTechLevel()) * quantity) > money) {
             System.out.println("Not enough money to buy that many goods");
         }
 
     }
 
-    public void sellCargo(Goods item, int quantity) {
+    public void sellCargo(Goods item, int quantity, Planet planet) {
         int income = 0;
         for (int i = 0; i < quantity; i++) {
             Goods removed = ship.removeCargo(item);
             if (removed != null) { //item exists in cargo
-                income += removed.price();
+                income += removed.price(planet.getTechLevel());
             }
         }
         addMoney(income);
