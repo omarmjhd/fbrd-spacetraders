@@ -12,6 +12,8 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
+import java.awt.event.MouseEvent;
+
 /**
  * This class handles all button presses and handing of information from the
  * model to the view.
@@ -61,26 +63,30 @@ public class Controller {
     /**
      * Listens for slider change values
      *
-     * @param actionEvent
+     *
      */
-    public void sliders(ActionEvent actionEvent) {
-        String currentValue = skillPoints.getText();
-        int currentInt = Integer.parseInt(currentValue); 
-        int pilotSkill = (int) pilotSlide.getValue();
-        int fightSkill = (int) fightSlide.getValue();
-        int engSkill = (int) engSlide.getValue();
-        int tradeSkill = (int) tradeSlide.getValue();
-        int investSkill = (int) investSlide.getValue();
-        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-        if (total > 30) {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used " 
-                    + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
-        } else {
-            currentInt -= total;
-        }
-        //tradeSlide.set soething TODO aka set cap
-        skillPoints = new Label("" + currentInt);
-    }
+   public void sliders() {
+       System.out.println("changing sliders");
+       String currentValue = skillPoints.getText();
+       int currentInt = Integer.parseInt(currentValue);
+       int pilotSkill = (int) pilotSlide.getValue();
+       int fightSkill = (int) fightSlide.getValue();
+       int engSkill = (int) engSlide.getValue();
+       int tradeSkill = (int) tradeSlide.getValue();
+       int investSkill = (int) investSlide.getValue();
+       int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+       if (total > 30) {
+           Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used "
+                   + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+       } else {
+           currentInt -= total;
+       }
+       //sliders can't add more skill points than # points left
+
+
+       //displays the skillPoints left
+       skillPoints.setText("" + currentInt);
+   }
 
     /**
      * Creates the Game from the slider values when the user presses the button.
