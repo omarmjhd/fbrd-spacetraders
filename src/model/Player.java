@@ -26,7 +26,7 @@ public class Player {
         this.TRADE_SKILL = tradeSkill;
         this.INVEST_SKILL = investSkill;
         this.PILOT_SKILL = pilotSkill;
-        this.ship = Ship.makeFlea();
+        this.ship = Ship.makeGnat();
 
     }
 
@@ -38,6 +38,10 @@ public class Player {
      */
     public void addMoney(int income) {
         this.money += income;
+    }
+
+    public void subtractMoney(int money) {
+        addMoney(-money);
     }
 
     public void buyShip(Ship otherShip) {
