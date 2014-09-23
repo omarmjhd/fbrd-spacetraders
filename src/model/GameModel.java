@@ -46,7 +46,7 @@ public class GameModel {
 
     private int solarSystemCount = 0;
 
-    private Resource[] resources = Resource.values();
+    private Goods[] resources = Goods.values();
     private TechLevel[] techLevels = TechLevel.values();
 
 
@@ -129,10 +129,4 @@ public class GameModel {
         return gameString;
     }
 
-    public static void main(String[] args) {
-
-        GameModel game = new GameModel();
-        game.createUniverse(5);
-        System.out.println(game.toString());
-    }
 }

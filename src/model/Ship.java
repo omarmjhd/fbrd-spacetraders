@@ -12,13 +12,17 @@ package model;
  * @author ngraves3
  *
  */
-public class Ship {
+public enum Ship {
 
-    private enum ShipName {
-        Flea, Gnat, Firefly, Mosquito, Bumblebee;
-    }
+    FLEA(10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0),
 
-    private ShipName name;
+    GNAT(15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1),
+
+    FIREFLY(20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1),
+
+    MOSQUITO(15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1),
+
+    BUMBLEBEE(25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
 
     private Goods[] cargo;
     private int numCargo = 0;
@@ -48,8 +52,7 @@ public class Ship {
     private int pirateAggression;
     private int size;
 
-    private Ship(ShipName name, int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
-        this.name = name;
+    private Ship(int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
         cargo = new Goods[cargoSize];
         weapons = new Weapon[weaponSize];
         shields = new Shield[shieldSize];
@@ -64,56 +67,6 @@ public class Ship {
         pirateAggression = pirate;
         this.size = size;
         currentFuel = maxFuel;
-    }
-
-    /*
-     * All ships are exactly the same except for stats
-     */
-
-    /**
-     * Makes a new "Flea" ship
-     *
-     * @return flea Ship
-     */
-    public static Ship makeFlea() {
-        return new Ship(ShipName.Flea, 10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0);
-
-    }
-
-    /**
-     * Makes a new "Gnat" ship
-     *
-     * @return new Gnat ship
-     */
-    public static Ship makeGnat() {
-        return new Ship(ShipName.Gnat, 15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1);
-    }
-
-    /**
-     * Makes a "Firefly" ship
-     *
-     * @return returns a new ship
-     */
-    public static Ship makeFirefly() {
-        return new Ship(ShipName.Firefly, 20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1);
-    }
-
-    /**
-     * Makes a "Mosquito" ship
-     *
-     * @return a new Ship
-     */
-    public static Ship makeMosquito() {
-        return new Ship(ShipName.Mosquito, 15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1);
-    }
-
-    /**
-     * Makes a "Bumblebee" ship
-     *
-     * @return a new Ship
-     */
-    public static Ship makeBumblebee() {
-        return new Ship(ShipName.Bumblebee, 25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
     }
 
     /**
@@ -143,9 +96,9 @@ public class Ship {
      *
      * @return Goods the good removed from cargo
      */
-    public Goods removeCargo() throws IllegalStateException {
+    public Goods removeCargo() {
         if (numCargo < 1) {
-            throw new IllegalStateException("No cargo in ship");
+            return null;
         }
         numCargo--;
         Goods retval = cargo[numCargo];
@@ -165,9 +118,9 @@ public class Ship {
      * @throws IllegalArgumentException
      *         if item is null
      */
-    public Goods removeCargo(Goods item) throws IllegalStateException, IllegalArgumentException {
+    public Goods removeCargo(Goods item) throws IllegalArgumentException {
         if (numCargo < 1) {
-            throw new IllegalStateException("No cargo in ship");
+            return null;
         } else if (item == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
@@ -206,10 +159,6 @@ public class Ship {
     /*
      * Getter methods below
      */
-
-    public ShipName getName() {
-        return name;
-    }
 
     public int cargoSize() {
         return cargo.length;
