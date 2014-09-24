@@ -40,10 +40,6 @@ public class Planet {
 
     }
 
-    public void trade() {
-
-    }
-
 
     /**
      * Returns the name of the planet
