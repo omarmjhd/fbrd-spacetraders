@@ -14,8 +14,6 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
-import java.awt.event.MouseEvent;
-
 /**
  * This class handles all button presses and handing of information from the
  * model to the view.
@@ -117,6 +115,7 @@ public class Controller {
                 System.out.println(Main.getGame().getPlayer());
                 GameModel gm = GameModel.getInstance();
                 gm.createUniverse();
+                Main.setScene("screens/mapscreen.fxml");
             }
         } else if (total >= 30) {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
