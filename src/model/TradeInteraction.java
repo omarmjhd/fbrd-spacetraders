@@ -42,9 +42,10 @@ public class TradeInteraction {
                         && quantity <= supply) {
             for (int i = 0; i < quantity; i++) {
                 player.addCargo(merchandise);
+                supply--;
             }
         } else if (quantity > player.cargoRoomLeft()) {
-            System.out.println("Not enough room for cargo; only " + player.cargoRoomLeft()
+            System.out.println("Not enought room for cargo; only " + player.cargoRoomLeft()
                             + " available");
         } else if ((price * quantity) > player.getMoney()) {
             System.out.println("Not enough money to buy that many goods");
@@ -68,8 +69,8 @@ public class TradeInteraction {
         }
     }
 
-    public TechLevel getPlanetTech() {
-        return planetTech;
+    public int getPrice() {
+        return price;
     }
 
     public Goods getMerchandise() {
@@ -78,9 +79,5 @@ public class TradeInteraction {
 
     public int getSupply() {
         return supply;
-    }
-
-    public int getPrice() {
-        return price;
     }
 }
