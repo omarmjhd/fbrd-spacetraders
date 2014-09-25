@@ -6,7 +6,7 @@ package model;
  * @author Nick
  *
  */
-class Point {
+public class Point {
     private int x;
     private int y;
 
@@ -30,5 +30,13 @@ class Point {
     public String toString() {
 
         return "(" + x + "," + y + ")";
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 }
