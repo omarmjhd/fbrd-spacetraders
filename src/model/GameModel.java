@@ -17,6 +17,8 @@ public class GameModel {
     private HashSet<Planet> planets = new HashSet<>();
     private HashSet<Point> points = new HashSet<>();
 
+    private Planet currentPlanet;
+
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
             "Calondia", "Campor", "Capelle","Carzon", "Castor", "Cestus", "Cheron", "Courteney",
@@ -58,6 +60,14 @@ public class GameModel {
 
     public static GameModel getInstance() {
         return instance;
+    }
+
+    public Planet getCurrentPlanet() {
+        return currentPlanet;
+    }
+
+    public void setCurrentPlanet(Planet destination) {
+        currentPlanet = destination;
     }
 
     public void setPlayer(Player data) {
