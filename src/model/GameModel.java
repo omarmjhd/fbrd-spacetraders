@@ -1,5 +1,4 @@
 package model;
-
 import java.util.HashSet;
 import java.util.Random;
 
@@ -47,7 +46,7 @@ public class GameModel {
 
     private int solarSystemCount = 0;
 
-    private Resource[] resources = Resource.values();
+    private Goods[] resources = Goods.values();
     private TechLevel[] techLevels = TechLevel.values();
 
 

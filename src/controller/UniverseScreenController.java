@@ -44,6 +44,7 @@ public class UniverseScreenController implements Initializable {
 
 
         };
+
         lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         Random random = new Random();
