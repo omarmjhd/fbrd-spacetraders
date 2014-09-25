@@ -26,8 +26,12 @@ public class Player {
         this.TRADE_SKILL = tradeSkill;
         this.INVEST_SKILL = investSkill;
         this.PILOT_SKILL = pilotSkill;
-        this.ship = Ship.makeGnat();
+        this.ship = Ship.GNAT;
 
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     /**
@@ -45,47 +49,22 @@ public class Player {
     }
 
     public void buyShip(Ship otherShip) {
-        /*
-         * Need to transfer all items from current ship to new ship
-         */
-        while (ship.cargoRoomLeft() < ship.cargoSize() && otherShip.cargoRoomLeft() > 0) {
-            otherShip.addCargo(ship.removeCargo());
-        }
-
-        /**
-         * Need to the same thing for weapons, shields, crew, gadgets
-         */
+        ship.transferCargo(otherShip);
+        ship = otherShip;
     }
 
-    /**
-     * Adds cargo to the player's ship
-     *
-     * @param item
-     * @param quantity
-     */
-    public void buyCargo(Goods item, int quantity) {
-        if (quantity <= ship.cargoRoomLeft() && (item.price() * quantity) <= money) {
-            for (int i = 0; i < quantity; i++) {
-                ship.addCargo(item);
-            }
-        } else if (quantity > ship.cargoRoomLeft()) {
-            System.out.println("Not enought room for cargo; only " + ship.cargoRoomLeft() + " available");
-        } else if ((item.price() * quantity) > money) {
-            System.out.println("Not enough money to buy that many goods");
-        }
-
+    public int cargoRoomLeft() {
+        return ship.cargoRoomLeft();
     }
 
-    public void sellCargo(Goods item, int quantity) {
-        int income = 0;
-        for (int i = 0; i < quantity; i++) {
-            Goods removed = ship.removeCargo(item);
-            if (removed != null) { //item exists in cargo
-                income += removed.price();
-            }
-        }
-        addMoney(income);
+    public void addCargo(Goods item) {
+        ship.addCargo(item);
     }
+
+    public Goods removeCargo(Goods item) {
+        return ship.removeCargo(item);
+    }
+
 
     @Override
     public String toString() {
