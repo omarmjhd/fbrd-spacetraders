@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public class GameModel {
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
     private HashSet<Planet> planets = new HashSet<>();
-    private HashSet<Point> points = new HashSet<>();
+    private HashMap<Point, Planet> points = new HashMap<>();
 
     private Planet currentPlanet;
 
@@ -79,6 +80,17 @@ public class GameModel {
     }
 
     /**
+     * Gets planet at the chosen coordinate;
+     *
+     * @param coordinate
+     * @return a planet if present, null otherwise
+     */
+    public Planet getPlanet(Point coordinate) {
+
+        return points.get(coordinate);
+    }
+
+    /**
      * Creates a universe with number of planets equal to the length of our
      * default list of planet names
      */
@@ -103,12 +115,14 @@ public class GameModel {
             int techLevelNum = rand.nextInt(techLevels.length);
 
             Point point = new Point(rand.nextInt(350), rand.nextInt(350));
-            while (points.contains(point)) {
+            while (points.keySet().contains(point)) {
                 point = new Point(rand.nextInt(350), rand.nextInt(350));
             }
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
+
+            points.put(point, planet);
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
