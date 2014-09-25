@@ -42,6 +42,7 @@ public class TradeInteraction {
                         && quantity <= supply) {
             for (int i = 0; i < quantity; i++) {
                 player.addCargo(merchandise);
+                supply--;
             }
         } else if (quantity > player.cargoRoomLeft()) {
             System.out.println("Not enought room for cargo; only " + player.cargoRoomLeft()
@@ -68,4 +69,15 @@ public class TradeInteraction {
         }
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public Goods getMerchandise() {
+        return merchandise;
+    }
+
+    public int getSupply() {
+        return supply;
+    }
 }
