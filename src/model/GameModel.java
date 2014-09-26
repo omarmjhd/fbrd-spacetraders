@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -15,7 +16,9 @@ public class GameModel {
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
     private HashSet<Planet> planets = new HashSet<>();
-    private HashSet<Point> points = new HashSet<>();
+    private HashMap<Point, Planet> points = new HashMap<>();
+
+    private Planet currentPlanet;
 
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
@@ -46,7 +49,7 @@ public class GameModel {
 
     private int solarSystemCount = 0;
 
-    private Resource[] resources = Resource.values();
+    private Goods[] resources = Goods.values();
     private TechLevel[] techLevels = TechLevel.values();
 
 
@@ -60,12 +63,31 @@ public class GameModel {
         return instance;
     }
 
+    public Planet getCurrentPlanet() {
+        return currentPlanet;
+    }
+
+    public void setCurrentPlanet(Planet destination) {
+        currentPlanet = destination;
+    }
+
     public void setPlayer(Player data) {
         player = data;
     }
 
     public Player getPlayer() {
         return player;
+    }
+
+    /**
+     * Gets planet at the chosen coordinate;
+     *
+     * @param coordinate
+     * @return a planet if present, null otherwise
+     */
+    public Planet getPlanet(Point coordinate) {
+
+        return points.get(coordinate);
     }
 
     /**
@@ -92,20 +114,22 @@ public class GameModel {
             int resourceNum =  rand.nextInt(resources.length);
             int techLevelNum = rand.nextInt(techLevels.length);
 
-            Point point = new Point(rand.nextInt(350), rand.nextInt(350));
-            while (points.contains(point)) {
-                point = new Point(rand.nextInt(350), rand.nextInt(350));
+            Point point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
+                while (points.keySet().contains(point)) {
+                point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             }
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
+
+            points.put(point, planet);
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
             System.out.println(solarsystem.toString());
             solarSystemCount++;
 
-
+            solarSystems.add(solarsystem);
 
 
         }
@@ -129,10 +153,4 @@ public class GameModel {
         return gameString;
     }
 
-    public static void main(String[] args) {
-
-        GameModel game = new GameModel();
-        game.createUniverse(5);
-        System.out.println(game.toString());
-    }
 }

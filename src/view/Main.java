@@ -31,7 +31,6 @@ public class Main extends Application {
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
         Main.game = GameModel.getInstance();
-
         Main.setScene("screens/startscreen.fxml");
     }
 
@@ -45,7 +44,6 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource(fxmlURI));
             Parent root = loader.load();
-
             Scene newPane = new Scene(root);
             primaryStage.setScene(newPane);
             primaryStage.show();

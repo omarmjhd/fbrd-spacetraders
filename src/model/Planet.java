@@ -2,6 +2,8 @@ package model;
 
 
 
+
+
 /**
  * A planet in a SolarSystem. It has a tech level, resources, and a name.
  *
@@ -10,16 +12,34 @@ package model;
  */
 public class Planet {
 
-    private Resource resource;
+    private Goods resource;
+    private int supply;
     private TechLevel tech;
     private String name;
     private TradeInteraction marketplace;
 
-    public Planet(String name, Resource resource, TechLevel tech) {
+    public Planet(String name, Goods resource, TechLevel tech) {
         this.name = name;
         this.resource = resource;
         this.tech = tech;
+
+
     }
+
+    /**
+     * This method initializes the marketplace on a planet. It should be called
+     * after the player visits the planet. It creates a random supply of a good
+     * (from 1-10 right now).
+     *
+     * @param player
+     *        the player mddel
+     */
+    public TradeInteraction enterMarket(Player player) {
+        marketplace = new TradeInteraction(this, player);
+        return marketplace;
+
+    }
+
 
     /**
      * Returns the name of the planet
@@ -28,6 +48,14 @@ public class Planet {
      */
     public String getName() {
         return name;
+    }
+
+    public Goods getResource() {
+        return resource;
+    }
+
+    public TechLevel getTechLevel() {
+        return tech;
     }
 
     @Override

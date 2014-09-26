@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+   <children>
+      <Text fontSmoothingType="LCD" layoutX="88.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" wrappingWidth="464.13671875" AnchorPane.topAnchor="13.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
+               <stops>
+                  <Stop color="#bf0101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <font>
+            <Font name="Courier New Bold Italic" size="35.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

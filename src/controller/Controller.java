@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javax.naming.OperationNotSupportedException;
 import model.GameModel;
 import model.Player;
@@ -27,6 +28,7 @@ public class Controller {
     public Slider investSlide;
     public Slider pilotSlide;
     public TextField playerName;
+    public Label skillPoints;
 
     /**
      * Ends the game when the quit button is pressed
@@ -50,13 +52,43 @@ public class Controller {
     }
 
     /**
-     * Stats a new game by sending the player to the character creation screen.
+     * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
      */
     public void startGame(ActionEvent actionEvent) {
         Main.setScene("screens/configscreen.fxml");
     }
+
+    /**
+     * Listens for slider change values
+     *
+     *
+     */
+   public void sliders() {
+       String currentValue = skillPoints.getText();
+       int currentInt = Integer.parseInt(currentValue);
+       System.out.println(currentInt);
+       int pilotSkill = (int) pilotSlide.getValue();
+       int fightSkill = (int) fightSlide.getValue();
+       int engSkill = (int) engSlide.getValue();
+       int tradeSkill = (int) tradeSlide.getValue();
+       int investSkill = (int) investSlide.getValue();
+
+       int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+
+       if (total > 30) {
+           Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used "
+                   + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+       } else {
+           currentInt = 30 - total;
+       }
+       //sliders can't add more skill points than # points left
+        //TODO LOCK SLIDERS WHEN AT MAX
+
+       //displays the skillPoints left
+       skillPoints.setText("" + currentInt);
+   }
 
     /**
      * Creates the Game from the slider values when the user presses the button.
@@ -83,14 +115,13 @@ public class Controller {
                 System.out.println(Main.getGame().getPlayer());
                 GameModel gm = GameModel.getInstance();
                 gm.createUniverse();
+                Main.setScene("screens/mapscreen.fxml");
             }
         } else if (total >= 30) {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
-
-
 
     }
 
