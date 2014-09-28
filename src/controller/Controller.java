@@ -53,6 +53,28 @@ public class Controller {
     }
 
     /**
+     * Listens for change in slider values and calls sliders()
+     */
+    public void sliderListener() {
+        // Handle Slider value change events.
+        engSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        tradeSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        fightSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        investSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        pilotSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+    }
+
+    /**
      * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
@@ -62,8 +84,7 @@ public class Controller {
     }
 
     /**
-     * Listens for slider change values
-     *
+     * Updates the skillPoints Label
      *
      */
    public void sliders() {
@@ -77,10 +98,20 @@ public class Controller {
 
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
 
-       if (total > 30) {
-           Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used "
-                   + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+       //TODO FIX SETTING THE MAX; DOESN'T WORK WELL
+       if (total >= 30) {
+           pilotSlide.setMax(pilotSkill);
+           fightSlide.setMax(fightSkill);
+           engSlide.setMax(engSkill);
+           tradeSlide.setMax(tradeSkill);
+           investSlide.setMax(investSkill);
+           currentInt = 0;
        } else {
+           pilotSlide.setMax(15);
+           fightSlide.setMax(15);
+           engSlide.setMax(15);
+           tradeSlide.setMax(15);
+           investSlide.setMax(15);
            currentInt = 30 - total;
        }
        //sliders can't add more skill points than # points left

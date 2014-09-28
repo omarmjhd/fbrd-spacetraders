@@ -60,7 +60,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Slider fx:id="engSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
+            <Slider fx:id="engSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
             <Slider fx:id="tradeSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Slider fx:id="fightSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Slider fx:id="investSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
