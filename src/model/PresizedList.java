@@ -9,6 +9,8 @@ import java.util.NoSuchElementException;
  * remove(T). Chose not to implement List<T> because there were way too many
  * unecessary methods.
  *
+ * USE THIS: http://docs.oracle.com/javase/7/docs/api/java/util/AbstractList.html
+ *
  * @author Nick
  *
  * @param <T>
@@ -48,6 +50,7 @@ public class PresizedList<T> implements Iterable<T> {
         size++;
         return true;
     }
+
 
     /**
      * Looks for the item in the list and removes it.

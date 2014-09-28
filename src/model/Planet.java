@@ -32,7 +32,7 @@ public class Planet {
      * (from 1-10 right now).
      *
      * @param player
-     *        the player mddel
+     *        the player model
      */
     public Marketplace enterMarket(Player player) {
         marketplace = new Marketplace(this, player);

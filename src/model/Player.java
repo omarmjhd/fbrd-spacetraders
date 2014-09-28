@@ -76,4 +76,8 @@ public class Player {
         retval += "Investing Skill: " + INVEST_SKILL + "\n";
         return retval;
     }
+
+    public Ship getShip() {
+        return ship;
+    }
 }

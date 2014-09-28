@@ -11,7 +11,7 @@ public class Marketplace {
     private TechLevel planetTech;
 
     /*
-     * Right now a planet can sell an infinite amount of one type of Goods. We
+     * Right now a planet can sell a finite amount of one type of Goods. We
      * may want to implement a limited number of goods per planet -Nick
      */
     private Goods merchandise;

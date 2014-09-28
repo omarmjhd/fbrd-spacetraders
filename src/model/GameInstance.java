@@ -1,6 +1,5 @@
 package model;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -16,7 +15,7 @@ public class GameInstance {
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
     private HashSet<Planet> planets = new HashSet<>();
-    private HashMap<Point, Planet> points = new HashMap<>();
+    private HashSet<Point> points = new HashSet<>();
 
     private Planet currentPlanet;
 
@@ -68,7 +67,7 @@ public class GameInstance {
     }
 
     public void setCurrentPlanet(Planet destination) {
-        currentPlanet = destination;
+        this.currentPlanet = destination;
     }
 
     public void setPlayer(Player data) {
@@ -77,17 +76,6 @@ public class GameInstance {
 
     public Player getPlayer() {
         return player;
-    }
-
-    /**
-     * Gets planet at the chosen coordinate;
-     *
-     * @param coordinate
-     * @return a planet if present, null otherwise
-     */
-    public Planet getPlanet(Point coordinate) {
-
-        return points.get(coordinate);
     }
 
     /**
@@ -115,14 +103,14 @@ public class GameInstance {
             int techLevelNum = rand.nextInt(techLevels.length);
 
             Point point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
-                while (points.keySet().contains(point)) {
+            while (points.contains(point)) {
                 point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             }
+            points.add(point);
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
 
-            points.put(point, planet);
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
@@ -153,4 +141,11 @@ public class GameInstance {
         return gameString;
     }
 
+    public HashSet<SolarSystem> getSolarSystems() {
+        return solarSystems;
+    }
+
+    public HashSet<Planet> getPlanets() {
+        return planets;
+    }
 }

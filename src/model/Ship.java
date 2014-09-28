@@ -136,4 +136,23 @@ public enum Ship {
         return gadgets.maxSize();
     }
 
+    public PresizedList<Goods> getCargo() {
+        return cargo;
+    }
+
+    public PresizedList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public PresizedList<Shield> getShields() {
+        return shields;
+    }
+
+    public PresizedList<Gadget> getGadgets() {
+        return gadgets;
+    }
+
+    public PresizedList<Crew> getCrew() {
+        return crew;
+    }
 }
