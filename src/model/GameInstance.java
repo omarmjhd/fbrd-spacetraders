@@ -11,7 +11,7 @@ import java.util.Random;
  * @author ngraves3
  *
  */
-public class GameModel {
+public class GameInstance {
 
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
@@ -54,12 +54,12 @@ public class GameModel {
 
 
 
-    private static GameModel instance = new GameModel();
+    private static GameInstance instance = new GameInstance();
 
-    private GameModel() { //private constructor for singleton
+    private GameInstance() { //private constructor for singleton
     }
 
-    public static GameModel getInstance() {
+    public static GameInstance getInstance() {
         return instance;
     }
 

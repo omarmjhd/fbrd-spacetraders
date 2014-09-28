@@ -2,7 +2,7 @@ package model;
 
 import java.util.Random;
 
-public class TradeInteraction {
+public class Marketplace {
 
 
     /*
@@ -22,7 +22,7 @@ public class TradeInteraction {
 
     private Player player;
 
-    public TradeInteraction(Planet planet, Player player) {
+    public Marketplace(Planet planet, Player player) {
         this.planetTech = planet.getTechLevel();
         this.supply = new Random().nextInt(9) + 1;
         this.merchandise = planet.getResource();
