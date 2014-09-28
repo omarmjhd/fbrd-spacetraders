@@ -68,7 +68,6 @@ public class Controller {
    public void sliders() {
        String currentValue = skillPoints.getText();
        int currentInt = Integer.parseInt(currentValue);
-       System.out.println(currentInt);
        int pilotSkill = (int) pilotSlide.getValue();
        int fightSkill = (int) fightSlide.getValue();
        int engSkill = (int) engSlide.getValue();
