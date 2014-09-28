@@ -42,6 +42,7 @@ public class Marketplace {
                         && quantity <= supply) {
             for (int i = 0; i < quantity; i++) {
                 player.addCargo(merchandise);
+                player.subtractMoney(price);
                 supply--;
             }
         } else if (quantity > player.cargoRoomLeft()) {

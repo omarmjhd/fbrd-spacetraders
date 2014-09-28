@@ -1,5 +1,7 @@
 package model;
 
+import java.util.AbstractList;
+
 /**
  * This class represents the Player and his state.
  *
@@ -59,6 +61,10 @@ public class Player {
 
     public void addCargo(Goods item) {
         ship.addCargo(item);
+    }
+
+    public AbstractList<Goods> getCargo() {
+        return ship.getCargo();
     }
 
     public Goods removeCargo(Goods item) {
