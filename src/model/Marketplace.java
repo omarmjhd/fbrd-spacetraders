@@ -74,6 +74,18 @@ public class Marketplace {
         return price;
     }
 
+    /**
+     * Returns a representation of an object in the format: Water 1000cr
+     *
+     * @return String representation of the merchandise object
+     */
+    public String itemString() {
+        String firstChar = merchandise.name().substring(0, 1).toUpperCase();
+        String rest = merchandise.name().substring(1).toLowerCase();
+        String name = firstChar + rest;
+        return name + "   " + price + "cr";
+    }
+
     public Goods getMerchandise() {
         return merchandise;
     }

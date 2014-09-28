@@ -76,6 +76,11 @@ public enum Ship {
         return cargo.maxSize() - cargo.size();
     }
 
+    /**
+     * Returns the list of cargo the Ship contains
+     * 
+     * @return
+     */
     public AbstractList<Goods> getCargo() {
         return cargo;
     }
@@ -135,11 +140,29 @@ public enum Ship {
 
     /**
      * Returns the current amount of fuel
-     * 
+     *
      * @return current fuel
      */
     public int getCurrentFuel() {
         return currentFuel;
+    }
+
+    /**
+     * Adds fuel to the ship.
+     *
+     * @param amount
+     */
+    public void buyFuel(int amount) {
+        currentFuel += amount;
+    }
+
+    /**
+     * Returns the maximum amount of fuel
+     *
+     * @return maxFuel
+     */
+    public int getMaxFuel() {
+        return maxFuel;
     }
 
     /*
