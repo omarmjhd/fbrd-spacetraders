@@ -31,7 +31,6 @@ public class Main extends Application {
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
         Main.game = GameModel.getInstance();
-
         Main.setScene("screens/startscreen.fxml");
     }
 

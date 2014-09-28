@@ -122,8 +122,6 @@ public class Controller {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
 
-
-
     }
 
     /**

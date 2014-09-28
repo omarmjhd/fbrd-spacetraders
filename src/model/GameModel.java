@@ -13,6 +13,7 @@ import java.util.Random;
 public class GameModel {
 
     private Player player;
+
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
     private HashSet<Planet> planets = new HashSet<>();
     private HashSet<Point> points = new HashSet<>();
@@ -92,9 +93,9 @@ public class GameModel {
             int resourceNum =  rand.nextInt(resources.length);
             int techLevelNum = rand.nextInt(techLevels.length);
 
-            Point point = new Point(rand.nextInt(350), rand.nextInt(350));
+            Point point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             while (points.contains(point)) {
-                point = new Point(rand.nextInt(350), rand.nextInt(350));
+                point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             }
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
@@ -105,7 +106,7 @@ public class GameModel {
             System.out.println(solarsystem.toString());
             solarSystemCount++;
 
-
+            solarSystems.add(solarsystem);
 
 
         }
@@ -129,6 +130,22 @@ public class GameModel {
         return gameString;
     }
 
+    public HashSet<SolarSystem> getSolarSystems() {
+        return solarSystems;
+    }
+
+    public HashSet<Planet> getPlanets() {
+        return planets;
+    }
+
+    public HashSet<Point> getPoints() {
+        return points;
+    }
+
+    /**
+     * Main method for test
+     * @param args
+     */
     public static void main(String[] args) {
 
         GameModel game = new GameModel();
