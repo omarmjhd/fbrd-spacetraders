@@ -3,7 +3,7 @@ package controller;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -11,9 +11,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import model.GameModel;
+import model.GameInstance;
 import model.Point;
 import model.SolarSystem;
+import view.Main;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -27,23 +28,29 @@ public class UniverseScreenController implements Initializable {
 
     public AnchorPane root;
     public Pane lolpane;
+    public TextArea planetText;
+    private GameInstance gm;
     private HashSet<SolarSystem> universe;
     @FXML
-    private Canvas map;
 
     private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "blue", "cadetblue", "CHARTREUSE",
                                 "coral", "cornflowerblue", "crimson", "cyan", "darkcyan", "goldenrod"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("INIT");
-        this.universe = GameModel.getInstance().getSolarSystems();
+        this.universe = GameInstance.getInstance().getSolarSystems();
+        this.gm = GameInstance.getInstance();
 
         EventHandler<MouseEvent> handler = event -> {
             System.out.println(event.getX() + ", " + event.getY() + ", " + event.getPickResult().toString());
-
+            Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
+            Point point = new Point( (int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
+            SolarSystem selectedSystem = (SolarSystem) clickedCircle.getUserData();
+            gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
+            Main.setScene("screens/marketplacescreen.fxml");
 
         };
+
         lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         Random random = new Random();
@@ -58,6 +65,7 @@ public class UniverseScreenController implements Initializable {
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED , handler);
+            circle.setUserData(s);
             lolpane.getChildren().add(circle);
 
             b++;

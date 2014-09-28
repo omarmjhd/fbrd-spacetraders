@@ -3,16 +3,17 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javax.naming.OperationNotSupportedException;
-import model.GameModel;
+import model.GameInstance;
 import model.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import javax.naming.OperationNotSupportedException;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -112,7 +113,7 @@ public class Controller {
                 Main.getGame().getPlayer().addMoney(1000);
                 System.out.println("Player Created");
                 System.out.println(Main.getGame().getPlayer());
-                GameModel gm = GameModel.getInstance();
+                GameInstance gm = GameInstance.getInstance();
                 gm.createUniverse();
                 Main.setScene("screens/mapscreen.fxml");
             }

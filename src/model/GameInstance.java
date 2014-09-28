@@ -10,13 +10,14 @@ import java.util.Random;
  * @author ngraves3
  *
  */
-public class GameModel {
+public class GameInstance {
 
     private Player player;
-
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
     private HashSet<Planet> planets = new HashSet<>();
     private HashSet<Point> points = new HashSet<>();
+
+    private Planet currentPlanet;
 
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
@@ -47,18 +48,25 @@ public class GameModel {
 
     private int solarSystemCount = 0;
 
-    private Resource[] resources = Resource.values();
+    private Goods[] resources = Goods.values();
     private TechLevel[] techLevels = TechLevel.values();
 
 
+    private static GameInstance instance = new GameInstance();
 
-    private static GameModel instance = new GameModel();
-
-    private GameModel() { //private constructor for singleton
+    private GameInstance() { //private constructor for singleton
     }
 
-    public static GameModel getInstance() {
+    public static GameInstance getInstance() {
         return instance;
+    }
+
+    public Planet getCurrentPlanet() {
+        return currentPlanet;
+    }
+
+    public void setCurrentPlanet(Planet destination) {
+        this.currentPlanet = destination;
     }
 
     public void setPlayer(Player data) {
@@ -67,6 +75,10 @@ public class GameModel {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public HashSet<SolarSystem> getSolarSystems() {
+        return solarSystems;
     }
 
     /**
@@ -97,9 +109,11 @@ public class GameModel {
             while (points.contains(point)) {
                 point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             }
+            points.add(point);
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
+
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
@@ -130,26 +144,7 @@ public class GameModel {
         return gameString;
     }
 
-    public HashSet<SolarSystem> getSolarSystems() {
-        return solarSystems;
-    }
-
     public HashSet<Planet> getPlanets() {
         return planets;
-    }
-
-    public HashSet<Point> getPoints() {
-        return points;
-    }
-
-    /**
-     * Main method for test
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        GameModel game = new GameModel();
-        game.createUniverse(5);
-        System.out.println(game.toString());
     }
 }
