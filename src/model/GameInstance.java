@@ -52,7 +52,6 @@ public class GameInstance {
     private TechLevel[] techLevels = TechLevel.values();
 
 
-
     private static GameInstance instance = new GameInstance();
 
     private GameInstance() { //private constructor for singleton
@@ -76,6 +75,10 @@ public class GameInstance {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public HashSet<SolarSystem> getSolarSystems() {
+        return solarSystems;
     }
 
     /**
@@ -139,10 +142,6 @@ public class GameInstance {
         }
 
         return gameString;
-    }
-
-    public HashSet<SolarSystem> getSolarSystems() {
-        return solarSystems;
     }
 
     public HashSet<Planet> getPlanets() {
