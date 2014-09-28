@@ -37,7 +37,7 @@
             <Font name="Courier New" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="skillPoints" focusTraversable="false" layoutX="592.0" layoutY="129.0" text="30" AnchorPane.rightAnchor="29.0">
+      <Label fx:id="skillPoints" focusTraversable="false" layoutX="607.0" layoutY="131.0" prefHeight="19.0" prefWidth="13.0" text="30" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Courier New" size="15.0" />
          </font>
@@ -60,11 +60,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Slider fx:id="engSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
-            <Slider fx:id="tradeSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Slider fx:id="fightSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Slider fx:id="investSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Slider fx:id="pilotSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onMouseReleased="#sliders" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Slider fx:id="engSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.valignment="CENTER" />
+            <Slider fx:id="tradeSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Slider fx:id="fightSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Slider fx:id="investSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Slider fx:id="pilotSlide" blockIncrement="1.0" majorTickUnit="5.0" max="15.0" minorTickCount="4" onKeyReleased="#sliderListener" onMouseReleased="#sliderListener" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" text="Engineering" textAlignment="CENTER">
                <GridPane.margin>
                   <Insets top="5.0" />

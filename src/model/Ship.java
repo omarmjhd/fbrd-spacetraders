@@ -12,28 +12,27 @@ package model;
  * @author ngraves3
  *
  */
-public class Ship {
+public enum Ship {
 
-    private enum ShipName {
-        Flea, Gnat, Firefly, Mosquito, Bumblebee;
-    }
+    FLEA(10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0),
 
-    private ShipName name;
+    GNAT(15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1),
 
-    private Goods[] cargo;
-    private int numCargo = 0;
+    FIREFLY(20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1),
 
-    private Weapon[] weapons;
-    private int numWeapons = 0;
+    MOSQUITO(15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1),
 
-    private Shield[] shields;
-    private int numShields = 0;
+    BUMBLEBEE(25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
 
-    private Gadget[] gadgets;
-    private int numGadget = 0;
+    private PresizedList<Goods> cargo;
 
-    private Crew[] crew;
-    private int numCrew = 0;
+    private PresizedList<Weapon> weapons;
+
+    private PresizedList<Shield> shields;
+
+    private PresizedList<Gadget> gadgets;
+
+    private PresizedList<Crew> crew;
 
     private int maxFuel;
 
@@ -48,13 +47,13 @@ public class Ship {
     private int pirateAggression;
     private int size;
 
-    private Ship(ShipName name, int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
-        this.name = name;
-        cargo = new Goods[cargoSize];
-        weapons = new Weapon[weaponSize];
-        shields = new Shield[shieldSize];
-        gadgets = new Gadget[gadgetSize];
-        crew = new Crew[crewSize];
+    private Ship(int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
+        //cargo = new Goods[cargoSize];
+        cargo = new PresizedList<Goods>(cargoSize);
+        weapons = new PresizedList<Weapon>(weaponSize);
+        shields = new PresizedList<Shield>(shieldSize);
+        gadgets = new PresizedList<Gadget>(gadgetSize);
+        crew = new PresizedList<Crew>(crewSize);
         this.maxFuel = maxFuel;
         this.fuelCost = fuelCost;
         this.price = price;
@@ -66,155 +65,94 @@ public class Ship {
         currentFuel = maxFuel;
     }
 
-    /*
-     * All ships are exactly the same except for stats
-     */
-
-    /**
-     * Makes a new "Flea" ship
-     *
-     * @return flea Ship
-     */
-    public static Ship makeFlea() {
-        return new Ship(ShipName.Flea, 10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0);
-
-    }
-
-    /**
-     * Makes a new "Gnat" ship
-     *
-     * @return new Gnat ship
-     */
-    public static Ship makeGnat() {
-        return new Ship(ShipName.Gnat, 15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1);
-    }
-
-    /**
-     * Makes a "Firefly" ship
-     *
-     * @return returns a new ship
-     */
-    public static Ship makeFirefly() {
-        return new Ship(ShipName.Firefly, 20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1);
-    }
-
-    /**
-     * Makes a "Mosquito" ship
-     *
-     * @return a new Ship
-     */
-    public static Ship makeMosquito() {
-        return new Ship(ShipName.Mosquito, 15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1);
-    }
-
-    /**
-     * Makes a "Bumblebee" ship
-     *
-     * @return a new Ship
-     */
-    public static Ship makeBumblebee() {
-        return new Ship(ShipName.Bumblebee, 25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
-    }
-
     /**
      * Returns the number of empty slots for cargo
      *
      * @return number of empty slots for cargo
      */
     public int cargoRoomLeft() {
-        return cargo.length - numCargo;
+        return cargo.maxSize() - cargo.size();
     }
 
     /**
      * Adds cargo to the ship
      *
      * @param item
+     * @return true if item was added, false otherwise
+     * @throws IllegalArgumentException
+     *         if item is null
      */
-    public void addCargo(Goods item) throws IllegalStateException {
-        if (numCargo >= cargo.length) {
-            throw new IllegalStateException("Cargo bay is full");
-        }
-        cargo[numCargo] = item;
-        numCargo++;
-    }
-
-    /**
-     * Removes the last cargo from the ship
-     *
-     * @return Goods the good removed from cargo
-     */
-    public Goods removeCargo() throws IllegalStateException {
-        if (numCargo < 1) {
-            throw new IllegalStateException("No cargo in ship");
-        }
-        numCargo--;
-        Goods retval = cargo[numCargo];
-        cargo[numCargo] = null;
-        return retval;
-
+    public boolean addCargo(Goods item) throws IllegalArgumentException {
+        return cargo.add(item);
     }
 
     /**
      * Looks through the cargo to find the given item.
      *
      * @param item
-     *        the item to look for
+     *        the item to look for. null if item not in cargo
      * @return the matching item if found or null if no items match
-     * @throws IllegalStateException
-     *         if no cargo in ship
      * @throws IllegalArgumentException
      *         if item is null
      */
-    public Goods removeCargo(Goods item) throws IllegalStateException, IllegalArgumentException {
-        if (numCargo < 1) {
-            throw new IllegalStateException("No cargo in ship");
-        } else if (item == null) {
-            throw new IllegalArgumentException("Item cannot be null");
-        }
+    public Goods removeCargo(Goods item) throws IllegalArgumentException {
+        return cargo.remove(item);
+    }
 
-        for (int i = 0; i < cargo.length; i++) {
-            if (cargo[i].equals(item)) {
-                /*
-                 * cargo[i] == the item to search for. since items are same,
-                 * just return the item to search for
-                 */
-                cargo[i] = null;
-                return item;
-            }
+    /**
+     * Transfers the cargo from one ship to another. Might change this method to
+     * include other items as we implement more
+     *
+     * @param other
+     *        the Ship to transfer to
+     */
+    public void transferCargo(Ship other) {
+        for (Goods item : cargo) {
+            other.addCargo(item);
         }
-
-        /*
-         * No matching item found in the list
-         */
-        return null;
     }
 
     /*
      * Getter methods below
      */
 
-    public ShipName getName() {
-        return name;
-    }
-
     public int cargoSize() {
-        return cargo.length;
+        return cargo.maxSize();
     }
 
     public int weaponsSize() {
-        return weapons.length;
+        return weapons.maxSize();
     }
 
     public int shieldsSize() {
-        return shields.length;
+        return shields.maxSize();
     }
 
     public int crewSize() {
-        return crew.length;
+        return crew.maxSize();
     }
 
     public int gadgetSize() {
-        return gadgets.length;
+        return gadgets.maxSize();
     }
 
+    public PresizedList<Goods> getCargo() {
+        return cargo;
+    }
+
+    public PresizedList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public PresizedList<Shield> getShields() {
+        return shields;
+    }
+
+    public PresizedList<Gadget> getGadgets() {
+        return gadgets;
+    }
+
+    public PresizedList<Crew> getCrew() {
+        return crew;
+    }
 }
