@@ -7,7 +7,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javax.naming.OperationNotSupportedException;
-import model.GameModel;
+
+import model.GameInstance;
 import model.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -113,7 +114,7 @@ public class Controller {
                 Main.getGame().getPlayer().addMoney(1000);
                 System.out.println("Player Created");
                 System.out.println(Main.getGame().getPlayer());
-                GameModel gm = GameModel.getInstance();
+                GameInstance gm = GameInstance.getInstance();
                 gm.createUniverse();
                 Main.setScene("screens/mapscreen.fxml");
             }

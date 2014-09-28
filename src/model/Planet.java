@@ -16,7 +16,7 @@ public class Planet {
     private int supply;
     private TechLevel tech;
     private String name;
-    private TradeInteraction marketplace;
+    private Marketplace marketplace;
 
     public Planet(String name, Goods resource, TechLevel tech) {
         this.name = name;
@@ -34,8 +34,8 @@ public class Planet {
      * @param player
      *        the player mddel
      */
-    public TradeInteraction enterMarket(Player player) {
-        marketplace = new TradeInteraction(this, player);
+    public Marketplace enterMarket(Player player) {
+        marketplace = new Marketplace(this, player);
         return marketplace;
 
     }

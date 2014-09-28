@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.GameModel;
+import model.GameInstance;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private static Stage primaryStage;
-    private static GameModel game;
+    private static GameInstance game;
 
     /**
      * Starts the game
@@ -30,7 +30,8 @@ public class Main extends Application {
         Main.primaryStage = primaryStage;
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
-        Main.game = GameModel.getInstance();
+        Main.game = GameInstance.getInstance();
+
         Main.setScene("screens/startscreen.fxml");
     }
 
@@ -77,7 +78,7 @@ public class Main extends Application {
      *
      * @return The game model
      */
-    public static GameModel getGame() {
+    public static GameInstance getGame() {
         return game;
     }
 
