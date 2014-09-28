@@ -114,9 +114,9 @@ public class GameInstance {
             int resourceNum =  rand.nextInt(resources.length);
             int techLevelNum = rand.nextInt(techLevels.length);
 
-            Point point = new Point(rand.nextInt(350), rand.nextInt(350));
-            while (points.keySet().contains(point)) {
-                point = new Point(rand.nextInt(350), rand.nextInt(350));
+            Point point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
+                while (points.keySet().contains(point)) {
+                point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             }
 
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
@@ -129,7 +129,7 @@ public class GameInstance {
             System.out.println(solarsystem.toString());
             solarSystemCount++;
 
-
+            solarSystems.add(solarsystem);
 
 
         }

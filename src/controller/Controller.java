@@ -3,17 +3,17 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javax.naming.OperationNotSupportedException;
-
 import model.GameInstance;
 import model.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import javax.naming.OperationNotSupportedException;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -123,8 +123,6 @@ public class Controller {
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
-
-
 
     }
 
