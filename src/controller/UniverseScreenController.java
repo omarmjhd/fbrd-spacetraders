@@ -1,5 +1,10 @@
 package controller;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,14 +16,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import model.GameModel;
+import model.GameInstance;
+import model.Planet;
 import model.Point;
 import model.SolarSystem;
-
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * @author Joshua on 9/25/2014.
@@ -37,12 +38,16 @@ public class UniverseScreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("INIT");
-        this.universe = GameModel.getInstance().getSolarSystems();
+        this.universe = GameInstance.getInstance().getSolarSystems();
+
+        HashMap<Point, Planet> map = GameInstance.getInstance().getMap();
 
         EventHandler<MouseEvent> handler = event -> {
             System.out.println(event.getX() + ", " + event.getY() + ", " + event.getPickResult().toString());
-
-
+                            Planet chosen =
+                                            map.get(new Point((int) event.getX(), (int) event
+                                                            .getY()));
+                            System.out.println(chosen);
         };
 
         lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));

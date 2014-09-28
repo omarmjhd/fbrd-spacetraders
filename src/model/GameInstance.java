@@ -52,7 +52,9 @@ public class GameInstance {
     private Goods[] resources = Goods.values();
     private TechLevel[] techLevels = TechLevel.values();
 
-
+    public HashMap<Point, Planet> getMap() {
+        return points;
+    }
 
     private static GameInstance instance = new GameInstance();
 
@@ -77,6 +79,10 @@ public class GameInstance {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public HashSet<SolarSystem> getSolarSystems() {
+        return solarSystems;
     }
 
     /**
