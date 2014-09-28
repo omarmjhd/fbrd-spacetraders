@@ -88,8 +88,7 @@ public class Controller {
      *
      */
    public void sliders() {
-       String currentValue = skillPoints.getText();
-       int currentInt = Integer.parseInt(currentValue);
+       int currentInt = 0;
        int pilotSkill = (int) pilotSlide.getValue();
        int fightSkill = (int) fightSlide.getValue();
        int engSkill = (int) engSlide.getValue();
@@ -97,25 +96,7 @@ public class Controller {
        int investSkill = (int) investSlide.getValue();
 
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-
-       //TODO FIX SETTING THE MAX; DOESN'T WORK WELL
-       if (total >= 30) {
-           pilotSlide.setMax(pilotSkill);
-           fightSlide.setMax(fightSkill);
-           engSlide.setMax(engSkill);
-           tradeSlide.setMax(tradeSkill);
-           investSlide.setMax(investSkill);
-           currentInt = 0;
-       } else {
-           pilotSlide.setMax(15);
-           fightSlide.setMax(15);
-           engSlide.setMax(15);
-           tradeSlide.setMax(15);
-           investSlide.setMax(15);
-           currentInt = 30 - total;
-       }
-       //sliders can't add more skill points than # points left
-        //TODO LOCK SLIDERS WHEN AT MAX
+       currentInt = 30 - total;
 
        //displays the skillPoints left
        skillPoints.setText("" + currentInt);
