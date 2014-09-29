@@ -63,5 +63,9 @@ public enum Goods {
         return minTechToUse;
     }
 
+    @Override
+    public String toString(){
+        return this.name().toLowerCase();
+    }
 
 }
