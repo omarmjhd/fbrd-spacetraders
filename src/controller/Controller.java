@@ -96,7 +96,7 @@ public class Controller {
        int investSkill = (int) investSlide.getValue();
 
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-       currentInt = 30 - total;
+       currentInt = 15 - total;
 
        //displays the skillPoints left
        skillPoints.setText("" + currentInt);
@@ -129,8 +129,8 @@ public class Controller {
                 gm.createUniverse();
                 Main.setScene("screens/mapscreen.fxml");
             }
-        } else if (total >= 30) {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+        } else if (total >= 15) {
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 15. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }

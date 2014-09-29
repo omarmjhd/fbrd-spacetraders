@@ -37,7 +37,7 @@
             <Font name="Courier New" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="skillPoints" focusTraversable="false" layoutX="607.0" layoutY="131.0" prefHeight="19.0" prefWidth="13.0" text="30" AnchorPane.rightAnchor="14.0">
+      <Label fx:id="skillPoints" focusTraversable="false" layoutX="607.0" layoutY="131.0" prefHeight="19.0" prefWidth="13.0" text="15" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Courier New" size="15.0" />
          </font>
