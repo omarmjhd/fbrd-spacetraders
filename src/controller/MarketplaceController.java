@@ -24,8 +24,8 @@ import model.Player;
  */
 public class MarketplaceController implements Initializable{
     public Text marketTitle;
-    public ListView shipView;
-    public ListView marketView;
+    public ListView<Goods> shipView;
+    public ListView<Goods> marketView;
     public Button buyButton;
     public Button sellButton;
     public Label playerMoney;
@@ -36,7 +36,6 @@ public class MarketplaceController implements Initializable{
     private ObservableList<Goods> marketGoods = FXCollections.observableArrayList();
     private ObservableList<Goods> shipGoods = FXCollections.observableArrayList();
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         marketView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -95,6 +94,7 @@ public class MarketplaceController implements Initializable{
         marketplace.playerSells(player.getCargo().get(
                         shipView.getSelectionModel().getSelectedIndex()));
         marketGoods.add(shipGoods.remove(shipView.getSelectionModel().getSelectedIndex()));
+        //marketplace.playerSells(shipGoods.remove(shipView.getSelectionModel().getSelectedIndex()));
         if (shipGoods.size() == 0) {
             sellButton.setDisable(true);
         }
@@ -116,7 +116,7 @@ public class MarketplaceController implements Initializable{
             super.updateItem(item, empty);
 
             if (item != null) {
-                setText(item.toString() + " | Price: " + price);
+                setText(item.toString() + " | " + price + " cr");
             }
         }
     }

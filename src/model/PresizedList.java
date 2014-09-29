@@ -48,7 +48,7 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T> {
             throw new IllegalArgumentException("Items cannot be null");
         }
         if (size >= backing.length) {
-            return false;
+            throw new IllegalStateException("List is full");
         }
         backing[size] = item;
         size++;
