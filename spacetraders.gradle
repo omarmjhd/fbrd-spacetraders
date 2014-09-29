@@ -20,7 +20,7 @@ sourceSets {
 
 processResources {
 
-    from(zipTree('lib/controlsfx-8.0.6.jar'))
+    from(zipTree('lib/controlsfx-8.0.6_20.jar'))
     from(fileTree(dir: 'src', include: '**/*.fxml', exclude: '**/*.java'))
 }
 
@@ -35,5 +35,5 @@ jar {
 }
 
 dependencies {
-	     compile files('lib/controlsfx-8.0.6.jar')
+	     compile files('lib/controlsfx-8.0.6_20.jar')
 }
