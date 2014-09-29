@@ -69,13 +69,13 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T> {
         }
         T retval = null;
         int i = 0;
-        while (retval == null && i < size) {
+        while (retval == null && i < size && i < backing.length) {
             if (item.equals(backing[i])) {
                 retval = backing[i];
-                for (; i < (backing.length - 1); i++) {
-                    backing[i] = backing[i + 1];
+                for (int j = i; j < (backing.length - 1); j++) {
+                    backing[j] = backing[j + 1];
                 }
-                backing[i + 1] = null;
+                backing[backing.length - 1] = null;
             }
             i++;
         }
@@ -96,7 +96,9 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T> {
         T item = (T) o;
 
         T retval = removeHelper(item);
-
+        if (retval != null) {
+            size--;
+        }
         return retval != null;
     }
 
