@@ -117,7 +117,7 @@ public class Controller {
 
         int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
 
-        if (total <= 30 && !name.equals("")) {
+        if (total <= 15 && !name.equals("")) {
             Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
