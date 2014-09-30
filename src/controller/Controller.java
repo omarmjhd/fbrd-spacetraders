@@ -53,6 +53,28 @@ public class Controller {
     }
 
     /**
+     * Listens for change in slider values and calls sliders()
+     */
+    public void sliderListener() {
+        // Handle Slider value change events.
+        engSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        tradeSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        fightSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        investSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        pilotSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+    }
+
+    /**
      * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
@@ -62,14 +84,11 @@ public class Controller {
     }
 
     /**
-     * Listens for slider change values
-     *
+     * Updates the skillPoints Label
      *
      */
    public void sliders() {
-       String currentValue = skillPoints.getText();
-       int currentInt = Integer.parseInt(currentValue);
-       System.out.println(currentInt);
+       int currentInt = 0;
        int pilotSkill = (int) pilotSlide.getValue();
        int fightSkill = (int) fightSlide.getValue();
        int engSkill = (int) engSlide.getValue();
@@ -77,15 +96,7 @@ public class Controller {
        int investSkill = (int) investSlide.getValue();
 
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-
-       if (total > 30) {
-           Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("To Many Skill Points").message("You have used "
-                   + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
-       } else {
-           currentInt = 30 - total;
-       }
-       //sliders can't add more skill points than # points left
-        //TODO LOCK SLIDERS WHEN AT MAX
+       currentInt = 15 - total;
 
        //displays the skillPoints left
        skillPoints.setText("" + currentInt);
@@ -106,7 +117,7 @@ public class Controller {
 
         int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
 
-        if (total <= 30 && !name.equals("")) {
+        if (total <= 15 && !name.equals("")) {
             Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
@@ -118,8 +129,8 @@ public class Controller {
                 gm.createUniverse();
                 Main.setScene("screens/mapscreen.fxml");
             }
-        } else if (total >= 30) {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+        } else if (total >= 15) {
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 15. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
