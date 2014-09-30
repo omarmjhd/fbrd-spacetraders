@@ -117,6 +117,8 @@ public class MarketplaceController implements Initializable{
 
             if (item != null) {
                 setText(item.toString() + " | " + price + " cr");
+            } else {
+                setText("");
             }
         }
     }
