@@ -3,6 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Class to act as a service provider between Planet and Player for trading
+ * items
+ *
+ * @author ngraves3
+ *
+ */
 public class Marketplace {
 
 
@@ -77,6 +84,11 @@ public class Marketplace {
         return retval;
     }
 
+    /**
+     * Gets the price of the item this market sells
+     *
+     * @return price of Good
+     */
     public int getPrice() {
         return price;
     }
@@ -93,6 +105,11 @@ public class Marketplace {
         return name + "   " + price + "cr";
     }
 
+    /**
+     * Returns quantity left in marketplace
+     * 
+     * @return number of items left
+     */
     public int getSupply() {
         return supply;
     }
