@@ -20,6 +20,7 @@ import model.Planet;
 import model.Player;
 
 /**
+ *
  * @author jwinchester6
  */
 public class MarketplaceController implements Initializable{
@@ -38,19 +39,25 @@ public class MarketplaceController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Sets only one item allowed to be selected in each listview for easier buying selling code
         marketView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         shipView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        // Sets various instance variables
         this.gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
         currentPlanet = gm.getCurrentPlanet();
         marketTitle.setText(currentPlanet.getName() + " Market");
         marketplace = currentPlanet.enterMarket(gm.getPlayer());
-        //for (int i = 0; i < marketplace.getSupply(); i++) {
-        //  marketGoods.add(marketplace.getMerchandise());
-        //}
         marketGoods.addAll(marketplace.getMerchandise());
-        shipGoods.addAll(player.getCargo());
 
+        // Enables the sell button if the player has goods to sell
+        if (player.getCargo().size() != 0) {
+            sellButton.setDisable(false);
+            shipGoods.addAll(player.getCargo());
+        }
+
+        // Allows us to set our ListCell's text to what we needs and bind them to a good
         marketView.setCellFactory(new Callback<ListView<Goods>, ListCell<Goods>>() {
             @Override
             public ListCell<Goods> call(ListView<Goods> param) {
@@ -59,6 +66,7 @@ public class MarketplaceController implements Initializable{
         });
         shipView.setCellFactory(marketView.getCellFactory());
 
+        // Loads the Listviews and displays the players cash
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
         playerMoney.setText(String.valueOf(player.getMoney()));

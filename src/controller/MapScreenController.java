@@ -3,7 +3,6 @@ package controller;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -24,11 +23,10 @@ import java.util.ResourceBundle;
 /**
  * @author Joshua on 9/25/2014.
  */
-public class UniverseScreenController implements Initializable {
+public class MapScreenController implements Initializable {
 
     public AnchorPane root;
     public Pane lolpane;
-    public TextArea planetText;
     private GameInstance gm;
     private HashSet<SolarSystem> universe;
     @FXML
