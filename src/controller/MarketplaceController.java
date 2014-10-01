@@ -54,9 +54,10 @@ public class MarketplaceController implements Initializable{
         marketView.setCellFactory(new Callback<ListView<Goods>, ListCell<Goods>>() {
             @Override
             public ListCell<Goods> call(ListView<Goods> param) {
-                return new GoodsCell(marketplace.getPrice());
+                return new GoodsCell();
             }
         });
+        shipView.setCellFactory(marketView.getCellFactory());
 
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
@@ -64,6 +65,9 @@ public class MarketplaceController implements Initializable{
     }
 
     public void buy(ActionEvent actionEvent) {
+        if (marketView.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
         boolean canBuy = marketplace.getPrice() <= player.getMoney() && player.cargoRoomLeft() >= 1;
 
         if (canBuy) {
@@ -71,9 +75,6 @@ public class MarketplaceController implements Initializable{
 
             shipGoods.add(marketGoods.remove(marketView.getSelectionModel().getSelectedIndex()));
 
-            //marketGoods = marketView.getItems();
-            //marketView.setItems(marketGoods);
-            //marketView.edit(arg0);
         }
 
         canBuy = marketplace.getPrice() <= player.getMoney() && player.cargoRoomLeft() >= 1;
@@ -81,13 +82,16 @@ public class MarketplaceController implements Initializable{
         if (marketGoods.size() == 0 || !canBuy) {
             buyButton.setDisable(true);
         }
-        if (shipGoods.size() > 0 || canBuy) {
+        if (shipGoods.size() > 0) {
             sellButton.setDisable(false);
         }
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
     public void sell(ActionEvent actionEvent) {
+        if (shipView.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
         //Need to validate the selection index
         //i.e. is something actually selected.
         //if you press sell with nothing selected we get bad Exceptions
@@ -104,19 +108,14 @@ public class MarketplaceController implements Initializable{
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
-    static class GoodsCell extends ListCell<Goods> {
+    class GoodsCell extends ListCell<Goods> {
 
-        private int price;
-
-        public GoodsCell(int price) {
-            this.price = price;
-        }
         @Override
         public void updateItem(Goods item, boolean empty) {
             super.updateItem(item, empty);
 
             if (item != null) {
-                setText(item.toString() + " | " + price + " cr");
+                setText(marketplace.itemString());
             } else {
                 setText("");
             }

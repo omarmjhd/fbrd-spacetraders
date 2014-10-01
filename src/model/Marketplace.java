@@ -56,8 +56,7 @@ public class Marketplace {
     /**
      * Player sells goods to the market.
      *
-     * @param cargo
-     * @param quantity
+     * @param cargo the good the player sells
      */
     public boolean playerSells(Goods cargo) {
 
