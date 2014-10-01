@@ -76,7 +76,7 @@ public class Marketplace {
         }
 
         Random rand = new Random();
-        int quantity = rand.nextInt(9) + 1;
+        int quantity = rand.nextInt(9) + 10;
 
         supply = new ArrayList<Goods>(quantity);
 
@@ -92,7 +92,7 @@ public class Marketplace {
      * Player buys {quantity} amount of goods from the planet. If the player
      * can't buy that many, don't let him/her.
      *
-     * @param quantity
+     * @param item
      *        the amount of Goods to buy
      * @return boolean whether the good was actually bought
      */

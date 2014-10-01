@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MarketplaceController">
    <children>
-      <Text fx:id="marketTitle" fontSmoothingType="LCD" layoutX="181.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" textAlignment="CENTER" wrappingWidth="278.13671875" AnchorPane.topAnchor="14.0">
+      <Text fx:id="marketTitle" fontSmoothingType="LCD" layoutX="14.0" layoutY="52.13818359375" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" textAlignment="CENTER" wrappingWidth="608.13671875" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
          <fill>
             <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
                <stops>

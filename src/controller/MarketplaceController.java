@@ -1,23 +1,16 @@
 package controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import model.GameInstance;
-import model.Goods;
-import model.Marketplace;
-import model.Planet;
-import model.Player;
+import model.*;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -69,25 +62,33 @@ public class MarketplaceController implements Initializable{
         // Loads the ListViews and displays the players cash
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
+        marketView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {return; }
+            if (marketplace.getPrice(newValue) > player.getMoney()) {
+                buyButton.setDisable(true);
+            } else if (marketplace.getPrice(newValue) <= player.getMoney()
+                    && player.cargoRoomLeft() != 0){
+                buyButton.setDisable(false);
+            }
+        });
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
     public void buy(ActionEvent actionEvent) {
-        if (marketView.getSelectionModel().getSelectedItem() == null) {
+        Goods boughtGood = marketView.getSelectionModel().getSelectedItem();
+        if (boughtGood == null) {
             return;
         }
 
-        if () {
-            marketplace.playerBuys(marketplace.getMerchandise().get(
-                    marketView.getSelectionModel().getSelectedIndex()));
-            shipGoods.add(marketGoods.remove(marketView.getSelectionModel().getSelectedIndex()));
+        marketplace.playerBuys(boughtGood);
+        marketGoods.remove(boughtGood);
+        shipGoods.add(boughtGood);
 
-        }
 
-        if (marketGoods.size() == 0 || marketplace.getPrice(marketplace.getMerchandise().get(
-                marketView.getSelectionModel().getSelectedIndex())) <= player.getMoney() && player.cargoRoomLeft() >= 1) {
+        if (marketGoods.size() == 0 || player.cargoRoomLeft() == 0) {
             buyButton.setDisable(true);
         }
+
         if (shipGoods.size() > 0) {
             sellButton.setDisable(false);
         }
@@ -98,13 +99,10 @@ public class MarketplaceController implements Initializable{
         if (shipView.getSelectionModel().getSelectedItem() == null) {
             return;
         }
-        //Need to validate the selection index
-        //i.e. is something actually selected.
-        //if you press sell with nothing selected we get bad Exceptions
+
         marketplace.playerSells(player.getCargo().get(
                         shipView.getSelectionModel().getSelectedIndex()));
         marketGoods.add(shipGoods.remove(shipView.getSelectionModel().getSelectedIndex()));
-        //marketplace.playerSells(shipGoods.remove(shipView.getSelectionModel().getSelectedIndex()));
         if (shipGoods.size() == 0) {
             sellButton.setDisable(true);
         }

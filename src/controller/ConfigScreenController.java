@@ -98,7 +98,7 @@ public class ConfigScreenController implements Initializable {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
                 Main.getGame().setPlayer(player);
-                Main.getGame().getPlayer().addMoney(1000);
+                Main.getGame().getPlayer().addMoney(10000);
                 System.out.println("Player Created");
                 System.out.println(Main.getGame().getPlayer());
                 GameInstance gm = GameInstance.getInstance();
