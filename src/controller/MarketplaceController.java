@@ -39,7 +39,7 @@ public class MarketplaceController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Sets only one item allowed to be selected in each listview for easier buying selling code
+        //Sets only one item allowed to be selected in each ListView for easier buying selling code
         marketView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         shipView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -66,7 +66,7 @@ public class MarketplaceController implements Initializable{
         });
         shipView.setCellFactory(marketView.getCellFactory());
 
-        // Loads the Listviews and displays the players cash
+        // Loads the ListViews and displays the players cash
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
         playerMoney.setText(String.valueOf(player.getMoney()));
@@ -76,18 +76,16 @@ public class MarketplaceController implements Initializable{
         if (marketView.getSelectionModel().getSelectedItem() == null) {
             return;
         }
-        boolean canBuy = marketplace.getPrice() <= player.getMoney() && player.cargoRoomLeft() >= 1;
 
-        if (canBuy) {
-            marketplace.playerBuys(1);
-
+        if () {
+            marketplace.playerBuys(marketplace.getMerchandise().get(
+                    marketView.getSelectionModel().getSelectedIndex()));
             shipGoods.add(marketGoods.remove(marketView.getSelectionModel().getSelectedIndex()));
 
         }
 
-        canBuy = marketplace.getPrice() <= player.getMoney() && player.cargoRoomLeft() >= 1;
-
-        if (marketGoods.size() == 0 || !canBuy) {
+        if (marketGoods.size() == 0 || marketplace.getPrice(marketplace.getMerchandise().get(
+                marketView.getSelectionModel().getSelectedIndex())) <= player.getMoney() && player.cargoRoomLeft() >= 1) {
             buyButton.setDisable(true);
         }
         if (shipGoods.size() > 0) {
@@ -123,7 +121,7 @@ public class MarketplaceController implements Initializable{
             super.updateItem(item, empty);
 
             if (item != null) {
-                setText(marketplace.itemString());
+                setText(item.toString() + "  " + marketplace.getPrice(item));
             } else {
                 setText("");
             }

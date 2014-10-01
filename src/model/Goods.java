@@ -79,7 +79,7 @@ public enum Goods {
 
     @Override
     public String toString(){
-        return this.name().toLowerCase();
+        return this.name().charAt(0) + name().substring(1,name().length()).toLowerCase();
     }
 
 }
