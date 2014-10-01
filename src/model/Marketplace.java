@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -19,23 +22,70 @@ public class Marketplace {
     private TechLevel planetTech;
 
     /*
-     * Right now a planet can sell a finite amount of one type of Goods. We
-     * may want to implement a limited number of goods per planet -Nick
+     * Set of map of goods this planet can sell inherently (i.e. produce)
      */
-    private Goods merchandise;
+    private Map<Goods, Integer> productionPrices;
 
-    private int supply;
+    /*
+     * Map of goods this planet can buy. Min tech to produce is always >= min
+     * tech to use
+     * 
+     * K(productionPrices) is a subset of K(purchasePrices)
+     */
+    private Map<Goods, Integer> purchasePrices;
 
-    private int price;
+    private List<Goods> supply;
 
     private Player player;
 
+    /**
+     * Instantiates a marketplace with the given planet's tech level
+     *
+     * @param planet
+     *        the planet of the market
+     * @param player
+     *        the Player
+     */
     public Marketplace(Planet planet, Player player) {
         this.planetTech = planet.getTechLevel();
-        this.supply = new Random().nextInt(9) + 1;
-        this.merchandise = planet.getResource();
         this.player = player;
-        price = merchandise.price(planetTech);
+        productionPrices = new HashMap<Goods, Integer>();
+        purchasePrices = new HashMap<Goods, Integer>();
+
+        /*
+         * Initialize goods the planet can produce
+         */
+        for (Goods item : Goods.values()) {
+            /* Check if planetTech is higher than minTech for the good */
+            if (planetTech.compareTo(item.minTechToProduce()) >= 0) {
+                productionPrices.put(item, item.price(planetTech));
+            }
+        }
+
+        /*
+         * Initialize goods the planet can buy. Copy over production goods and
+         * add any other goods it can sell.
+         */
+        purchasePrices.putAll(productionPrices);
+
+        for (Goods item : Goods.values()) {
+            if (!productionPrices.containsKey(item)
+                            && planetTech.compareTo(item.minTechToUse()) >= 0) {
+                purchasePrices.put(item, item.price(planetTech));
+            }
+        }
+
+        Random rand = new Random();
+        int quantity = rand.nextInt(9) + 1;
+
+        supply = new ArrayList<Goods>(quantity);
+
+        Goods[] usableGoods = productionPrices.keySet().toArray(new Goods[productionPrices.size()]);
+
+        while (supply.size() < quantity) {
+            supply.add(usableGoods[rand.nextInt(productionPrices.size())]);
+        }
+
     }
 
     /**
@@ -44,25 +94,35 @@ public class Marketplace {
      *
      * @param quantity
      *        the amount of Goods to buy
+     * @return boolean whether the good was actually bought
      */
-    public void playerBuys(int quantity) {
-
-        player.addCargo(merchandise);
-        player.subtractMoney(price);
-        supply--;
-
+    public boolean playerBuys(Goods item) {
+        if (supply.remove(item)) {
+            player.addCargo(item);
+            player.subtractMoney(purchasePrices.get(item));
+            return true;
+        }
+        return false;
     }
 
     /**
      * Player sells goods to the market.
      *
-     * @param cargo the good the player sells
+     * @param cargo
+     *        the item to sell
+     * @return whether the good was sold or not
      */
     public boolean playerSells(Goods cargo) {
+        // if cargo not in keys, can't sell to market
+        if (!purchasePrices.containsKey(cargo)) {
+            return false;
+        }
 
+        //check if cargo is in player's inventory
         Goods removed = player.removeCargo(cargo);
         if (removed != null) { //item exists in cargo
-            player.addMoney(removed.price(planetTech));
+            player.addMoney(purchasePrices.get(removed));
+            supply.add(removed);
         }
 
         return removed != null;
@@ -70,46 +130,22 @@ public class Marketplace {
     }
 
     /**
-     * Returns an ArrayList of the Merchandise. I.e. supply * the item
+     * Returns an List of the Merchandise.
      *
-     * @return ArrayList of the Goods this Marketplace sells
+     * @return List of the Goods this Marketplace sells
      */
-    public ArrayList<Goods> getMerchandise() {
-        ArrayList<Goods> retval = new ArrayList<>(supply);
-        for (int i = 0; i < supply; i++) {
-            retval.add(merchandise);
-        }
-
-        return retval;
-    }
-
-    /**
-     * Gets the price of the item this market sells
-     *
-     * @return price of Good
-     */
-    public int getPrice() {
-        return price;
-    }
-
-    /**
-     * Returns a representation of an object in the format: Water 1000cr
-     *
-     * @return String representation of the merchandise object
-     */
-    public String itemString() {
-        String firstChar = merchandise.name().substring(0, 1).toUpperCase();
-        String rest = merchandise.name().substring(1).toLowerCase();
-        String name = firstChar + rest;
-        return name + "   " + price + "cr";
-    }
-
-    /**
-     * Returns quantity left in marketplace
-     * 
-     * @return number of items left
-     */
-    public int getSupply() {
+    public List<Goods> getMerchandise() {
         return supply;
+    }
+
+    /**
+     * Gets the price for a specific type of Goods
+     *
+     * @param item
+     *        a Good
+     * @return price of the Good
+     */
+    public int getPrice(Goods item) {
+        return purchasePrices.get(item);
     }
 }
