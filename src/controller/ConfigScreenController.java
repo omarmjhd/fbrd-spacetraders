@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,9 +14,6 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -98,7 +97,7 @@ public class ConfigScreenController implements Initializable {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
                 Main.getGame().setPlayer(player);
-                Main.getGame().getPlayer().addMoney(10000);
+                Main.getGame().getPlayer().addMoney(1000);
                 System.out.println("Player Created");
                 System.out.println(Main.getGame().getPlayer());
                 GameInstance gm = GameInstance.getInstance();
