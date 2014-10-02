@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Line;
 import model.GameInstance;
 import model.Point;
 import model.SolarSystem;
@@ -32,8 +33,10 @@ public class MapScreenController implements Initializable {
     private GameInstance gm;
     private HashSet<SolarSystem> universe;
     private boolean clickedPlanet = false;
-    private Circle currentChoice;
+    private Circle currentCircle;
+    private Line currentLine;
     private Point playerLocation;
+    private Point currentChoicePoint;
     @FXML
 
     private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "blue", "cadetblue", "CHARTREUSE",
@@ -45,18 +48,23 @@ public class MapScreenController implements Initializable {
         this.gm = GameInstance.getInstance();
 
         //playerLocation = gm.getCurrentSolarSystem.getPosition();
+        //for testing:
         playerLocation = new Point(10, 10);
         Rectangle rectangle = new Rectangle(playerLocation.getX(), playerLocation.getY(), 20, 20);
         rectangle.setFill(Color.WHITE);
         lolpane.getChildren().add(rectangle);
 
-
+        //currentLine initialization
+        currentLine = new Line();
+        currentLine.setStartX(playerLocation.getX());
+        currentLine.setStartY(playerLocation.getY());
+        lolpane.getChildren().add(currentLine);
 
         EventHandler<MouseEvent> handler = event -> {
-            System.out.println(event.getX() + ", " + event.getY() + ", " + event.getPickResult().toString());
-            Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
-            Point point = new Point( (int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
-            SolarSystem selectedSystem = (SolarSystem) clickedCircle.getUserData();
+            //System.out.println(event.getX() + ", " + event.getY() + ", " + event.getPickResult().toString());
+            //Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
+            //Point point = new Point( (int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
+            SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
             gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
             Main.setScene("screens/marketplacescreen.fxml");
 
@@ -67,17 +75,36 @@ public class MapScreenController implements Initializable {
             Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
             Point chosenPlanet = new Point((int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
             if (!clickedPlanet) {
-                currentChoice = clickedCircle;
-                currentChoice.setStroke(Color.RED);
-                currentChoice.setStrokeWidth(10);
+                currentCircle = clickedCircle;
+                currentChoicePoint = chosenPlanet;
+                currentCircle.setStroke(Color.RED);
+                currentCircle.setStrokeWidth(10);
                 clickedPlanet = true;
             } else {
             //changes the current chosen planet
-                currentChoice.setStroke(null);
-                currentChoice = clickedCircle;
-                currentChoice.setStroke(Color.RED);
-                currentChoice.setStrokeWidth(10);
+                currentCircle.setStroke(null);
+                currentCircle = clickedCircle;
+                currentChoicePoint = chosenPlanet;
+                currentCircle.setStroke(Color.RED);
+                currentCircle.setStrokeWidth(10);
             }
+        };
+
+        EventHandler<MouseEvent> drawLine = event -> {
+            if (!clickedPlanet) {
+                currentLine.setEndX(currentChoicePoint.getX());
+                currentLine.setEndY(currentChoicePoint.getY());
+                currentLine.setStroke(Color.RED);
+                currentLine.setStrokeWidth(3);
+            } else {
+                currentLine.setStroke(null);
+                currentLine.setEndX(currentChoicePoint.getX());
+                currentLine.setEndY(currentChoicePoint.getY());
+                currentLine.setStroke(Color.RED);
+                currentLine.setStrokeWidth(3);
+            }
+
+
         };
 
         lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
@@ -95,6 +122,7 @@ public class MapScreenController implements Initializable {
                     Paint.valueOf(colorList[b]));
             //circle.addEventHandler(MouseEvent.MOUSE_CLICKED , handler);
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
+            lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
             circle.setUserData(s);
             lolpane.getChildren().add(circle);
 
