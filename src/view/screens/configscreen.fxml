@@ -42,7 +42,7 @@
             <Font name="Courier New" size="15.0" />
          </font>
       </Label>
-      <Label focusTraversable="false" layoutX="105.0" layoutY="53.0" prefHeight="47.0" prefWidth="430.0" text="Use the sliders below to allocate your players skill points. Choose wisely you only have 30 skill points to use." wrapText="true">
+      <Label focusTraversable="false" layoutX="105.0" layoutY="53.0" prefHeight="47.0" prefWidth="430.0" text="Use the sliders below to allocate your players skill points. Choose wisely you only have 15 skill points to use." wrapText="true">
          <font>
             <Font name="Courier New" size="12.0" />
          </font>
