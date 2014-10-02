@@ -23,5 +23,7 @@
          </font>
       </Text>
       <Pane fx:id="lolpane" layoutX="50.0" layoutY="65.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="65.0" />
+      <Button fx:id="travelButton" layoutX="535.0" layoutY="390.0" mnemonicParsing="false" onAction="#travel" text="Travel!" />
+      <Text fx:id="fuelError" layoutX="512.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
