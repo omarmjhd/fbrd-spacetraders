@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,6 +39,8 @@ public class MapScreenController implements Initializable {
     public Pane lolpane;
     public Button travelButton;
     public Text fuelError;
+    public Label currentFuelLabel;
+    public Label travelDistanceLabel;
     private GameInstance gm;
     private HashSet<SolarSystem> universe;
     private boolean clickedPlanet = false;
@@ -58,10 +61,12 @@ public class MapScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
+        currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
+        travelDistanceLabel.setText("");
 
         //playerLocation = gm.getCurrentSolarSystem().getPosition();
         //for testing:
-        playerLocation = new Point(10, 10);
+        playerLocation = new Point(100, 100);
 
         //currentLine initialization
         currentLine = new Line();
@@ -87,6 +92,14 @@ public class MapScreenController implements Initializable {
         //astronautView.setY(playerLocation.getY());
         //}
 
+        EventHandler<MouseEvent> handleLabels = event -> {
+            if (clickedPlanet) {
+                travelDistance = currentCirclePoint.distance(playerLocation);
+                travelDistanceLabel.setText("" + travelDistance);
+                checkFuel();
+            }
+        };
+
         EventHandler<MouseEvent> drawClickedCircle = event -> {
             //if haven't already chosen a planet, just highlight clicked planet
             Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
@@ -97,15 +110,13 @@ public class MapScreenController implements Initializable {
                 currentCircle.setStroke(Color.RED);
                 currentCircle.setStrokeWidth(10);
                 clickedPlanet = true;
-                checkFuel();
             } else {
-            //changes the current chosen planet
+//            changes the current chosen planet
                 currentCircle.setStroke(null);
                 currentCircle = clickedCircle;
                 currentCirclePoint = chosenPlanet;
                 currentCircle.setStroke(Color.RED);
                 currentCircle.setStrokeWidth(10);
-                checkFuel();
             }
         };
 
@@ -134,6 +145,7 @@ public class MapScreenController implements Initializable {
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
             lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
+            lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, handleLabels);
             circle.setUserData(s);
             lolpane.getChildren().add(circle);
 
@@ -157,8 +169,7 @@ public class MapScreenController implements Initializable {
      * and adds error Text
      */
     private void checkFuel() {
-        if (clickedPlanet) {
-            travelDistance = playerLocation.distance(currentCirclePoint);
+       if (clickedPlanet) {
             if (travelDistance > gm.getPlayer().getCurrentFuel()) {
                 travelButton.setDisable(true);
                 fuelError.setText("Not enough fuel :(");
@@ -166,9 +177,9 @@ public class MapScreenController implements Initializable {
                 travelButton.setDisable(false);
                 fuelError.setText("");
             }
-        } else {
-            travelButton.setDisable(false);
-            fuelError.setText("");
-        }
+       } else {
+           travelButton.setDisable(false);
+           fuelError.setText("");
+       }
     }
 }
