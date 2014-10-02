@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -43,6 +45,8 @@ public class MapScreenController implements Initializable {
     private Point playerLocation;
     private Point currentCirclePoint;
     private int travelDistance;
+    private Image astronaut;
+    private ImageView astronautView;
 
     @FXML
 
@@ -57,15 +61,22 @@ public class MapScreenController implements Initializable {
         playerLocation = gm.getCurrentSolarSystem.getPosition();
         //for testing:
         //playerLocation = new Point(10, 10);
-        Rectangle rectangle = new Rectangle(playerLocation.getX(), playerLocation.getY(), 20, 20);
-        rectangle.setFill(Color.WHITE);
-        lolpane.getChildren().add(rectangle);
 
         //currentLine initialization
         currentLine = new Line();
         currentLine.setStartX(playerLocation.getX());
         currentLine.setStartY(playerLocation.getY());
         lolpane.getChildren().add(currentLine);
+
+        //make player image
+        astronaut = new Image("file:assets/astronaut.png");
+        astronautView = new ImageView(astronaut);
+        lolpane.getChildren().add(astronautView);
+        astronautView.setPreserveRatio(true);
+        astronautView.setX(playerLocation.getX() - 20);
+        astronautView.setY(playerLocation.getY() - 20);
+        astronautView.setFitHeight(50);
+
 
 
         EventHandler<MouseEvent> drawClickedCircle = event -> {
@@ -92,10 +103,10 @@ public class MapScreenController implements Initializable {
 
         EventHandler<MouseEvent> drawLine = event -> {
             if (!clickedPlanet) {
-                currentLine.setEndX(currentCirclePoint.getX());
-                currentLine.setEndY(currentCirclePoint.getY());
-                currentLine.setStroke(Color.RED);
-                currentLine.setStrokeWidth(3);
+                //currentLine.setEndX(currentCirclePoint.getX());
+                //currentLine.setEndY(currentCirclePoint.getY());
+                //currentLine.setStroke(Color.RED);
+                //currentLine.setStrokeWidth(3);
             } else {
                 currentLine.setStroke(null);
                 currentLine.setEndX(currentCirclePoint.getX());
