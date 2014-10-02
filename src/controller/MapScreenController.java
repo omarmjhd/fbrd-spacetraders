@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import model.GameInstance;
@@ -29,7 +28,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
+ * @version 2.0
  * @author Joshua on 9/25/2014.
+ * @author Renee on 10/2/2014
  */
 public class MapScreenController implements Initializable {
 
@@ -58,9 +59,9 @@ public class MapScreenController implements Initializable {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
 
-        playerLocation = gm.getCurrentSolarSystem.getPosition();
+        //playerLocation = gm.getCurrentSolarSystem().getPosition();
         //for testing:
-        //playerLocation = new Point(10, 10);
+        playerLocation = new Point(10, 10);
 
         //currentLine initialization
         currentLine = new Line();
@@ -73,11 +74,18 @@ public class MapScreenController implements Initializable {
         astronautView = new ImageView(astronaut);
         lolpane.getChildren().add(astronautView);
         astronautView.setPreserveRatio(true);
-        astronautView.setX(playerLocation.getX() - 20);
-        astronautView.setY(playerLocation.getY() - 20);
         astronautView.setFitHeight(50);
+        astronautView.setX(playerLocation.getX() - 20);
+        astronautView.setY(playerLocation.getY() - 25);
 
-
+        //keep in case out of bounds errors happen bc the - 20
+        //if (playerLocation.distance(new Point(0,0)) >= 30) {
+        //astronautView.setX(playerLocation.getX() - 20);
+        //astronautView.setY(playerLocation.getY() - 20);
+        //} else {
+        //astronautView.setX(playerLocation.getX());
+        //astronautView.setY(playerLocation.getY());
+        //}
 
         EventHandler<MouseEvent> drawClickedCircle = event -> {
             //if haven't already chosen a planet, just highlight clicked planet
@@ -102,12 +110,7 @@ public class MapScreenController implements Initializable {
         };
 
         EventHandler<MouseEvent> drawLine = event -> {
-            if (!clickedPlanet) {
-                //currentLine.setEndX(currentCirclePoint.getX());
-                //currentLine.setEndY(currentCirclePoint.getY());
-                //currentLine.setStroke(Color.RED);
-                //currentLine.setStrokeWidth(3);
-            } else {
+            if (clickedPlanet) {
                 currentLine.setStroke(null);
                 currentLine.setEndX(currentCirclePoint.getX());
                 currentLine.setEndY(currentCirclePoint.getY());
