@@ -22,7 +22,8 @@ public class Point {
      * @return int closest to the hypotenuse
      */
     public int distance(Point other) {
-        return (int) Math.sqrt(x * x + y * y);
+        return (int) Math.sqrt(Math.pow((x - other.getX()), 2)
+                        + Math.pow((y - other.getY()), 2));
     }
 
 
