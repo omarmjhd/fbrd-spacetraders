@@ -94,7 +94,7 @@ public class MapScreenController implements Initializable {
 
         EventHandler<MouseEvent> handleLabels = event -> {
             if (clickedPlanet) {
-                travelDistance = computeDistance(playerLocation, currentCirclePoint);
+                travelDistance = playerLocation.distance(currentCirclePoint);
                 travelDistanceLabel.setText("" + travelDistance);
                 checkFuel();
             }
@@ -181,19 +181,5 @@ public class MapScreenController implements Initializable {
            travelButton.setDisable(false);
            fuelError.setText("");
        }
-    }
-
-    /**
-     * Computes distance between two points
-     * @param pt1
-     * @param pt2
-     * @return distance
-     */
-    private int computeDistance(Point pt1, Point pt2) {
-        double x1 = pt1.getX();
-        double y1 = pt1.getY();
-        double x2 = pt2.getX();
-        double y2 = pt2.getY();
-        return (int) Math.sqrt(Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2));
     }
 }
