@@ -66,7 +66,7 @@ public class MapScreenController implements Initializable {
 
         //playerLocation = gm.getCurrentSolarSystem().getPosition();
         //for testing:
-        playerLocation = new Point(100, 100);
+        playerLocation = new Point(250, 250);
 
         //currentLine initialization
         currentLine = new Line();
@@ -194,6 +194,6 @@ public class MapScreenController implements Initializable {
         double y1 = pt1.getY();
         double x2 = pt2.getX();
         double y2 = pt2.getY();
-        return (int) Math.sqrt(Math.pow(Math.abs(x1 + x2), 2) + Math.pow(Math.abs(y1 + y2), 2));
+        return (int) Math.sqrt(Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2));
     }
 }
