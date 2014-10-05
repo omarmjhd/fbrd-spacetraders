@@ -136,10 +136,7 @@ public class MapScreenController implements Initializable {
         int b = 0;
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
-            System.out.println(point);
-            //int b = random.nextInt(colorList.length - 1);
             if (b >= colorList.length) { b =0;}
-            System.out.println(b + ": " + colorList[b]);
 
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
