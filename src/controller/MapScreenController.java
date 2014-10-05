@@ -63,10 +63,7 @@ public class MapScreenController implements Initializable {
         this.gm = GameInstance.getInstance();
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
         travelDistanceLabel.setText("");
-
-        //playerLocation = gm.getCurrentSolarSystem().getPosition();
-        //for testing:
-        playerLocation = new Point(250, 250);
+        playerLocation = gm.getSolarSystem().getPosition();
 
         //currentLine initialization
         currentLine = new Line();
