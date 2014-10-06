@@ -155,6 +155,7 @@ public class MapScreenController implements Initializable {
     public void travel(ActionEvent actionEvent) {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
+        gm.getPlayer().travel(travelDistance);
         Main.setScene("screens/marketplacescreen.fxml");
     }
 
