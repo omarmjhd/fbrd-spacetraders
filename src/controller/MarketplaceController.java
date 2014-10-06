@@ -79,6 +79,10 @@ public class MarketplaceController implements Initializable{
         if (boughtGood == null) {
             return;
         }
+        if (marketplace.getPrice(boughtGood) > player.getMoney()) {
+            buyButton.setDisable(true);
+            return;
+        }
 
         marketplace.playerBuys(boughtGood);
         marketGoods.remove(boughtGood);
