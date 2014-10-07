@@ -90,9 +90,14 @@ public class Player {
         return ship.getCurrentFuel();
     }
 
+    public void buyFuel(int units) {
+        subtractMoney(units * ship.getFuelCost());
+        ship.buyFuel(units);
+    }
+
     /**
      * Gets maxmium amount of fuel for the given Ship
-     * 
+     *
      * @return maximum amount of fuel in Ship
      */
     public int getMaxFuel() {

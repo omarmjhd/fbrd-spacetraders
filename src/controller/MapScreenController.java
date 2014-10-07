@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,14 +23,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import model.GameInstance;
+import model.Planet;
 import model.Point;
 import model.SolarSystem;
 import view.Main;
-
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * @version 2.0
@@ -134,7 +134,9 @@ public class MapScreenController implements Initializable {
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
             if (b >= colorList.length) { b =0;}
-
+            for (Planet p : s.getPlanets()) {
+                p.setColor(Paint.valueOf(colorList[b]));
+            }
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
@@ -155,8 +157,7 @@ public class MapScreenController implements Initializable {
     public void travel(ActionEvent actionEvent) {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
-        gm.getPlayer().travel(travelDistance);
-        Main.setScene("screens/planetscreen.fxml");
+        Main.setScene("screens/marketplacescreen.fxml");
     }
 
     /**

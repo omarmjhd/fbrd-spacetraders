@@ -1,7 +1,7 @@
 package model;
 
 
-
+import javafx.scene.paint.Paint;
 
 
 /**
@@ -13,17 +13,15 @@ package model;
 public class Planet {
 
     private Goods resource;
-    private int supply;
     private TechLevel tech;
     private String name;
     private Marketplace marketplace;
+    private Paint color;
 
     public Planet(String name, Goods resource, TechLevel tech) {
         this.name = name;
         this.resource = resource;
         this.tech = tech;
-
-
     }
 
     /**
@@ -56,6 +54,14 @@ public class Planet {
 
     public TechLevel getTechLevel() {
         return tech;
+    }
+
+    public Paint getColor() {
+        return color;
+    }
+
+    public void setColor(Paint color) {
+        this.color = color;
     }
 
     @Override

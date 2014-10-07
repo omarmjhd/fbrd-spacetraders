@@ -169,6 +169,10 @@ public enum Ship {
      * Getter methods below
      */
 
+    public int getFuelCost() {
+        return fuelCost;
+    }
+
     public int cargoSize() {
         return cargo.maxSize();
     }
