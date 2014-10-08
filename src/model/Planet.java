@@ -3,6 +3,8 @@ package model;
 
 import javafx.scene.paint.Paint;
 
+import java.io.*;
+
 
 /**
  * A planet in a SolarSystem. It has a tech level, resources, and a name.
@@ -10,7 +12,7 @@ import javafx.scene.paint.Paint;
  * @author Nick
  *
  */
-public class Planet {
+public class Planet implements Serializable{
 
     private Goods resource;
     private TechLevel tech;

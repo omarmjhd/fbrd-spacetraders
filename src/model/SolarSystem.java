@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.io.*;
 
 /**
  * A SolarSystem has a position in the universe and contains planets, which have
@@ -10,7 +11,7 @@ import java.util.Collection;
  * @author Nick
  *
  */
-public class SolarSystem {
+public class SolarSystem implements Serializable{
 
     private String name;
     private Point pos;

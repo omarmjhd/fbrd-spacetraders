@@ -1,5 +1,6 @@
 package model;
 
+import java.io.*;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import java.util.Random;
  * @author ngraves3
  *
  */
-public class GameInstance {
+public class GameInstance implements Serializable{
 
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
@@ -88,6 +89,10 @@ public class GameInstance {
         return solarSystems;
     }
 
+    public HashSet<Planet> getPlanets() {
+        return planets;
+    }
+
     /**
      * Creates a universe with number of planets equal to the length of our
      * default list of planet names
@@ -145,6 +150,49 @@ public class GameInstance {
         //Do something to end the turn or whatever
     }
 
+    public void saveGameInstance(GameInstance game) {
+
+        try {
+            FileOutputStream saveFile = new FileOutputStream("saveGameInstance.sav");
+            ObjectOutputStream save = new ObjectOutputStream(saveFile);
+            save.writeObject(game);
+            save.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        }
+    }
+
+    public GameInstance loadGameInstance() {
+
+        try {
+
+            FileInputStream openFile = new FileInputStream("saveGameInstance.sav");
+            ObjectInputStream restore = new ObjectInputStream(openFile);
+            GameInstance restoredGameInstance = (GameInstance) restore.readObject();
+
+            openFile.close();
+
+
+            return restoredGameInstance;
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        } catch (ClassNotFoundException g) {
+            g.printStackTrace();
+        }
+
+
+        return null;
+
+    }
+
     @Override
     public String toString() {
 
@@ -159,7 +207,4 @@ public class GameInstance {
         return gameString;
     }
 
-    public HashSet<Planet> getPlanets() {
-        return planets;
-    }
 }

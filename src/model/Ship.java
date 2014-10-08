@@ -1,6 +1,10 @@
 package model;
 
 import java.util.AbstractList;
+import java.util.AbstractList;
+import java.io.Serializable;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -14,7 +18,7 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public enum Ship {
+public enum Ship implements Serializable{
 
     FLEA(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0),
 

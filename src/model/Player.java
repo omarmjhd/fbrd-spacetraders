@@ -1,5 +1,6 @@
 package model;
 
+import java.io.*;
 import java.util.AbstractList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private final int PILOT_SKILL;
@@ -39,8 +40,7 @@ public class Player {
     /**
      * Adds money to the player's money
      *
-     * @param income
-     *        amount of money to add
+     * @param income amount of money to add
      */
     public void addMoney(int income) {
         this.money += income;
@@ -74,8 +74,7 @@ public class Player {
     /**
      * Travels the distance. Uses distance units of fuel
      *
-     * @param distance
-     *        distance to travel
+     * @param distance distance to travel
      */
     public void travel(int distance) {
         ship.travel(distance);
@@ -112,6 +111,51 @@ public class Player {
         retval += "Engineering skill: " + ENG_SKILL + "\n";
         retval += "Trading Skill: " + TRADE_SKILL + "\n";
         retval += "Investing Skill: " + INVEST_SKILL + "\n";
+        retval += "Ship: " + ship.toString();
         return retval;
     }
+
+    public void savePlayer(Player player) {
+
+        try {
+            FileOutputStream saveFile = new FileOutputStream("savePlayer.sav");
+            ObjectOutputStream save = new ObjectOutputStream(saveFile);
+            save.writeObject(player);
+            save.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        }
+    }
+
+    public Player loadPlayer() {
+
+        try {
+
+            FileInputStream openFile = new FileInputStream("savePlayer.sav");
+            ObjectInputStream restore = new ObjectInputStream(openFile);
+            Player restoredPlayer = (Player) restore.readObject();
+
+            openFile.close();
+
+
+            return restoredPlayer;
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        } catch (ClassNotFoundException g) {
+            g.printStackTrace();
+        }
+
+
+        return null;
+
+    }
+
 }
