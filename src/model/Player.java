@@ -115,47 +115,4 @@ public class Player implements Serializable {
         return retval;
     }
 
-    public void savePlayer(Player player) {
-
-        try {
-            FileOutputStream saveFile = new FileOutputStream("savePlayer.sav");
-            ObjectOutputStream save = new ObjectOutputStream(saveFile);
-            save.writeObject(player);
-            save.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException f) {
-            f.printStackTrace();
-        }
-    }
-
-    public Player loadPlayer() {
-
-        try {
-
-            FileInputStream openFile = new FileInputStream("savePlayer.sav");
-            ObjectInputStream restore = new ObjectInputStream(openFile);
-            Player restoredPlayer = (Player) restore.readObject();
-
-            openFile.close();
-
-
-            return restoredPlayer;
-
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException f) {
-            f.printStackTrace();
-        } catch (ClassNotFoundException g) {
-            g.printStackTrace();
-        }
-
-
-        return null;
-
-    }
-
 }

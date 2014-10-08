@@ -79,7 +79,7 @@ public class GameInstance implements Serializable{
         return player;
     }
 
-    public SolarSystem getSolarSystem() { return currentSolarSystem; };
+    public SolarSystem getCurrentSolarSystem() { return currentSolarSystem; };
 
     public void setCurrentSolarSystem(SolarSystem desination) {
         currentSolarSystem = desination;
@@ -91,6 +91,14 @@ public class GameInstance implements Serializable{
 
     public HashSet<Planet> getPlanets() {
         return planets;
+    }
+
+    public void setPlanets(HashSet<Planet> planets) {
+        this.planets = planets;
+    }
+
+    public void setSolarSystems(HashSet<SolarSystem> solarSystems) {
+        this.solarSystems = solarSystems;
     }
 
     /**
@@ -131,7 +139,7 @@ public class GameInstance implements Serializable{
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
-            System.out.println(solarsystem.toString());
+            //System.out.println(solarsystem.toString());
             solarSystemCount++;
 
             solarSystems.add(solarsystem);
@@ -139,7 +147,9 @@ public class GameInstance implements Serializable{
             if (startingLocation == i) {
 
                 setCurrentPlanet(planet);
+                System.out.println(getCurrentPlanet());
                 setCurrentSolarSystem(solarsystem);
+                System.out.println(getCurrentSolarSystem());
 
             }
 
@@ -150,12 +160,25 @@ public class GameInstance implements Serializable{
         //Do something to end the turn or whatever
     }
 
-    public void saveGameInstance(GameInstance game) {
+
+    /**
+     * Saves the game
+     *
+     * @param saveFileLocation
+     *        Location of the save file
+     */
+    public void saveGameInstance(String saveFileLocation) {
 
         try {
-            FileOutputStream saveFile = new FileOutputStream("saveGameInstance.sav");
+
+            FileOutputStream saveFile = new FileOutputStream(saveFileLocation);
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
-            save.writeObject(game);
+            save.writeObject(planets);
+            save.writeObject(solarSystems);
+            save.writeObject(instance);
+            save.writeObject(player);
+            save.writeObject(currentPlanet);
+            save.writeObject(currentSolarSystem);
             save.close();
 
         } catch (FileNotFoundException e) {
@@ -165,20 +188,37 @@ public class GameInstance implements Serializable{
         }
     }
 
-    public GameInstance loadGameInstance() {
+
+    /**
+     * Loads a saved game
+     *
+     * @param saveFileLocation
+     *        Location of the save file
+     */
+    public GameInstance loadGameInstance(String saveFileLocation) {
 
         try {
 
-            FileInputStream openFile = new FileInputStream("saveGameInstance.sav");
+            FileInputStream openFile = new FileInputStream(saveFileLocation);
             ObjectInputStream restore = new ObjectInputStream(openFile);
+
+            HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
+            HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
             GameInstance restoredGameInstance = (GameInstance) restore.readObject();
+            Player restoredPlayer = (Player) restore.readObject();
+            Planet restoredCurrentPlanet = (Planet) restore.readObject();
+            SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
+
+            restoredGameInstance.setPlanets(planetsRestored);
+            restoredGameInstance.setSolarSystems(solarSystemsRestored);
+            restoredGameInstance.setPlayer(restoredPlayer);
+            restoredGameInstance.setCurrentSolarSystem(restoredCurrentSolarSystem);
+            restoredGameInstance.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
 
 
             return restoredGameInstance;
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -204,7 +244,36 @@ public class GameInstance implements Serializable{
 
         }
 
+        gameString += "\n\n Current Player: " + player.toString() + "\n\n";
+        gameString += "Current Planet: " + currentPlanet.toString()+ "\n\n";
+        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + "\n\n";
+
+
         return gameString;
+    }
+
+    public static void main(String[] args) {
+
+        Player omar = new Player("Omar", 5, 5, 5, 5, 5);
+
+
+        GameInstance game = new GameInstance();
+        game.setPlayer(omar);
+        game.createUniverse(3);
+
+        System.out.println(game.toString());
+        System.out.println();
+        System.out.println();
+
+        System.out.println(game.getPlayer());
+        System.out.println();
+        System.out.println();
+        System.out.println("Original universe: " + game.toString());
+        game.saveGameInstance("src/saves/savefile.sav");
+
+        System.out.println();
+        System.out.println();
+        System.out.println("Loaded universe: " + game.loadGameInstance("src/saves/savefile.sav"));
     }
 
 }
