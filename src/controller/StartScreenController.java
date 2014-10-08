@@ -2,9 +2,15 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.stage.FileChooser;
+import model.GameInstance;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
 import javax.naming.OperationNotSupportedException;
+import java.io.File;
 
 /**
  * @author Joshua on 9/30/2014.
@@ -21,15 +27,31 @@ public class StartScreenController {
     }
 
     /**
-     * Loads the users old game and starts it
-     *
-     * TODO: Implement loading an old game
+     * Lets the user load an old .sav file and load it.
      *
      * @param actionEvent
-     * @throws javax.naming.OperationNotSupportedException
      */
-    public void loadSavedGame(ActionEvent actionEvent) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("Loading a saved game is not yet implemented. \n Sorry :(");
+    public void loadSavedGame(ActionEvent actionEvent)  {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Save File to Load");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
+        File file = new File("Game Saves");
+        if (file.exists()){
+            fileChooser.setInitialDirectory(file);
+        } else {
+            Action response =
+                    Dialogs.create().owner(Main.getPrimaryStage()).title("No Games Saves Detected")
+                            .message("No Game Saves found. \nDo you want to find a game save file yourself?").showConfirm();
+            if (response == Dialog.Actions.NO || response == Dialog.Actions.CANCEL) {
+                return;
+            }
+        }
+        File saveFile = fileChooser.showOpenDialog(Main.getPrimaryStage());
+        if (saveFile != null && saveFile.exists()) {
+            GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath());
+            Main.setScene("screens/planetscreen.fxml");
+        }
+
     }
 
     /**

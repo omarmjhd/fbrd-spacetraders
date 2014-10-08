@@ -108,7 +108,9 @@ public class ConfigScreenController implements Initializable {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 15. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
+
         }
+
 
     }
 
