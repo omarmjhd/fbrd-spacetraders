@@ -26,14 +26,16 @@ public class RandomEvent {
      */
     private class MoneyEvent extends RandomEvent {
 
-        String[] addPhrases = {"Your last lotto ticket was worth %d!",
+        private String[] addPhrases = {
+                "Your last lotto ticket was worth %d!",
                         "%d credits fell into your hand!",
                         "You found %d credits in your back pocket!",
                         "An old man gave you %d credits (and a weird wink...)",
                         "You helped a little old lady carry her groceries "
                         + "to the car and she gave you %d credits!"};
 
-        String[] minusPhrases = {"You lost %d credits playing a shell game!",
+        private String[] minusPhrases = {
+                "You lost %d credits playing a shell game!",
                         "%d credits fell out of your pocket! Oops!",
                         "You were mugged and had %d credits stolen!",
                         "Unexpected taxes in this market cost you %d credits!",
@@ -73,13 +75,14 @@ public class RandomEvent {
      */
     private class GoodsEvent extends RandomEvent {
 
-        String[] losePhrases = {"Your %s fell out of your ship!",
+        private String[] losePhrases = {
+                "Your %s fell out of your ship!",
                         "A thief stole your %s!", "Your %s broke!",
                         "Your %s was in a freak cargo accident"
                         + " and is no longer sellable!",
                         "You can't seem to remember where you put that %s..."};
 
-        String[] getPhrases= {"You found %s floating in space!",
+        private String[] getPhrases = { "You found %s floating in space!",
                         "A retiring trader gave you his last %s!",
                         "%s fell from the sky into your hands!",
                 "A shady looking man gave you his %s and ran away!",
@@ -122,7 +125,7 @@ public class RandomEvent {
      *
      */
     private class FuelEvent extends RandomEvent {
-        String[] losePhrases = {"%d units of your fuel leaked out!",
+        private String[] losePhrases = { "%d units of your fuel leaked out!",
                 "A thief stole %d units of fuel!" }; //i'm all out of ideas for phrases now
 
         public FuelEvent(Player player) {
