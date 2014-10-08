@@ -252,28 +252,4 @@ public class GameInstance implements Serializable{
         return gameString;
     }
 
-    public static void main(String[] args) {
-
-        Player omar = new Player("Omar", 5, 5, 5, 5, 5);
-
-
-        GameInstance game = new GameInstance();
-        game.setPlayer(omar);
-        game.createUniverse(3);
-
-        System.out.println(game.toString());
-        System.out.println();
-        System.out.println();
-
-        System.out.println(game.getPlayer());
-        System.out.println();
-        System.out.println();
-        System.out.println("Original universe: " + game.toString());
-        game.saveGameInstance("src/saves/savefile.sav");
-
-        System.out.println();
-        System.out.println();
-        System.out.println("Loaded universe: " + game.loadGameInstance("src/saves/savefile.sav"));
-    }
-
 }
