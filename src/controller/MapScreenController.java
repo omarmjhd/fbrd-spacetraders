@@ -18,9 +18,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import model.GameInstance;
-import model.Point;
-import model.SolarSystem;
+import model.*;
 import view.Main;
 
 import java.net.URL;
@@ -51,6 +49,8 @@ public class MapScreenController implements Initializable {
     private int travelDistance;
     private Image astronaut;
     private ImageView astronautView;
+    private Label randomEventLabel;
+    private Player player;
 
     @FXML
 
@@ -79,6 +79,11 @@ public class MapScreenController implements Initializable {
         astronautView.setFitHeight(50);
         astronautView.setX(playerLocation.getX() - 20);
         astronautView.setY(playerLocation.getY() - 25);
+
+        //random events
+        player = gm.getPlayer();
+        RandomEvent randomEvent = new RandomEvent(player);
+        randomEventLabel.setText(randomEvent.event());
 
         //keep in case out of bounds errors happen bc the - 20
         //if (playerLocation.distance(new Point(0,0)) >= 30) {
