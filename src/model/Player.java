@@ -81,20 +81,6 @@ public class Player implements Serializable {
     }
 
     /**
-     * Gets the current amount of fuel
-     *
-     * @return fuel left in Ship
-     */
-    public int getCurrentFuel() {
-        return ship.getCurrentFuel();
-    }
-
-    public void buyFuel(int units) {
-        subtractMoney(units * ship.getFuelCost());
-        ship.buyFuel(units);
-    }
-
-    /**
      * Gets maxmium amount of fuel for the given Ship
      *
      * @return maximum amount of fuel in Ship
@@ -110,6 +96,15 @@ public class Player implements Serializable {
      */
     public int getFuelCost() {
         return ship.getFuelCost();
+    }
+
+    /**
+     * Gets the current amount of fuel
+     *
+     * @return fuel left in Ship
+     */
+    public int getCurrentFuel() {
+        return ship.getCurrentFuel();
     }
 
     /**
