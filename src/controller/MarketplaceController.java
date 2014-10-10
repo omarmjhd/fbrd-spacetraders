@@ -117,10 +117,6 @@ public class MarketplaceController implements Initializable{
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
-    public void goToPlanet(ActionEvent actionEvent) {
-        Main.setScene("screens/planetscreen.fxml");
-    }
-
     class GoodsCell extends ListCell<Goods> {
 
         @Override
