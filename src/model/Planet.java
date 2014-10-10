@@ -3,7 +3,7 @@ package model;
 
 import javafx.scene.paint.Paint;
 
-import java.io.*;
+import java.io.Serializable;
 
 
 /**

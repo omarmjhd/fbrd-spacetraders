@@ -1,10 +1,7 @@
 package model;
 
-import java.util.AbstractList;
-import java.util.AbstractList;
 import java.io.Serializable;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.AbstractList;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,

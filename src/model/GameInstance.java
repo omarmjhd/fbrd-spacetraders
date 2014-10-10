@@ -1,6 +1,8 @@
 package model;
 
 import java.io.*;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -164,14 +166,12 @@ public class GameInstance implements Serializable{
     /**
      * Saves the game
      *
-     * @param saveFileLocation
-     *        Location of the save file
      */
-    public void saveGameInstance(String saveFileLocation) {
+    public void saveGameInstance() {
 
         try {
 
-            FileOutputStream saveFile = new FileOutputStream(saveFileLocation);
+            FileOutputStream saveFile = new FileOutputStream("Game_Saves" + File.pathSeparator + Date.from(Instant.now()).toString());
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
             save.writeObject(planets);
             save.writeObject(solarSystems);

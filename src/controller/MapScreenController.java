@@ -1,10 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,15 +18,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import model.GameInstance;
 import model.Planet;
 import model.Point;
 import model.SolarSystem;
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 /**
  * @version 2.0
@@ -189,13 +185,4 @@ public class MapScreenController implements Initializable {
         Main.setScene("screens/planetscreen.fxml");
     }
 
-    public void saveEvent(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Location to Save");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
-        File saveFile = fileChooser.showSaveDialog(Main.getPrimaryStage());
-        if (saveFile != null && saveFile.exists()) {
-            gm.saveGameInstance(saveFile.getAbsolutePath());
-        }
-    }
 }

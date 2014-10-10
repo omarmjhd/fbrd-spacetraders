@@ -1,6 +1,6 @@
 package model;
 
-import java.io.*;
+import java.io.Serializable;
 
 /**
  * Represents a coordinate position for a SolarSystem

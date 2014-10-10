@@ -12,9 +12,12 @@ import javafx.scene.text.Text;
 import model.GameInstance;
 import model.Planet;
 import model.Player;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
 import javax.naming.OperationNotSupportedException;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,5 +58,15 @@ public class PlanetScreenController implements Initializable {
 
     public void leaveSystem(ActionEvent actionEvent) {
         Main.setScene("screens/mapscreen.fxml");
+    }
+
+
+    public void saveEvent(ActionEvent actionEvent) {
+        File saveFile = new File("Game_Saves");
+        gi.saveGameInstance();
+        Dialogs.create().owner(Main.getPrimaryStage())
+                .title("File Saved")
+                .message("New Save File Created")
+                .lightweight().showInformation();
     }
 }

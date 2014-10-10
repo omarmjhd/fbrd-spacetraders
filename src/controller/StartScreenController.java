@@ -9,7 +9,6 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
-import javax.naming.OperationNotSupportedException;
 import java.io.File;
 
 /**
@@ -35,21 +34,30 @@ public class StartScreenController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Save File to Load");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
-        File file = new File("Game Saves");
+        File file = new File("Game_Saves");
         if (file.exists()){
             fileChooser.setInitialDirectory(file);
         } else {
             Action response =
-                    Dialogs.create().owner(Main.getPrimaryStage()).title("No Games Saves Detected")
-                            .message("No Game Saves found. \nDo you want to find a game save file yourself?").showConfirm();
+                    Dialogs.create()
+                            .owner(Main.getPrimaryStage()).title("No Games Saves Detected")
+                            .message("No Game Saves found. \nDo you want to find a game save file yourself?")
+                            .showConfirm();
             if (response == Dialog.Actions.NO || response == Dialog.Actions.CANCEL) {
                 return;
             }
         }
         File saveFile = fileChooser.showOpenDialog(Main.getPrimaryStage());
         if (saveFile != null && saveFile.exists()) {
-            GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath());
-            Main.setScene("screens/planetscreen.fxml");
+            if (GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath()) != null) {
+                Main.setScene("screens/planetscreen.fxml");
+            }
+            Action response =
+                    Dialogs.create()
+                            .owner(Main.getPrimaryStage()).title("Save File Invalid")
+                            .message("The selected Save file is invalid.\nPlease try another file.")
+                            .showError();
+
         }
 
     }

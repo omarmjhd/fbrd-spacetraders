@@ -1,8 +1,8 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.io.*;
 
 /**
  * A SolarSystem has a position in the universe and contains planets, which have
