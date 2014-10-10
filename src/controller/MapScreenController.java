@@ -39,6 +39,7 @@ public class MapScreenController implements Initializable {
     public Text fuelError;
     public Label currentFuelLabel;
     public Label travelDistanceLabel;
+    public Label randomEventLabel;
     private GameInstance gm;
     private HashSet<SolarSystem> universe;
     private boolean clickedPlanet = false;
@@ -49,7 +50,6 @@ public class MapScreenController implements Initializable {
     private int travelDistance;
     private Image astronaut;
     private ImageView astronautView;
-    private Label randomEventLabel;
     private Player player;
 
     @FXML
