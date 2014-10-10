@@ -22,8 +22,12 @@
             <Font name="Courier New Bold Italic" size="35.0" />
          </font>
       </Text>
+      <Pane fx:id="lolpane" layoutX="50.0" layoutY="65.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="65.0" />
+      <Button fx:id="travelButton" layoutX="540.0" layoutY="374.0" mnemonicParsing="false" onAction="#travel" text="Travel!" AnchorPane.bottomAnchor="77.0" AnchorPane.rightAnchor="16.0">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font></Button>
       <Pane fx:id="lolpane" layoutX="48.0" layoutY="78.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="78.0" />
-      <Button fx:id="travelButton" layoutX="535.0" layoutY="390.0" mnemonicParsing="false" onAction="#travel" text="Travel!" />
       <Text fx:id="fuelError" layoutX="413.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="95.0" />
       <Label fx:id="currentFuelLabel" layoutX="522.0" layoutY="78.0" text="Label" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="78.0" />
       <Text layoutX="400.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Fuel Level:" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="78.0" />
@@ -34,5 +38,9 @@
           <Button fx:id="saveBar" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
         </items>
       </ToolBar>
+      <Button fx:id="returnButton" layoutX="493.0" layoutY="415.0" mnemonicParsing="false" onAction="#returnToPlanet" text="Return to Planet" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="19.0">
+          <font>
+              <Font name="Courier New" size="15.0" />
+          </font></Button>
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import model.*;
+import view.Main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -114,6 +115,10 @@ public class MarketplaceController implements Initializable{
             buyButton.setDisable(false);
         }
         playerMoney.setText(String.valueOf(player.getMoney()));
+    }
+
+    public void goToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
     }
 
     class GoodsCell extends ListCell<Goods> {

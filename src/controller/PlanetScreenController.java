@@ -4,6 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import model.GameInstance;
 import model.Planet;
@@ -23,6 +27,7 @@ public class PlanetScreenController implements Initializable {
     public Button buyFuel;
     public Button travelButton;
     public Label planetText;
+    public Pane planetPane;
     private GameInstance gi;
     private Planet curPlanet;
     private Player player;
@@ -32,9 +37,12 @@ public class PlanetScreenController implements Initializable {
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
+        planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
+
 
         planetName.setText(curPlanet.getName());
-        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString());
+        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
+                                + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
     }
 
     public void goToMarket(ActionEvent actionEvent) {

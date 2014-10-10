@@ -184,6 +184,10 @@ public class MapScreenController implements Initializable {
        }
     }
 
+    public void returnToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
+    }
+
     public void saveEvent(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Location to Save");
