@@ -6,7 +6,8 @@ import java.util.AbstractList;
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
  * gadgets, and crew. It also has fuel, a purchasing price, and NPC disposition
- * modifiers.
+ * modifiers. Converted from enum to class so object would be serialized
+ * correctly
  *
  *
  * It might be a good idea to use a custom linked list with a maximum size
@@ -15,17 +16,28 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public enum Ship implements Serializable{
+public class Ship implements Serializable{
 
-    FLEA(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0),
+    public static Ship flea() {
+        return new Ship(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0);
 
-    GNAT(15, 1, 0, 1, 1, 140, 2, 10000, 50, 100, 0, 0, 1),
+    }
 
-    FIREFLY(20, 1, 1, 1, 1, 170, 3, 25000, 75, 100, 0, 0, 1),
+    public static Ship gnat() {
+        return new Ship(15, 1, 0, 1, 1, 140, 2, 10000, 50, 100, 0, 0, 1);
+    }
 
-    MOSQUITO(15, 2, 1, 1, 1, 130, 5, 30000, 100, 100, 0, 1, 1),
+    public static Ship firefly() {
+        return new Ship(20, 1, 1, 1, 1, 170, 3, 25000, 75, 100, 0, 0, 1);
+    }
 
-    BUMBLEBEE(25, 1, 2, 2, 2, 150, 7, 60000, 125, 100, 0, 1, 2);
+    public static Ship mosquito() {
+        return new Ship(15, 2, 1, 1, 1, 130, 5, 30000, 100, 100, 0, 1, 1);
+    }
+
+    public static Ship bumblebee() {
+        return new Ship(25, 1, 2, 2, 2, 150, 7, 60000, 125, 100, 0, 1, 2);
+    }
 
     private PresizedList<Goods> cargo;
 
@@ -209,4 +221,5 @@ public enum Ship implements Serializable{
     public AbstractList<Crew> getCrew() {
         return crew;
     }
+
 }
