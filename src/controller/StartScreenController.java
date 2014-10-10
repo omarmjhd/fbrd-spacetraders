@@ -49,15 +49,16 @@ public class StartScreenController {
         }
         File saveFile = fileChooser.showOpenDialog(Main.getPrimaryStage());
         if (saveFile != null && saveFile.exists()) {
-            if (GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath()) != null) {
+            if (GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath())) {
                 Main.setScene("screens/planetscreen.fxml");
             }
-            Action response =
-                    Dialogs.create()
-                            .owner(Main.getPrimaryStage()).title("Save File Invalid")
-                            .message("The selected Save file is invalid.\nPlease try another file.")
-                            .showError();
-
+            else {
+                Action response =
+                        Dialogs.create()
+                                .owner(Main.getPrimaryStage()).title("Save File Invalid")
+                                .message("The selected Save file is invalid.\nPlease try another file.")
+                                .showError();
+            }
         }
 
     }

@@ -167,25 +167,26 @@ public class GameInstance implements Serializable{
      * Saves the game
      *
      */
-    public void saveGameInstance() {
+    public boolean saveGameInstance() {
 
         try {
-
-            FileOutputStream saveFile = new FileOutputStream("Game_Saves" + File.pathSeparator + Date.from(Instant.now()).toString());
+            File file = new File("Game_Saves");
+            file.mkdir();
+            FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
             save.writeObject(planets);
             save.writeObject(solarSystems);
-            save.writeObject(instance);
             save.writeObject(player);
             save.writeObject(currentPlanet);
             save.writeObject(currentSolarSystem);
             save.close();
-
+            return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException f) {
             f.printStackTrace();
         }
+        return false;
     }
 
 
@@ -195,30 +196,28 @@ public class GameInstance implements Serializable{
      * @param saveFileLocation
      *        Location of the save file
      */
-    public GameInstance loadGameInstance(String saveFileLocation) {
+    public boolean loadGameInstance(String saveFileLocation) {
 
         try {
-
             FileInputStream openFile = new FileInputStream(saveFileLocation);
             ObjectInputStream restore = new ObjectInputStream(openFile);
 
             HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
             HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
-            GameInstance restoredGameInstance = (GameInstance) restore.readObject();
             Player restoredPlayer = (Player) restore.readObject();
             Planet restoredCurrentPlanet = (Planet) restore.readObject();
             SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
 
-            restoredGameInstance.setPlanets(planetsRestored);
-            restoredGameInstance.setSolarSystems(solarSystemsRestored);
-            restoredGameInstance.setPlayer(restoredPlayer);
-            restoredGameInstance.setCurrentSolarSystem(restoredCurrentSolarSystem);
-            restoredGameInstance.setCurrentPlanet(restoredCurrentPlanet);
+            this.setPlanets(planetsRestored);
+            this.setSolarSystems(solarSystemsRestored);
+            this.setPlayer(restoredPlayer);
+            this.setCurrentSolarSystem(restoredCurrentSolarSystem);
+            this.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
 
 
-            return restoredGameInstance;
+            return true;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -229,7 +228,7 @@ public class GameInstance implements Serializable{
         }
 
 
-        return null;
+        return false;
 
     }
 
