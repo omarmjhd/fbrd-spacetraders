@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.AbstractList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public class Player {
+public class Player implements Serializable {
 
     private String name;
     private final int PILOT_SKILL;
@@ -39,8 +40,7 @@ public class Player {
     /**
      * Adds money to the player's money
      *
-     * @param income
-     *        amount of money to add
+     * @param income amount of money to add
      */
     public void addMoney(int income) {
         this.money += income;
@@ -74,8 +74,7 @@ public class Player {
     /**
      * Travels the distance. Uses distance units of fuel
      *
-     * @param distance
-     *        distance to travel
+     * @param distance distance to travel
      */
     public void travel(int distance) {
         ship.travel(distance);
@@ -90,9 +89,14 @@ public class Player {
         return ship.getCurrentFuel();
     }
 
+    public void buyFuel(int units) {
+        subtractMoney(units * ship.getFuelCost());
+        ship.buyFuel(units);
+    }
+
     /**
      * Gets maxmium amount of fuel for the given Ship
-     * 
+     *
      * @return maximum amount of fuel in Ship
      */
     public int getMaxFuel() {
@@ -107,6 +111,8 @@ public class Player {
         retval += "Engineering skill: " + ENG_SKILL + "\n";
         retval += "Trading Skill: " + TRADE_SKILL + "\n";
         retval += "Investing Skill: " + INVEST_SKILL + "\n";
+        retval += "Ship: " + ship.toString();
         return retval;
     }
+
 }

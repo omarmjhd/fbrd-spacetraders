@@ -1,8 +1,6 @@
 package controller;
 
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -14,6 +12,9 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -94,7 +95,12 @@ public class ConfigScreenController implements Initializable {
 
         if (total <= 15 && !name.equals("")) {
             Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
+            Action response =
+                    Dialogs.create().owner(Main.getPrimaryStage())
+                    .title("Player Created!")
+                    .message("Use this Character?: \n" + player.toString())
+                    .lightweight().showConfirm();
+
             if (response == Dialog.Actions.YES) {
                 Main.getGame().setPlayer(player);
                 Main.getGame().getPlayer().addMoney(1000);
@@ -105,10 +111,21 @@ public class ConfigScreenController implements Initializable {
                 Main.setScene("screens/mapscreen.fxml");
             }
         } else if (total > 15) {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 15. \n Try again.").lightweight().showWarning();
+            Action response =
+                    Dialogs.create()
+                    .owner(Main.getPrimaryStage())
+                    .title("Too Many Skill Points")
+                    .message("You have used " + total + " skill points. You are only allowed 15. \n Try again.")
+                    .lightweight().showWarning();
         } else {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
+            Action response = Dialogs.create()
+                    .owner(Main.getPrimaryStage())
+                    .title("Invalid Name")
+                    .message("You have not entered a name.")
+                    .lightweight().showWarning();
+
         }
+
 
     }
 

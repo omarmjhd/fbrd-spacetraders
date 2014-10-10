@@ -1,5 +1,8 @@
 package model;
 
+import java.io.*;
+import java.time.Instant;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -10,7 +13,7 @@ import java.util.Random;
  * @author ngraves3
  *
  */
-public class GameInstance {
+public class GameInstance implements Serializable{
 
     private Player player;
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
@@ -78,7 +81,7 @@ public class GameInstance {
         return player;
     }
 
-    public SolarSystem getSolarSystem() { return currentSolarSystem; };
+    public SolarSystem getCurrentSolarSystem() { return currentSolarSystem; };
 
     public void setCurrentSolarSystem(SolarSystem desination) {
         currentSolarSystem = desination;
@@ -86,6 +89,18 @@ public class GameInstance {
 
     public HashSet<SolarSystem> getSolarSystems() {
         return solarSystems;
+    }
+
+    public HashSet<Planet> getPlanets() {
+        return planets;
+    }
+
+    public void setPlanets(HashSet<Planet> planets) {
+        this.planets = planets;
+    }
+
+    public void setSolarSystems(HashSet<SolarSystem> solarSystems) {
+        this.solarSystems = solarSystems;
     }
 
     /**
@@ -126,7 +141,7 @@ public class GameInstance {
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
-            System.out.println(solarsystem.toString());
+            //System.out.println(solarsystem.toString());
             solarSystemCount++;
 
             solarSystems.add(solarsystem);
@@ -134,7 +149,9 @@ public class GameInstance {
             if (startingLocation == i) {
 
                 setCurrentPlanet(planet);
+                System.out.println(getCurrentPlanet());
                 setCurrentSolarSystem(solarsystem);
+                System.out.println(getCurrentSolarSystem());
 
             }
 
@@ -143,6 +160,77 @@ public class GameInstance {
 
     public void endTurn() {
         //Do something to end the turn or whatever
+    }
+
+
+    /**
+     * Saves the game
+     *
+     */
+    public void saveGameInstance() {
+
+        try {
+
+            FileOutputStream saveFile = new FileOutputStream("Game_Saves" + File.pathSeparator + Date.from(Instant.now()).toString());
+            ObjectOutputStream save = new ObjectOutputStream(saveFile);
+            save.writeObject(planets);
+            save.writeObject(solarSystems);
+            save.writeObject(instance);
+            save.writeObject(player);
+            save.writeObject(currentPlanet);
+            save.writeObject(currentSolarSystem);
+            save.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Loads a saved game
+     *
+     * @param saveFileLocation
+     *        Location of the save file
+     */
+    public GameInstance loadGameInstance(String saveFileLocation) {
+
+        try {
+
+            FileInputStream openFile = new FileInputStream(saveFileLocation);
+            ObjectInputStream restore = new ObjectInputStream(openFile);
+
+            HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
+            HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
+            GameInstance restoredGameInstance = (GameInstance) restore.readObject();
+            Player restoredPlayer = (Player) restore.readObject();
+            Planet restoredCurrentPlanet = (Planet) restore.readObject();
+            SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
+
+            restoredGameInstance.setPlanets(planetsRestored);
+            restoredGameInstance.setSolarSystems(solarSystemsRestored);
+            restoredGameInstance.setPlayer(restoredPlayer);
+            restoredGameInstance.setCurrentSolarSystem(restoredCurrentSolarSystem);
+            restoredGameInstance.setCurrentPlanet(restoredCurrentPlanet);
+
+            openFile.close();
+
+
+            return restoredGameInstance;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException f) {
+            f.printStackTrace();
+        } catch (ClassNotFoundException g) {
+            g.printStackTrace();
+        }
+
+
+        return null;
+
     }
 
     @Override
@@ -156,10 +244,12 @@ public class GameInstance {
 
         }
 
+        gameString += "\n\n Current Player: " + player.toString() + "\n\n";
+        gameString += "Current Planet: " + currentPlanet.toString()+ "\n\n";
+        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + "\n\n";
+
+
         return gameString;
     }
 
-    public HashSet<Planet> getPlanets() {
-        return planets;
-    }
 }

@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Represents a coordinate position for a SolarSystem
  *
  * @author Nick
  *
  */
-public class Point {
+public class Point implements Serializable{
     private int x;
     private int y;
 

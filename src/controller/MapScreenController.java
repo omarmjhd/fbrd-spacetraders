@@ -63,7 +63,7 @@ public class MapScreenController implements Initializable {
         this.gm = GameInstance.getInstance();
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
         travelDistanceLabel.setText("");
-        playerLocation = gm.getSolarSystem().getPosition();
+        playerLocation = gm.getCurrentSolarSystem().getPosition();
 
         //currentLine initialization
         currentLine = new Line();
@@ -139,7 +139,9 @@ public class MapScreenController implements Initializable {
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
             if (b >= colorList.length) { b =0;}
-
+            for (Planet p : s.getPlanets()) {
+                p.setColor(Paint.valueOf(colorList[b]));
+            }
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
@@ -161,7 +163,7 @@ public class MapScreenController implements Initializable {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
         gm.getPlayer().travel(travelDistance);
-        Main.setScene("screens/marketplacescreen.fxml");
+        Main.setScene("screens/planetscreen.fxml");
     }
 
     /**
@@ -182,4 +184,9 @@ public class MapScreenController implements Initializable {
            fuelError.setText("");
        }
     }
+
+    public void returnToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
+    }
+
 }

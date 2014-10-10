@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import model.*;
+import view.Main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -128,6 +129,10 @@ public class MarketplaceController implements Initializable{
                 setText("");
             }
         }
+    }
+
+    public void goToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
     }
 }
 
