@@ -194,6 +194,10 @@ public enum Ship implements Serializable{
         return gadgets.maxSize();
     }
 
+    public int getFuelCost() {
+        return fuelCost;
+    }
+
     public AbstractList<Weapon> getWeapons() {
         return weapons;
     }

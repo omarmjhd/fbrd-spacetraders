@@ -13,10 +13,6 @@ public class RandomEvent {
     public RandomEvent(Player player) {
         this.player = player;
         rand = new Random();
-        events = new RandomEvent[] {
-                        new MoneyEvent(player),
-                        new GoodsEvent(player),
-                        new FuelEvent(player)};
     }
 
     /**
@@ -27,7 +23,7 @@ public class RandomEvent {
     private class MoneyEvent extends RandomEvent {
 
         private String[] addPhrases = {
-                "Your last lotto ticket was worth %d!",
+                "Your last lotto ticket was worth %d! credits",
                         "%d credits fell into your hand!",
                         "You found %d credits in your back pocket!",
                         "An old man gave you %d credits (and a weird wink...)",
@@ -47,7 +43,7 @@ public class RandomEvent {
 
         @Override
         public String event() {
-            int money = rand.nextInt(player.getMoney() * 2);
+            int money = rand.nextInt(player.getMoney() * 2 + 1);
             money -= player.getMoney();
             if (money == 0) {
                 money++;
@@ -62,7 +58,7 @@ public class RandomEvent {
             } else {
                 return String.format(
                                 minusPhrases[rand.nextInt(minusPhrases.length)],
-                                money);
+                                -1 * money);
             }
         }
     }
@@ -107,12 +103,16 @@ public class RandomEvent {
                 }
                 return out;
             } else {
-                int cargoIndex = rand.nextInt(player.getCargo().size());
-                Goods toRemove = player.getCargo().get(cargoIndex);
-                player.removeCargo(toRemove);
-                int msg = rand.nextInt(losePhrases.length);
-                return String.format(losePhrases[msg], toRemove.toString());
-
+                if (player.getCargo().size() > 0) {
+                    int cargoIndex = rand.nextInt(player.getCargo().size());
+                    Goods toRemove = player.getCargo().get(cargoIndex);
+                    player.removeCargo(toRemove);
+                    int msg = rand.nextInt(losePhrases.length);
+                    return String.format(losePhrases[msg], toRemove.toString());
+                } else {
+                    return "Your cargo hold broke open,"
+                                    + " but there was nothing in it!";
+                }
             }
         }
 
@@ -134,8 +134,11 @@ public class RandomEvent {
 
         @Override
         public String event() {
-            int fuelLeakage = -1 * rand.nextInt(player.getCurrentFuel() - 1);
-            fuelLeakage--; // go from -1 to -(currentFuel)
+            int fuelLeakage =
+                            rand.nextInt(Math.max(player.getCurrentFuel(), 1));
+            fuelLeakage++; // 1 to player.getCurrentFuel()
+
+            player.travel(fuelLeakage);
             int msg = rand.nextInt(losePhrases.length);
             return String.format(losePhrases[msg], fuelLeakage);
         }
@@ -150,6 +153,12 @@ public class RandomEvent {
      * @return the message from the event
      */
     public String event() {
+        if (events == null) {
+            events = new RandomEvent[] {
+                            new MoneyEvent(player),
+                            new GoodsEvent(player),
+                            new FuelEvent(player)};
+        }
         int eventType = rand.nextInt(events.length);
         return events[eventType].event();
     }

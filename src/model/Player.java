@@ -103,6 +103,27 @@ public class Player implements Serializable {
         return ship.getMaxFuel();
     }
 
+    /**
+     * Get the fuel cost of the Player's ship
+     *
+     * @return the cost of 1 unit of fuel
+     */
+    public int getFuelCost() {
+        return ship.getFuelCost();
+    }
+
+    /**
+     * Adds fuel to the player's ship and removes the appropriate amount of
+     * money from the player
+     *
+     * @param quantity
+     *        the amount of fuel
+     */
+    public void buyFuel(int quantity) {
+        ship.buyFuel(quantity);
+        subtractMoney(quantity * getFuelCost());
+    }
+
     @Override
     public String toString() {
         String retval = "Name: " + name + "\n";
