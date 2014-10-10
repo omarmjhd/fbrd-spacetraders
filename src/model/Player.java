@@ -29,7 +29,7 @@ public class Player implements Serializable {
         this.TRADE_SKILL = tradeSkill;
         this.INVEST_SKILL = investSkill;
         this.PILOT_SKILL = pilotSkill;
-        this.ship = Ship.GNAT;
+        this.ship = Ship.gnat();
 
     }
 
