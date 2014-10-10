@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -16,11 +17,12 @@ import java.util.NoSuchElementException;
  *
  * @param <T>
  */
-public class PresizedList<T> extends AbstractList<T> implements Iterable<T> {
+public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
+                Serializable {
 
     private T[] backing;
 
-    int size;
+    private int size;
 
     @SuppressWarnings("unchecked")
     public PresizedList(int maxSize) {
