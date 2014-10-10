@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
@@ -22,10 +23,14 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import model.GameInstance;
 import model.Planet;
 import model.Point;
 import model.SolarSystem;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
 /**
@@ -157,7 +162,7 @@ public class MapScreenController implements Initializable {
     public void travel(ActionEvent actionEvent) {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
-        Main.setScene("screens/marketplacescreen.fxml");
+        Main.setScene("screens/planetscreen.fxml");
     }
 
     /**
@@ -177,5 +182,15 @@ public class MapScreenController implements Initializable {
            travelButton.setDisable(false);
            fuelError.setText("");
        }
+    }
+
+    public void saveEvent(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Location to Save");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
+        File saveFile = fileChooser.showSaveDialog(Main.getPrimaryStage());
+        if (saveFile != null && saveFile.exists()) {
+            gm.saveGameInstance(saveFile.getAbsolutePath());
+        }
     }
 }
