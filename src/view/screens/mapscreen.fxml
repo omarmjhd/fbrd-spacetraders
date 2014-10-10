@@ -31,7 +31,7 @@
       <Label fx:id="travelDistanceLabel" layoutX="487.0" layoutY="104.0" text="Label" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="104.0" />
       <ToolBar layoutY="2.0" prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <Button fx:id="saveBar" mnemonicParsing="false" onAction="#saveEvent" text="Button" />
+          <Button fx:id="saveBar" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
         </items>
       </ToolBar>
    </children>
