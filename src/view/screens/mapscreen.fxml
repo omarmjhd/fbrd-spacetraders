@@ -29,5 +29,6 @@
       <Text layoutX="400.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Fuel Level:" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="78.0" />
       <Text layoutX="400.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fuel Needed:" AnchorPane.rightAnchor="152.0" AnchorPane.topAnchor="104.0" />
       <Label fx:id="travelDistanceLabel" layoutX="487.0" layoutY="104.0" text="Label" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="104.0" />
+      <Label fx:id="randomEventLabel" layoutX="14.0" layoutY="449.0" text="Label" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
    </children>
 </AnchorPane>
