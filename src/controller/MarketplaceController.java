@@ -134,5 +134,9 @@ public class MarketplaceController implements Initializable{
             }
         }
     }
+
+    public void goToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
+    }
 }
 
