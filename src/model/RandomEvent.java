@@ -148,7 +148,8 @@ public class RandomEvent {
 
     /**
      * this method makes a random event happen in the game universe. It will
-     * randomly choose one type of random event and execute it
+     * randomly choose one type of random event and execute it. It has a 10%
+     * chance of executing an event
      *
      * @return the message from the event
      */
@@ -159,8 +160,14 @@ public class RandomEvent {
                             new GoodsEvent(player),
                             new FuelEvent(player)};
         }
-        int eventType = rand.nextInt(events.length);
-        return events[eventType].event();
+
+        if (rand.nextInt(10) == 0) {
+
+            int eventType = rand.nextInt(events.length);
+            return events[eventType].event();
+        }
+
+        return "";
     }
 
 }
