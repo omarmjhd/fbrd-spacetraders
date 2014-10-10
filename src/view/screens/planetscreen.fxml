@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="root" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlanetScreenController">
+   <children>
+      <Text fx:id="planetName" fontSmoothingType="LCD" layoutX="199.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Planet!" textAlignment="CENTER" wrappingWidth="242.13671875" AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="64.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
+               <stops>
+                  <Stop color="#bf0101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <font>
+            <Font name="Courier New Bold Italic" size="35.0" />
+         </font>
+      </Text>
+      <Pane fx:id="planetPane" layoutX="24.0" layoutY="104.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="104.0">
+         <children>
+            <Arc fill="DODGERBLUE" layoutX="350.0" layoutY="175.0" length="180.0" radiusX="149.0" radiusY="149.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+            <ImageView fitHeight="94.0" fitWidth="79.0" layoutX="40.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/astronaut.png" />
+               </image></ImageView>
+         </children></Pane>
+      <Button fx:id="enterMarket" layoutX="400.0" layoutY="295.0" mnemonicParsing="false" onAction="#goToMarket" prefHeight="31.0" prefWidth="111.0" text="Market!">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font></Button>
+      <Button fx:id="buyFuel" layoutX="400.0" layoutY="333.0" mnemonicParsing="false" onAction="#buyFuel" prefHeight="31.0" prefWidth="222.0" text="Refill Fuel (100 cr)" textOverrun="CLIP">
+         <font>
+            <Font name="Courier New" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="travelButton" layoutX="400.0" layoutY="376.0" mnemonicParsing="false" onAction="#leaveSystem" prefHeight="78.0" prefWidth="222.0" text="Leave The System!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Courier New Bold Italic" size="21.0" />
+         </font>
+      </Button>
+      <Label fx:id="planetText" layoutX="400.0" layoutY="65.0" prefHeight="152.0" prefWidth="213.0">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Label>
+       <MenuBar layoutX="6.0" layoutY="8.0" prefHeight="19.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <menus>
+               <Menu mnemonicParsing="false" text="File">
+                   <items>
+                       <MenuItem fx:id="saveBar" mnemonicParsing="false" onAction="#saveEvent" text="Save" />
+                   </items>
+               </Menu>
+           </menus>
+       </MenuBar>
+   </children>
+
+</AnchorPane>

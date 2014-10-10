@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.*?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MarketplaceController">
    <children>
       <Text fx:id="marketTitle" fontSmoothingType="LCD" layoutX="14.0" layoutY="52.13818359375" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" textAlignment="CENTER" wrappingWidth="608.13671875" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
@@ -34,12 +28,12 @@
          </font>
       </Label>
       <ListView fx:id="marketView" layoutX="381.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="140.0" />
-      <Button fx:id="buyButton" layoutX="491.0" layoutY="359.0" mnemonicParsing="false" onAction="#buy" prefHeight="40.0" prefWidth="122.0" text="Buy!">
+      <Button fx:id="buyButton" layoutX="342.0" layoutY="362.0" mnemonicParsing="false" onAction="#buy" prefHeight="40.0" prefWidth="122.0" text="Buy!">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="sellButton" disable="true" layoutX="491.0" layoutY="414.0" mnemonicParsing="false" onAction="#sell" prefHeight="40.0" prefWidth="122.0" text="Sell!">
+      <Button fx:id="sellButton" disable="true" layoutX="474.0" layoutY="362.0" mnemonicParsing="false" onAction="#sell" prefHeight="40.0" prefWidth="122.0" text="Sell!">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
@@ -53,5 +47,10 @@
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font></Label>
+      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToPlanet" prefHeight="40.0" prefWidth="257.0" text="Done Shopping">
+         <font>
+            <Font name="Courier New Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

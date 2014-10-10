@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.AbstractList;
 
 /**
@@ -14,7 +15,7 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public enum Ship {
+public enum Ship implements Serializable{
 
     FLEA(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0),
 
@@ -169,6 +170,10 @@ public enum Ship {
      * Getter methods below
      */
 
+    public int getFuelCost() {
+        return fuelCost;
+    }
+
     public int cargoSize() {
         return cargo.maxSize();
     }
@@ -187,10 +192,6 @@ public enum Ship {
 
     public int gadgetSize() {
         return gadgets.maxSize();
-    }
-
-    public int getFuelCost() {
-        return fuelCost;
     }
 
     public AbstractList<Weapon> getWeapons() {
