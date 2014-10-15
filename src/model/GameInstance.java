@@ -141,7 +141,6 @@ public class GameInstance implements Serializable{
 
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
-            //System.out.println(solarsystem.toString());
             solarSystemCount++;
 
             solarSystems.add(solarsystem);
@@ -165,6 +164,7 @@ public class GameInstance implements Serializable{
 
     /**
      * Saves the game
+     * @return boolean to make sure game was saved
      *
      */
     public boolean saveGameInstance() {
@@ -195,6 +195,7 @@ public class GameInstance implements Serializable{
      *
      * @param saveFileLocation
      *        Location of the save file
+     * @return boolean to make sure game was loaded
      */
     public boolean loadGameInstance(String saveFileLocation) {
 
