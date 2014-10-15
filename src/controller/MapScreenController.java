@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,13 +22,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import model.*;
+import model.GameInstance;
+import model.Player;
+import model.Point;
+import model.RandomEvent;
+import model.SolarSystem;
 import view.Main;
-
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * @version 2.0
@@ -61,7 +64,7 @@ public class MapScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
-        currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
+
         travelDistanceLabel.setText("");
         playerLocation = gm.getCurrentSolarSystem().getPosition();
 
@@ -84,6 +87,8 @@ public class MapScreenController implements Initializable {
         player = gm.getPlayer();
         RandomEvent randomEvent = new RandomEvent(player);
         randomEventLabel.setText(randomEvent.event());
+
+        currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
 
         //keep in case out of bounds errors happen bc the - 20
         //if (playerLocation.distance(new Point(0,0)) >= 30) {
