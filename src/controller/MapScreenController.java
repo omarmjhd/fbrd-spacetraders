@@ -139,9 +139,6 @@ public class MapScreenController implements Initializable {
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
             if (b >= colorList.length) { b =0;}
-            for (Planet p : s.getPlanets()) {
-                p.setColor(Paint.valueOf(colorList[b]));
-            }
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);

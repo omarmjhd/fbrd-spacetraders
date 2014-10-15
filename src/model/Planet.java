@@ -17,8 +17,7 @@ public class Planet implements Serializable{
     private Goods resource;
     private TechLevel tech;
     private String name;
-    private Marketplace marketplace;
-    private Paint color;
+    //private Marketplace marketplace;
 
     public Planet(String name, Goods resource, TechLevel tech) {
         this.name = name;
@@ -35,8 +34,9 @@ public class Planet implements Serializable{
      *        the player model
      */
     public Marketplace enterMarket(Player player) {
-        marketplace = new Marketplace(this, player);
-        return marketplace;
+        //marketplace = new Marketplace(this, player);
+        //return marketplace;
+        return new Marketplace(this, player);
 
     }
 
@@ -56,14 +56,6 @@ public class Planet implements Serializable{
 
     public TechLevel getTechLevel() {
         return tech;
-    }
-
-    public Paint getColor() {
-        return color;
-    }
-
-    public void setColor(Paint color) {
-        this.color = color;
     }
 
     @Override

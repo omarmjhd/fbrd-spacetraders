@@ -131,4 +131,7 @@ public class Player implements Serializable {
         return retval;
     }
 
+    public String getName() {
+        return name;
+    }
 }

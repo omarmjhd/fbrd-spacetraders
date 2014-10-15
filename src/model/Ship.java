@@ -16,27 +16,30 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public class Ship implements Serializable{
+public class Ship implements Serializable {
 
     public static Ship flea() {
-        return new Ship(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0);
+        return new Ship("Flea", 10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0);
 
     }
 
     public static Ship gnat() {
-        return new Ship(15, 1, 0, 1, 1, 140, 2, 10000, 50, 100, 0, 0, 1);
+        return new Ship("Gnat", 15, 1, 0, 1, 1, 140, 2, 10000, 50, 100, 0, 0, 1);
     }
 
     public static Ship firefly() {
-        return new Ship(20, 1, 1, 1, 1, 170, 3, 25000, 75, 100, 0, 0, 1);
+        return new Ship("Firefly", 20, 1, 1, 1, 1, 170, 3, 25000, 75, 100, 0,
+                        0, 1);
     }
 
     public static Ship mosquito() {
-        return new Ship(15, 2, 1, 1, 1, 130, 5, 30000, 100, 100, 0, 1, 1);
+        return new Ship("Mosquito", 15, 2, 1, 1, 1, 130, 5, 30000, 100, 100, 0,
+                        1, 1);
     }
 
     public static Ship bumblebee() {
-        return new Ship(25, 1, 2, 2, 2, 150, 7, 60000, 125, 100, 0, 1, 2);
+        return new Ship("Bumblebee", 25, 1, 2, 2, 2, 150, 7, 60000, 125, 100,
+                        0, 1, 2);
     }
 
     private PresizedList<Goods> cargo;
@@ -52,7 +55,7 @@ public class Ship implements Serializable{
     private int maxFuel;
 
     private int currentFuel;
-
+    private String name;
     private int minTechLevel; // use for validation purposes
     private int fuelCost;
     private int price;
@@ -62,13 +65,16 @@ public class Ship implements Serializable{
     private int pirateAggression;
     private int size;
 
-    private Ship(int cargoSize, int weaponSize, int shieldSize, int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price, int bounty, int hullStrength, int police, int pirate, int size) {
+    private Ship(String name, int cargoSize, int weaponSize, int shieldSize,
+        int gadgetSize, int crewSize, int maxFuel, int fuelCost, int price,
+        int bounty, int hullStrength, int police, int pirate, int size) {
         //cargo = new Goods[cargoSize];
         cargo = new PresizedList<Goods>(cargoSize);
         weapons = new PresizedList<Weapon>(weaponSize);
         shields = new PresizedList<Shield>(shieldSize);
         gadgets = new PresizedList<Gadget>(gadgetSize);
         crew = new PresizedList<Crew>(crewSize);
+        this.name = name;
         this.maxFuel = maxFuel;
         this.fuelCost = fuelCost;
         this.price = price;
@@ -220,6 +226,11 @@ public class Ship implements Serializable{
 
     public AbstractList<Crew> getCrew() {
         return crew;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }
