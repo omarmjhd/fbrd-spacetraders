@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -218,6 +220,31 @@ public class Ship implements Serializable {
 
     public AbstractList<Crew> getCrew() {
         return crew;
+    }
+
+    /**
+     * Returns a Map of attribute name to atribute value
+     *
+     * @return map of instance variable -> value
+     */
+    public Map<String, Integer> specs() {
+        Map<String, Integer> retval = new TreeMap<String, Integer>();
+
+        retval.put("Max Fuel", maxFuel);
+        retval.put("Fuel Cost", fuelCost);
+        retval.put("Price", price);
+        retval.put("Bounty", bounty);
+        retval.put("Hull Strength", hullStrength);
+        retval.put("Police Disposition", policeAggression);
+        retval.put("Pirate Aggression", pirateAggression);
+        retval.put("Cargo Size", cargoSize());
+        retval.put("Weapons Size", weaponsSize());
+        retval.put("Crew Size", crewSize());
+        retval.put("Gadget Size", gadgetSize());
+        retval.put("Shield Size", shieldsSize());
+
+        return retval;
+
     }
 
     @Override
