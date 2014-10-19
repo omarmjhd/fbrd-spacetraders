@@ -42,7 +42,7 @@ public class MarketplaceController implements Initializable{
         this.player = gm.getPlayer();
         currentPlanet = gm.getCurrentPlanet();
         marketTitle.setText(currentPlanet.getName() + " Market");
-        marketplace = currentPlanet.enterMarket(gm.getPlayer());
+        marketplace = currentPlanet.getMarketplace();
         marketGoods.addAll(marketplace.getMerchandise());
 
         // Enables the sell button if the player has goods to sell
