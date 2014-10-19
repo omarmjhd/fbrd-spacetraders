@@ -165,6 +165,7 @@ public class MapScreenController implements Initializable {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
         gm.getPlayer().travel(travelDistance);
+        gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         Main.setScene("screens/planetscreen.fxml");
     }
 
@@ -187,6 +188,11 @@ public class MapScreenController implements Initializable {
        }
     }
 
+    /**
+     * makes the planet screen
+     *
+     * @param actionEvent
+     */
     public void returnToPlanet(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
     }

@@ -75,6 +75,11 @@ public class MarketplaceController implements Initializable{
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
+    /**
+     * buys the selected item and does some validation
+     *
+     * @param actionEvent
+     */
     public void buy(ActionEvent actionEvent) {
         Goods boughtGood = marketView.getSelectionModel().getSelectedItem();
         if (boughtGood == null) {
@@ -100,6 +105,11 @@ public class MarketplaceController implements Initializable{
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
+    /**
+     * Sells the selected item and does some validation
+     *
+     * @param actionEvent
+     */
     public void sell(ActionEvent actionEvent) {
         if (shipView.getSelectionModel().getSelectedItem() == null) {
             return;
@@ -131,6 +141,10 @@ public class MarketplaceController implements Initializable{
         }
     }
 
+    /**
+     * goes back to the planet screen
+     * @param actionEvent
+     */
     public void goToPlanet(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
     }

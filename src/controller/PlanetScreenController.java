@@ -49,19 +49,40 @@ public class PlanetScreenController implements Initializable {
                                 + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
     }
 
+    /**
+     * Displays the marketplace scene
+     *
+     * @param actionEvent
+     */
     public void goToMarket(ActionEvent actionEvent) {
         Main.setScene("screens/marketplacescreen.fxml");
     }
 
-    public void buyFuel(ActionEvent actionEvent) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException();
+    /**
+     * Fills the player's ship with fuel
+     * TODO: add validation
+     *
+     * @param actionEvent
+     */
+    public void buyFuel(ActionEvent actionEvent) {
+        player.buyFuel(player.getMaxFuel() - player.getCurrentFuel());
     }
 
+    /**
+     * displays the map screen
+     *
+     * @param actionEvent
+     */
     public void leaveSystem(ActionEvent actionEvent) {
         Main.setScene("screens/mapscreen.fxml");
     }
 
 
+    /**
+     * saves the game
+     *
+     * @param actionEvent
+     */
     public void saveEvent(ActionEvent actionEvent) {
         if (gi.saveGameInstance()){
             Dialogs.create().owner(Main.getPrimaryStage())
