@@ -134,18 +134,6 @@ public class Ship implements Serializable {
         }
     }
 
-    /**
-     * Transfers the cargo from one ship to another. Might change this method to
-     * include other items as we implement more
-     *
-     * @param other
-     *        the Ship to transfer to
-     */
-    public void transferCargo(Ship other) {
-        for (Goods item : cargo) {
-            other.addCargo(item);
-        }
-    }
 
     /**
      * Remove [distance] units of fuel after travelling distance.
@@ -190,6 +178,10 @@ public class Ship implements Serializable {
 
     public int getFuelCost() {
         return fuelCost;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public int cargoSize() {
