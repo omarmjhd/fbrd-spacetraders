@@ -170,7 +170,7 @@ public class GameInstance implements Serializable{
     public boolean saveGameInstance() {
 
         try {
-            File file = new File("Game_Saves");
+            File file = new File("game_saves");
             file.mkdir();
             FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
