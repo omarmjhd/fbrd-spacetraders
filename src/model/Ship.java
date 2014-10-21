@@ -58,7 +58,7 @@ public class Ship implements Serializable {
 
     private int currentFuel;
     private String name;
-    private int minTechLevel; // use for validation purposes
+    private TechLevel minTechLevel; // use for validation purposes
     private int fuelCost;
     private int price;
     private int bounty;
