@@ -42,9 +42,8 @@ public class PlanetScreenController implements Initializable {
         planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
-        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString() +
-                                "\n Tech Level: " + curPlanet.getTechLevel()
-                                + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
+        planetText.setText(curPlanet.toString() + "\n\nFuel: " + player.getCurrentFuel()
+                                                + "\nMoney: " + player.getMoney());
     }
 
     /**

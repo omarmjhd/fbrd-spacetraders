@@ -19,6 +19,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import model.*;
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
 import java.net.URL;
@@ -82,8 +83,7 @@ public class MapScreenController implements Initializable {
 
         //random events
         player = gm.getPlayer();
-        RandomEvent randomEvent = new RandomEvent(player);
-        randomEventLabel.setText(randomEvent.event());
+
 
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
 
@@ -162,6 +162,12 @@ public class MapScreenController implements Initializable {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentSolarSystem(selectedSystem);
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
+        RandomEvent randomEvent = new RandomEvent(player);
+        String event = randomEvent.event();
+        if (!event.equals("")) {
+            Dialogs.create().owner(Main.getPrimaryStage())
+                    .title("Something has happened...").message(event).lightweight().showInformation();
+        }
         gm.getPlayer().travel(travelDistance);
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         Main.setScene("screens/planetscreen.fxml");
