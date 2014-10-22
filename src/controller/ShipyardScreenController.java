@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import model.*;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -24,7 +23,7 @@ public class ShipyardScreenController implements Initializable{
     public Button buyButton;
     public Button sellButton;
     public Label playerMoney;
-    public TextArea shipAttributes;
+    public Label shipAttributes;
     public Text shipyardTitle;
     private Shipyard shipyard;
     private Ship currentShip;
@@ -32,7 +31,7 @@ public class ShipyardScreenController implements Initializable{
     private Marketplace marketplace;
     private GameInstance gm;
     private Player player;
-    private ObservableList<Ship> options;
+    private ObservableList<String> options;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,36 +41,44 @@ public class ShipyardScreenController implements Initializable{
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
-
         if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
             options =
                     FXCollections.observableArrayList(
-                    Ship.flea()
+                    Ship.flea().toString()
             );
         } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
-            options =
-                    FXCollections.observableArrayList(
-                            Ship.flea(),
-                            Ship.gnat(),
-                            Ship.firefly(),
-                            Ship.mosquito(),
-                            Ship.bumblebee()
-                    );
+            options = FXCollections.observableArrayList(
+        Ship.flea().toString(),
+                Ship.gnat().toString(),
+                Ship.firefly().toString(),
+                Ship.mosquito().toString(),
+                Ship.bumblebee().toString()
+        );
         }
-        shipComboBox = new ComboBox(options);
+        shipComboBox.setItems(options);
+        if(shipComboBox.getValue() == null) {
+            shipAttributes.setText("");
+        }
     }
 
     public void chooseShip(ActionEvent actionEvent) {
-        currentShip = (Ship) shipComboBox.getValue();
-        Map<String, Integer> specs = currentShip.specs();
-        String text = "";
-        for(int i = 0; i < specs.size(); i++) {
-            text += specs;
+        String cur = (String) shipComboBox.getValue();
+        if (cur.equals("Flea")) {
+            currentShip = Ship.flea();
+        } else if(cur.equals("Gnat")) {
+            currentShip = Ship.gnat();
+        } else if(cur.equals("Firefly")) {
+            currentShip = Ship.firefly();
+        } else if(cur.equals("Mosquito")) {
+            currentShip = Ship.mosquito();
+        } else if(cur.equals("Bumblebee")) {
+            currentShip = Ship.bumblebee();
         }
+        Map<String, Integer> specs = currentShip.specs();
+        String text = cur + "\n";
         for (Map.Entry<String, Integer> e : specs.entrySet()) {
             text += e.getKey() + ": " + e.getValue() + "\n";
         }
         shipAttributes.setText(text);
     }
-
 }

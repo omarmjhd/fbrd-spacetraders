@@ -23,12 +23,12 @@
             <Font name="Courier New Bold Italic" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="buyButton" layoutX="342.0" layoutY="362.0" mnemonicParsing="false" onAction="#buy" prefHeight="40.0" prefWidth="122.0" text="Buy!">
+      <Button fx:id="buyButton" layoutX="342.0" layoutY="362.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Buy!">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="sellButton" disable="true" layoutX="474.0" layoutY="362.0" mnemonicParsing="false" onAction="#sell" prefHeight="40.0" prefWidth="122.0" text="Sell!">
+      <Button fx:id="sellButton" disable="true" layoutX="474.0" layoutY="362.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Sell!">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
@@ -42,12 +42,15 @@
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font></Label>
-      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToPlanet" prefHeight="40.0" prefWidth="257.0" text="Done Shopping">
+      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="257.0" text="Done Shopping">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
       <ComboBox fx:id="shipComboBox" layoutX="37.0" layoutY="82.0" onAction="#chooseShip" prefWidth="150.0" promptText="Choose a ship" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="82.0" />
-      <TextArea fx:id="shipAttributes" layoutX="374.0" layoutY="82.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="shipAttributes" layoutX="201.0" layoutY="86.0" text="Label">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

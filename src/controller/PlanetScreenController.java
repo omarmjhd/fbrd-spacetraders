@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import model.GameInstance;
 import model.Planet;
 import model.Player;
+import model.TechLevel;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
@@ -24,6 +25,7 @@ import view.Main;
 public class PlanetScreenController implements Initializable {
     public Text planetName;
     public Button enterMarket;
+    public Button enterShipyard;
     public Button buyFuel;
     public Button travelButton;
     public Label planetText;
@@ -45,6 +47,13 @@ public class PlanetScreenController implements Initializable {
         planetName.setText(curPlanet.getName());
         planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
                                 + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
+        if(curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+            enterShipyard.setVisible(true);
+        } else if(curPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+            enterShipyard.setVisible(true);
+        } else {
+            enterShipyard.setVisible(false);
+        }
     }
 
     /**
@@ -54,6 +63,15 @@ public class PlanetScreenController implements Initializable {
      */
     public void goToMarket(ActionEvent actionEvent) {
         Main.setScene("screens/marketplacescreen.fxml");
+    }
+
+    /**
+     * Displays the shipyard scene
+     *
+     * @param actionEvent
+     */
+    public void goToShipyard(ActionEvent actionEvent) {
+        Main.setScene("screens/shipyardscreen.fxml");
     }
 
     /**
