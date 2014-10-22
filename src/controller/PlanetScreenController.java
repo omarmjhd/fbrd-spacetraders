@@ -13,12 +13,9 @@ import javafx.scene.text.Text;
 import model.GameInstance;
 import model.Planet;
 import model.Player;
-import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
-import javax.naming.OperationNotSupportedException;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,7 +42,8 @@ public class PlanetScreenController implements Initializable {
         planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
-        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
+        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString() +
+                                "\n Tech Level: " + curPlanet.getTechLevel()
                                 + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
     }
 
