@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -56,7 +58,7 @@ public class Ship implements Serializable {
 
     private int currentFuel;
     private String name;
-    private int minTechLevel; // use for validation purposes
+    private TechLevel minTechLevel; // use for validation purposes
     private int fuelCost;
     private int price;
     private int bounty;
@@ -134,18 +136,6 @@ public class Ship implements Serializable {
         }
     }
 
-    /**
-     * Transfers the cargo from one ship to another. Might change this method to
-     * include other items as we implement more
-     *
-     * @param other
-     *        the Ship to transfer to
-     */
-    public void transferCargo(Ship other) {
-        for (Goods item : cargo) {
-            other.addCargo(item);
-        }
-    }
 
     /**
      * Remove [distance] units of fuel after travelling distance.
@@ -192,6 +182,10 @@ public class Ship implements Serializable {
         return fuelCost;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public int cargoSize() {
         return cargo.maxSize();
     }
@@ -226,6 +220,31 @@ public class Ship implements Serializable {
 
     public AbstractList<Crew> getCrew() {
         return crew;
+    }
+
+    /**
+     * Returns a Map of attribute name to atribute value
+     *
+     * @return map of instance variable -> value
+     */
+    public Map<String, Integer> specs() {
+        Map<String, Integer> retval = new TreeMap<String, Integer>();
+
+        retval.put("Max Fuel", maxFuel);
+        retval.put("Fuel Cost", fuelCost);
+        retval.put("Price", price);
+        retval.put("Bounty", bounty);
+        retval.put("Hull Strength", hullStrength);
+        retval.put("Police Disposition", policeAggression);
+        retval.put("Pirate Aggression", pirateAggression);
+        retval.put("Cargo Size", cargoSize());
+        retval.put("Weapons Size", weaponsSize());
+        retval.put("Crew Size", crewSize());
+        retval.put("Gadget Size", gadgetSize());
+        retval.put("Shield Size", shieldsSize());
+
+        return retval;
+
     }
 
     @Override

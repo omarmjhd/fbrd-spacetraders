@@ -50,8 +50,7 @@ public class Player implements Serializable {
         addMoney(-money);
     }
 
-    public void buyShip(Ship otherShip) {
-        ship.transferCargo(otherShip);
+    public void changeShip(Ship otherShip) {
         ship = otherShip;
     }
 

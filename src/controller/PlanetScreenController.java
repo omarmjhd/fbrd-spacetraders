@@ -1,5 +1,7 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,14 +15,8 @@ import javafx.scene.text.Text;
 import model.GameInstance;
 import model.Planet;
 import model.Player;
-import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
-import javax.naming.OperationNotSupportedException;
-import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author Joshua on 10/6/2014.
@@ -42,6 +38,8 @@ public class PlanetScreenController implements Initializable {
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
+        int totalFuelCost = (player.getMaxFuel() - player.getCurrentFuel()) * player.getFuelCost();
+        buyFuel.setText("Refuel: " + totalFuelCost + " cr");
         planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
@@ -49,19 +47,45 @@ public class PlanetScreenController implements Initializable {
                                 + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
     }
 
+    /**
+     * Displays the marketplace scene
+     *
+     * @param actionEvent
+     */
     public void goToMarket(ActionEvent actionEvent) {
         Main.setScene("screens/marketplacescreen.fxml");
     }
 
-    public void buyFuel(ActionEvent actionEvent) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException();
+    /**
+     * Fills the player's ship with fuel TODO: add validation TODO: make the
+     * fuel update after buying
+     *
+     * @param actionEvent
+     */
+    public void buyFuel(ActionEvent actionEvent) {
+        player.buyFuel(player.getMaxFuel() - player.getCurrentFuel());
+        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
+ + "\n\nFuel: "
+                        + player.getCurrentFuel() + "\nMoney: "
+                        + player.getMoney());
+        buyFuel.setText("Refuel: " + 0 + " cr");
     }
 
+    /**
+     * displays the map screen
+     *
+     * @param actionEvent
+     */
     public void leaveSystem(ActionEvent actionEvent) {
         Main.setScene("screens/mapscreen.fxml");
     }
 
 
+    /**
+     * saves the game
+     *
+     * @param actionEvent
+     */
     public void saveEvent(ActionEvent actionEvent) {
         if (gi.saveGameInstance()){
             Dialogs.create().owner(Main.getPrimaryStage())
