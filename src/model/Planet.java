@@ -114,8 +114,8 @@ public class Planet implements Serializable{
     @Override
     public String toString() {
 
-        return "Planet Name: " + name + "\n\tPlanet Resources: " + resource
-                        + "\n\tPlanet Tech: " + tech;
+        return "Planet Name: " + name + "\n\tResources: " + resource
+                        + "\n\tTech: " + tech;
 
     }
 }

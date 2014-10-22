@@ -125,6 +125,9 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
 
         @Override
         public boolean hasNext() {
+            if (index >= backing.length) {
+                return false;
+            }
             return backing[index] != null;
         }
 

@@ -54,6 +54,8 @@ public class PlanetScreenController implements Initializable {
         } else {
             enterShipyard.setVisible(false);
         }
+        planetText.setText(curPlanet.toString() + "\n\nFuel: " + player.getCurrentFuel()
+                                                + "\nMoney: " + player.getMoney());
     }
 
     /**
@@ -74,6 +76,11 @@ public class PlanetScreenController implements Initializable {
         Main.setScene("screens/shipyardscreen.fxml");
     }
 
+    /**
+     * Ensures player doesnt over buy fuel
+     *
+     * @return amount of fuel player can buy
+     */
     private int calculateFuelQuantity() {
         int fuelAmount = player.getMaxFuel() - player.getCurrentFuel();
 
@@ -93,15 +100,14 @@ public class PlanetScreenController implements Initializable {
     public void buyFuel(ActionEvent actionEvent) {
 
         player.buyFuel(calculateFuelQuantity());
-        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
- + "\n\nFuel: "
+        planetText.setText(curPlanet.toString() + "\n\nFuel: "
                         + player.getCurrentFuel() + "\nMoney: "
                         + player.getMoney());
         buyFuel.setText("Refuel: " + 0 + " cr");
     }
 
     /**
-     * displays the map screen
+     * Displays the map screen
      *
      * @param actionEvent
      */
@@ -111,7 +117,7 @@ public class PlanetScreenController implements Initializable {
 
 
     /**
-     * saves the game
+     * Saves the game
      *
      * @param actionEvent
      */
