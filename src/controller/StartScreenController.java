@@ -34,7 +34,7 @@ public class StartScreenController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Save File to Load");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
-        File file = new File("Game_Saves");
+        File file = new File("game_saves");
         if (file.exists()){
             fileChooser.setInitialDirectory(file);
         } else {
