@@ -97,7 +97,7 @@ public class Marketplace {
      * @return boolean whether the good was actually bought
      */
     public boolean playerBuys(Goods item) {
-        if (supply.remove(item)) {
+        if (player.cargoRoomLeft() >= 1 && supply.remove(item)) {
             player.addCargo(item);
             player.subtractMoney(purchasePrices.get(item));
             return true;

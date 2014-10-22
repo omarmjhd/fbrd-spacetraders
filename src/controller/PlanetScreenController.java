@@ -1,5 +1,7 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,9 +17,6 @@ import model.Planet;
 import model.Player;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author Joshua on 10/6/2014.
@@ -39,6 +38,8 @@ public class PlanetScreenController implements Initializable {
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
+        int totalFuelCost = calculateFuelQuantity() * player.getFuelCost();
+        buyFuel.setText("Refuel: " + totalFuelCost + " cr");
         planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
@@ -56,13 +57,32 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
+     * Ensures player doesnt over buy fuel
+     *
+     * @return amount of fuel player can buy
+     */
+    private int calculateFuelQuantity() {
+        int fuelAmount = player.getMaxFuel() - player.getCurrentFuel();
+
+        if ((fuelAmount * player.getFuelCost()) > player.getMoney()) {
+            fuelAmount = player.getMoney() / player.getFuelCost();
+        }
+
+        return fuelAmount;
+    }
+
+    /**
      * Fills the player's ship with fuel
      * TODO: add validation
      *
      * @param actionEvent
      */
     public void buyFuel(ActionEvent actionEvent) {
-        player.buyFuel(player.getMaxFuel() - player.getCurrentFuel());
+        player.buyFuel(calculateFuelQuantity());
+        planetText.setText(curPlanet.toString() + "\n\nFuel: "
+                        + player.getCurrentFuel() + "\nMoney: "
+                        + player.getMoney());
+        buyFuel.setText("Refuel: " + 0 + " cr");
     }
 
     /**

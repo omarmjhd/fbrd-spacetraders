@@ -58,6 +58,10 @@ public class MarketplaceController implements Initializable{
             shipGoods.addAll(player.getCargo());
         }
 
+        if (player.cargoRoomLeft() < 1) {
+            buyButton.setDisable(true);
+        }
+
         // Allows us to set our ListCell's text to what we needs and bind them to a good
         marketView.setCellFactory(new Callback<ListView<Goods>, ListCell<Goods>>() {
             @Override
@@ -89,6 +93,11 @@ public class MarketplaceController implements Initializable{
      */
     public void buy(ActionEvent actionEvent) {
         Goods boughtGood = marketView.getSelectionModel().getSelectedItem();
+        if (player.cargoRoomLeft() < 1) {
+            buyButton.setDisable(true);
+            return;
+        }
+
         if (boughtGood == null) {
             return;
         }
