@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import model.*;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -23,24 +26,52 @@ public class ShipyardScreenController implements Initializable{
     public Label playerMoney;
     public TextArea shipAttributes;
     public Text shipyardTitle;
+    private Shipyard shipyard;
+    private Ship currentShip;
     private Planet currentPlanet;
     private Marketplace marketplace;
     private GameInstance gm;
     private Player player;
+    private ObservableList<Ship> options;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Sets various instance variables
         this.gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
-        this.shipComboBox = new ComboBox();
         currentPlanet = gm.getCurrentPlanet();
+        shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
+
+        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+            options =
+                    FXCollections.observableArrayList(
+                    Ship.flea()
+            );
+        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+            options =
+                    FXCollections.observableArrayList(
+                            Ship.flea(),
+                            Ship.gnat(),
+                            Ship.firefly(),
+                            Ship.mosquito(),
+                            Ship.bumblebee()
+                    );
+        }
+        shipComboBox = new ComboBox(options);
     }
 
-    public Ship chooseShip(ActionEvent actionEvent) {
-        return (Ship) shipComboBox.getValue();
+    public void chooseShip(ActionEvent actionEvent) {
+        currentShip = (Ship) shipComboBox.getValue();
+        Map<String, Integer> specs = currentShip.specs();
+        String text = "";
+        for(int i = 0; i < specs.size(); i++) {
+            text += specs;
+        }
+        for (Map.Entry<String, Integer> e : specs.entrySet()) {
+            text += e.getKey() + ": " + e.getValue() + "\n";
+        }
+        shipAttributes.setText(text);
     }
 
 }
