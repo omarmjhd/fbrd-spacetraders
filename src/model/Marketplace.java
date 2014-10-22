@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Random;
  * @author ngraves3
  *
  */
-public class Marketplace {
+public class Marketplace implements Serializable {
 
 
     /*
