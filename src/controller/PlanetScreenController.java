@@ -40,7 +40,7 @@ public class PlanetScreenController implements Initializable {
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
-        int totalFuelCost = (player.getMaxFuel() - player.getCurrentFuel()) * player.getFuelCost();
+        int totalFuelCost = calculateFuelQuantity() * player.getFuelCost();
         buyFuel.setText("Refuel: " + totalFuelCost + " cr");
         planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
@@ -74,6 +74,16 @@ public class PlanetScreenController implements Initializable {
         Main.setScene("screens/shipyardscreen.fxml");
     }
 
+    private int calculateFuelQuantity() {
+        int fuelAmount = player.getMaxFuel() - player.getCurrentFuel();
+
+        if ((fuelAmount * player.getFuelCost()) > player.getMoney()) {
+            fuelAmount = player.getMoney() / player.getFuelCost();
+        }
+
+        return fuelAmount;
+    }
+
     /**
      * Fills the player's ship with fuel TODO: add validation TODO: make the
      * fuel update after buying
@@ -81,7 +91,8 @@ public class PlanetScreenController implements Initializable {
      * @param actionEvent
      */
     public void buyFuel(ActionEvent actionEvent) {
-        player.buyFuel(player.getMaxFuel() - player.getCurrentFuel());
+
+        player.buyFuel(calculateFuelQuantity());
         planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
  + "\n\nFuel: "
                         + player.getCurrentFuel() + "\nMoney: "

@@ -1,6 +1,10 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Class to act as a service provider between Planet and Player for trading
@@ -25,7 +29,7 @@ public class Marketplace {
     /*
      * Map of goods this planet can buy. Min tech to produce is always >= min
      * tech to use
-     * 
+     *
      * K(productionPrices) is a subset of K(purchasePrices)
      */
     private Map<Goods, Integer> purchasePrices;
@@ -141,7 +145,11 @@ public class Marketplace {
      *        a Good
      * @return price of the Good
      */
-    public int getPrice(Goods item) {
-        return purchasePrices.get(item);
+    public Integer getPrice(Goods item) {
+        if (purchasePrices.containsKey(item)) {
+            return purchasePrices.get(item);
+        }
+
+        return null;
     }
 }
