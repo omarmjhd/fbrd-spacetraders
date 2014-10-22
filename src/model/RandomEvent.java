@@ -135,12 +135,16 @@ public class RandomEvent {
         @Override
         public String event() {
             int fuelLeakage =
-                            rand.nextInt(Math.max(player.getCurrentFuel(), 1));
+                            rand.nextInt(Math.max(player.getCurrentFuel() - 1,
+                                            1));
             fuelLeakage++; // 1 to player.getCurrentFuel()
-
-            player.travel(fuelLeakage);
-            int msg = rand.nextInt(losePhrases.length);
-            return String.format(losePhrases[msg], fuelLeakage);
+            if (player.getCurrentFuel() > 0) {
+                player.travel(fuelLeakage);
+                int msg = rand.nextInt(losePhrases.length);
+                return String.format(losePhrases[msg], fuelLeakage);
+            } else {
+                return "Your fuel tank broke open, but you had no fuel!";
+            }
         }
 
     }
