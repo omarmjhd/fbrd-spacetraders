@@ -56,6 +56,8 @@ public class Ship implements Serializable {
 
     private int maxFuel;
 
+    private boolean isVisible;
+
     private int currentFuel;
     private String name;
     private TechLevel minTechLevel; // use for validation purposes
@@ -86,6 +88,7 @@ public class Ship implements Serializable {
         pirateAggression = pirate;
         this.size = size;
         currentFuel = maxFuel;
+        isVisible = true;
     }
 
     /**
@@ -104,6 +107,36 @@ public class Ship implements Serializable {
      */
     public AbstractList<Goods> getCargo() {
         return cargo;
+    }
+
+    /**
+     * used with CargoGadget
+     *
+     * @param cargo
+     *        the new backing cargo for the ship
+     */
+    public void setCargo(PresizedList<Goods> cargo) {
+        this.cargo = cargo;
+    }
+
+    /**
+     * Used with FuelGadget
+     *
+     * @param cost
+     *        the new fuel cost of the ship
+     */
+    public void setFuelCost(int cost) {
+        fuelCost = cost;
+    }
+
+    /**
+     * Used with CloakingGadget
+     *
+     * @param isVisible
+     *        whether or not the ship is visible
+     */
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 
     /**
@@ -232,7 +265,7 @@ public class Ship implements Serializable {
 
         retval.put("Max Fuel", maxFuel);
         retval.put("Fuel Cost", fuelCost);
-        retval.put("Price", price);
+        retval.put("Base Price", price);
         retval.put("Bounty", bounty);
         retval.put("Hull Strength", hullStrength);
         retval.put("Police Disposition", policeAggression);

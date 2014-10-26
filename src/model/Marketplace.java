@@ -39,6 +39,8 @@ public class Marketplace implements Serializable {
 
     private Player player;
 
+    private int tradeSkillModifier;
+
     /**
      * Instantiates a marketplace with the given planet's tech level
      *
@@ -52,6 +54,7 @@ public class Marketplace implements Serializable {
         this.player = player;
         productionPrices = new HashMap<Goods, Integer>();
         purchasePrices = new HashMap<Goods, Integer>();
+        tradeSkillModifier = new Random().nextInt(2 * player.getTradeSkill());
 
         /*
          * Initialize goods the planet can produce
@@ -59,9 +62,10 @@ public class Marketplace implements Serializable {
         for (Goods item : Goods.values()) {
             /* Check if planetTech is higher than minTech for the good */
             if (planetTech.compareTo(item.minTechToProduce()) >= 0) {
-                productionPrices.put(item, item.price(planetTech));
+                productionPrices.put(item, adjustPriceOnSkills(item));
             }
         }
+
 
         /*
          * Initialize goods the planet can buy. Copy over production goods and
@@ -72,7 +76,7 @@ public class Marketplace implements Serializable {
         for (Goods item : Goods.values()) {
             if (!productionPrices.containsKey(item)
                             && planetTech.compareTo(item.minTechToUse()) >= 0) {
-                purchasePrices.put(item, item.price(planetTech));
+                purchasePrices.put(item, adjustPriceOnSkills(item));
             }
         }
 
@@ -87,6 +91,10 @@ public class Marketplace implements Serializable {
             supply.add(usableGoods[rand.nextInt(productionPrices.size())]);
         }
 
+    }
+
+    private int adjustPriceOnSkills(Goods good) {
+        return Math.max(good.price(planetTech) - tradeSkillModifier, 1);
     }
 
     /**

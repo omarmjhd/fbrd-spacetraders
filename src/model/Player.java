@@ -9,14 +9,11 @@ import java.util.AbstractList;
  * @author ngraves3
  *
  */
-public class Player implements Serializable {
+public class Player implements HasSkills, Serializable {
 
     private String name;
-    private final int PILOT_SKILL;
-    private final int FIGHT_SKILL;
-    private final int ENG_SKILL;
-    private final int TRADE_SKILL;
-    private final int INVEST_SKILL;
+
+    private SkillSet skills;
 
     private int money = 0;
 
@@ -24,11 +21,8 @@ public class Player implements Serializable {
 
     public Player(String name, int pilotSkill, int fightSkill, int engSkill, int tradeSkill, int investSkill) {
         this.name = name;
-        this.ENG_SKILL = engSkill;
-        this.FIGHT_SKILL = fightSkill;
-        this.TRADE_SKILL = tradeSkill;
-        this.INVEST_SKILL = investSkill;
-        this.PILOT_SKILL = pilotSkill;
+        skills = new SkillSet(tradeSkill, fightSkill, engSkill,
+                                        pilotSkill, investSkill);
         this.ship = Ship.gnat();
 
     }
@@ -79,6 +73,10 @@ public class Player implements Serializable {
         ship.travel(distance);
     }
 
+    public int getShipBasePrice() {
+        return ship.getPrice();
+    }
+
     /**
      * Gets maxmium amount of fuel for the given Ship
      *
@@ -121,16 +119,65 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         String retval = "Name: " + name + "\n";
-        retval += "Piloting skill: " + PILOT_SKILL + "\n";
-        retval += "Fighting skill: " + FIGHT_SKILL + "\n";
-        retval += "Engineering skill: " + ENG_SKILL + "\n";
-        retval += "Trading Skill: " + TRADE_SKILL + "\n";
-        retval += "Investing Skill: " + INVEST_SKILL + "\n";
+        retval += "Piloting skill: " + getPilotSkill() + "\n";
+        retval += "Fighting skill: " + getFightingSkill() + "\n";
+        retval += "Engineering skill: " + getEngineeringSkill() + "\n";
+        retval += "Trading Skill: " + getTradeSkill() + "\n";
+        retval += "Investing Skill: " + getInvestingSkill() + "\n";
         retval += "Ship: " + ship.toString();
         return retval;
     }
 
     public String getName() {
         return name;
+    }
+
+    /*
+     * The below methods need to account for a Crew members skill too
+     */
+
+    @Override
+    public int getTradeSkill() {
+        int total = skills.getTradeSkill();
+        for (Crew member : ship.getCrew()) {
+            total += member.getTradeSkill();
+        }
+        return total;
+    }
+
+    @Override
+    public int getEngineeringSkill() {
+        int total = skills.getEngineeringSkill();
+        for (Crew member : ship.getCrew()) {
+            total += member.getEngineeringSkill();
+        }
+        return total;
+    }
+
+    @Override
+    public int getPilotSkill() {
+        int total = skills.getPilotSkill();
+        for (Crew member : ship.getCrew()) {
+            total += member.getPilotSkill();
+        }
+        return total;
+    }
+
+    @Override
+    public int getFightingSkill() {
+        int total = skills.getFightingSkill();
+        for (Crew member : ship.getCrew()) {
+            total += member.getFightingSkill();
+        }
+        return total;
+    }
+
+    @Override
+    public int getInvestingSkill() {
+        int total = skills.getInvestingSkill();
+        for (Crew member : ship.getCrew()) {
+            total += member.getInvestingSkill();
+        }
+        return total;
     }
 }
