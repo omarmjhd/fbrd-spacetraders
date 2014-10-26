@@ -30,6 +30,8 @@ public class Shipyard {
             //implement other price modifiers like shields, goods, cargo
         }
 
+        total -= player.getShipBasePrice();
+
         return total;
     }
 
