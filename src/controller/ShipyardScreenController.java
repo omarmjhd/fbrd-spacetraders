@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import model.*;
+import view.Main;
 
 import java.net.URL;
 import java.util.Map;
@@ -25,6 +26,8 @@ public class ShipyardScreenController implements Initializable{
     public Label playerMoney;
     public Label shipAttributes;
     public Text shipyardTitle;
+    public Label shipCost;
+
     private Shipyard shipyard;
     private Ship currentShip;
     private Planet currentPlanet;
@@ -41,20 +44,29 @@ public class ShipyardScreenController implements Initializable{
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
-        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
-            options =
-                    FXCollections.observableArrayList(
-                    Ship.flea().toString()
-            );
-        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
-            options = FXCollections.observableArrayList(
-        Ship.flea().toString(),
+        options = FXCollections.observableArrayList(
+                Ship.flea().toString(),
                 Ship.gnat().toString(),
                 Ship.firefly().toString(),
                 Ship.mosquito().toString(),
                 Ship.bumblebee().toString()
         );
-        }
+
+
+//        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+//            options =
+//                    FXCollections.observableArrayList(
+//                    Ship.flea().toString()
+//            );
+//        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+//            options = FXCollections.observableArrayList(
+//        Ship.flea().toString(),
+//                Ship.gnat().toString(),
+//                Ship.firefly().toString(),
+//                Ship.mosquito().toString(),
+//                Ship.bumblebee().toString()
+//        );
+//        }
         shipComboBox.setItems(options);
         if(shipComboBox.getValue() == null) {
             shipAttributes.setText("");
@@ -80,5 +92,13 @@ public class ShipyardScreenController implements Initializable{
             text += e.getKey() + ": " + e.getValue() + "\n";
         }
         shipAttributes.setText(text);
+    }
+
+    public void goToUpgradeShip(ActionEvent actionEvent) {
+        Main.setScene("screens/shipupgradescreen.fxml");
+    }
+
+    public void goToPlanet(ActionEvent actionEvent) {
+        Main.setScene("screens/planetscreen.fxml");
     }
 }
