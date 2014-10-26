@@ -170,6 +170,7 @@ public class MapScreenController implements Initializable {
         }
         gm.getPlayer().travel(travelDistance);
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
+        gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
         Main.setScene("screens/planetscreen.fxml");
     }
 

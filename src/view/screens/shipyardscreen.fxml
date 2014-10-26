@@ -23,12 +23,7 @@
             <Font name="Courier New Bold Italic" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="buyButton" layoutX="342.0" layoutY="362.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Buy!">
-         <font>
-            <Font name="Courier New Bold" size="17.0" />
-         </font>
-      </Button>
-      <Button fx:id="sellButton" disable="true" layoutX="474.0" layoutY="362.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Sell!">
+      <Button fx:id="tradeButton" layoutX="37.0" layoutY="416.0" mnemonicParsing="false" onAction="#trade" prefHeight="40.0" prefWidth="257.0" text="Trade Ship">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
@@ -38,11 +33,11 @@
             <Font name="Courier New Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="playerMoney" layoutX="187.0" layoutY="372.0" text="200">
+      <Label fx:id="playerMoney" layoutX="187.0" layoutY="373.0" text="200">
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font></Label>
-      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="257.0" text="Done Shopping">
+      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" onAction="#goToPlanet" prefHeight="40.0" prefWidth="257.0" text="Done Shopping">
          <font>
             <Font name="Courier New Bold" size="14.0" />
          </font>
@@ -52,5 +47,20 @@
          <font>
             <Font name="Courier New" size="12.0" />
          </font></Label>
+      <Label layoutX="69.0" layoutY="343.0" text="Cost of Ship:">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="shipCost" layoutX="192.0" layoutY="343.0" text="200">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="upgradeShipButton" layoutX="338.0" layoutY="363.0" mnemonicParsing="false" onAction="#goToUpgradeShip" prefHeight="40.0" prefWidth="257.0" text="Upgrade Ship" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="338.0">
+         <font>
+            <Font name="Courier New Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
