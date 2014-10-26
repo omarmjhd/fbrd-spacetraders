@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.*;
 import view.Main;
@@ -44,6 +45,7 @@ public class ShipyardScreenController implements Initializable{
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
+        //for debugging
         options = FXCollections.observableArrayList(
                 Ship.flea().toString(),
                 Ship.gnat().toString(),
@@ -52,7 +54,7 @@ public class ShipyardScreenController implements Initializable{
                 Ship.bumblebee().toString()
         );
 
-
+        //shows which are available on each planet
 //        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
 //            options =
 //                    FXCollections.observableArrayList(
@@ -71,8 +73,18 @@ public class ShipyardScreenController implements Initializable{
         if(shipComboBox.getValue() == null) {
             shipAttributes.setText("");
         }
+
+        if(currentShip == null) {
+            shipCost.setText("");
+        }
+
+        playerMoney.setText("" + player.getMoney());
     }
 
+    /**
+     * When a ship is chosen from the combo box, updates the label
+     * @param actionEvent
+     */
     public void chooseShip(ActionEvent actionEvent) {
         String cur = (String) shipComboBox.getValue();
         if (cur.equals("Flea")) {
@@ -91,14 +103,40 @@ public class ShipyardScreenController implements Initializable{
         for (Map.Entry<String, Integer> e : specs.entrySet()) {
             text += e.getKey() + ": " + e.getValue() + "\n";
         }
+
+        //ship cost label
         shipAttributes.setText(text);
+        shipCost.setText("" +
+                shipyard.costToBuy(currentShip));
+        if(shipyard.costToBuy(currentShip) <= 0) {
+            shipCost.setTextFill(Color.GREEN);
+        } else {
+            shipCost.setTextFill(Color.RED);
+        }
     }
 
+    /**
+     * Goes to ship upgrade screen
+     * @param actionEvent
+     */
     public void goToUpgradeShip(ActionEvent actionEvent) {
         Main.setScene("screens/shipupgradescreen.fxml");
     }
 
+    /**
+     * Go to planet screen
+     * @param actionEvent
+     */
     public void goToPlanet(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
     }
+
+    /**
+     * Does the actual action of selling your ship
+     * @param actionEvent
+     */
+    public void trade(ActionEvent actionEvent) {
+
+    }
+
 }
