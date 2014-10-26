@@ -22,20 +22,19 @@ import java.util.ResourceBundle;
 public class ShipyardScreenController implements Initializable{
 
     public ComboBox shipComboBox;
-    public Button buyButton;
-    public Button sellButton;
     public Label playerMoney;
     public Label shipAttributes;
     public Text shipyardTitle;
     public Label shipCost;
+    public Button tradeButton;
 
     private Shipyard shipyard;
     private Ship currentShip;
     private Planet currentPlanet;
-    private Marketplace marketplace;
     private GameInstance gm;
     private Player player;
     private ObservableList<String> options;
+    private int costToBuy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,30 +44,32 @@ public class ShipyardScreenController implements Initializable{
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
+        //can't trade until have chosen a ship
+        tradeButton.setDisable(true);
         //for debugging
-        options = FXCollections.observableArrayList(
+//        options = FXCollections.observableArrayList(
+//                Ship.flea().toString(),
+//                Ship.gnat().toString(),
+//                Ship.firefly().toString(),
+//                Ship.mosquito().toString(),
+//                Ship.bumblebee().toString()
+//        );
+
+        //shows which are available on each planet
+        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+            options =
+                    FXCollections.observableArrayList(
+                    Ship.flea().toString()
+            );
+        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+            options = FXCollections.observableArrayList(
                 Ship.flea().toString(),
                 Ship.gnat().toString(),
                 Ship.firefly().toString(),
                 Ship.mosquito().toString(),
                 Ship.bumblebee().toString()
         );
-
-        //shows which are available on each planet
-//        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
-//            options =
-//                    FXCollections.observableArrayList(
-//                    Ship.flea().toString()
-//            );
-//        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
-//            options = FXCollections.observableArrayList(
-//        Ship.flea().toString(),
-//                Ship.gnat().toString(),
-//                Ship.firefly().toString(),
-//                Ship.mosquito().toString(),
-//                Ship.bumblebee().toString()
-//        );
-//        }
+        }
         shipComboBox.setItems(options);
         if(shipComboBox.getValue() == null) {
             shipAttributes.setText("");
@@ -106,12 +107,18 @@ public class ShipyardScreenController implements Initializable{
 
         //ship cost label
         shipAttributes.setText(text);
-        shipCost.setText("" +
-                shipyard.costToBuy(currentShip));
-        if(shipyard.costToBuy(currentShip) <= 0) {
+        costToBuy = shipyard.costToBuy(currentShip);
+        shipCost.setText("" + costToBuy);
+        if(costToBuy <= 0) {
             shipCost.setTextFill(Color.GREEN);
         } else {
             shipCost.setTextFill(Color.RED);
+        }
+
+        if (costToBuy > player.getMoney()) {
+            tradeButton.setDisable(true);
+        } else {
+            tradeButton.setDisable(false);
         }
     }
 
@@ -136,7 +143,8 @@ public class ShipyardScreenController implements Initializable{
      * @param actionEvent
      */
     public void trade(ActionEvent actionEvent) {
-
+        player.changeShip(currentShip);
+        player.subtractMoney(costToBuy);
     }
 
 }

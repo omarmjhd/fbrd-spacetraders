@@ -47,13 +47,13 @@ public class PlanetScreenController implements Initializable {
         planetName.setText(curPlanet.getName());
         planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
                                 + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
-//        if(curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
-//            enterShipyard.setVisible(true);
-//        } else if(curPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
-//            enterShipyard.setVisible(true);
-//        } else {
-//            enterShipyard.setVisible(false);
-//        }
+        if(curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+            enterShipyard.setVisible(true);
+        } else if(curPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+            enterShipyard.setVisible(true);
+        } else {
+            enterShipyard.setVisible(false);
+        }
         planetText.setText(curPlanet.toString() + "\n\nFuel: " + player.getCurrentFuel()
                                                 + "\nMoney: " + player.getMoney());
     }
