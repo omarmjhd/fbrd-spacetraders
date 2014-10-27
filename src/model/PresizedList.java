@@ -34,6 +34,10 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
         return backing.length;
     }
 
+    public boolean hasRoom() {
+        return size < backing.length;
+    }
+
     @Override
     public int size() {
         return size;

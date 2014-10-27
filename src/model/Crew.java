@@ -4,7 +4,9 @@ public class Crew implements HasPrice, HasSkills {
 
     private SkillSet skills;
 
-    public Crew(int trade, int fight, int eng, int pilot, int invest) {
+
+    public Crew(int trade, int fight, int eng, int pilot,
+        int invest) {
         skills = new SkillSet(trade, fight, eng, pilot, invest);
     }
 

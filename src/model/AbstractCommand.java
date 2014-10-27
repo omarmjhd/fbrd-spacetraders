@@ -9,7 +9,7 @@ import java.util.Stack;
  * @author ngraves
  *
  */
-public abstract class Command {
+public abstract class AbstractCommand implements CommandPattern {
 
     /*
      * applyEffect := true, removeEffect := false

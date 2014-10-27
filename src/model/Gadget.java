@@ -9,7 +9,7 @@ package model;
  * @author ngraves3
  *
  */
-public abstract class Gadget extends Command implements HasPrice {
+public abstract class Gadget extends AbstractCommand implements HasPrice {
 
     private String name;
 

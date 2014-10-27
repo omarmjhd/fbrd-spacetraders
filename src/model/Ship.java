@@ -169,6 +169,116 @@ public class Ship implements Serializable {
         }
     }
 
+    /**
+     * Adds a gadget to the ship
+     *
+     * @param gadget
+     *        the gadget to add
+     * @return true iff gadget was added and effect was applied
+     */
+    public boolean addGadget(Gadget gadget) {
+        if (gadgets.hasRoom()) {
+            gadgets.add(gadget);
+            return gadget.applyEffect();
+        }
+
+        return false;
+    }
+
+    /**
+     * Removed a gadget from the the ship
+     *
+     * @param gadget
+     *        the gadget to remove
+     * @return true iff the gadget and its effect were removed
+     */
+    public boolean removeGadget(Gadget gadget) {
+        if (gadgets.remove(gadget)) {
+            return gadget.removeEffect();
+        }
+
+        return false;
+    }
+
+    /**
+     * Adds a crew member to the ship
+     *
+     * @param member
+     *        the Crew member to add
+     * @return true iff the Crew member was added
+     */
+    public boolean addCrew(Crew member) {
+        if (crew.hasRoom()) {
+            return crew.add(member);
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes a crew member from the ship
+     *
+     * @param member
+     *        the Crew member to remove
+     * @return true iff the Crew member was removed
+     */
+    public boolean removeCrew(Crew member) {
+        return crew.remove(member);
+    }
+
+    /**
+     * Adds the weapon to the ship
+     *
+     * @param w
+     *        the weapon to add
+     * @return true iff the weapon is removed
+     */
+    public boolean addWeapon(Weapon w) {
+        if (weapons.hasRoom()) {
+            weapons.add(w);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes the weapon from the ship
+     *
+     * @param w
+     *        the weapon to remove
+     * @return true iff the weapon was removed
+     */
+    public boolean removeWeapon(Weapon w) {
+        return weapons.remove(w);
+    }
+
+    /**
+     * The shield to add the ship
+     * 
+     * @param s
+     *        the shield to add
+     * @return true iff the shield was added
+     */
+    public boolean addShield(Shield s) {
+        if (shields.hasRoom()) {
+            shields.add(s);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes the shield from the ship
+     *
+     * @param s
+     *        the shield to remove
+     * @return true iff the shield was removed
+     */
+    public boolean removeShield(Shield s) {
+        return shields.remove(s);
+    }
 
     /**
      * Remove [distance] units of fuel after travelling distance.
