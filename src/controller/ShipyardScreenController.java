@@ -35,11 +35,13 @@ public class ShipyardScreenController implements Initializable{
     private Player player;
     private ObservableList<String> options;
     private int costToBuy;
+    private Ship playership;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
+        //playership = player.
         currentPlanet = gm.getCurrentPlanet();
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
@@ -145,6 +147,7 @@ public class ShipyardScreenController implements Initializable{
     public void trade(ActionEvent actionEvent) {
         player.changeShip(currentShip);
         player.subtractMoney(costToBuy);
+        playerMoney.setText("" + player.getMoney());
     }
 
 }

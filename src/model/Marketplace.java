@@ -54,7 +54,7 @@ public class Marketplace implements Serializable {
         this.player = player;
         productionPrices = new HashMap<Goods, Integer>();
         purchasePrices = new HashMap<Goods, Integer>();
-        tradeSkillModifier = new Random().nextInt(2 * player.getTradeSkill());
+        tradeSkillModifier = new Random().nextInt(2 * player.getTradeSkill() + 1);
 
         /*
          * Initialize goods the planet can produce
