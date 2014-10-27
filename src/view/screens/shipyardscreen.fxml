@@ -42,8 +42,8 @@
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
-      <ComboBox fx:id="shipComboBox" layoutX="37.0" layoutY="82.0" onAction="#chooseShip" prefWidth="150.0" promptText="Choose a ship" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="82.0" />
-      <Label fx:id="shipAttributes" layoutX="201.0" layoutY="86.0" text="Label">
+      <ComboBox fx:id="shipComboBox" layoutX="37.0" layoutY="101.0" onAction="#chooseShip" prefWidth="150.0" promptText="Choose a ship" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="101.0" />
+      <Label fx:id="shipAttributes" layoutX="202.0" layoutY="106.0" text="Label">
          <font>
             <Font name="Courier New" size="12.0" />
          </font></Label>
@@ -62,5 +62,15 @@
             <Font name="Courier New Bold" size="14.0" />
          </font>
       </Button>
+      <Text layoutX="37.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Ship:">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Text>
+      <Label fx:id="playershipLabel" layoutX="152.0" layoutY="64.0" text="Gnat">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

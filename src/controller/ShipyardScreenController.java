@@ -31,6 +31,7 @@ public class ShipyardScreenController implements Initializable{
     public Text shipyardTitle;
     public Label shipCost;
     public Button tradeButton;
+    public Label playershipLabel;
 
     private Shipyard shipyard;
     private Ship currentShip;
@@ -45,21 +46,15 @@ public class ShipyardScreenController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         this.gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
-        //playership = player.
+        playership = player.getShip();
+        playershipLabel.setText(
+                playership.toString());
         currentPlanet = gm.getCurrentPlanet();
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
         //can't trade until have chosen a ship
         tradeButton.setDisable(true);
-        //for debugging
-//        options = FXCollections.observableArrayList(
-//                Ship.flea().toString(),
-//                Ship.gnat().toString(),
-//                Ship.firefly().toString(),
-//                Ship.mosquito().toString(),
-//                Ship.bumblebee().toString()
-//        );
 
         //shows which are available on each planet
         if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
@@ -151,6 +146,8 @@ public class ShipyardScreenController implements Initializable{
     public void trade(ActionEvent actionEvent) {
         player.changeShip(currentShip);
         player.subtractMoney(costToBuy);
+        playership = player.getShip();
+        playershipLabel.setText(playership.toString());
         playerMoney.setText("" + player.getMoney());
         costToBuy = shipyard.costToBuy(currentShip);
         shipCost.setText("" + costToBuy);

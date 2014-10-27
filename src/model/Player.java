@@ -44,6 +44,8 @@ public class Player implements HasSkills, Serializable {
         addMoney(-money);
     }
 
+    public Ship getShip() {return ship;}
+
     public void changeShip(Ship otherShip) {
         ship = otherShip;
     }
