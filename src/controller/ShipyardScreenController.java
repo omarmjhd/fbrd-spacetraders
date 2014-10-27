@@ -1,5 +1,8 @@
 package controller;
 
+import java.net.URL;
+import java.util.Map;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,12 +12,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.*;
+import model.GameInstance;
+import model.Planet;
+import model.Player;
+import model.Ship;
+import model.Shipyard;
+import model.TechLevel;
 import view.Main;
-
-import java.net.URL;
-import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
  * Created by Renee on 10/21/2014.
@@ -35,11 +39,13 @@ public class ShipyardScreenController implements Initializable{
     private Player player;
     private ObservableList<String> options;
     private int costToBuy;
+    private Ship playership;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
+        //playership = player.
         currentPlanet = gm.getCurrentPlanet();
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
@@ -145,6 +151,9 @@ public class ShipyardScreenController implements Initializable{
     public void trade(ActionEvent actionEvent) {
         player.changeShip(currentShip);
         player.subtractMoney(costToBuy);
+        playerMoney.setText("" + player.getMoney());
+        costToBuy = shipyard.costToBuy(currentShip);
+        shipCost.setText("" + costToBuy);
     }
 
 }
