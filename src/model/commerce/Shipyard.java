@@ -1,9 +1,10 @@
 package model.commerce;
 
+import java.io.Serializable;
 import model.core.Player;
 import model.core.Ship;
 
-public class Shipyard {
+public class Shipyard implements Serializable {
 
     /* Knows about market to get prices for goods */
     private Marketplace marketplace;

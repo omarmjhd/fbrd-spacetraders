@@ -1,5 +1,6 @@
 package model.core;
 
+import java.io.Serializable;
 
 
 /**
@@ -8,7 +9,7 @@ package model.core;
  * @author ngraves3
  *
  */
-public class SkillSet implements HasSkills {
+public class SkillSet implements HasSkills, Serializable {
 
     private final int TRADE_SKILL;
 
