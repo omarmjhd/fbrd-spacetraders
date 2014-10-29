@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,7 +22,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import model.*;
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
@@ -26,10 +29,6 @@ import model.core.SolarSystem;
 import model.events.RandomEvent;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * @version 2.0
@@ -166,13 +165,13 @@ public class MapScreenController implements Initializable {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentSolarSystem(selectedSystem);
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
+        gm.getPlayer().travel(travelDistance);
         RandomEvent randomEvent = new RandomEvent(player);
         String event = randomEvent.event();
         if (!event.equals("")) {
             Dialogs.create().owner(Main.getPrimaryStage())
                     .title("Something has happened...").message(event).lightweight().showInformation();
         }
-        gm.getPlayer().travel(travelDistance);
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
         Main.setScene("screens/planetscreen.fxml");
