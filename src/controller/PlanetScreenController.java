@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -30,13 +31,17 @@ public class PlanetScreenController implements Initializable {
     public Button travelButton;
     public Label planetText;
     public Pane planetPane;
-    public ImageView astronaut;
+    public ImageView astronautView;
+    public Image astronaut;
     private GameInstance gi;
     private Planet curPlanet;
     private Player player;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        astronaut = new Image("file:assets/astronaut.png");
+        astronautView.setImage(astronaut);
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();

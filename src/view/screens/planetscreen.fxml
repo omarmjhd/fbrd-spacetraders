@@ -31,10 +31,8 @@
       <Pane fx:id="planetPane" layoutX="24.0" layoutY="85.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="85.0">
          <children>
             <Arc fill="DODGERBLUE" layoutX="350.0" layoutY="175.0" length="180.0" radiusX="149.0" radiusY="149.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
-            <ImageView fx:id="astronaut" fitHeight="94.0" fitWidth="79.0" layoutX="40.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../assets/astronaut.png" />
-               </image></ImageView>
+            <ImageView fx:id="astronautView" fitHeight="94.0" fitWidth="79.0" layoutX="40.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               </ImageView>
          </children></Pane>
       <Button fx:id="enterMarket" layoutX="400.0" layoutY="295.0" mnemonicParsing="false" onAction="#goToMarket" prefHeight="31.0" prefWidth="111.0" text="Market!">
          <font>
