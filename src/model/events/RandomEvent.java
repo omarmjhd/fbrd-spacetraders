@@ -136,8 +136,10 @@ public class RandomEvent {
 
         @Override
         public String event() {
-            int fuelLeakage = rand.nextInt(player.getCurrentFuel() - 1);
-            fuelLeakage++; // 1 to player.getCurrentFuel()
+            int fuelLeakage = rand.nextInt(player.getCurrentFuel() + 1);
+            if (fuelLeakage == 0) {
+                fuelLeakage++; // 1 to player.getCurrentFuel()
+            }
             if (player.getCurrentFuel() > 0) {
                 player.travel(fuelLeakage);
                 int msg = rand.nextInt(losePhrases.length);
@@ -171,6 +173,7 @@ public class RandomEvent {
             int eventType = rand.nextInt(events.length);
             return events[eventType].event();
         }
+
 
         return "";
     }
