@@ -1,4 +1,4 @@
-package model;
+package model.commerce;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import model.core.Planet;
+import model.core.Player;
+import model.core.TechLevel;
 
 /**
  * Class to act as a service provider between Planet and Player for trading

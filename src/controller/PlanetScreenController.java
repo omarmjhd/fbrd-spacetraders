@@ -12,10 +12,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import model.GameInstance;
-import model.Planet;
-import model.Player;
-import model.TechLevel;
+import model.core.GameInstance;
+import model.core.Planet;
+import model.core.Player;
+import model.core.TechLevel;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 

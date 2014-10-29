@@ -1,4 +1,4 @@
-package model;
+package model.core;
 
 /**
  * Interface to ensure skills are available for a Player/Crew

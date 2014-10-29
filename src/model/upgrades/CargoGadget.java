@@ -1,6 +1,9 @@
-package model;
+package model.upgrades;
 
 import java.util.List;
+import model.commerce.Goods;
+import model.core.PresizedList;
+import model.core.Ship;
 
 /**
  * This class represents an object that adds extra cargo to a Ship. It uses the

@@ -1,8 +1,10 @@
-package model;
+package model.upgrades;
 
-public enum Weapon implements HasPrice {
+import model.core.Utilities;
 
-    PULSE_LASER, BEAM_LASER, MILITARY_LASER;
+public enum Shield implements HasPrice {
+
+    ENERGY_SHIELD, REFLECTIVE_SHIELD;
 
     @Override
     public int getPrice() {

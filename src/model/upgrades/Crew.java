@@ -1,4 +1,7 @@
-package model;
+package model.upgrades;
+
+import model.core.HasSkills;
+import model.core.SkillSet;
 
 public class Crew implements HasPrice, HasSkills {
 

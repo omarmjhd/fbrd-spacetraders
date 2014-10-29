@@ -3,12 +3,11 @@ package controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
-import model.GameInstance;
+import model.core.GameInstance;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
 import java.io.File;
 
 /**

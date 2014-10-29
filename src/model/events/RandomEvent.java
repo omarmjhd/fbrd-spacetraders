@@ -1,6 +1,8 @@
-package model;
+package model.events;
 
 import java.util.Random;
+import model.commerce.Goods;
+import model.core.Player;
 
 public class RandomEvent {
 

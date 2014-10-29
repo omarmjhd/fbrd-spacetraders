@@ -6,13 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import model.GameInstance;
-import model.Player;
+import model.core.GameInstance;
+import model.core.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 

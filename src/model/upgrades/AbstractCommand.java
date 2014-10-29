@@ -1,4 +1,4 @@
-package model;
+package model.upgrades;
 
 import java.util.Stack;
 

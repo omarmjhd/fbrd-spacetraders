@@ -1,4 +1,7 @@
-package model;
+package model.commerce;
+
+import model.core.Player;
+import model.core.Ship;
 
 public class Shipyard {
 

@@ -1,4 +1,6 @@
-package model;
+package model.upgrades;
+
+import model.core.Ship;
 
 public class FuelGadget extends Gadget {
 

@@ -1,4 +1,4 @@
-package model;
+package model.upgrades;
 
 /**
  * Interface for objects that have a price.

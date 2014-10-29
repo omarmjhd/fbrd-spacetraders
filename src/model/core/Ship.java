@@ -1,9 +1,14 @@
-package model;
+package model.core;
 
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Map;
 import java.util.TreeMap;
+import model.commerce.Goods;
+import model.upgrades.Crew;
+import model.upgrades.Gadget;
+import model.upgrades.Shield;
+import model.upgrades.Weapon;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -255,7 +260,7 @@ public class Ship implements Serializable {
 
     /**
      * The shield to add the ship
-     * 
+     *
      * @param s
      *        the shield to add
      * @return true iff the shield was added

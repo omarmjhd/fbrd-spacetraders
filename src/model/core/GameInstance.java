@@ -1,10 +1,11 @@
-package model;
+package model.core;
 
 import java.io.*;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
+import model.commerce.Goods;
 
 /**
  * Singleton game monitor. The game model will control the passing of turns and

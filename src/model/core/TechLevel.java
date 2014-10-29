@@ -1,4 +1,4 @@
-package model;
+package model.core;
 
 /**
  * This enum represents the tech level of a given plant. The tech level

@@ -1,4 +1,4 @@
-package model;
+package model.upgrades;
 
 /**
  * The interface defining the Command design pattern. Can apply an effect or

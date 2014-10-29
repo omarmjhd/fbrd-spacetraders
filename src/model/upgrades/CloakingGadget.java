@@ -1,4 +1,6 @@
-package model;
+package model.upgrades;
+
+import model.core.Ship;
 
 /**
  * The gadget the makes the player invisible to encounters

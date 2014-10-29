@@ -1,6 +1,7 @@
-package model;
+package model.commerce;
 
 import java.util.Random;
+import model.core.TechLevel;
 
 /**
  * Represents a trade good. All goods have prices and different attributes

@@ -1,8 +1,9 @@
-package model;
+package model.core;
 
 import java.io.Serializable;
 import java.util.AbstractList;
-
+import model.commerce.Goods;
+import model.upgrades.Crew;
 /**
  * This class represents the Player and his state.
  *

@@ -1,4 +1,4 @@
-package model;
+package model.core;
 
 /**
  * Class containing lots of useful methods for various things that don't really

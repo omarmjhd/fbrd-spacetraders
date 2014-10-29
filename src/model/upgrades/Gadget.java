@@ -1,4 +1,7 @@
-package model;
+package model.upgrades;
+
+import model.core.Ship;
+import model.core.Utilities;
 
 /**
  * An abstract representation of a gadget. Not much can be said about gadgets

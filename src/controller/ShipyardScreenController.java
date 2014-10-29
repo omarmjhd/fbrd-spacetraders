@@ -12,12 +12,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import model.GameInstance;
-import model.Planet;
-import model.Player;
-import model.Ship;
-import model.Shipyard;
-import model.TechLevel;
+import model.commerce.Shipyard;
+import model.core.GameInstance;
+import model.core.Planet;
+import model.core.Player;
+import model.core.Ship;
+import model.core.TechLevel;
 import view.Main;
 
 /**
