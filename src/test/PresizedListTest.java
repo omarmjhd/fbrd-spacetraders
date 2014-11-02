@@ -26,6 +26,9 @@ public class PresizedListTest {
     PresizedList<Integer> pList;
     int maxSize;
 
+    /**
+     * Sets up the PresizedList of Integers with a maxSize of 5
+     */
     @Before
     public void setup() {
 
@@ -34,6 +37,9 @@ public class PresizedListTest {
 
     }
 
+    /**
+     * Clears the PresizedList of Integers
+     */
     @After
     public void cleanup() {
 
@@ -41,6 +47,10 @@ public class PresizedListTest {
 
     }
 
+    /**
+     * Tests adding null items to the PresizedList
+     * Should throw and IllegalArgumentException
+     */
     @Test (expected = IllegalArgumentException.class)
     public void testAddNull(){
 
@@ -48,6 +58,10 @@ public class PresizedListTest {
 
     }
 
+    /**
+     * Tests adding too many items to the PresizedList
+     * Should throw and IllegalStateException
+     */
     @Test (expected = IllegalStateException.class)
     public void testAddTooMany() {
 
@@ -59,6 +73,10 @@ public class PresizedListTest {
 
     }
 
+    /**
+     * Tests adding one item to the PresizedList
+     * Should make the list hold the Integer 1, make size 1, and make isEmpty false
+     */
     @Test
     public void testAddOne(){
 
@@ -70,6 +88,10 @@ public class PresizedListTest {
 
     }
 
+    /**
+     * Tests adding half the maxSize items to the PresizedList
+     * Should make the list hold the Integers 1-maxSize / 2, make size maxSize / 2, and make isEmpty false
+     */
     @Test
     public void testAddHalf(){
 
@@ -81,11 +103,22 @@ public class PresizedListTest {
 
         assertFalse(pList.isEmpty());
         assertEquals(maxSize / 2, pList.size());
-        assertEquals((Integer) 1, pList.get(0));
-        assertEquals((Integer) 2, pList.get(1));
+
+        for (int i = 0; i < maxSize / 2; i++) {
+
+            int integer = i + 1;
+
+            assertEquals((Integer) integer, pList.get(i));
+
+        }
+
 
     }
 
+    /**
+     * Tests adding the maxSize items to the PresizedList
+     * Should make the list hold the Integers 1-maxSize, make size maxSize, and make isEmpty false
+     */
     @Test
     public void testAddMax() {
 
@@ -97,11 +130,14 @@ public class PresizedListTest {
 
         assertFalse(pList.isEmpty());
         assertEquals(maxSize, pList.size());
-        assertEquals((Integer) 1, pList.get(0));
-        assertEquals((Integer) 2, pList.get(1));
-        assertEquals((Integer) 3, pList.get(2));
-        assertEquals((Integer) 4, pList.get(3));
-        assertEquals((Integer) 5, pList.get(4));
+
+        for (int i = 0; i < maxSize; i++) {
+
+            int integer = i + 1;
+
+            assertEquals((Integer) integer, pList.get(i));
+
+        }
 
     }
 
