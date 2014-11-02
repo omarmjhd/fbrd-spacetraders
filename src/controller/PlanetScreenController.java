@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,11 +14,14 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
+
 import org.controlsfx.dialog.Dialogs;
+
 import view.Main;
 
 /**

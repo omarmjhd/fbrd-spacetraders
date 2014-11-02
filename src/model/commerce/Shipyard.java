@@ -1,6 +1,7 @@
 package model.commerce;
 
 import java.io.Serializable;
+
 import model.core.Player;
 import model.core.Ship;
 

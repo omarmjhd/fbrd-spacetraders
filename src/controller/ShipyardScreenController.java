@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,12 +13,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
 import model.commerce.Shipyard;
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
+
 import view.Main;
 
 /**

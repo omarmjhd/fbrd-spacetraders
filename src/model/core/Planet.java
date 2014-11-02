@@ -2,6 +2,7 @@ package model.core;
 
 
 import java.io.Serializable;
+
 import model.commerce.Goods;
 import model.commerce.Marketplace;
 import model.commerce.Shipyard;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import model.commerce.Goods;
 import model.upgrades.Crew;
 import model.upgrades.Gadget;
@@ -250,7 +251,7 @@ public class Ship implements Serializable {
     /**
      * Removes the weapon from the ship
      *
-     * @param w
+     * @param weapon
      *        the weapon to remove
      * @return true iff the weapon was removed
      */
@@ -261,7 +262,7 @@ public class Ship implements Serializable {
     /**
      * The shield to add the ship
      *
-     * @param s
+     * @param shield
      *        the shield to add
      * @return true iff the shield was added
      */
@@ -277,7 +278,7 @@ public class Ship implements Serializable {
     /**
      * Removes the shield from the ship
      *
-     * @param s
+     * @param shield
      *        the shield to remove
      * @return true iff the shield was removed
      */
