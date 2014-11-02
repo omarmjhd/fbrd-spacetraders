@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,12 +23,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
 import model.events.RandomEvent;
+
 import org.controlsfx.dialog.Dialogs;
+
 import view.Main;
 
 /**
