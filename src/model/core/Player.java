@@ -84,7 +84,7 @@ public class Player implements HasSkills, Serializable {
     }
 
     /**
-     * Gets maxmium amount of fuel for the given Ship
+     * Gets maximum amount of fuel for the given Ship
      *
      * @return maximum amount of fuel in Ship
      */
