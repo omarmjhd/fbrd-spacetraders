@@ -12,7 +12,7 @@ public class Utilities {
     /**
      * Capitalizes a string
      *
-     * @param s
+     * @param str
      *        the string to capitalize
      * @return the capitalized string; null if input is null; empty string if
      *         string is empty

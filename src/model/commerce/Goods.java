@@ -1,6 +1,7 @@
 package model.commerce;
 
 import java.util.Random;
+
 import model.core.TechLevel;
 
 /**

@@ -1,11 +1,15 @@
 package controller;
 
 import java.io.File;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
+
 import model.core.GameInstance;
+
 import view.Main;
+
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
