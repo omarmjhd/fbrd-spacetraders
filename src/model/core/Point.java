@@ -9,12 +9,12 @@ import java.io.Serializable;
  *
  */
 public class Point implements Serializable{
-    private int x;
-    private int y;
+    private int xpos;
+    private int ypos;
 
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Point(int xpos, int ypos) {
+        this.xpos = xpos;
+        this.ypos = ypos;
     }
 
     /**
@@ -24,28 +24,28 @@ public class Point implements Serializable{
      * @return int closest to the hypotenuse
      */
     public int distance(Point other) {
-        return (int) Math.sqrt(Math.pow((x - other.getX()), 2)
-                        + Math.pow((y - other.getY()), 2));
+        return (int) Math.sqrt(Math.pow((xpos - other.getX()), 2)
+                        + Math.pow((ypos - other.getY()), 2));
     }
 
 
     @Override
     public String toString() {
 
-        return "(" + x + "," + y + ")";
+        return "(" + xpos + "," + ypos + ")";
     }
 
     public int getY() {
-        return y;
+        return ypos;
     }
 
     public int getX() {
-        return x;
+        return xpos;
     }
 
     @Override
     public int hashCode() {
-        return x * y;
+        return xpos * ypos;
     }
 
     @Override
@@ -55,8 +55,8 @@ public class Point implements Serializable{
         } else if (this == other) {
             return true;
         } else {
-            Point o = (Point) other;
-            return x == o.getX() && y == o.getY();
+            Point oth = (Point) other;
+            return xpos == oth.getX() && ypos == oth.getY();
         }
     }
 }

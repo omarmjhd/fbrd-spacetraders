@@ -238,9 +238,9 @@ public class Ship implements Serializable {
      *        the weapon to add
      * @return true iff the weapon is removed
      */
-    public boolean addWeapon(Weapon w) {
+    public boolean addWeapon(Weapon weapon) {
         if (weapons.hasRoom()) {
-            weapons.add(w);
+            weapons.add(weapon);
             return true;
         }
 
@@ -254,8 +254,8 @@ public class Ship implements Serializable {
      *        the weapon to remove
      * @return true iff the weapon was removed
      */
-    public boolean removeWeapon(Weapon w) {
-        return weapons.remove(w);
+    public boolean removeWeapon(Weapon weapon) {
+        return weapons.remove(weapon);
     }
 
     /**
@@ -265,9 +265,9 @@ public class Ship implements Serializable {
      *        the shield to add
      * @return true iff the shield was added
      */
-    public boolean addShield(Shield s) {
+    public boolean addShield(Shield shield) {
         if (shields.hasRoom()) {
-            shields.add(s);
+            shields.add(shield);
             return true;
         }
 
@@ -281,8 +281,8 @@ public class Ship implements Serializable {
      *        the shield to remove
      * @return true iff the shield was removed
      */
-    public boolean removeShield(Shield s) {
-        return shields.remove(s);
+    public boolean removeShield(Shield shield) {
+        return shields.remove(shield);
     }
 
     /**

@@ -1,5 +1,6 @@
 package view;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.core.GameInstance;
-import java.io.IOException;
 
 /**
  * Main application class
@@ -39,10 +39,10 @@ public class Main extends Application {
      *
      * @param fxmlURI the URI of the .fxml file representing the scene
      */
-    public static void setScene(String fxmlURI) {
+    public static void setScene(String fxmlUri) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource(fxmlURI));
+            loader.setLocation(Main.class.getResource(fxmlUri));
             Parent root = loader.load();
             Scene newPane = new Scene(root);
             primaryStage.setScene(newPane);

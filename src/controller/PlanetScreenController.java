@@ -51,14 +51,17 @@ public class PlanetScreenController implements Initializable {
         player = gi.getPlayer();
         int totalFuelCost = calculateFuelQuantity() * player.getFuelCost();
         buyFuel.setText("Refuel: " + totalFuelCost + " cr");
-        planetPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
+        planetPane.setBackground(new Background(new BackgroundFill(Paint
+                        .valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
-        planetText.setText(curPlanet.getName() + "\n Resources:  " + curPlanet.getResource().toString()
-                                + "\n\nFuel: " + player.getCurrentFuel() + "\nMoney: " + player.getMoney());
-        if(curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+        planetText.setText(curPlanet.getName() + "\n Resources:  "
+                        + curPlanet.getResource().toString() + "\n\nFuel: "
+                        + player.getCurrentFuel() + "\nMoney: "
+                        + player.getMoney());
+        if (curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
             enterShipyard.setVisible(true);
-        } else if(curPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+        } else if (curPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
             enterShipyard.setVisible(true);
         } else {
             enterShipyard.setVisible(false);
@@ -131,7 +134,7 @@ public class PlanetScreenController implements Initializable {
      * @param actionEvent
      */
     public void saveEvent(ActionEvent actionEvent) {
-        if (gi.saveGameInstance()){
+        if (gi.saveGameInstance()) {
             Dialogs.create().owner(Main.getPrimaryStage())
                     .title("File Saved")
                     .message("New Save File Created")

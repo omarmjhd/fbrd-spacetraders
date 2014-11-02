@@ -97,14 +97,14 @@ public class Planet implements Serializable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || !(o instanceof Planet)) {
+    public boolean equals(Object other) {
+        if (other == null || !(other instanceof Planet)) {
             return false;
-        } else if (o == this) {
+        } else if (other == this) {
             return true;
         }
-        Planet p = (Planet) o;
-        return name.equals(p.getName());
+        Planet planet = (Planet) other;
+        return name.equals(planet.getName());
 
     }
 

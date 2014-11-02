@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,8 +14,6 @@ import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -93,7 +93,9 @@ public class ConfigScreenController implements Initializable {
         int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
 
         if (total <= 15 && !name.equals("")) {
-            Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
+            Player player =
+                            new Player(name, pilotSkill, fightSkill, engSkill,
+                                            tradeSkill, investSkill);
             Action response =
                     Dialogs.create().owner(Main.getPrimaryStage())
                     .title("Player Created!")
@@ -114,7 +116,8 @@ public class ConfigScreenController implements Initializable {
                     Dialogs.create()
                     .owner(Main.getPrimaryStage())
                     .title("Too Many Skill Points")
-                    .message("You have used " + total + " skill points. You are only allowed 15. \n Try again.")
+                    .message("You have used " + total + " skill points."
+                                    + " You are only allowed 15. \n Try again.")
                     .lightweight().showWarning();
         } else {
             Action response = Dialogs.create()
