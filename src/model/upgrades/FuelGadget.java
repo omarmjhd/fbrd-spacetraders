@@ -24,7 +24,7 @@ public class FuelGadget extends Gadget {
     @Override
     protected boolean effect() {
         if (!effectApplied) {
-            ship.setFuelCost(originalFuelCost / fuelModifier);
+            ship.setFuelCost(Math.max(1, originalFuelCost / fuelModifier));
             effectApplied = true;
             return true;
         }
