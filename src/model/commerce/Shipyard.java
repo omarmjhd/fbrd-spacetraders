@@ -1,9 +1,9 @@
 package model.commerce;
 
 import java.io.Serializable;
-
 import model.core.Player;
 import model.core.Ship;
+import model.upgrades.HasPrice;
 
 public class Shipyard implements Serializable {
 
@@ -30,9 +30,13 @@ public class Shipyard implements Serializable {
     public int costToBuy(Ship shipToBuy) {
 
         int total = shipToBuy.getPrice();
+
         for (Goods cargo : player.getCargo()) {
             total -= marketplace.getPrice(cargo);
-            //implement other price modifiers like shields, goods, cargo
+        }
+
+        for (HasPrice upgrade : player.getUpgrades()) {
+            total -= upgrade.getPrice();
         }
 
         total -= player.getShipBasePrice();

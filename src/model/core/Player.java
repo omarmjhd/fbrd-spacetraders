@@ -1,10 +1,11 @@
 package model.core;
 
 import java.io.Serializable;
-import java.util.AbstractList;
-
+import java.util.LinkedList;
+import java.util.List;
 import model.commerce.Goods;
 import model.upgrades.Crew;
+import model.upgrades.HasPrice;
 /**
  * This class represents the Player and his state.
  *
@@ -63,8 +64,30 @@ public class Player implements HasSkills, Serializable {
         ship.addCargo(item);
     }
 
-    public AbstractList<Goods> getCargo() {
+    public List<Goods> getCargo() {
         return ship.getCargo();
+    }
+
+    public List<HasPrice> getUpgrades() {
+        List<HasPrice> upgrades = new LinkedList<HasPrice>();
+
+        for (HasPrice weapon : ship.getWeapons()) {
+            upgrades.add(weapon);
+        }
+
+        for (HasPrice shield : ship.getShields()) {
+            upgrades.add(shield);
+        }
+
+        for (HasPrice crew : ship.getCrew()) {
+            upgrades.add(crew);
+        }
+
+        for (HasPrice gadget : ship.getGadgets()) {
+            upgrades.add(gadget);
+        }
+
+        return upgrades;
     }
 
     public Goods removeCargo(Goods item) {

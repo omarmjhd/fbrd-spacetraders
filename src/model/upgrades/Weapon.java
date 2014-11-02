@@ -8,8 +8,7 @@ public enum Weapon implements HasPrice {
 
     @Override
     public int getPrice() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 500 * (ordinal() + 1);
     }
 
     @Override
