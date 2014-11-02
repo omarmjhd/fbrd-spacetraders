@@ -2,7 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -58,8 +57,9 @@ public class MapScreenController implements Initializable {
 
     @FXML
 
-    private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "blue", "cadetblue", "CHARTREUSE",
-                                "coral", "cornflowerblue", "crimson", "cyan", "darkcyan", "goldenrod"};
+    private String[] colorList = { "blue", "aqua", "aquamarine", "BLUEVIOLET",
+            "blue", "cadetblue", "CHARTREUSE", "coral", "cornflowerblue",
+            "crimson", "cyan", "darkcyan", "goldenrod" };
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -110,7 +110,8 @@ public class MapScreenController implements Initializable {
         EventHandler<MouseEvent> drawClickedCircle = event -> {
             //if haven't already chosen a planet, just highlight clicked planet
             Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
-            Point chosenPlanet = new Point((int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
+            Point chosenPlanet = new Point((int) clickedCircle.getCenterX(),
+                            (int) clickedCircle.getCenterY());
             if (!clickedPlanet) {
                 currentCircle = clickedCircle;
                 currentCirclePoint = chosenPlanet;
@@ -137,22 +138,24 @@ public class MapScreenController implements Initializable {
             }
         };
 
-        lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
+        lolpane.setBackground(new Background(new BackgroundFill(Paint
+                        .valueOf("black"), null, null)));
 
-        Random random = new Random();
-        int b = 0;
+        int colorIndex = 0;
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
-            if (b >= colorList.length) { b =0;}
+            if (colorIndex >= colorList.length) {
+                colorIndex = 0;
+            }
             Circle circle = new Circle(point.getX(), point.getY(), 5,
-                    Paint.valueOf(colorList[b]));
+                                            Paint.valueOf(colorList[colorIndex]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
             lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
             lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, handleLabels);
             circle.setUserData(s);
             lolpane.getChildren().add(circle);
 
-            b++;
+            colorIndex++;
         }
 
     }
@@ -170,7 +173,8 @@ public class MapScreenController implements Initializable {
         String event = randomEvent.event();
         if (!event.equals("")) {
             Dialogs.create().owner(Main.getPrimaryStage())
-                    .title("Something has happened...").message(event).lightweight().showInformation();
+                            .title("Something has happened...").message(event)
+                            .lightweight().showInformation();
         }
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         gm.getCurrentPlanet().enterShipyard(gm.getPlayer());

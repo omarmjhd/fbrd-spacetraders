@@ -11,24 +11,24 @@ public class Utilities {
 
     /**
      * Capitalizes a string
-     * 
+     *
      * @param s
      *        the string to capitalize
      * @return the capitalized string; null if input is null; empty string if
      *         string is empty
      */
-    public static String capitalize(String s) {
-        if (s == null) {
+    public static String capitalize(String str) {
+        if (str == null) {
             return null;
         }
 
-        if (s.length()  == 0) {
-            return s;
-        } else if (s.length() == 1) {
-            return s.toUpperCase();
+        if (str.length() == 0) {
+            return str;
+        } else if (str.length() == 1) {
+            return str.toUpperCase();
         }
 
-        return s.charAt(0) + s.substring(1, s.length()).toLowerCase();
+        return str.charAt(0) + str.substring(1, str.length()).toLowerCase();
     }
 
 }

@@ -57,12 +57,12 @@ public class ShipyardScreenController implements Initializable{
         tradeButton.setDisable(true);
 
         //shows which are available on each planet
-        if(currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
+        if (currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
             options =
                     FXCollections.observableArrayList(
                     Ship.flea().toString()
             );
-        } else if(currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
+        } else if (currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
             options = FXCollections.observableArrayList(
                 Ship.flea().toString(),
                 Ship.gnat().toString(),
@@ -72,11 +72,11 @@ public class ShipyardScreenController implements Initializable{
         );
         }
         shipComboBox.setItems(options);
-        if(shipComboBox.getValue() == null) {
+        if (shipComboBox.getValue() == null) {
             shipAttributes.setText("");
         }
 
-        if(currentShip == null) {
+        if (currentShip == null) {
             shipCost.setText("");
         }
 
@@ -91,13 +91,13 @@ public class ShipyardScreenController implements Initializable{
         String cur = (String) shipComboBox.getValue();
         if (cur.equals("Flea")) {
             currentShip = Ship.flea();
-        } else if(cur.equals("Gnat")) {
+        } else if (cur.equals("Gnat")) {
             currentShip = Ship.gnat();
-        } else if(cur.equals("Firefly")) {
+        } else if (cur.equals("Firefly")) {
             currentShip = Ship.firefly();
-        } else if(cur.equals("Mosquito")) {
+        } else if (cur.equals("Mosquito")) {
             currentShip = Ship.mosquito();
-        } else if(cur.equals("Bumblebee")) {
+        } else if (cur.equals("Bumblebee")) {
             currentShip = Ship.bumblebee();
         }
         Map<String, Integer> specs = currentShip.specs();
@@ -110,7 +110,7 @@ public class ShipyardScreenController implements Initializable{
         shipAttributes.setText(text);
         costToBuy = shipyard.costToBuy(currentShip);
         shipCost.setText("" + costToBuy);
-        if(costToBuy <= 0) {
+        if (costToBuy <= 0) {
             shipCost.setTextFill(Color.GREEN);
         } else {
             shipCost.setTextFill(Color.RED);

@@ -74,12 +74,16 @@ public class MarketplaceController implements Initializable{
         // Loads the ListViews and displays the players cash
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
-        marketView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {return; }
+        marketView.getSelectionModel()
+                        .selectedItemProperty()
+                        .addListener((observable, oldValue, newValue) -> {
+                            if (newValue == null) {
+                                return;
+                            }
             if (marketplace.getPrice(newValue) > player.getMoney()) {
                 buyButton.setDisable(true);
             } else if (marketplace.getPrice(newValue) <= player.getMoney()
-                    && player.cargoRoomLeft() != 0){
+                                            && player.cargoRoomLeft() != 0) {
                 buyButton.setDisable(false);
             }
         });

@@ -74,16 +74,16 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
             throw new IllegalArgumentException("Items cannot be null");
         }
         T retval = null;
-        int i = 0;
-        while (retval == null && i < size && i < backing.length) {
-            if (item.equals(backing[i])) {
-                retval = backing[i];
-                for (int j = i; j < (backing.length - 1); j++) {
+        int index = 0;
+        while (retval == null && index < size && index < backing.length) {
+            if (item.equals(backing[index])) {
+                retval = backing[index];
+                for (int j = index; j < (backing.length - 1); j++) {
                     backing[j] = backing[j + 1];
                 }
                 backing[backing.length - 1] = null;
             }
-            i++;
+            index++;
         }
         return retval;
     }
@@ -95,11 +95,11 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean remove(Object o) {
-        if (o == null) {
+    public boolean remove(Object obj) {
+        if (obj == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
-        T item = (T) o;
+        T item = (T) obj;
 
         T retval = removeHelper(item);
         if (retval != null) {

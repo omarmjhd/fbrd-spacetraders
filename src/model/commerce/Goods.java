@@ -19,17 +19,23 @@ public enum Goods {
 
     ORE(TechLevel.MEDIEVAL, TechLevel.MEDIEVAL, TechLevel.RENAISSANCE, 350, 20, 10, 350, 420),
 
-    GAMES(TechLevel.RENAISSANCE, TechLevel.AGRICULTURE, TechLevel.POST_INDUSTRIAL, 250, -10, 5, 160, 270),
+    GAMES(TechLevel.RENAISSANCE, TechLevel.AGRICULTURE,
+                    TechLevel.POST_INDUSTRIAL, 250, -10, 5, 160, 270),
 
-    FIREARMS(TechLevel.RENAISSANCE, TechLevel.AGRICULTURE, TechLevel.INDUSTRIAL, 1250, -75, 100, 600, 1100),
+    FIREARMS(TechLevel.RENAISSANCE, TechLevel.AGRICULTURE,
+                    TechLevel.INDUSTRIAL, 1250, -75, 100, 600, 1100),
 
-    MEDICINE(TechLevel.EARLY_INDUSTRIAL, TechLevel.AGRICULTURE, TechLevel.POST_INDUSTRIAL, 650, -20, 10, 400, 700),
+    MEDICINE(TechLevel.EARLY_INDUSTRIAL, TechLevel.AGRICULTURE,
+                    TechLevel.POST_INDUSTRIAL, 650, -20, 10, 400, 700),
 
-    MACHINES(TechLevel.EARLY_INDUSTRIAL, TechLevel.RENAISSANCE, TechLevel.INDUSTRIAL, 900, -30, 5, 600, 800),
+    MACHINES(TechLevel.EARLY_INDUSTRIAL, TechLevel.RENAISSANCE,
+                    TechLevel.INDUSTRIAL, 900, -30, 5, 600, 800),
 
-    NARCOTICS(TechLevel.INDUSTRIAL, TechLevel.PRE_AG, TechLevel.INDUSTRIAL, 3500, -125, 150, 2000, 3000),
+    NARCOTICS(TechLevel.INDUSTRIAL, TechLevel.PRE_AG, TechLevel.INDUSTRIAL,
+                    3500, -125, 150, 2000, 3000),
 
-    ROBOTS(TechLevel.POST_INDUSTRIAL, TechLevel.EARLY_INDUSTRIAL, TechLevel.HI_TECH, 5000, -150, 100, 3500, 5000);
+    ROBOTS(TechLevel.POST_INDUSTRIAL, TechLevel.EARLY_INDUSTRIAL,
+                    TechLevel.HI_TECH, 5000, -150, 100, 3500, 5000);
 
     private TechLevel minTechProduce;
     private TechLevel minTechToUse;
@@ -42,7 +48,9 @@ public enum Goods {
 
 
 
-    private Goods(TechLevel minTechProduce, TechLevel minTechToUse, TechLevel mainProducer, int basePrice, int priceIncreasePerLevel, int variance, int minSpacePrice, int maxSpacePrice ) {
+    private Goods(TechLevel minTechProduce, TechLevel minTechToUse,
+        TechLevel mainProducer, int basePrice, int priceIncreasePerLevel,
+        int variance, int minSpacePrice, int maxSpacePrice) {
         this.minTechProduce = minTechProduce;
         this.minTechToUse = minTechToUse;
         this.mainProducer = mainProducer;
@@ -56,13 +64,14 @@ public enum Goods {
     public int price(TechLevel planetTech) {
         int randomVariance = new Random().nextInt(2 * variance) - variance;
         return basePrice
-                        + (priceIncreasePerLevel * (planetTech.ordinal() - minTechProduce.ordinal()))
+                        + (priceIncreasePerLevel * (planetTech.ordinal() - minTechProduce
+                                        .ordinal()))
                         + randomVariance;
     }
 
     /**
      * Returns lowest tech level for a planet to buy this goods
-     * 
+     *
      * @return the above
      */
     public TechLevel minTechToUse() {
@@ -71,7 +80,7 @@ public enum Goods {
 
     /**
      * Returns lowest tech needed to inherently sell the good
-     * 
+     *
      * @return lowest tech level
      */
     public TechLevel minTechToProduce() {
@@ -79,7 +88,7 @@ public enum Goods {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.name().charAt(0) + name().substring(1,name().length()).toLowerCase();
     }
 

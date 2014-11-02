@@ -1,14 +1,16 @@
 package controller;
 
+import java.io.File;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import model.core.GameInstance;
+import view.Main;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
-import view.Main;
-import java.io.File;
+
+
 
 /**
  * @author Joshua on 9/30/2014.
@@ -32,15 +34,18 @@ public class StartScreenController {
     public void loadSavedGame(ActionEvent actionEvent)  {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Save File to Load");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Save Files", "*.sav"));
+        fileChooser.getExtensionFilters().add(
+                        new FileChooser.ExtensionFilter("Save Files", "*.sav"));
         File file = new File("game_saves");
-        if (file.exists()){
+        if (file.exists()) {
             fileChooser.setInitialDirectory(file);
         } else {
             Action response =
                     Dialogs.create()
                             .owner(Main.getPrimaryStage()).title("No Games Saves Detected")
-                            .message("No Game Saves found. \nDo you want to find a game save file yourself?")
+                                            .message("No Game Saves found. "
+                                                            + "\nDo you want to "
+                                                            + "find a game save file yourself?")
                             .showConfirm();
             if (response == Dialog.Actions.NO || response == Dialog.Actions.CANCEL) {
                 return;
@@ -50,12 +55,12 @@ public class StartScreenController {
         if (saveFile != null && saveFile.exists()) {
             if (GameInstance.getInstance().loadGameInstance(saveFile.getAbsolutePath())) {
                 Main.setScene("screens/planetscreen.fxml");
-            }
-            else {
+            } else {
                 Action response =
                         Dialogs.create()
                                 .owner(Main.getPrimaryStage()).title("Save File Invalid")
-                                .message("The selected Save file is invalid.\nPlease try another file.")
+                                                .message("The selected Save file is invalid."
+                                                                + "\nPlease try another file.")
                                 .showError();
             }
         }

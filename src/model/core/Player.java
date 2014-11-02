@@ -20,7 +20,8 @@ public class Player implements HasSkills, Serializable {
 
     private Ship ship;
 
-    public Player(String name, int pilotSkill, int fightSkill, int engSkill, int tradeSkill, int investSkill) {
+    public Player(String name, int pilotSkill, int fightSkill, int engSkill,
+        int tradeSkill, int investSkill) {
         this.name = name;
         skills = new SkillSet(tradeSkill, fightSkill, engSkill,
                                         pilotSkill, investSkill);
@@ -45,7 +46,9 @@ public class Player implements HasSkills, Serializable {
         addMoney(-money);
     }
 
-    public Ship getShip() {return ship;}
+    public Ship getShip() {
+        return ship;
+    }
 
     public void changeShip(Ship otherShip) {
         ship = otherShip;

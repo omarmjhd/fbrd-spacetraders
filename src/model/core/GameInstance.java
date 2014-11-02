@@ -1,8 +1,13 @@
 package model.core;
 
-import java.io.*;
-import java.time.Instant;
-import java.util.Date;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import model.commerce.Goods;
@@ -35,7 +40,8 @@ public class GameInstance implements Serializable{
             "Kaylon", "Khefka",
             "Kira", "Klaatu", "Klaestron", "Korma", "Kravat", "Krios",
             "Laertes", "Largo", "Lave", "Ligon", "Lowry",
-            "Magrat", "Malcoria", "Melina", "Mentar", "Merik", "Mintaka", "Montor", "Mordan", "Myrthe"};
+ "Magrat", "Malcoria", "Melina", "Mentar",
+            "Merik", "Mintaka", "Montor", "Mordan", "Myrthe" };
 
     private int planetCount = 0;
 
@@ -43,8 +49,10 @@ public class GameInstance implements Serializable{
             "Odet", "Og", "Omega", "Omphalos", "Orias", "Othello",
             "Parade","Penthara","Picard","Pollux",
             "Quator", "Rakhar", "Ran", "Regulas", "Relva", "Rhymus", "Rochani", "Rubicum", "Rutia",
-            "Sarpeidon", "Sefalla", "Seltrice", "Sigma", "Sol",	"Somari", "Stakoron", "Styris",
-            "Talani", "Tamus", "Tantalos", "Tanuga", "Tarchannen", "Terosa", "Thera", "Titan", "Torin", "Triacus", "Turkana", "Tyrus",
+            "Sarpeidon", "Sefalla", "Seltrice", "Sigma", "Sol", "Somari",
+            "Stakoron", "Styris", "Talani", "Tamus", "Tantalos", "Tanuga",
+            "Tarchannen", "Terosa", "Thera", "Titan", "Torin", "Triacus",
+            "Turkana", "Tyrus",
             "Umberlee","Utopia",
             "Vadera","Vagra","Vandor","Ventax",
             "Xenon","Xerxes",
@@ -82,11 +90,13 @@ public class GameInstance implements Serializable{
         return player;
     }
 
-    public SolarSystem getCurrentSolarSystem() { return currentSolarSystem; };
+    public SolarSystem getCurrentSolarSystem() {
+        return currentSolarSystem;
+    }
 
     public void setCurrentSolarSystem(SolarSystem desination) {
         currentSolarSystem = desination;
-    };
+    }
 
     public HashSet<SolarSystem> getSolarSystems() {
         return solarSystems;
@@ -137,11 +147,16 @@ public class GameInstance implements Serializable{
             }
             points.add(point);
 
-            Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
+            Planet planet =
+                            new Planet(planetNames[planetCount],
+                                            resources[resourceNum],
+                                            techLevels[techLevelNum]);
             planets.add(planet);
 
             planetCount++;
-            SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
+            SolarSystem solarsystem =
+                            new SolarSystem(solarSystemNames[solarSystemCount],
+                                            point, planet);
             solarSystemCount++;
 
             solarSystems.add(solarsystem);
@@ -173,7 +188,10 @@ public class GameInstance implements Serializable{
         try {
             File file = new File("game_saves");
             file.mkdir();
-            FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
+            FileOutputStream saveFile =
+                            new FileOutputStream(file.getAbsoluteFile()
+                                            + File.separator + player.getName()
+                                            + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
             save.writeObject(planets);
             save.writeObject(solarSystems);
@@ -246,7 +264,7 @@ public class GameInstance implements Serializable{
         }
 
         gameString += "\n\n Current Player: " + player.toString() + "\n\n";
-        gameString += "Current Planet: " + currentPlanet.toString()+ "\n\n";
+        gameString += "Current Planet: " + currentPlanet.toString() + "\n\n";
         gameString += "Current SolarSystem: " + currentSolarSystem.toString() + "\n\n";
 
 

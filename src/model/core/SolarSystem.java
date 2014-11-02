@@ -17,8 +17,8 @@ public class SolarSystem implements Serializable{
     private Point pos;
     private ArrayList<Planet> planets;
 
-    public SolarSystem(String name, int x, int y, Planet... varPlanets) {
-        this(name, new Point(x, y), varPlanets);
+    public SolarSystem(String name, int xpos, int ypos, Planet... varPlanets) {
+        this(name, new Point(xpos, ypos), varPlanets);
     }
 
     public SolarSystem(String name, Point pos, Planet... varPlanets) {
@@ -30,8 +30,9 @@ public class SolarSystem implements Serializable{
         }
     }
 
-    public SolarSystem(String name, int x, int y, Collection<Planet> varPlanets) {
-        this(name, new Point(x, y), varPlanets);
+    public SolarSystem(String name, int xpos, int ypos,
+        Collection<Planet> varPlanets) {
+        this(name, new Point(xpos, ypos), varPlanets);
     }
 
     public SolarSystem(String name, Point pos, Collection<Planet> varPlanets) {
