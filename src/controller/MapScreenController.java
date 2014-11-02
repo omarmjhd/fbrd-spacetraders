@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
 public class MapScreenController implements Initializable {
 
     public AnchorPane root;
-    public Pane lolpane;
+    public Pane mapPane;
     public Button travelButton;
     public Text fuelError;
     public Label currentFuelLabel;
@@ -70,12 +70,12 @@ public class MapScreenController implements Initializable {
         currentLine = new Line();
         currentLine.setStartX(playerLocation.getX());
         currentLine.setStartY(playerLocation.getY());
-        lolpane.getChildren().add(currentLine);
+        mapPane.getChildren().add(currentLine);
 
         //make player image
         astronaut = new Image("file:assets/astronaut.png");
         astronautView = new ImageView(astronaut);
-        lolpane.getChildren().add(astronautView);
+        mapPane.getChildren().add(astronautView);
         astronautView.setPreserveRatio(true);
         astronautView.setFitHeight(50);
         astronautView.setX(playerLocation.getX() - 20);
@@ -86,15 +86,6 @@ public class MapScreenController implements Initializable {
 
 
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
-
-        //keep in case out of bounds errors happen bc the - 20
-        //if (playerLocation.distance(new Point(0,0)) >= 30) {
-        //astronautView.setX(playerLocation.getX() - 20);
-        //astronautView.setY(playerLocation.getY() - 20);
-        //} else {
-        //astronautView.setX(playerLocation.getX());
-        //astronautView.setY(playerLocation.getY());
-        //}
 
         EventHandler<MouseEvent> handleLabels = event -> {
             if (clickedPlanet) {
@@ -134,7 +125,7 @@ public class MapScreenController implements Initializable {
             }
         };
 
-        lolpane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
+        mapPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         Random random = new Random();
         int b = 0;
@@ -144,10 +135,10 @@ public class MapScreenController implements Initializable {
             Circle circle = new Circle(point.getX(), point.getY(), 5,
                     Paint.valueOf(colorList[b]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
-            lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
-            lolpane.addEventHandler(MouseEvent.MOUSE_CLICKED, handleLabels);
+            mapPane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
+            mapPane.addEventHandler(MouseEvent.MOUSE_CLICKED, handleLabels);
             circle.setUserData(s);
-            lolpane.getChildren().add(circle);
+            mapPane.getChildren().add(circle);
 
             b++;
         }
