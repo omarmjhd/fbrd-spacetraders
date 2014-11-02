@@ -155,6 +155,7 @@ public class GameInstance implements Serializable{
             }
 
         }
+
     }
 
     public void endTurn() {
@@ -216,7 +217,6 @@ public class GameInstance implements Serializable{
             this.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
-
 
             return true;
 

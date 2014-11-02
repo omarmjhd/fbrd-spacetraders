@@ -18,7 +18,7 @@ public class Shipyard {
      * the player will receive money upon changing the ship. the cost of the
      * ship is decreased for each item in the cargo
      *
-     * @param toBuy
+     * @param shipToBuy
      *        the ship to buy
      * @return the net cost of the ship to buy
      */
