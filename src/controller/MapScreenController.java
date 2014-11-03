@@ -46,7 +46,6 @@ public class MapScreenController implements Initializable {
     public Text fuelError;
     public Label currentFuelLabel;
     public Label travelDistanceLabel;
-    public Label randomEventLabel;
     private GameInstance gm;
     private HashSet<SolarSystem> universe;
     private boolean clickedPlanet = false;

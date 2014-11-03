@@ -39,7 +39,7 @@ public class Main extends Application {
     /**
      * Changes the scene currently displayed
      *
-     * @param fxmlURI the URI of the .fxml file representing the scene
+     * @param fxmlUri the URI of the .fxml file representing the scene
      */
     public static void setScene(String fxmlUri) {
         try {
