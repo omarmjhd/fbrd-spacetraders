@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
-
 import model.commerce.Goods;
 
 /**
@@ -22,16 +21,41 @@ import model.commerce.Goods;
  */
 public class GameInstance implements Serializable{
 
+    /**
+     * The player playing.
+     */
     private Player player;
+    /**
+     * The solar systems in the game.
+     */
     private HashSet<SolarSystem> solarSystems = new HashSet<>();
+    /**
+     * The planets in the game.
+     */
     private HashSet<Planet> planets = new HashSet<>();
+    /**
+     * The points which are the locations of the solar systems.
+     */
     private HashSet<Point> points = new HashSet<>();
-
+    /**
+     * Player's current location.
+     */
     private Planet currentPlanet;
+    /**
+     * Players current loation.
+     */
     private SolarSystem currentSolarSystem;
+    /**
+     * Default location for saving games.
+     */
     private File file = new File("game_saves");
+    /**
+     * Flag to check if game was created.
+     */
     private boolean saveDirectoryCreated = false;
-
+    /**
+     * All the planet names. May or may not use all of them.
+     */
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
             "Calondia", "Campor", "Capelle","Carzon", "Castor", "Cestus", "Cheron", "Courteney",
@@ -46,8 +70,14 @@ public class GameInstance implements Serializable{
  "Magrat", "Malcoria", "Melina", "Mentar",
             "Merik", "Mintaka", "Montor", "Mordan", "Myrthe" };
 
+    /**
+     * Keeps track of how many planets are being made.
+     */
     private int planetCount = 0;
 
+    /**
+     * Solar system names for the game. May or may not use all.
+     */
     private String[] solarSystemNames = { "Nelvana", "Nix", "Nyle",
             "Odet", "Og", "Omega", "Omphalos", "Orias", "Othello",
             "Parade","Penthara","Picard","Pollux",
@@ -62,41 +92,94 @@ public class GameInstance implements Serializable{
             "Yew", "Yojimbo",
             "Zalkon", "Zuul"};
 
+    /**
+     * Flag to keep track of solar systems made.
+     */
     private int solarSystemCount = 0;
 
+    /**
+     * Local instance of all the Goods. Not sure why we need this.
+     */
     private Goods[] resources = Goods.values();
+
+    /**
+     * Local instance of all the tech levels. Not sure why we need this.
+     */
     private TechLevel[] techLevels = TechLevel.values();
 
-
+    /**
+     * Reference to the Singleton GameInstance.
+     */
     private static GameInstance instance = new GameInstance();
 
+    /**
+     * Private constructor for Singleton. Prevents others from accessing
+     */
     private GameInstance() { //private constructor for singleton
     }
 
+    /**
+     * Gets the only GameInstance.
+     *
+     * @return the sole GameInstance
+     */
     public static GameInstance getInstance() {
         return instance;
     }
 
+    /**
+     * Gets the player's current planet.
+     *
+     * @return player's current planet
+     */
     public Planet getCurrentPlanet() {
         return currentPlanet;
     }
 
+    /**
+     * Sets the player's location to a planet.
+     *
+     * @param destination
+     *        the planet to go to
+     */
     public void setCurrentPlanet(Planet destination) {
         this.currentPlanet = destination;
     }
 
+    /**
+     * Sets a player for this game instance.
+     *
+     * @param data
+     *        the Player to use for this instance
+     */
     public void setPlayer(Player data) {
         player = data;
     }
 
+    /**
+     * Returns the player for the instance of this game.
+     *
+     * @return the Player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns the solar system the player is in.
+     *
+     * @return the current solar system
+     */
     public SolarSystem getCurrentSolarSystem() {
         return currentSolarSystem;
     }
 
+    /**
+     * Sets the current solar system to whatever is passed in.
+     *
+     * @param desination
+     *        the new solar system
+     */
     public void setCurrentSolarSystem(SolarSystem desination) {
         currentSolarSystem = desination;
     }

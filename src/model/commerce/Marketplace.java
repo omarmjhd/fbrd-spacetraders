@@ -6,14 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
 
 /**
- * Class to act as a service provider between Planet and Player for trading
- * items
+ * Class to act as a service provider between Planet and Player for trading items.
  *
  * @author ngraves3
  *
@@ -21,41 +18,49 @@ import model.core.TechLevel;
 public class Marketplace implements Serializable {
 
 
-    /*
-     * Planet tech affects the price of a good in the market
+    /**
+     * Planet tech affects the price of a good in the market.
      */
     private TechLevel planetTech;
 
-    /*
-     * Set of map of goods this planet can sell inherently (i.e. produce)
+    /**
+     * Set of map of goods this planet can sell inherently (i.e. produce).
      */
     private Map<Goods, Integer> productionPrices;
 
-    /*
-     * Map of goods this planet can buy. Min tech to produce is always >= min
-     * tech to use
+    /**
+     * Map of goods this planet can buy. Min tech to produce is always >= min tech to use.
      *
      * K(productionPrices) is a subset of K(purchasePrices)
      */
     private Map<Goods, Integer> purchasePrices;
 
+    /**
+     * A list of goods the market has for sale.
+     */
     private List<Goods> supply;
 
+    /**
+     * The player buying.
+     */
     private Player player;
 
+    /**
+     * Price modifer based on player's trade skill.
+     */
     private int tradeSkillModifier;
 
     /**
-     * Instantiates a marketplace with the given planet's tech level
+     * Instantiates a marketplace with the given planet's tech level.
      *
      * @param tech
      *        the tech level of the planet
-     * @param player
+     * @param playerArg
      *        the Player
      */
-    public Marketplace(TechLevel tech, Player player) {
+    public Marketplace(TechLevel tech, Player playerArg) {
         this.planetTech = tech;
-        this.player = player;
+        this.player = playerArg;
         productionPrices = new HashMap<Goods, Integer>();
         purchasePrices = new HashMap<Goods, Integer>();
         tradeSkillModifier = new Random().nextInt(2 * player.getTradeSkill() + 1);
@@ -98,6 +103,13 @@ public class Marketplace implements Serializable {
 
     }
 
+    /**
+     * Returns the price of a good based on a player's trade skill.
+     *
+     * @param good
+     *        the good to get the price of
+     * @return the adjusted price
+     */
     private int adjustPriceOnSkills(Goods good) {
         return Math.max(good.price(planetTech) - tradeSkillModifier, 1);
     }
@@ -153,7 +165,7 @@ public class Marketplace implements Serializable {
     }
 
     /**
-     * Gets the price for a specific type of Goods
+     * Gets the price for a specific type of Goods.
      *
      * @param item
      *        a Good
