@@ -1,15 +1,15 @@
 package model.core;
 
-import java.io.Serializable;
-import java.util.AbstractList;
-import java.util.Map;
-import java.util.TreeMap;
-
 import model.commerce.Goods;
 import model.upgrades.Crew;
 import model.upgrades.Gadget;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
+
+import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -235,7 +235,7 @@ public class Ship implements Serializable {
     /**
      * Adds the weapon to the ship
      *
-     * @param w
+     * @param weapon
      *        the weapon to add
      * @return true iff the weapon is removed
      */
