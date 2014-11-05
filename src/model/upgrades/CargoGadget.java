@@ -1,7 +1,6 @@
 package model.upgrades;
 
 import java.util.List;
-
 import model.commerce.Goods;
 import model.core.PresizedList;
 import model.core.Ship;
@@ -57,12 +56,14 @@ public class CargoGadget extends Gadget {
         if (effectApplied) {
             List<Goods> currentCargo = ship.getCargo();
             if ((ship.cargoSize() - additionalSize) >= currentCargo.size()) {
-                PresizedList<Goods> smaller =
-                                new PresizedList<>(currentCargo.size()
-                                                - additionalSize);
+                PresizedList<Goods> smaller = new PresizedList<>(ship.cargoSize() - additionalSize);
                 for (Goods cargo : currentCargo) {
                     smaller.add(cargo);
                 }
+
+                /*
+                 * Apply effect
+                 */
 
                 ship.setCargo(smaller);
                 effectApplied = false;
