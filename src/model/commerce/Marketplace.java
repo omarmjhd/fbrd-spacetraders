@@ -48,8 +48,8 @@ public class Marketplace implements Serializable {
     /**
      * Instantiates a marketplace with the given planet's tech level
      *
-     * @param planet
-     *        the planet of the market
+     * @param tech
+     *        the tech level of the planet
      * @param player
      *        the Player
      */
