@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import model.commerce.Goods;
 
 /**
@@ -28,11 +29,11 @@ public class GameInstance implements Serializable{
     /**
      * The solar systems in the game.
      */
-    private HashSet<SolarSystem> solarSystems = new HashSet<>();
+    private Set<SolarSystem> solarSystems = new HashSet<>();
     /**
      * The planets in the game.
      */
-    private HashSet<Planet> planets = new HashSet<>();
+    private Set<Planet> planets = new HashSet<>();
     /**
      * The points which are the locations of the solar systems.
      */
@@ -184,32 +185,54 @@ public class GameInstance implements Serializable{
         currentSolarSystem = desination;
     }
 
-    public HashSet<SolarSystem> getSolarSystems() {
+    /**
+     * Returns a Set of the solar systems.
+     *
+     * @return Set of solar systems
+     */
+    public Set<SolarSystem> getSolarSystems() {
         return solarSystems;
     }
 
-    public HashSet<Planet> getPlanets() {
+    /**
+     * Returns a set of the planets.
+     *
+     * @return set of planets
+     */
+    public Set<Planet> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(HashSet<Planet> planets) {
-        this.planets = planets;
-    }
-
-    public void setSolarSystems(HashSet<SolarSystem> solarSystems) {
-        this.solarSystems = solarSystems;
+    /**
+     * Sets the planet to the Set<Planet> arg.
+     *
+     * @param planetSet
+     *        the planets to use as set of planets
+     */
+    public void setPlanets(Set<Planet> planetSet) {
+        this.planets = planetSet;
     }
 
     /**
-     * Creates a universe with number of planets equal to the length of our
-     * default list of planet names
+     * Sets the solar systems to the given set.
+     *
+     * @param solarSystemSet
+     *        the set of solarSystems to use
+     */
+    public void setSolarSystems(Set<SolarSystem> solarSystemSet) {
+        this.solarSystems = solarSystemSet;
+    }
+
+    /**
+     * Creates a universe with number of planets equal to the length of our default list of planet
+     * names.
      */
     public void createUniverse() {
         createUniverse(Math.min(planetNames.length, solarSystemNames.length) - 1);
     }
 
     /**
-     * create universe with specified number of planets
+     * create universe with specified number of planets.
      *
      * @param number
      *        of planets
@@ -260,13 +283,17 @@ public class GameInstance implements Serializable{
 
     }
 
+    /**
+     * Ends the turn. Probably dont need ths.
+     */
     public void endTurn() {
         //Do something to end the turn or whatever
     }
 
 
     /**
-     * Saves the game
+     * Saves the game.
+     *
      * @return boolean to make sure game was saved
      *
      */
@@ -296,7 +323,7 @@ public class GameInstance implements Serializable{
 
 
     /**
-     * Loads a saved game
+     * Loads a saved game.
      *
      * @param saveFileLocation
      *        Location of the save file
@@ -347,10 +374,10 @@ public class GameInstance implements Serializable{
             gameString = gameString + " " + s.toString();
 
         }
-
-        gameString += "\n\n Current Player: " + player.toString() + "\n\n";
-        gameString += "Current Planet: " + currentPlanet.toString() + "\n\n";
-        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + "\n\n";
+        String term = "\n\n";
+        gameString += "\n\n Current Player: " + player.toString() + term;
+        gameString += "Current Planet: " + currentPlanet.toString() + term;
+        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + term;
 
 
         return gameString;
