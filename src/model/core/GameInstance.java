@@ -29,6 +29,8 @@ public class GameInstance implements Serializable{
 
     private Planet currentPlanet;
     private SolarSystem currentSolarSystem;
+    private File file = new File("game_saves");
+    private boolean saveDirectoryCreated = false;
 
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
@@ -172,6 +174,7 @@ public class GameInstance implements Serializable{
             }
 
         }
+
     }
 
     public void endTurn() {
@@ -187,12 +190,11 @@ public class GameInstance implements Serializable{
     public boolean saveGameInstance() {
 
         try {
-            File file = new File("game_saves");
-            file.mkdir();
-            FileOutputStream saveFile =
-                            new FileOutputStream(file.getAbsoluteFile()
-                                            + File.separator + player.getName()
-                                            + ".sav");
+            if (!saveDirectoryCreated) {
+                file.mkdir();
+                saveDirectoryCreated = true;
+            }
+            FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
             save.writeObject(planets);
             save.writeObject(solarSystems);
@@ -236,7 +238,6 @@ public class GameInstance implements Serializable{
             this.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
-
 
             return true;
 

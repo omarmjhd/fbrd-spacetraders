@@ -37,7 +37,7 @@ public class Planet implements Serializable{
      *        the player model
      */
     public Marketplace enterMarket(Player player) {
-        marketplace = new Marketplace(this, player);
+        marketplace = new Marketplace(tech, player);
         return marketplace;
     }
 

@@ -53,8 +53,8 @@ public class Marketplace implements Serializable {
      * @param player
      *        the Player
      */
-    public Marketplace(Planet planet, Player player) {
-        this.planetTech = planet.getTechLevel();
+    public Marketplace(TechLevel tech, Player player) {
+        this.planetTech = tech;
         this.player = player;
         productionPrices = new HashMap<Goods, Integer>();
         purchasePrices = new HashMap<Goods, Integer>();

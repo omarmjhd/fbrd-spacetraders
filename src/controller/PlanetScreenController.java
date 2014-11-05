@@ -89,7 +89,7 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Ensures player doesnt over buy fuel
+     * Ensures player doesn't over buy fuel
      *
      * @return amount of fuel player can buy
      */
