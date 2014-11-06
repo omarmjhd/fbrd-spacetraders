@@ -12,17 +12,34 @@ import model.core.Utilities;
  * @author ngraves3
  *
  */
-public abstract class Gadget extends AbstractCommand implements HasPrice {
+public abstract class AbstractGadget extends AbstractCommand implements HasPrice {
 
+    /**
+     * name of the gadget.
+     */
     private String name;
 
+    /**
+     * The ship to affect.
+     */
     protected Ship ship;
 
+    /**
+     * whether or not the effect was applied.
+     */
     protected boolean effectApplied;
 
-    public Gadget(String name, Ship ship) {
-        this.ship = ship;
-        this.name = name;
+    /**
+     * Constructor for an abstract gadget.
+     * 
+     * @param nameArg
+     *        name of gadget
+     * @param shipArg
+     *        the ship to affect
+     */
+    public AbstractGadget(String nameArg, Ship shipArg) {
+        this.ship = shipArg;
+        this.name = nameArg;
         effectApplied = false;
     }
 

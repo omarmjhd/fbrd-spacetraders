@@ -1,6 +1,7 @@
 package model.upgrades;
 
 import java.util.List;
+
 import model.commerce.Goods;
 import model.core.PresizedList;
 import model.core.Ship;
@@ -12,15 +13,32 @@ import model.core.Ship;
  * @author ngraves3
  *
  */
-public class CargoGadget extends Gadget {
+public class CargoGadget extends AbstractGadget {
 
+    /**
+     * The extra size added.
+     */
     private int additionalSize;
 
-    public CargoGadget(Ship ship, int additionalSize) {
+    /**
+     * Constructor for the gadget.
+     *
+     * @param ship
+     *        the ship to affect.
+     * @param additionalSizeArg
+     *        the extra size to add
+     */
+    public CargoGadget(Ship ship, int additionalSizeArg) {
         super("Extra Cargo Bay", ship);
-        this.additionalSize = additionalSize;
+        this.additionalSize = additionalSizeArg;
     }
 
+    /**
+     * Default size constructor.
+     *
+     * @param ship
+     *        the ship to affect
+     */
     public CargoGadget(Ship ship) {
         this(ship, 5);
     }
@@ -37,9 +55,7 @@ public class CargoGadget extends Gadget {
             effectApplied = true;
             //TODO add cargo room to ship
             List<Goods> currentCargo = ship.getCargo();
-            PresizedList<Goods> bigger =
-                            new PresizedList<>(currentCargo.size()
-                                            + additionalSize);
+            PresizedList<Goods> bigger = new PresizedList<>(ship.cargoSize() + additionalSize);
             for (Goods cargo : currentCargo) {
                 bigger.add(cargo);
             }

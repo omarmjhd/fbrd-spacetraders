@@ -8,6 +8,56 @@ package model.core;
  *
  */
 public enum Resource {
-    NONE, MINERAL_RICH, MINERAL_POOR, DESERT, WATER, RICH_SOIL, POOR_SOIL,
-    RICH_FAUNA, LIFELESS, MUSHROOMS, HERBS, ARTISTIC, WARLIKE;
+    /**
+     * None resource.
+     */
+    NONE,
+    /**
+     * Mineral resource.
+     */
+    MINERAL_RICH,
+    /**
+     * Lesser mineral resource.
+     */
+    MINERAL_POOR,
+    /**
+     * No resources.
+     */
+    DESERT,
+    /**
+     * Water resource.
+     */
+    WATER,
+    /**
+     * Fertile resource.
+     */
+    RICH_SOIL,
+    /**
+     * Lesser fertility resource.
+     */
+    POOR_SOIL,
+    /**
+     * Fauna resource.
+     */
+    RICH_FAUNA,
+    /**
+     * No life resource.
+     */
+    LIFELESS,
+    /**
+     * Weird mushroom resource.
+     */
+    MUSHROOMS,
+    /**
+     * "herbs" resource.
+     */
+    HERBS,
+    /**
+     * How is art a resource?
+     */
+    ARTISTIC,
+    /**
+     * War is a resource I guess.
+     */
+    WARLIKE;
 }

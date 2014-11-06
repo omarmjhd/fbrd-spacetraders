@@ -4,65 +4,92 @@ import java.io.Serializable;
 
 
 /**
- * This class holds all the specs for skills in a Player/Crew
+ * This class holds all the specs for skills in a Player/Crew.
  *
  * @author ngraves3
  *
  */
 public class SkillSet implements HasSkills, Serializable {
 
-    private final int TRADE_SKILL;
+    /**
+     * trading skill.
+     */
+    private final int tradeSkill;
 
-    private final int FIGHT_SKILL;
+    /**
+     * fighting skill.
+     */
+    private final int fightSkill;
 
-    private final int ENG_SKILL;
+    /**
+     * engineering skill.
+     */
+    private final int engSkill;
 
-    private final int PILOT_SKILL;
+    /**
+     * piloting skill.
+     */
+    private final int pilotSkill;
 
-    private final int INVEST_SKILL;
+    /**
+     * investing skill.
+     */
+    private final int investSkill;
 
+    /**
+     * Constructor for skill set.
+     *
+     * @param trade
+     *        trade skill
+     * @param fight
+     *        fight skill
+     * @param eng
+     *        engineering skill
+     * @param pilot
+     *        piloting skill
+     * @param invest
+     *        invest skill
+     */
     public SkillSet(int trade, int fight, int eng, int pilot, int invest) {
-        TRADE_SKILL = trade;
-        FIGHT_SKILL = fight;
-        ENG_SKILL = eng;
-        PILOT_SKILL = pilot;
-        INVEST_SKILL = invest;
+        tradeSkill = trade;
+        fightSkill = fight;
+        engSkill = eng;
+        pilotSkill = pilot;
+        investSkill = invest;
     }
 
     @Override
     public int getTradeSkill() {
-        return TRADE_SKILL;
+        return tradeSkill;
     }
 
     @Override
     public int getEngineeringSkill() {
-        return ENG_SKILL;
+        return engSkill;
     }
 
     @Override
     public int getPilotSkill() {
-        return PILOT_SKILL;
+        return pilotSkill;
     }
 
     @Override
     public int getFightingSkill() {
-        return FIGHT_SKILL;
+        return fightSkill;
     }
 
     @Override
     public int getInvestingSkill() {
-        return INVEST_SKILL;
+        return investSkill;
     }
 
     /**
-     * Returns the total number of skill points represented by this set of
-     * skills
+     * Returns the total number of skill points represented by this set of skills.
      *
      * @return total number of skill points
      */
     public int totalSkill() {
-        return TRADE_SKILL + FIGHT_SKILL + ENG_SKILL + PILOT_SKILL
-                        + INVEST_SKILL;
+        return tradeSkill + fightSkill + engSkill + pilotSkill + investSkill;
     }
 
 }

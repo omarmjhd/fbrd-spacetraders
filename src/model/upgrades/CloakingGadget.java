@@ -3,13 +3,19 @@ package model.upgrades;
 import model.core.Ship;
 
 /**
- * The gadget the makes the player invisible to encounters
+ * The gadget the makes the player invisible to encounters.
  *
  * @author ngraves3
  *
  */
-public class CloakingGadget extends Gadget {
+public class CloakingGadget extends AbstractGadget {
 
+    /**
+     * Constructor for a cloaking gadget.
+     *
+     * @param ship
+     *        the ship to affect
+     */
     public CloakingGadget(Ship ship) {
         super("Stealth Generator", ship);
     }

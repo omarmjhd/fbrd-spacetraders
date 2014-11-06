@@ -1,43 +1,92 @@
 package controller;
 
+import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.util.Callback;
+
+import org.controlsfx.dialog.Dialogs;
 
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
-import model.upgrades.*;
+import model.upgrades.AbstractGadget;
+import model.upgrades.CargoGadget;
+import model.upgrades.CloakingGadget;
+import model.upgrades.FuelGadget;
+import model.upgrades.HasPrice;
+import model.upgrades.Shield;
+import model.upgrades.Weapon;
 
-import org.controlsfx.dialog.Dialogs;
 import view.Main;
-
-import java.net.URL;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * Created by Joshua on 10/26/2014.
  */
 public class UpgradeShipScreenController implements Initializable {
 
-    /** buy upgrades.*/ public Button buyButton;
-    /** sell upgrades.*/ public Button sellButton;
-    /** player's money.*/ public Label playerMoney;
-    /** back to shipyard.*/ public Button leaveButton;
-    /** shipyard's upgrades.*/ public ListView<HasPrice> shipyardView;
-    /** ship's upgrades.*/ public ListView<HasPrice> shipView;
-    /** game instance.*/ private GameInstance gi;
-    /** the player.*/ private Player player;
-    /** tech level.*/ private TechLevel techLevel;
-    /** player's ship.*/ private Ship ship;
-    /** shipyard upgrades.*/ private ObservableList<HasPrice> shipyardUpgrades = FXCollections.observableArrayList();
-    /** ship upgrades.*/ private ObservableList<HasPrice> shipUpgrades = FXCollections.observableArrayList();
-    /** random number generator.*/ private Random random = new Random();
+    /**
+     * buy upgrades.
+     */
+    public Button buyButton;
+    /**
+     * sell upgrades.
+     */
+    public Button sellButton;
+    /**
+     * player's money.
+     */
+    public Label playerMoney;
+    /**
+     * back to shipyard.
+     */
+    public Button leaveButton;
+    /**
+     * shipyard's upgrades.
+     */
+    public ListView<HasPrice> shipyardView;
+    /**
+     * ship's upgrades.
+     */
+    public ListView<HasPrice> shipView;
+    /**
+     * game instance.
+     */
+    private GameInstance gi;
+    /**
+     * the player.
+     */
+    private Player player;
+    /**
+     * tech level.
+     */
+    private TechLevel techLevel;
+    /**
+     * player's ship.
+     */
+    private Ship ship;
+    /**
+     * shipyard upgrades.
+     */
+    private ObservableList<HasPrice> shipyardUpgrades = FXCollections.observableArrayList();
+    /**
+     * ship upgrades.
+     */
+    private ObservableList<HasPrice> shipUpgrades = FXCollections.observableArrayList();
+    /**
+     * random number generator.
+     */
+    private Random random = new Random();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,10 +111,13 @@ public class UpgradeShipScreenController implements Initializable {
             switch (chance) {
                 case 0:
                     shipyardUpgrades.add(new CargoGadget(player.getShip()));
+                    break;
                 case 1:
                     shipyardUpgrades.add(new CloakingGadget(player.getShip()));
+                    break;
                 case 2:
                     shipyardUpgrades.add(new FuelGadget(player.getShip()));
+                    break;
             }
 
         }
@@ -97,32 +149,34 @@ public class UpgradeShipScreenController implements Initializable {
         shipyardView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
-                    if (newValue == null) {
-                        return;
-                    }
-                    if (newValue.getPrice() > player.getMoney()) {
-                        buyButton.setDisable(true);
-                    } else if (newValue.getPrice() <= player.getMoney())
-                        if (Shield.class.isInstance(newValue)
-                                && ship.getShields().size() < ship.shieldsSize() ) {
-                            buyButton.setDisable(false);
-                        } else if (Weapon.class.isInstance(newValue)
-                                && ship.getWeapons().size() < ship.weaponsSize() ) {
-                            buyButton.setDisable(false);
-                        } else if (Gadget.class.isInstance(newValue)
-                                && ship.getGadgets().size() < ship.gadgetSize() ) {
-                            buyButton.setDisable(false);
-                        } else {
+                        if (newValue == null) {
+                            return;
+                        }
+                        if (newValue.getPrice() > player.getMoney()) {
                             buyButton.setDisable(true);
+                        } else if (newValue.getPrice() <= player.getMoney()) {
+                            if (Shield.class.isInstance(newValue)
+                                    && ship.getShields().size() < ship.shieldsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (Weapon.class.isInstance(newValue)
+                                    && ship.getWeapons().size() < ship.weaponsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (AbstractGadget.class.isInstance(newValue)
+                                    && ship.getGadgets().size() < ship.gadgetSize() ) {
+                                buyButton.setDisable(false);
+                            } else {
+                                buyButton.setDisable(true);
+                            }
                         }
                     }
-                );
+            );
     }
 
     /**
      * buys an upgrade.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void buy(ActionEvent actionEvent) {
         HasPrice boughtThing = shipyardView.getSelectionModel().getSelectedItem();
@@ -139,8 +193,8 @@ public class UpgradeShipScreenController implements Initializable {
             ship.addShield((Shield) boughtThing);
         } else if (Weapon.class.isInstance(boughtThing)) {
             ship.addWeapon((Weapon) boughtThing);
-        } else if (Gadget.class.isInstance(boughtThing)) {
-            ship.addGadget((Gadget) boughtThing);
+        } else if (AbstractGadget.class.isInstance(boughtThing)) {
+            ship.addGadget((AbstractGadget) boughtThing);
         }
         shipyardUpgrades.remove(boughtThing);
         player.subtractMoney(boughtThing.getPrice());
@@ -159,6 +213,7 @@ public class UpgradeShipScreenController implements Initializable {
      * sells an upgrade.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void sell(ActionEvent actionEvent) {
         HasPrice soldThing = shipView.getSelectionModel().getSelectedItem();
@@ -170,8 +225,8 @@ public class UpgradeShipScreenController implements Initializable {
             ship.removeShield((Shield) soldThing);
         } else if (Weapon.class.isInstance(soldThing)) {
             ship.removeWeapon((Weapon) soldThing);
-        } else if (Gadget.class.isInstance(soldThing)) {
-            if (!ship.removeGadget((Gadget) soldThing)) {
+        } else if (AbstractGadget.class.isInstance(soldThing)) {
+            if (!ship.removeGadget((AbstractGadget) soldThing)) {
                 Dialogs.create().owner(Main.getPrimaryStage())
                         .title("Error!")
                         .message("You still have cargo in the additional bays!!")
@@ -196,6 +251,7 @@ public class UpgradeShipScreenController implements Initializable {
      * returns you to the shipyard.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void returnToShipyard(ActionEvent actionEvent) {
         Main.setScene("screens/shipyardscreen.fxml");

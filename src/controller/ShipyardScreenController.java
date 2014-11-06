@@ -3,7 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,37 +12,83 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
 import model.commerce.Shipyard;
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
-
 import view.Main;
 
 /**
  * Created by Renee on 10/21/2014.
  */
-public class ShipyardScreenController implements Initializable{
+public class ShipyardScreenController implements Initializable {
 
-    /** for choosing a ship.*/ public ComboBox shipComboBox;
-    /** player's money.*/ public Label playerMoney;
-    /** ship's specs*/ public Label shipAttributes;
-    /** planet's shipyard.*/ public Text shipyardTitle;
-    /** cost of ship.*/ public Label shipCost;
-    /** trade button.*/ public Button tradeButton;
-    /** player's ship.*/ public Label playershipLabel;
-
-    /** current shipyard.*/ private Shipyard shipyard;
-    /** player's ship.*/ private Ship currentShip;
-    /** current planet.*/ private Planet currentPlanet;
-    /** gamer instance.*/ private GameInstance gm;
-    /** the player.*/ private Player player;
-    /** what ships the player can choose.*/ private ObservableList<String> options;
-    /** cost to buy the chosen ship.*/ private int costToBuy;
-    /** the ship that the player chose.*/ private Ship playership;
+    /**
+     * for choosing a ship.
+     */
+    public ComboBox<String> shipComboBox;
+    /**
+     * player's money.
+     */
+    public Label playerMoney;
+    /**
+     * ship's specs.
+     */
+    public Label shipAttributes;
+    /**
+     * planet's shipyard.
+     */
+    public Text shipyardTitle;
+    /**
+     * cost of ship.
+     */
+    public Label shipCost;
+    /**
+     * trade button.
+     */
+    public Button tradeButton;
+    /**
+     * player's ship.
+     */
+    public Label playershipLabel;
+    /**
+     * current shipyard.
+     */
+    private Shipyard shipyard;
+    /**
+     * player's ship.
+     */
+    private Ship currentShip;
+    /**
+     * current planet.
+     */
+    private Planet currentPlanet;
+    /**
+     * gamer instance.
+     */
+    private GameInstance gm;
+    /**
+     * the player.
+     */
+    private Player player;
+    /**
+     * what ships the player can choose.
+     */
+    private ObservableList<String> options;
+    /**
+     * cost to buy the chosen ship.
+     */
+    private int costToBuy;
+    /**
+     * the ship that the player chose.
+     */
+    private Ship playership;
+    /**
+     * shut up checkstyle.
+     */
+    private String newLine = "\n";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,10 +133,12 @@ public class ShipyardScreenController implements Initializable{
 
     /**
      * When a ship is chosen from the combo box, updates the label.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void chooseShip(ActionEvent actionEvent) {
-        String cur = (String) shipComboBox.getValue();
+        String cur = shipComboBox.getValue();
         if (cur.equals("Flea")) {
             currentShip = Ship.flea();
         } else if (cur.equals("Gnat")) {
@@ -104,9 +151,9 @@ public class ShipyardScreenController implements Initializable{
             currentShip = Ship.bumblebee();
         }
         Map<String, Integer> specs = currentShip.specs();
-        String text = cur + "\n";
+        String text = cur + newLine;
         for (Map.Entry<String, Integer> e : specs.entrySet()) {
-            text += e.getKey() + ": " + e.getValue() + "\n";
+            text += e.getKey() + ": " + e.getValue() + newLine;
         }
 
         //ship cost label
@@ -128,7 +175,9 @@ public class ShipyardScreenController implements Initializable{
 
     /**
      * Goes to ship upgrade screen.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void goToUpgradeShip(ActionEvent actionEvent) {
         Main.setScene("screens/shipupgradescreen.fxml");
@@ -136,7 +185,9 @@ public class ShipyardScreenController implements Initializable{
 
     /**
      * Go to planet screen.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void goToPlanet(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
@@ -144,7 +195,9 @@ public class ShipyardScreenController implements Initializable{
 
     /**
      * Does the actual action of selling your ship.
+     * 
      * @param actionEvent
+     *        the trigger
      */
     public void trade(ActionEvent actionEvent) {
         player.changeShip(currentShip);

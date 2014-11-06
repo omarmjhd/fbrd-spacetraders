@@ -2,7 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,32 +13,82 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-
+import org.controlsfx.dialog.Dialogs;
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
-
-import org.controlsfx.dialog.Dialogs;
-
 import view.Main;
 
 /**
  * @author Joshua on 10/6/2014.
  */
 public class PlanetScreenController implements Initializable {
-    /** planet name.*/ public Text planetName;
-    /** enter market button.*/ public Button enterMarket;
-    /** enter shipyard button.*/ public Button enterShipyard;
-    /** buy fuel button.*/ public Button buyFuel;
-    /** travel button.*/ public Button travelButton;
-    /** planet information.*/ public Label planetText;
-    /** planet information.*/ public Pane planetPane;
-    /** the astronaut view.*/ public ImageView astronautView;
-    /** the astronaut image.*/ public Image astronaut;
-    /** game instance.*/ private GameInstance gi;
-    /** current planet.*/ private Planet curPlanet;
-    /** the player.*/ private Player player;
+    /**
+     * planet name.
+     */
+    public Text planetName;
+    /**
+     * enter market button.
+     */
+    public Button enterMarket;
+    /**
+     * enter shipyard button.
+     */
+    public Button enterShipyard;
+    /**
+     * buy fuel button.
+     */
+    public Button buyFuel;
+    /**
+     * travel button.
+     */
+    public Button travelButton;
+    /**
+     * planet information.
+     */
+    public Label planetText;
+    /**
+     * planet information.
+     */
+    public Pane planetPane;
+    /**
+     * the astronaut view.
+     */
+    public ImageView astronautView;
+    /**
+     * the astronaut image.
+     */
+    public Image astronaut;
+    /**
+     * game instance.
+     */
+    private GameInstance gi;
+    /**
+     * current planet.
+     */
+    private Planet curPlanet;
+    /**
+     * the player.
+     */
+    private Player player;
+    /**
+     * string to make checkstyle happy.
+     */
+    private String fuelStr = "\n\nFuel: ";
+    /**
+     * string to make checkstyle happy.
+     */
+    private String refuel = "Refuel: ";
+    /**
+     * string to make checkstyle happy.
+     */
+    private String credits = " cr";
+    /**
+     * string to make checkstyle happy.
+     */
+    private String moneyStr = "\nMoney: ";
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,14 +99,14 @@ public class PlanetScreenController implements Initializable {
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
         int totalFuelCost = calculateFuelQuantity() * player.getFuelCost();
-        buyFuel.setText("Refuel: " + totalFuelCost + " cr");
+        buyFuel.setText(refuel + totalFuelCost + credits);
         planetPane.setBackground(new Background(new BackgroundFill(Paint
                         .valueOf("black"), null, null)));
 
         planetName.setText(curPlanet.getName());
         planetText.setText(curPlanet.getName() + "\n Resources:  "
-                        + curPlanet.getResource().toString() + "\n\nFuel: "
-                        + player.getCurrentFuel() + "\nMoney: "
+                        + curPlanet.getResource().toString() + fuelStr + player.getCurrentFuel()
+                        + moneyStr
                         + player.getMoney());
         if (curPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
             enterShipyard.setVisible(true);
@@ -66,14 +115,15 @@ public class PlanetScreenController implements Initializable {
         } else {
             enterShipyard.setVisible(false);
         }
-        planetText.setText(curPlanet.toString() + "\n\nFuel: " + player.getCurrentFuel()
-                                                + "\nMoney: " + player.getMoney());
+        planetText.setText(curPlanet.toString() + fuelStr + player.getCurrentFuel() + moneyStr
+                        + player.getMoney());
     }
 
     /**
      * Displays the marketplace scene.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void goToMarket(ActionEvent actionEvent) {
         Main.setScene("screens/marketplacescreen.fxml");
@@ -83,6 +133,7 @@ public class PlanetScreenController implements Initializable {
      * Displays the shipyard scene.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void goToShipyard(ActionEvent actionEvent) {
         Main.setScene("screens/shipyardscreen.fxml");
@@ -104,24 +155,24 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Fills the player's ship with fuel.
-     * fuel update after buying.
+     * Fills the player's ship with fuel. fuel update after buying.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void buyFuel(ActionEvent actionEvent) {
 
         player.buyFuel(calculateFuelQuantity());
-        planetText.setText(curPlanet.toString() + "\n\nFuel: "
-                        + player.getCurrentFuel() + "\nMoney: "
+        planetText.setText(curPlanet.toString() + fuelStr + player.getCurrentFuel() + moneyStr
                         + player.getMoney());
-        buyFuel.setText("Refuel: " + 0 + " cr");
+        buyFuel.setText(refuel + 0 + credits);
     }
 
     /**
      * Displays the map screen.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void leaveSystem(ActionEvent actionEvent) {
         Main.setScene("screens/mapscreen.fxml");
@@ -132,6 +183,7 @@ public class PlanetScreenController implements Initializable {
      * Saves the game.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void saveEvent(ActionEvent actionEvent) {
         if (gi.saveGameInstance()) {

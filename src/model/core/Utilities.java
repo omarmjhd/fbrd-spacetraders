@@ -1,8 +1,7 @@
 package model.core;
 
 /**
- * Class containing lots of useful methods for various things that don't really
- * belong in a class
+ * Class containing lots of useful methods for various things that don't really belong in a class.
  *
  * @author ngraves3
  *
@@ -10,12 +9,11 @@ package model.core;
 public class Utilities {
 
     /**
-     * Capitalizes a string
+     * Capitalizes a string.
      *
      * @param str
      *        the string to capitalize
-     * @return the capitalized string; null if input is null; empty string if
-     *         string is empty
+     * @return the capitalized string; null if input is null; empty string if string is empty
      */
     public static String capitalize(String str) {
         if (str == null) {

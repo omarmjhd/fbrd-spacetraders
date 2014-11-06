@@ -14,60 +14,132 @@ import model.upgrades.HasPrice;
  */
 public class Player implements HasSkills, Serializable {
 
+    /**
+     * Nameof character.
+     */
     private String name;
 
+    /**
+     * Skills of character.
+     */
     private SkillSet skills;
 
+    /**
+     * Players money.
+     */
     private int money = 0;
 
+    /**
+     * Player's ship.
+     */
     private Ship ship;
 
-    public Player(String name, int pilotSkill, int fightSkill, int engSkill,
+    /**
+     * Constrcutor for player.
+     *
+     * @param nameArg
+     *        player name
+     * @param pilotSkill
+     *        skill at piloting
+     * @param fightSkill
+     *        skill at fighting
+     * @param engSkill
+     *        skill at engineering
+     * @param tradeSkill
+     *        skill at trading
+     * @param investSkill
+     *        skill at investing
+     */
+    public Player(String nameArg, int pilotSkill, int fightSkill, int engSkill,
         int tradeSkill, int investSkill) {
-        this.name = name;
+        this.name = nameArg;
         skills = new SkillSet(tradeSkill, fightSkill, engSkill,
                                         pilotSkill, investSkill);
         this.ship = Ship.gnat();
 
     }
 
+    /**
+     * Gets the player's money.
+     *
+     * @return player's money
+     */
     public int getMoney() {
         return money;
     }
 
     /**
-     * Adds money to the player's money
+     * Adds money to the player's money.
      *
-     * @param income amount of money to add
+     * @param income
+     *        amount of money to add
      */
     public void addMoney(int income) {
         this.money += income;
     }
 
-    public void subtractMoney(int money) {
-        addMoney(-money);
+    /**
+     * Removes money from the player's money.
+     *
+     * @param cost
+     *        the amount to remove
+     */
+    public void subtractMoney(int cost) {
+        addMoney(-cost);
     }
 
+    /**
+     * Returns ship of the player.
+     *
+     * @return player's ship
+     */
     public Ship getShip() {
         return ship;
     }
 
+    /**
+     * Sets the players ship to this new ship.
+     *
+     * @param otherShip
+     *        the player's new ship
+     */
     public void changeShip(Ship otherShip) {
         ship = otherShip;
     }
 
+    /**
+     * Returns an int of how many cargo spaces are left.
+     *
+     * @return int number of slots left
+     */
     public int cargoRoomLeft() {
         return ship.cargoRoomLeft();
     }
 
+    /**
+     * Adds the item to the cargo.
+     *
+     * @param item
+     *        the cargo to add
+     */
     public void addCargo(Goods item) {
         ship.addCargo(item);
     }
 
+    /**
+     * Returns a list of the cargo.
+     *
+     * @return cargo in list form
+     */
     public List<Goods> getCargo() {
         return ship.getCargo();
     }
 
+    /**
+     * Returns a list of the current upgrades of the ship.
+     *
+     * @return list of upgrades
+     */
     public List<HasPrice> getUpgrades() {
         List<HasPrice> upgrades = new LinkedList<HasPrice>();
 
@@ -90,6 +162,13 @@ public class Player implements HasSkills, Serializable {
         return upgrades;
     }
 
+    /**
+     * Removes an item from cargo.
+     *
+     * @param item
+     *        the cargo to remove
+     * @return the item removed; null if doesnt exist in cargo
+     */
     public Goods removeCargo(Goods item) {
         return ship.removeCargo(item);
     }
@@ -103,12 +182,17 @@ public class Player implements HasSkills, Serializable {
         ship.travel(distance);
     }
 
+    /**
+     * Gets the base price of the ship. used when exchanging ships.
+     *
+     * @return the base price of the ship
+     */
     public int getShipBasePrice() {
         return ship.getPrice();
     }
 
     /**
-     * Gets maximum amount of fuel for the given Ship
+     * Gets maximum amount of fuel for the given Ship.
      *
      * @return maximum amount of fuel in Ship
      */
@@ -117,7 +201,7 @@ public class Player implements HasSkills, Serializable {
     }
 
     /**
-     * Get the fuel cost of the Player's ship
+     * Get the fuel cost of the Player's ship.
      *
      * @return the cost of 1 unit of fuel
      */
@@ -126,7 +210,7 @@ public class Player implements HasSkills, Serializable {
     }
 
     /**
-     * Gets the current amount of fuel
+     * Gets the current amount of fuel.
      *
      * @return fuel left in Ship
      */
@@ -135,8 +219,7 @@ public class Player implements HasSkills, Serializable {
     }
 
     /**
-     * Adds fuel to the player's ship and removes the appropriate amount of
-     * money from the player
+     * Adds fuel to the player's ship and removes the appropriate amount of money from the player.
      *
      * @param quantity
      *        the amount of fuel
@@ -148,16 +231,22 @@ public class Player implements HasSkills, Serializable {
 
     @Override
     public String toString() {
-        String retval = "Name: " + name + "\n";
-        retval += "Piloting skill: " + getPilotSkill() + "\n";
-        retval += "Fighting skill: " + getFightingSkill() + "\n";
-        retval += "Engineering skill: " + getEngineeringSkill() + "\n";
-        retval += "Trading Skill: " + getTradeSkill() + "\n";
-        retval += "Investing Skill: " + getInvestingSkill() + "\n";
+        String term = "\n";
+        String retval = "Name: " + name + term;
+        retval += "Piloting skill: " + getPilotSkill() + term;
+        retval += "Fighting skill: " + getFightingSkill() + term;
+        retval += "Engineering skill: " + getEngineeringSkill() + term;
+        retval += "Trading Skill: " + getTradeSkill() + term;
+        retval += "Investing Skill: " + getInvestingSkill() + term;
         retval += "Ship: " + ship.toString();
         return retval;
     }
 
+    /**
+     * Returns the player's name.
+     *
+     * @return player name
+     */
     public String getName() {
         return name;
     }

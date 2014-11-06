@@ -1,7 +1,6 @@
 package controller;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -24,13 +23,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
+import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
 import model.events.RandomEvent;
-
-import org.controlsfx.dialog.Dialogs;
 
 import view.Main;
 
@@ -41,35 +40,92 @@ import view.Main;
  */
 public class MapScreenController implements Initializable {
 
-    /** don't change this.*/ public AnchorPane root;
-    /** the map.*/ public Pane mapPane;
-    /** travel button.*/ public Button travelButton;
-    /** not enough fuel.*/ public Text fuelError;
-    /** ship's fuel.*/ public Label currentFuelLabel;
-    /** shows distance = fuel.*/ public Label travelDistanceLabel;
-    /** game instance.*/ private GameInstance gm;
-    /** the universe.*/ private Set<SolarSystem> universe;
-    /** clicked planet.*/ private boolean clickedPlanet = false;
-    /** current circle of clicked planet.*/ private Circle currentCircle;
-    /** current line to travel.*/ private Line currentLine;
-    /** player location.*/ private Point playerLocation;
-    /** current point chosen by player.*/ private Point currentCirclePoint;
-    /** travel distance to chosen planet.*/ private int travelDistance;
-    /** astronaut image.*/ private Image astronaut;
-    /** view of the astronaut.*/ private ImageView astronautView;
-    /** the player.*/ private Player player;
+    /**
+     * don't change this.
+     */
+    public AnchorPane root;
+    /**
+     * the map.
+     */
+    public Pane mapPane;
+    /**
+     * travel button.
+     */
+    public Button travelButton;
+    /**
+     * not enough fuel.
+     */
+    public Text fuelError;
+    /**
+     * ship's fuel.
+     */
+    public Label currentFuelLabel;
+    /**
+     * shows distance = fuel.
+     */
+    public Label travelDistanceLabel;
+    /**
+     * game instance.
+     */
+    private GameInstance gm;
+    /**
+     * the universe.
+     */
+    private Set<SolarSystem> universe;
+    /**
+     * clicked planet.
+     */
+    private boolean clickedPlanet = false;
+    /**
+     * current circle of clicked planet.
+     */
+    private Circle currentCircle;
+    /**
+     * current line to travel.
+     */
+    private Line currentLine;
+    /**
+     * player location.
+     */
+    private Point playerLocation;
+    /**
+     * current point chosen by player.
+     */
+    private Point currentCirclePoint;
+    /**
+     * travel distance to chosen planet.
+     */
+    private int travelDistance;
+    /**
+     * astronaut image.
+     */
+    private Image astronaut;
+    /**
+     * view of the astronaut.
+     */
+    private ImageView astronautView;
+    /**
+     * the player.
+     */
+    private Player player;
 
+    /**
+     * The list of colors used for planets.
+     */
     @FXML
+    private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "cadetblue",
+                                  "CHARTREUSE", "coral", "cornflowerblue",
+                                  "crimson", "cyan", "darkcyan", "goldenrod"};
 
-    private String[] colorList = { "blue", "aqua", "aquamarine", "BLUEVIOLET",
-            "blue", "cadetblue", "CHARTREUSE", "coral", "cornflowerblue",
-            "crimson", "cyan", "darkcyan", "goldenrod" };
+    /**
+     * Location of planet screen.
+     */
+    private String planetScreen = "screens/planetscreen.fxml";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
-
         travelDistanceLabel.setText("");
         playerLocation = gm.getCurrentSolarSystem().getPosition();
 
@@ -156,7 +212,9 @@ public class MapScreenController implements Initializable {
 
     /**
      * Changes to the marketplace for chosen solar system.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void travel(ActionEvent actionEvent) {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
@@ -172,7 +230,7 @@ public class MapScreenController implements Initializable {
         }
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
-        Main.setScene("screens/planetscreen.fxml");
+        Main.setScene(planetScreen);
     }
 
     /**
@@ -180,7 +238,7 @@ public class MapScreenController implements Initializable {
      * and adds error Text.
      */
     private void checkFuel() {
-       if (clickedPlanet) {
+        if (clickedPlanet) {
             if (travelDistance > gm.getPlayer().getCurrentFuel()) {
                 travelButton.setDisable(true);
                 fuelError.setText("Not enough fuel :(");
@@ -188,19 +246,21 @@ public class MapScreenController implements Initializable {
                 travelButton.setDisable(false);
                 fuelError.setText("");
             }
-       } else {
-           travelButton.setDisable(false);
-           fuelError.setText("");
-       }
+        } else {
+            travelButton.setDisable(false);
+            fuelError.setText("");
+        }
     }
 
     /**
      * makes the planet screen.
      *
      * @param actionEvent
+     *        the trigger
+     *
      */
     public void returnToPlanet(ActionEvent actionEvent) {
-        Main.setScene("screens/planetscreen.fxml");
+        Main.setScene(planetScreen);
     }
 
 }

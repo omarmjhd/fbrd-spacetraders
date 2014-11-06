@@ -3,24 +3,39 @@ package model.core;
 import java.io.Serializable;
 
 /**
- * Represents a coordinate position for a SolarSystem
+ * Represents a coordinate position for a SolarSystem.
  *
  * @author Nick
  *
  */
-public class Point implements Serializable{
+public class Point implements Serializable {
+    /**
+     * x.
+     */
     private int xpos;
+    /**
+     * y.
+     */
     private int ypos;
 
-    public Point(int xpos, int ypos) {
-        this.xpos = xpos;
-        this.ypos = ypos;
+    /**
+     * Constructor.
+     *
+     * @param x
+     *        x
+     * @param y
+     *        y
+     */
+    public Point(int x, int y) {
+        this.xpos = x;
+        this.ypos = y;
     }
 
     /**
      * Returns the distance between 2 points. Casts hypotenuse to an int.
      *
      * @param other
+     *        the other point to compare against
      * @return int closest to the hypotenuse
      */
     public int distance(Point other) {
@@ -35,10 +50,20 @@ public class Point implements Serializable{
         return "(" + xpos + "," + ypos + ")";
     }
 
+    /**
+     * Gets the y coordinate.
+     *
+     * @return y coord
+     */
     public int getY() {
         return ypos;
     }
 
+    /**
+     * Gets the x coordinate.
+     *
+     * @return x coord
+     */
     public int getX() {
         return xpos;
     }

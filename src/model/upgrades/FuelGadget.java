@@ -2,15 +2,30 @@ package model.upgrades;
 
 import model.core.Ship;
 
-public class FuelGadget extends Gadget {
+/**
+ * This class is a gadget that reduces fuel cost for the ship.
+ *
+ * @author ngraves3
+ *
+ */
+public class FuelGadget extends AbstractGadget {
 
-    /*
-     * Divide current fuel cost by this amount
+    /**
+     * Divide current fuel cost by this amount.
      */
     private int fuelModifier = 2;
 
+    /**
+     * Need to know original cost to avoid truncation errors.
+     */
     private int originalFuelCost;
 
+    /**
+     * Constructor for a fuel gadget.
+     * 
+     * @param ship
+     *        the ship to affect
+     */
     public FuelGadget(Ship ship) {
         super("Efficient Engine", ship);
         originalFuelCost = ship.getFuelCost();
