@@ -1,9 +1,6 @@
 package model_tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 import model.core.Player;
@@ -12,14 +9,15 @@ import model.upgrades.Crew;
 
 public class PlayerTests {
 
-    private Player player;
-    private Crew crewmembers[];
-    private Ship ship;
+    /** a player.*/ private Player player;
+    /** the crew for the ship.*/ private Crew crewmembers[];
+    /** a ship for the player.*/ private Ship ship;
 
     @Before
     public void setUp() throws Exception {
         player = new Player("Player", 5, 5, 5, 5, 5);
         ship = player.getShip();
+        crewmembers = new Crew[1];
     }
 
     @Test
@@ -46,7 +44,7 @@ public class PlayerTests {
         /*
          * Postconditions
          */
-        assertEquals(skill, 10);
+        assertEquals(playerskill, 10);
     }
 
     @Test
