@@ -1,20 +1,19 @@
 package controller;
 
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import model.core.GameInstance;
-import model.core.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
+import model.core.GameInstance;
+import model.core.Player;
 import view.Main;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -24,18 +23,41 @@ import java.util.ResourceBundle;
  */
 public class ConfigScreenController implements Initializable {
 
-    /** engineering slider.*/ public Slider engSlide;
-    /** trade slider.*/ public Slider tradeSlide;
-    /** fight slider.*/ public Slider fightSlide;
-    /** invest slider.*/ public Slider investSlide;
-    /** pilot slider.*/ public Slider pilotSlide;
-    /** player name.*/ public TextField playerName;
-    /** skill points.*/ public Label skillPoints;
+    /**
+     * engineering slider.
+     */
+    public Slider engSlide;
+    /**
+     * trade slider.
+     */
+    public Slider tradeSlide;
+    /**
+     * fight slider.
+     */
+    public Slider fightSlide;
+    /**
+     * invest slider.
+     */
+    public Slider investSlide;
+    /**
+     * pilot slider.
+     */
+    public Slider pilotSlide;
+    /**
+     * player name.
+     */
+    public TextField playerName;
+    /**
+     * skill points.
+     */
+    public Label skillPoints;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sliderListener();
     }
+
+
 
     /**
      * Listens for change in slider values and calls sliders().
@@ -59,29 +81,31 @@ public class ConfigScreenController implements Initializable {
         });
     }
 
+
     /**
      * Updates the skillPoints Label.
      *
      */
-   public void sliders() {
-       int currentInt = 0;
-       int pilotSkill = (int) pilotSlide.getValue();
-       int fightSkill = (int) fightSlide.getValue();
-       int engSkill = (int) engSlide.getValue();
-       int tradeSkill = (int) tradeSlide.getValue();
-       int investSkill = (int) investSlide.getValue();
+    public void sliders() {
+        int currentInt = 0;
+        int pilotSkill = (int) pilotSlide.getValue();
+        int fightSkill = (int) fightSlide.getValue();
+        int engSkill = (int) engSlide.getValue();
+        int tradeSkill = (int) tradeSlide.getValue();
+        int investSkill = (int) investSlide.getValue();
 
-       int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-       currentInt = 15 - total;
+        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+        currentInt = 15 - total;
 
        //displays the skillPoints left
-       skillPoints.setText("" + currentInt);
-   }
+        skillPoints.setText("" + currentInt);
+    }
 
     /**
      * Creates the Game from the slider values when the user presses the button.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void createGame(ActionEvent actionEvent) {
         int pilotSkill = (int) pilotSlide.getValue();
@@ -136,6 +160,7 @@ public class ConfigScreenController implements Initializable {
      * Sends the user back to the main menu.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void returnToMainMenu(ActionEvent actionEvent) {
         Main.setScene("screens/startscreen.fxml");

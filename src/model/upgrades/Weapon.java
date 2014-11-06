@@ -2,9 +2,25 @@ package model.upgrades;
 
 import model.core.Utilities;
 
+/**
+ * A class representing a weapon for combat.
+ *
+ * @author ngraves3
+ *
+ */
 public enum Weapon implements HasPrice {
-
-    PULSE_LASER, BEAM_LASER, MILITARY_LASER;
+    /**
+     * A standard laser.
+     */
+    PULSE_LASER,
+    /**
+     * A better laser.
+     */
+    BEAM_LASER,
+    /**
+     * The best laser.
+     */
+    MILITARY_LASER;
 
     @Override
     public int getPrice() {

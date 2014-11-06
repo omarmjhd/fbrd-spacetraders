@@ -14,12 +14,12 @@ public interface CommandPattern {
      *
      * @return true iff effect was applied, false otherwise
      */
-    public boolean applyEffect();
+    boolean applyEffect();
 
     /**
      * Removes the object's effect.
      *
      * @return true iff the effect was removed, false otherwise
      */
-    public boolean removeEffect();
+    boolean removeEffect();
 }

@@ -14,70 +14,82 @@ public class SkillSet implements HasSkills, Serializable {
     /**
      * trading skill.
      */
-    private final int TRADE_SKILL;
+    private final int tradeSkill;
 
     /**
      * fighting skill.
      */
-    private final int FIGHT_SKILL;
+    private final int fightSkill;
 
     /**
      * engineering skill.
      */
-    private final int ENG_SKILL;
+    private final int engSkill;
 
     /**
      * piloting skill.
      */
-    private final int PILOT_SKILL;
+    private final int pilotSkill;
 
     /**
      * investing skill.
      */
-    private final int INVEST_SKILL;
+    private final int investSkill;
 
+    /**
+     * Constructor for skill set.
+     *
+     * @param trade
+     *        trade skill
+     * @param fight
+     *        fight skill
+     * @param eng
+     *        engineering skill
+     * @param pilot
+     *        piloting skill
+     * @param invest
+     *        invest skill
+     */
     public SkillSet(int trade, int fight, int eng, int pilot, int invest) {
-        TRADE_SKILL = trade;
-        FIGHT_SKILL = fight;
-        ENG_SKILL = eng;
-        PILOT_SKILL = pilot;
-        INVEST_SKILL = invest;
+        tradeSkill = trade;
+        fightSkill = fight;
+        engSkill = eng;
+        pilotSkill = pilot;
+        investSkill = invest;
     }
 
     @Override
     public int getTradeSkill() {
-        return TRADE_SKILL;
+        return tradeSkill;
     }
 
     @Override
     public int getEngineeringSkill() {
-        return ENG_SKILL;
+        return engSkill;
     }
 
     @Override
     public int getPilotSkill() {
-        return PILOT_SKILL;
+        return pilotSkill;
     }
 
     @Override
     public int getFightingSkill() {
-        return FIGHT_SKILL;
+        return fightSkill;
     }
 
     @Override
     public int getInvestingSkill() {
-        return INVEST_SKILL;
+        return investSkill;
     }
 
     /**
-     * Returns the total number of skill points represented by this set of
-     * skills
+     * Returns the total number of skill points represented by this set of skills.
      *
      * @return total number of skill points
      */
     public int totalSkill() {
-        return TRADE_SKILL + FIGHT_SKILL + ENG_SKILL + PILOT_SKILL
-                        + INVEST_SKILL;
+        return tradeSkill + fightSkill + engSkill + pilotSkill + investSkill;
     }
 
 }

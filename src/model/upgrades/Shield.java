@@ -2,9 +2,21 @@ package model.upgrades;
 
 import model.core.Utilities;
 
+/**
+ * A class representing shields for use in combat.
+ * 
+ * @author ngraves3
+ *
+ */
 public enum Shield implements HasPrice {
-
-    ENERGY_SHIELD, REFLECTIVE_SHIELD;
+    /**
+     * A basic shield.
+     */
+    ENERGY_SHIELD,
+    /**
+     * A premium shield.
+     */
+    REFLECTIVE_SHIELD;
 
     @Override
     public int getPrice() {

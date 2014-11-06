@@ -5,43 +5,76 @@ import java.util.Random;
 import model.commerce.Goods;
 import model.core.Player;
 
+/**
+ * A class representing random events. These are things such as losing fuel, gaining or losing an
+ * item, or gaining or losing money
+ *
+ * @author ngraves3
+ *
+ */
 public class RandomEvent {
 
+    /**
+     * The Player whom the event will affect.
+     */
     protected Player player;
 
+    /**
+     * Use the same RNG for efficiency.
+     */
     protected Random rand;
 
+    /**
+     * The array of all possible events.
+     */
     private RandomEvent[] events;
 
-    public RandomEvent(Player player) {
-        this.player = player;
+    /**
+     * Constructor for the random events.
+     *
+     * @param playerArg
+     *        the player to affect
+     */
+    public RandomEvent(Player playerArg) {
+        this.player = playerArg;
         rand = new Random();
     }
 
     /**
-     * Private class to handle money events
+     * Private class to handle money events.
+     *
      * @author ngraves3
      *
      */
     private class MoneyEvent extends RandomEvent {
 
-        private String[] addPhrases = {
-                "Your last lotto ticket was worth %d! credits",
-                        "%d credits fell into your hand!",
-                        "You found %d credits in your back pocket!",
-                        "An old man gave you %d credits (and a weird wink...)",
-                        "You helped a little old lady carry her groceries "
-                        + "to the car and she gave you %d credits!"};
+        /**
+         * Phrases for gaining money.
+         */
+        private String[] addPhrases = {"Your last lotto ticket was worth %d! credits",
+                                       "%d credits fell into your hand!",
+                                       "You found %d credits in your back pocket!",
+                                       "An old man gave you %d credits (and a weird wink...)",
+                                       "You helped a little old lady carry her groceries "
+                                                       + "to the car and she gave you %d credits!"};
 
-        private String[] minusPhrases = {
-                "You lost %d credits playing a shell game!",
-                        "%d credits fell out of your pocket! Oops!",
-                        "You were mugged and had %d credits stolen!",
-                        "Unexpected taxes in this market cost you %d credits!",
-                        "You gave %d credits to a crying orphan!" };
+        /**
+         * Phrases for losing money.
+         */
+        private String[] minusPhrases = {"You lost %d credits playing a shell game!",
+                                         "%d credits fell out of your pocket! Oops!",
+                                         "You were mugged and had %d credits stolen!",
+                                         "Unexpected taxes in this market cost you %d credits!",
+                                         "You gave %d credits to a crying orphan!"};
 
-        public MoneyEvent(Player player) {
-            super(player);
+        /**
+         * Constructor for sub-event.
+         *
+         * @param playerArg
+         *        the player to affect
+         */
+        public MoneyEvent(Player playerArg) {
+            super(playerArg);
         }
 
         @Override
@@ -67,28 +100,40 @@ public class RandomEvent {
     }
 
     /**
-     * Private class to handle events involving cargo
+     * Private class to handle events involving cargo.
      *
      * @author ngraves3
      *
      */
     private class GoodsEvent extends RandomEvent {
 
-        private String[] losePhrases = {
-                "Your %s fell out of your ship!",
-                        "A thief stole your %s!", "Your %s broke!",
-                        "Your %s was in a freak cargo accident"
-                        + " and is no longer sellable!",
-                        "You can't seem to remember where you put that %s..."};
+        /**
+         * Phrases for losing an item.
+         */
+        private String[] losePhrases = {"Your %s fell out of your ship!",
+                                        "A thief stole your %s!",
+                                        "Your %s broke!",
+                                        "Your %s was in a freak cargo accident"
+                                        + " and is no longer sellable!",
+                                        "You can't seem to remember where you put that %s..."};
 
-        private String[] getPhrases = { "You found %s floating in space!",
-                        "A retiring trader gave you his last %s!",
-                        "%s fell from the sky into your hands!",
-                "A shady looking man gave you his %s and ran away!",
-                "You found free %s under a bush!" };
+        /**
+         * Phrases for gaining an item.
+         */
+        private String[] getPhrases = {"You found %s floating in space!",
+                                       "A retiring trader gave you his last %s!",
+                                       "%s fell from the sky into your hands!",
+                                       "A shady looking man gave you his %s and ran away!",
+                                       "You found free %s under a bush!"};
 
-        public GoodsEvent(Player player) {
-            super(player);
+        /**
+         * Constructor for GoodsEvent.
+         *
+         * @param playerArg
+         *        the player to affect
+         */
+        public GoodsEvent(Player playerArg) {
+            super(playerArg);
         }
 
         @Override
@@ -122,17 +167,26 @@ public class RandomEvent {
     }
 
     /**
-     * Inner class to handle random events with fuel
+     * Inner class to handle random events with fuel.
      *
      * @author ngraves3
      *
      */
     private class FuelEvent extends RandomEvent {
-        private String[] losePhrases = { "%d units of your fuel leaked out!",
-                "A thief stole %d units of fuel!" }; //i'm all out of ideas for phrases now
+        /**
+         * Phrases for losing fuel.
+         */
+        private String[] losePhrases = {"%d units of your fuel leaked out!",
+                                        "A thief stole %d units of fuel!"}; //i'm all out of ideas for phrases now
 
-        public FuelEvent(Player player) {
-            super(player);
+        /**
+         * Constructor for a fuel event.
+         *
+         * @param playerArg
+         *        the player to affect
+         */
+        public FuelEvent(Player playerArg) {
+            super(playerArg);
         }
 
         @Override
@@ -163,10 +217,8 @@ public class RandomEvent {
      */
     public String event() {
         if (events == null) {
-            events = new RandomEvent[] {
-                            new MoneyEvent(player),
-                            new GoodsEvent(player),
-                            new FuelEvent(player)};
+            events = new RandomEvent[] {new MoneyEvent(player), new GoodsEvent(player),
+                                        new FuelEvent(player)};
         }
 
         if (rand.nextInt(10) == 0) {

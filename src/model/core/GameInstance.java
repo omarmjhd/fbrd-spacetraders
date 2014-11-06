@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
 import model.commerce.Goods;
 
 /**
@@ -20,7 +21,7 @@ import model.commerce.Goods;
  * @author ngraves3
  *
  */
-public class GameInstance implements Serializable{
+public class GameInstance implements Serializable {
 
     /**
      * The player playing.
@@ -57,19 +58,15 @@ public class GameInstance implements Serializable{
     /**
      * All the planet names. May or may not use all of them.
      */
-    private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
-            "Balosnee", "Baratas", "Brax", "Bretel",
-            "Calondia", "Campor", "Capelle","Carzon", "Castor", "Cestus", "Cheron", "Courteney",
-            "Daled", "Damast", "Davlos", "Deneb", "Deneva", "Devidia", "Draylon", "Drema",
-            "Endor", "Esmee", "Exo", "Ferris", "Festen", "Fourmi", "Frolix", "Gemulon", "Guinifer",
-            "Hades", "Hamlet", "Helena", "Hulst",
-            "Iodine", "Iralius",
-            "Janus", "Japori", "Jarada", "Jason",
-            "Kaylon", "Khefka",
-            "Kira", "Klaatu", "Klaestron", "Korma", "Kravat", "Krios",
-            "Laertes", "Largo", "Lave", "Ligon", "Lowry",
- "Magrat", "Malcoria", "Melina", "Mentar",
-            "Merik", "Mintaka", "Montor", "Mordan", "Myrthe" };
+    private String[] planetNames = {"Acamar", "Adahn", "Aldea", "Andevian", "Antedi", "Balosnee",
+            "Baratas", "Brax", "Bretel", "Calondia", "Campor", "Capelle", "Carzon", "Castor",
+            "Cestus", "Cheron", "Courteney", "Daled", "Damast", "Davlos", "Deneb", "Deneva",
+            "Devidia", "Draylon", "Drema", "Endor", "Esmee", "Exo", "Ferris", "Festen", "Fourmi",
+            "Frolix", "Gemulon", "Guinifer", "Hades", "Hamlet", "Helena", "Hulst", "Iodine",
+            "Iralius", "Janus", "Japori", "Jarada", "Jason", "Kaylon", "Khefka", "Kira", "Klaatu",
+            "Klaestron", "Korma", "Kravat", "Krios", "Laertes", "Largo", "Lave", "Ligon", "Lowry",
+            "Magrat", "Malcoria", "Melina", "Mentar", "Merik", "Mintaka", "Montor", "Mordan",
+            "Myrthe"};
 
     /**
      * Keeps track of how many planets are being made.
@@ -79,7 +76,7 @@ public class GameInstance implements Serializable{
     /**
      * Solar system names for the game. May or may not use all.
      */
-    private String[] solarSystemNames = { "Nelvana", "Nix", "Nyle",
+    private String[] solarSystemNames = {"Nelvana", "Nix", "Nyle",
             "Odet", "Og", "Omega", "Omphalos", "Orias", "Othello",
             "Parade","Penthara","Picard","Pollux",
             "Quator", "Rakhar", "Ran", "Regulas", "Relva", "Rhymus", "Rochani", "Rubicum", "Rutia",

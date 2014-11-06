@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import model.commerce.Goods;
 import model.upgrades.Crew;
-import model.upgrades.Gadget;
+import model.upgrades.AbstractGadget;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
 
@@ -92,7 +93,7 @@ public class Ship implements Serializable {
     /**
      * Ship gadgets.
      */
-    private PresizedList<Gadget> gadgets;
+    private PresizedList<AbstractGadget> gadgets;
 
     /**
      * Ship crew.
@@ -161,7 +162,7 @@ public class Ship implements Serializable {
     /**
      * Private ship constructor. Makes new ships through methods.
      *
-     * @param name
+     * @param nameArg
      *        name of ship
      * @param cargoSize
      *        size of cargo
@@ -190,17 +191,16 @@ public class Ship implements Serializable {
      * @param sizeArg
      *        size of ship
      */
-    private Ship(String name, int cargoSize, int weaponSize, int shieldSize,
- int gadgetSize,
+    private Ship(String nameArg, int cargoSize, int weaponSize, int shieldSize, int gadgetSize,
         int crewSize, int maxFuelArg, int fuelCostArg, int priceArg, int bountyArg,
         int hullStrengthArg, int police, int pirate, int sizeArg) {
         //cargo = new Goods[cargoSize];
         cargo = new PresizedList<Goods>(cargoSize);
         weapons = new PresizedList<Weapon>(weaponSize);
         shields = new PresizedList<Shield>(shieldSize);
-        gadgets = new PresizedList<Gadget>(gadgetSize);
+        gadgets = new PresizedList<AbstractGadget>(gadgetSize);
         crew = new PresizedList<Crew>(crewSize);
-        this.name = name;
+        this.name = nameArg;
         this.maxFuel = maxFuelArg;
         this.fuelCost = fuelCostArg;
         this.price = priceArg;
@@ -299,7 +299,7 @@ public class Ship implements Serializable {
      *        the gadget to add
      * @return true iff gadget was added and effect was applied
      */
-    public boolean addGadget(Gadget gadget) {
+    public boolean addGadget(AbstractGadget gadget) {
         if (gadgets.hasRoom()) {
             gadgets.add(gadget);
             return gadget.applyEffect();
@@ -315,7 +315,7 @@ public class Ship implements Serializable {
      *        the gadget to remove
      * @return true iff the gadget and its effect were removed
      */
-    public boolean removeGadget(Gadget gadget) {
+    public boolean removeGadget(AbstractGadget gadget) {
         if (gadgets.remove(gadget)) {
             return gadget.removeEffect();
         }
@@ -531,7 +531,7 @@ public class Ship implements Serializable {
      *
      * @return list of gadgets
      */
-    public AbstractList<Gadget> getGadgets() {
+    public AbstractList<AbstractGadget> getGadgets() {
         return gadgets;
     }
 

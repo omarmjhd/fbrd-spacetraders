@@ -1,18 +1,14 @@
 package controller;
 
 import java.io.File;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
-
-import model.core.GameInstance;
-
-import view.Main;
-
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
+import model.core.GameInstance;
+import view.Main;
 
 
 
@@ -25,6 +21,7 @@ public class StartScreenController {
      * Ends the game when the quit button is pressed.
      *
      * @param event
+     *        the trigger
      */
     public void endGame(ActionEvent event) {
         Platform.exit();
@@ -34,6 +31,7 @@ public class StartScreenController {
      * Lets the user load an old .sav file and load it.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void loadSavedGame(ActionEvent actionEvent)  {
         FileChooser fileChooser = new FileChooser();
@@ -75,6 +73,7 @@ public class StartScreenController {
      * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void startGame(ActionEvent actionEvent) {
         Main.setScene("screens/configscreen.fxml");

@@ -8,6 +8,36 @@ package model.core;
  *
  */
 public enum TechLevel {
-    PRE_AG, AGRICULTURE, MEDIEVAL, RENAISSANCE, EARLY_INDUSTRIAL, INDUSTRIAL,
-    POST_INDUSTRIAL, HI_TECH;
+    /**
+     * Pre-agricultural level.
+     */
+    PRE_AG,
+    /**
+     * Agricultural level.
+     */
+    AGRICULTURE,
+    /**
+     * Medieval level.
+     */
+    MEDIEVAL,
+    /**
+     * Renaissance level.
+     */
+    RENAISSANCE,
+    /**
+     * Early-industrial level.
+     */
+    EARLY_INDUSTRIAL,
+    /**
+     * Industrial level.
+     */
+    INDUSTRIAL,
+    /**
+     * Post-industrial level.
+     */
+    POST_INDUSTRIAL,
+    /**
+     * Hi-tech level.
+     */
+    HI_TECH;
 }

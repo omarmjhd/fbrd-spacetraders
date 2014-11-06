@@ -2,7 +2,7 @@ package model.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * A SolarSystem has a position in the universe and contains planets, which have
@@ -11,40 +11,42 @@ import java.util.Collection;
  * @author Nick
  *
  */
-public class SolarSystem implements Serializable{
+public class SolarSystem implements Serializable {
 
+    /**
+     * Name of solar system.
+     */
     private String name;
+    /**
+     * position of solar system.
+     */
     private Point pos;
-    private ArrayList<Planet> planets;
+    /**
+     * Planets in a solar system.
+     */
+    private List<Planet> planets;
 
-    public SolarSystem(String name, int xpos, int ypos, Planet... varPlanets) {
-        this(name, new Point(xpos, ypos), varPlanets);
-    }
-
-    public SolarSystem(String name, Point pos, Planet... varPlanets) {
-        this.name = name;
-        this.pos = pos;
+    /**
+     * Constructor for solar systems.
+     *
+     * @param nameArg
+     *        the name of the solar system
+     * @param posArg
+     *        the position of the solar system
+     * @param varPlanets
+     *        the planets in the solar system
+     */
+    public SolarSystem(String nameArg, Point posArg, Planet... varPlanets) {
+        this.name = nameArg;
+        this.pos = posArg;
         planets = new ArrayList<>();
         for (Planet p : varPlanets) {
             planets.add(p);
         }
     }
 
-    public SolarSystem(String name, int xpos, int ypos,
-        Collection<Planet> varPlanets) {
-        this(name, new Point(xpos, ypos), varPlanets);
-    }
-
-    public SolarSystem(String name, Point pos, Collection<Planet> varPlanets) {
-        this.name = name;
-        this.pos = pos;
-        planets = new ArrayList<>();
-        planets.addAll(varPlanets);
-
-    }
-
     /**
-     * Returns distance between 2 SolarSystems
+     * Returns distance between 2 SolarSystems.
      *
      * @param other
      *        a SolarSystem
@@ -54,6 +56,11 @@ public class SolarSystem implements Serializable{
         return pos.distance(other.getPosition());
     }
 
+    /**
+     * Gets position of planet.
+     *
+     * @return position
+     */
     public Point getPosition() {
         return pos;
     }
@@ -73,7 +80,12 @@ public class SolarSystem implements Serializable{
 
     }
 
-    public ArrayList<Planet> getPlanets() {
+    /**
+     * Returns list of planets in solar system.
+     *
+     * @return list of planets
+     */
+    public List<Planet> getPlanets() {
         return planets;
     }
 }
