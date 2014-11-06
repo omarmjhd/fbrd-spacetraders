@@ -22,18 +22,18 @@ import java.util.ResourceBundle;
  * @author jwinchester6
  */
 public class MarketplaceController implements Initializable{
-    public Text marketTitle;
-    public ListView<Goods> shipView;
-    public ListView<Goods> marketView;
-    public Button buyButton;
-    public Button sellButton;
-    public Label playerMoney;
-    private Planet currentPlanet;
-    private Marketplace marketplace;
-    private GameInstance gm;
-    private Player player;
-    private ObservableList<Goods> marketGoods = FXCollections.observableArrayList();
-    private ObservableList<Goods> shipGoods = FXCollections.observableArrayList();
+    /** market title.*/ public Text marketTitle;
+    /** ship's good.*/ public ListView<Goods> shipView;
+    /** market's good.*/ public ListView<Goods> marketView;
+    /** buy button.*/ public Button buyButton;
+    /** sell button.*/ public Button sellButton;
+    /** player's money.*/ public Label playerMoney;
+    /** current planet.*/ private Planet currentPlanet;
+    /** planet's marketplace.*/ private Marketplace marketplace;
+    /** game instance.*/ private GameInstance gm;
+    /** the player.*/ private Player player;
+    /** market's goods.*/ private ObservableList<Goods> marketGoods = FXCollections.observableArrayList();
+    /** shipy's goods.*/ private ObservableList<Goods> shipGoods = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,7 +88,7 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * buys the selected item and does some validation
+     * Buys the selected item and does some validation.
      *
      * @param actionEvent
      */
@@ -123,7 +123,7 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * Sells the selected item and does some validation
+     * Sells the selected item and does some validation.
      *
      * @param actionEvent
      */
@@ -145,7 +145,7 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * List Cell subclass that displays items correctly
+     * List Cell subclass that displays items correctly.
      *
      */
     class GoodsCell extends ListCell<Goods> {
@@ -165,7 +165,7 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * goes back to the planet screen
+     * goes back to the planet screen.
      * @param actionEvent
      */
     public void goToPlanet(ActionEvent actionEvent) {

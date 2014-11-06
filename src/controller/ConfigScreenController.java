@@ -24,13 +24,13 @@ import java.util.ResourceBundle;
  */
 public class ConfigScreenController implements Initializable {
 
-    public Slider engSlide;
-    public Slider tradeSlide;
-    public Slider fightSlide;
-    public Slider investSlide;
-    public Slider pilotSlide;
-    public TextField playerName;
-    public Label skillPoints;
+    /** engineering slider.*/ public Slider engSlide;
+    /** trade slider.*/ public Slider tradeSlide;
+    /** fight slider.*/ public Slider fightSlide;
+    /** invest slider.*/ public Slider investSlide;
+    /** pilot slider.*/ public Slider pilotSlide;
+    /** player name.*/ public TextField playerName;
+    /** skill points.*/ public Label skillPoints;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,7 +38,7 @@ public class ConfigScreenController implements Initializable {
     }
 
     /**
-     * Listens for change in slider values and calls sliders()
+     * Listens for change in slider values and calls sliders().
      */
     public void sliderListener() {
         // Handle Slider value change events.
@@ -60,7 +60,7 @@ public class ConfigScreenController implements Initializable {
     }
 
     /**
-     * Updates the skillPoints Label
+     * Updates the skillPoints Label.
      *
      */
    public void sliders() {
@@ -133,7 +133,7 @@ public class ConfigScreenController implements Initializable {
     }
 
     /**
-     * Sends the user back to the main menu
+     * Sends the user back to the main menu.
      *
      * @param actionEvent
      */

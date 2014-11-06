@@ -28,22 +28,22 @@ import view.Main;
  */
 public class ShipyardScreenController implements Initializable{
 
-    public ComboBox shipComboBox;
-    public Label playerMoney;
-    public Label shipAttributes;
-    public Text shipyardTitle;
-    public Label shipCost;
-    public Button tradeButton;
-    public Label playershipLabel;
+    /** for choosing a ship.*/ public ComboBox shipComboBox;
+    /** player's money.*/ public Label playerMoney;
+    /** ship's specs*/ public Label shipAttributes;
+    /** planet's shipyard.*/ public Text shipyardTitle;
+    /** cost of ship.*/ public Label shipCost;
+    /** trade button.*/ public Button tradeButton;
+    /** player's ship.*/ public Label playershipLabel;
 
-    private Shipyard shipyard;
-    private Ship currentShip;
-    private Planet currentPlanet;
-    private GameInstance gm;
-    private Player player;
-    private ObservableList<String> options;
-    private int costToBuy;
-    private Ship playership;
+    /** current shipyard.*/ private Shipyard shipyard;
+    /** player's ship.*/ private Ship currentShip;
+    /** current planet.*/ private Planet currentPlanet;
+    /** gamer instance.*/ private GameInstance gm;
+    /** the player.*/ private Player player;
+    /** what ships the player can choose.*/ private ObservableList<String> options;
+    /** cost to buy the chosen ship.*/ private int costToBuy;
+    /** the ship that the player chose.*/ private Ship playership;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,7 +87,7 @@ public class ShipyardScreenController implements Initializable{
     }
 
     /**
-     * When a ship is chosen from the combo box, updates the label
+     * When a ship is chosen from the combo box, updates the label.
      * @param actionEvent
      */
     public void chooseShip(ActionEvent actionEvent) {
@@ -127,7 +127,7 @@ public class ShipyardScreenController implements Initializable{
     }
 
     /**
-     * Goes to ship upgrade screen
+     * Goes to ship upgrade screen.
      * @param actionEvent
      */
     public void goToUpgradeShip(ActionEvent actionEvent) {
@@ -135,7 +135,7 @@ public class ShipyardScreenController implements Initializable{
     }
 
     /**
-     * Go to planet screen
+     * Go to planet screen.
      * @param actionEvent
      */
     public void goToPlanet(ActionEvent actionEvent) {
@@ -143,7 +143,7 @@ public class ShipyardScreenController implements Initializable{
     }
 
     /**
-     * Does the actual action of selling your ship
+     * Does the actual action of selling your ship.
      * @param actionEvent
      */
     public void trade(ActionEvent actionEvent) {
