@@ -25,19 +25,19 @@ import java.util.ResourceBundle;
  */
 public class UpgradeShipScreenController implements Initializable {
 
-    public Button buyButton;
-    public Button sellButton;
-    public Label playerMoney;
-    public Button leaveButton;
-    public ListView<HasPrice> shipyardView;
-    public ListView<HasPrice> shipView;
-    private GameInstance gi;
-    private Player player;
-    private TechLevel techLevel;
-    private Ship ship;
-    private ObservableList<HasPrice> shipyardUpgrades = FXCollections.observableArrayList();
-    private ObservableList<HasPrice> shipUpgrades = FXCollections.observableArrayList();
-    private Random random = new Random();
+    /** buy upgrades.*/ public Button buyButton;
+    /** sell upgrades.*/ public Button sellButton;
+    /** player's money.*/ public Label playerMoney;
+    /** back to shipyard.*/ public Button leaveButton;
+    /** shipyard's upgrades.*/ public ListView<HasPrice> shipyardView;
+    /** ship's upgrades.*/ public ListView<HasPrice> shipView;
+    /** game instance.*/ private GameInstance gi;
+    /** the player.*/ private Player player;
+    /** tech level.*/ private TechLevel techLevel;
+    /** player's ship.*/ private Ship ship;
+    /** shipyard upgrades.*/ private ObservableList<HasPrice> shipyardUpgrades = FXCollections.observableArrayList();
+    /** ship upgrades.*/ private ObservableList<HasPrice> shipUpgrades = FXCollections.observableArrayList();
+    /** random number generator.*/ private Random random = new Random();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,7 +120,7 @@ public class UpgradeShipScreenController implements Initializable {
     }
 
     /**
-     * buys an upgrade
+     * buys an upgrade.
      *
      * @param actionEvent
      */
@@ -156,7 +156,7 @@ public class UpgradeShipScreenController implements Initializable {
     }
 
     /**
-     * sells an upgrade
+     * sells an upgrade.
      *
      * @param actionEvent
      */
@@ -193,7 +193,7 @@ public class UpgradeShipScreenController implements Initializable {
     }
 
     /**
-     * returns you to the shipyard
+     * returns you to the shipyard.
      *
      * @param actionEvent
      */
@@ -202,7 +202,7 @@ public class UpgradeShipScreenController implements Initializable {
     }
 
     /**
-     * List Cell subclass that displays items correctly
+     * List Cell subclass that displays items correctly.
      *
      */
     class GadgetCell extends ListCell<HasPrice> {

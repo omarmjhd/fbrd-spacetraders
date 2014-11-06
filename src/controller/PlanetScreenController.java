@@ -28,18 +28,18 @@ import view.Main;
  * @author Joshua on 10/6/2014.
  */
 public class PlanetScreenController implements Initializable {
-    public Text planetName;
-    public Button enterMarket;
-    public Button enterShipyard;
-    public Button buyFuel;
-    public Button travelButton;
-    public Label planetText;
-    public Pane planetPane;
-    public ImageView astronautView;
-    public Image astronaut;
-    private GameInstance gi;
-    private Planet curPlanet;
-    private Player player;
+    /** planet name.*/ public Text planetName;
+    /** enter market button.*/ public Button enterMarket;
+    /** enter shipyard button.*/ public Button enterShipyard;
+    /** buy fuel button.*/ public Button buyFuel;
+    /** travel button.*/ public Button travelButton;
+    /** planet information.*/ public Label planetText;
+    /** planet information.*/ public Pane planetPane;
+    /** the astronaut view.*/ public ImageView astronautView;
+    /** the astronaut image.*/ public Image astronaut;
+    /** game instance.*/ private GameInstance gi;
+    /** current planet.*/ private Planet curPlanet;
+    /** the player.*/ private Player player;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,7 +71,7 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Displays the marketplace scene
+     * Displays the marketplace scene.
      *
      * @param actionEvent
      */
@@ -80,7 +80,7 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Displays the shipyard scene
+     * Displays the shipyard scene.
      *
      * @param actionEvent
      */
@@ -89,7 +89,7 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Ensures player doesn't over buy fuel
+     * Ensures player doesn't over buy fuel.
      *
      * @return amount of fuel player can buy
      */
@@ -104,8 +104,8 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Fills the player's ship with fuel TODO: add validation TODO: make the
-     * fuel update after buying
+     * Fills the player's ship with fuel.
+     * fuel update after buying.
      *
      * @param actionEvent
      */
@@ -119,7 +119,7 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Displays the map screen
+     * Displays the map screen.
      *
      * @param actionEvent
      */
@@ -129,7 +129,7 @@ public class PlanetScreenController implements Initializable {
 
 
     /**
-     * Saves the game
+     * Saves the game.
      *
      * @param actionEvent
      */

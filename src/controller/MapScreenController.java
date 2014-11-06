@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,23 +41,23 @@ import view.Main;
  */
 public class MapScreenController implements Initializable {
 
-    public AnchorPane root;
-    public Pane mapPane;
-    public Button travelButton;
-    public Text fuelError;
-    public Label currentFuelLabel;
-    public Label travelDistanceLabel;
-    private GameInstance gm;
-    private HashSet<SolarSystem> universe;
-    private boolean clickedPlanet = false;
-    private Circle currentCircle;
-    private Line currentLine;
-    private Point playerLocation;
-    private Point currentCirclePoint;
-    private int travelDistance;
-    private Image astronaut;
-    private ImageView astronautView;
-    private Player player;
+    /** don't change this.*/ public AnchorPane root;
+    /** the map.*/ public Pane mapPane;
+    /** travel button.*/ public Button travelButton;
+    /** not enough fuel.*/ public Text fuelError;
+    /** ship's fuel.*/ public Label currentFuelLabel;
+    /** shows distance = fuel.*/ public Label travelDistanceLabel;
+    /** game instance.*/ private GameInstance gm;
+    /** the universe.*/ private Set<SolarSystem> universe;
+    /** clicked planet.*/ private boolean clickedPlanet = false;
+    /** current circle of clicked planet.*/ private Circle currentCircle;
+    /** current line to travel.*/ private Line currentLine;
+    /** player location.*/ private Point playerLocation;
+    /** current point chosen by player.*/ private Point currentCirclePoint;
+    /** travel distance to chosen planet.*/ private int travelDistance;
+    /** astronaut image.*/ private Image astronaut;
+    /** view of the astronaut.*/ private ImageView astronautView;
+    /** the player.*/ private Player player;
 
     @FXML
 
@@ -154,7 +155,7 @@ public class MapScreenController implements Initializable {
     }
 
     /**
-     * Changes to the marketplace for chosen solar system
+     * Changes to the marketplace for chosen solar system.
      * @param actionEvent
      */
     public void travel(ActionEvent actionEvent) {
@@ -175,8 +176,8 @@ public class MapScreenController implements Initializable {
     }
 
     /**
-     * If the distance is too far for the amount of fuel, disables travel button
-     * and adds error Text
+     * If the distance is too far for the amount of fuel, disables travel button.
+     * and adds error Text.
      */
     private void checkFuel() {
        if (clickedPlanet) {
@@ -194,7 +195,7 @@ public class MapScreenController implements Initializable {
     }
 
     /**
-     * makes the planet screen
+     * makes the planet screen.
      *
      * @param actionEvent
      */

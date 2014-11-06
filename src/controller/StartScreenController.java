@@ -22,7 +22,7 @@ import org.controlsfx.dialog.Dialogs;
 public class StartScreenController {
 
     /**
-     * Ends the game when the quit button is pressed
+     * Ends the game when the quit button is pressed.
      *
      * @param event
      */
