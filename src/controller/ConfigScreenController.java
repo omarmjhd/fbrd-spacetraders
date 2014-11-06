@@ -3,16 +3,20 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
+
 import view.Main;
 
 /**
@@ -65,21 +69,22 @@ public class ConfigScreenController implements Initializable {
     public void sliderListener() {
         // Handle Slider value change events.
         engSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliders();
-        });
+                sliders();
+            });
         tradeSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliders();
-        });
+                sliders();
+            });
         fightSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliders();
-        });
+                sliders();
+            });
         investSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliders();
-        });
+                sliders();
+            });
         pilotSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
-            sliders();
-        });
+                sliders();
+            });
     }
+
 
 
     /**

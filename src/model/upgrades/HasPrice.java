@@ -9,7 +9,7 @@ package model.upgrades;
 public interface HasPrice {
 
     /**
-     * Returns the price of the object
+     * Returns the price of the object.
      *
      * @return the price of the object
      */

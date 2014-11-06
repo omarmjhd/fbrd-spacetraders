@@ -1,11 +1,10 @@
 package model_tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import model.core.Player;
 import model.core.Ship;
 import model.upgrades.Crew;
@@ -46,7 +45,7 @@ public class PlayerTests {
         /*
          * Postconditions
          */
-        assertEquals(skill, 10);
+        assertEquals(playerskill, 10);
     }
 
     @Test

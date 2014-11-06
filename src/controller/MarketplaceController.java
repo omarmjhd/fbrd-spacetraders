@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,11 +14,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+
 import model.commerce.Goods;
 import model.commerce.Marketplace;
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
+
 import view.Main;
 
 /**
@@ -113,16 +116,16 @@ public class MarketplaceController implements Initializable {
         marketView.getSelectionModel()
                         .selectedItemProperty()
                         .addListener((observable, oldValue, newValue) -> {
-                            if (newValue == null) {
-                                return;
-                            }
-                            if (marketplace.getPrice(newValue) > player.getMoney()) {
-                                buyButton.setDisable(true);
-                            } else if (marketplace.getPrice(newValue) <= player.getMoney()
-                                            && player.cargoRoomLeft() != 0) {
-                                buyButton.setDisable(false);
-                            }
-                        });
+                                if (newValue == null) {
+                                    return;
+                                }
+                                if (marketplace.getPrice(newValue) > player.getMoney()) {
+                                    buyButton.setDisable(true);
+                                } else if (marketplace.getPrice(newValue) <= player.getMoney()
+                                                && player.cargoRoomLeft() != 0) {
+                                    buyButton.setDisable(false);
+                                }
+                            });
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 

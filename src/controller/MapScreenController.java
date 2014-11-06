@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,12 +22,15 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+
 import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
 import model.events.RandomEvent;
+
 import view.Main;
 
 /**
@@ -109,9 +113,9 @@ public class MapScreenController implements Initializable {
      * The list of colors used for planets.
      */
     @FXML
-    private String[] colorList = { "blue", "aqua", "aquamarine", "BLUEVIOLET", "cadetblue",
-            "CHARTREUSE", "coral", "cornflowerblue",
-            "crimson", "cyan", "darkcyan", "goldenrod" };
+    private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "cadetblue",
+                                  "CHARTREUSE", "coral", "cornflowerblue",
+                                  "crimson", "cyan", "darkcyan", "goldenrod"};
 
     /**
      * Location of planet screen.

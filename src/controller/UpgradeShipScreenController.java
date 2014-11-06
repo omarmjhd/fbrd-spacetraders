@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,18 +13,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+
 import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
+import model.upgrades.AbstractGadget;
 import model.upgrades.CargoGadget;
 import model.upgrades.CloakingGadget;
 import model.upgrades.FuelGadget;
-import model.upgrades.AbstractGadget;
 import model.upgrades.HasPrice;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
+
 import view.Main;
 
 /**
@@ -107,13 +111,13 @@ public class UpgradeShipScreenController implements Initializable {
             switch (chance) {
                 case 0:
                     shipyardUpgrades.add(new CargoGadget(player.getShip()));
-                break;
+                    break;
                 case 1:
                     shipyardUpgrades.add(new CloakingGadget(player.getShip()));
-                break;
+                    break;
                 case 2:
                     shipyardUpgrades.add(new FuelGadget(player.getShip()));
-                break;
+                    break;
             }
 
         }
@@ -145,26 +149,27 @@ public class UpgradeShipScreenController implements Initializable {
         shipyardView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
-                    if (newValue == null) {
-                        return;
-                    }
-                    if (newValue.getPrice() > player.getMoney()) {
-                        buyButton.setDisable(true);
-                    } else if (newValue.getPrice() <= player.getMoney())
-                        if (Shield.class.isInstance(newValue)
-                                && ship.getShields().size() < ship.shieldsSize() ) {
-                            buyButton.setDisable(false);
-                        } else if (Weapon.class.isInstance(newValue)
-                                && ship.getWeapons().size() < ship.weaponsSize() ) {
-                            buyButton.setDisable(false);
-                        } else if (AbstractGadget.class.isInstance(newValue)
-                                && ship.getGadgets().size() < ship.gadgetSize() ) {
-                            buyButton.setDisable(false);
-                        } else {
+                        if (newValue == null) {
+                            return;
+                        }
+                        if (newValue.getPrice() > player.getMoney()) {
                             buyButton.setDisable(true);
+                        } else if (newValue.getPrice() <= player.getMoney()) {
+                            if (Shield.class.isInstance(newValue)
+                                    && ship.getShields().size() < ship.shieldsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (Weapon.class.isInstance(newValue)
+                                    && ship.getWeapons().size() < ship.weaponsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (AbstractGadget.class.isInstance(newValue)
+                                    && ship.getGadgets().size() < ship.gadgetSize() ) {
+                                buyButton.setDisable(false);
+                            } else {
+                                buyButton.setDisable(true);
+                            }
                         }
                     }
-                );
+            );
     }
 
     /**
