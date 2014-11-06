@@ -4,21 +4,36 @@ import java.io.Serializable;
 
 
 /**
- * This class holds all the specs for skills in a Player/Crew
+ * This class holds all the specs for skills in a Player/Crew.
  *
  * @author ngraves3
  *
  */
 public class SkillSet implements HasSkills, Serializable {
 
+    /**
+     * trading skill.
+     */
     private final int TRADE_SKILL;
 
+    /**
+     * fighting skill.
+     */
     private final int FIGHT_SKILL;
 
+    /**
+     * engineering skill.
+     */
     private final int ENG_SKILL;
 
+    /**
+     * piloting skill.
+     */
     private final int PILOT_SKILL;
 
+    /**
+     * investing skill.
+     */
     private final int INVEST_SKILL;
 
     public SkillSet(int trade, int fight, int eng, int pilot, int invest) {

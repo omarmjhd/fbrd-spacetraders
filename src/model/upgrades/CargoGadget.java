@@ -37,9 +37,7 @@ public class CargoGadget extends Gadget {
             effectApplied = true;
             //TODO add cargo room to ship
             List<Goods> currentCargo = ship.getCargo();
-            PresizedList<Goods> bigger =
-                            new PresizedList<>(currentCargo.size()
-                                            + additionalSize);
+            PresizedList<Goods> bigger = new PresizedList<>(ship.cargoSize() + additionalSize);
             for (Goods cargo : currentCargo) {
                 bigger.add(cargo);
             }

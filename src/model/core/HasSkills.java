@@ -1,7 +1,7 @@
 package model.core;
 
 /**
- * Interface to ensure skills are available for a Player/Crew
+ * Interface to ensure skills are available for a Player/Crew.
  *
  * @author ngraves3
  *
@@ -9,38 +9,38 @@ package model.core;
 public interface HasSkills {
 
     /**
-     * Returns trading skill
-     * 
+     * Returns trading skill.
+     *
      * @return int of trading skill
      */
-    public int getTradeSkill();
+    int getTradeSkill();
 
     /**
-     * Returns engineering skill
-     * 
+     * Returns engineering skill.
+     *
      * @return int of engineering skill
      */
-    public int getEngineeringSkill();
+    int getEngineeringSkill();
 
     /**
-     * Returns piloting skill
-     * 
+     * Returns piloting skill.
+     *
      * @return int of piloting skill
      */
-    public int getPilotSkill();
+    int getPilotSkill();
 
     /**
-     * Returns fighting skill
-     * 
+     * Returns fighting skill.
+     *
      * @return int of piloting skill
      */
-    public int getFightingSkill();
+    int getFightingSkill();
 
     /**
-     * Returns investing skill
-     * 
+     * Returns investing skill.
+     *
      * @return int of investing skill
      */
-    public int getInvestingSkill();
+    int getInvestingSkill();
 
 }
