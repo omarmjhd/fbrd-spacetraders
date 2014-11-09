@@ -106,8 +106,7 @@ public class ShipyardScreenController implements Initializable {
 
         //shows which are available on each planet
         if (currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
-            options =
-                    FXCollections.observableArrayList(
+            options = FXCollections.observableArrayList(
                     Ship.flea().toString()
             );
         } else if (currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
@@ -150,11 +149,14 @@ public class ShipyardScreenController implements Initializable {
         } else if (cur.equals("Bumblebee")) {
             currentShip = Ship.bumblebee();
         }
+
         Map<String, Integer> specs = currentShip.specs();
         String text = cur + newLine;
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Integer> e : specs.entrySet()) {
-            text += e.getKey() + ": " + e.getValue() + newLine;
+            sb.append(e.getKey()).append(": ").append(e.getValue()).append(newLine);
         }
+        text += sb;
 
         //ship cost label
         shipAttributes.setText(text);
