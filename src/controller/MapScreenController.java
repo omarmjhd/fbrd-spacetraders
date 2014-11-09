@@ -172,6 +172,9 @@ public class MapScreenController implements Initializable {
 
     }
 
+    /**
+     * Changes the labels when a new planet is clicked.
+     */
     EventHandler<MouseEvent> handleLabels = event -> {
         if (clickedPlanet) {
             travelDistance = playerLocation.distance(currentCirclePoint);
@@ -180,6 +183,9 @@ public class MapScreenController implements Initializable {
         }
     };
 
+    /**
+     * Draws a circle on the clicked planet.
+     */
     EventHandler<MouseEvent> drawClickedCircle = event -> {
         //if haven't already chosen a planet, just highlight clicked planet
         Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
@@ -201,6 +207,9 @@ public class MapScreenController implements Initializable {
         }
     };
 
+    /*
+     * Draws a line between the two planets.
+     */
     EventHandler<MouseEvent> drawLine = event -> {
         if (clickedPlanet) {
             currentLine.setStroke(null);
