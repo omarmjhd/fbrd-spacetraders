@@ -1,4 +1,4 @@
-package model;
+package model.commerce;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,10 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import model.core.Player;
+import model.core.TechLevel;
 
 /**
- * Class to act as a service provider between Planet and Player for trading
- * items
+ * Class to act as a service provider between Planet and Player for trading items.
  *
  * @author ngraves3
  *
@@ -17,41 +18,53 @@ import java.util.Random;
 public class Marketplace implements Serializable {
 
 
-    /*
-     * Planet tech affects the price of a good in the market
+    /**
+     * Planet tech affects the price of a good in the market.
      */
     private TechLevel planetTech;
 
-    /*
-     * Set of map of goods this planet can sell inherently (i.e. produce)
+    /**
+     * Set of map of goods this planet can sell inherently (i.e. produce).
      */
     private Map<Goods, Integer> productionPrices;
 
-    /*
-     * Map of goods this planet can buy. Min tech to produce is always >= min
-     * tech to use
+    /**
+     * Map of goods this planet can buy. Min tech to produce is always >= min tech to use.
      *
      * K(productionPrices) is a subset of K(purchasePrices)
      */
     private Map<Goods, Integer> purchasePrices;
 
+    /**
+     * A list of goods the market has for sale.
+     */
     private List<Goods> supply;
 
+    /**
+     * The player buying.
+     */
     private Player player;
 
     /**
-     * Instantiates a marketplace with the given planet's tech level
+     * Price modifer based on player's trade skill.
+     */
+    private int tradeSkillModifier;
+
+    /**
+     * Instantiates a marketplace with the given planet's tech level.
      *
-     * @param planet
-     *        the planet of the market
-     * @param player
+     * @param tech
+     *        the tech level of the planet
+     * @param playerArg
      *        the Player
      */
-    public Marketplace(Planet planet, Player player) {
-        this.planetTech = planet.getTechLevel();
-        this.player = player;
+    public Marketplace(TechLevel tech, Player playerArg) {
+        this.planetTech = tech;
+        this.player = playerArg;
         productionPrices = new HashMap<Goods, Integer>();
         purchasePrices = new HashMap<Goods, Integer>();
+        tradeSkillModifier = new Random().nextInt(2 * player.getTradeSkill() + 1);
+
 
         /*
          * Initialize goods the planet can produce
@@ -59,9 +72,10 @@ public class Marketplace implements Serializable {
         for (Goods item : Goods.values()) {
             /* Check if planetTech is higher than minTech for the good */
             if (planetTech.compareTo(item.minTechToProduce()) >= 0) {
-                productionPrices.put(item, item.price(planetTech));
+                productionPrices.put(item, adjustPriceOnSkills(item));
             }
         }
+
 
         /*
          * Initialize goods the planet can buy. Copy over production goods and
@@ -72,7 +86,7 @@ public class Marketplace implements Serializable {
         for (Goods item : Goods.values()) {
             if (!productionPrices.containsKey(item)
                             && planetTech.compareTo(item.minTechToUse()) >= 0) {
-                purchasePrices.put(item, item.price(planetTech));
+                purchasePrices.put(item, adjustPriceOnSkills(item));
             }
         }
 
@@ -87,6 +101,17 @@ public class Marketplace implements Serializable {
             supply.add(usableGoods[rand.nextInt(productionPrices.size())]);
         }
 
+    }
+
+    /**
+     * Returns the price of a good based on a player's trade skill.
+     *
+     * @param good
+     *        the good to get the price of
+     * @return the adjusted price
+     */
+    private int adjustPriceOnSkills(Goods good) {
+        return Math.max(good.price(planetTech) - tradeSkillModifier, 1);
     }
 
     /**
@@ -140,16 +165,17 @@ public class Marketplace implements Serializable {
     }
 
     /**
-     * Gets the price for a specific type of Goods
+     * Gets the price for a specific type of Goods.
      *
      * @param item
      *        a Good
      * @return price of the Good
      */
     public Integer getPrice(Goods item) {
-        if (!purchasePrices.containsKey(item)) {
-            return null;
+        if (purchasePrices.containsKey(item)) {
+            return purchasePrices.get(item);
         }
-        return purchasePrices.get(item);
+
+        return null;
     }
 }

@@ -1,7 +1,10 @@
-package model;
+package model.core;
 
 
 import java.io.Serializable;
+import model.commerce.Goods;
+import model.commerce.Marketplace;
+import model.commerce.Shipyard;
 
 
 /**
@@ -10,30 +13,55 @@ import java.io.Serializable;
  * @author Nick
  *
  */
-public class Planet implements Serializable{
+public class Planet implements Serializable {
 
+    /**
+     * Resource for this planet.
+     */
     private Goods resource;
+    /**
+     * Tech level for this planet.
+     */
     private TechLevel tech;
+    /**
+     * Name of this planet.
+     */
     private String name;
+    /**
+     * Marketplace specific to this planet.
+     */
     private Marketplace marketplace;
+    /**
+     * Shipyard specific to this planet.
+     */
     private Shipyard shipyard;
 
-    public Planet(String name, Goods resource, TechLevel tech) {
-        this.name = name;
-        this.resource = resource;
-        this.tech = tech;
+    /**
+     * Constructor for Planet.
+     *
+     * @param nameArg
+     *        name of the Planet
+     * @param resourceArg
+     *        resource of the planet
+     * @param techArg
+     *        tech level of the planet
+     */
+    public Planet(String nameArg, Goods resourceArg, TechLevel techArg) {
+        this.name = nameArg;
+        this.resource = resourceArg;
+        this.tech = techArg;
     }
 
     /**
-     * This method initializes the marketplace on a planet. It should be called
-     * after the player visits the planet. It creates a random supply of various
-     * goods
+     * This method initializes the marketplace on a planet. It should be called after the player
+     * visits the planet. It creates a random supply of various goods
      *
      * @param player
      *        the player model
+     * @return the marketplace created
      */
     public Marketplace enterMarket(Player player) {
-        marketplace = new Marketplace(this, player);
+        marketplace = new Marketplace(tech, player);
         return marketplace;
     }
 
@@ -42,7 +70,7 @@ public class Planet implements Serializable{
      *
      * @param player
      *        the Player entering the shipyard
-     * @return
+     * @return the shipyard created
      */
     public Shipyard enterShipyard(Player player) {
         shipyard = new Shipyard(marketplace, player);
@@ -59,7 +87,7 @@ public class Planet implements Serializable{
     }
 
     /**
-     * Determines if a Planet has as shipyard (techLevel is HI_TECH)
+     * Determines if a Planet has as shipyard (techLevel is HI_TECH).
      *
      * @return true if Planet is HI_TECH, false otherwise
      */
@@ -68,7 +96,7 @@ public class Planet implements Serializable{
     }
 
     /**
-     * Gets the Shipyard for buying new ships
+     * Gets the Shipyard for buying new ships.
      *
      * @return the shipyard being used
      */
@@ -77,7 +105,7 @@ public class Planet implements Serializable{
     }
 
     /**
-     * Returns the name of the planet
+     * Returns the name of the planet.
      *
      * @return name: String
      */
@@ -85,23 +113,33 @@ public class Planet implements Serializable{
         return name;
     }
 
+    /**
+     * Returns the resources of this Planet.
+     *
+     * @return the resources of this planet
+     */
     public Goods getResource() {
         return resource;
     }
 
+    /**
+     * Gets tech level of planet.
+     *
+     * @return return tech level of planet
+     */
     public TechLevel getTechLevel() {
         return tech;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || !(o instanceof Planet)) {
+    public boolean equals(Object other) {
+        if (other == null || !(other instanceof Planet)) {
             return false;
-        } else if (o == this) {
+        } else if (other == this) {
             return true;
         }
-        Planet p = (Planet) o;
-        return name.equals(p.getName());
+        Planet planet = (Planet) other;
+        return name.equals(planet.getName());
 
     }
 

@@ -1,4 +1,4 @@
-package model;
+package model.core;
 
 import java.io.Serializable;
 import java.util.AbstractList;
@@ -20,18 +20,44 @@ import java.util.NoSuchElementException;
 public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
                 Serializable {
 
+    /**
+     * Backing array.
+     */
     private T[] backing;
 
+    /**
+     * Size of list.
+     */
     private int size;
 
+    /**
+     * Constructor for presized list.
+     *
+     * @param maxSize
+     *        maximum size of list
+     */
     @SuppressWarnings("unchecked")
     public PresizedList(int maxSize) {
         backing = (T[]) new Object[maxSize];
         size = 0;
     }
 
+    /**
+     * Returns max size of list.
+     *
+     * @return max quantity of elements
+     */
     public int maxSize() {
         return backing.length;
+    }
+
+    /**
+     * Returns whether more elements can be added to this list.
+     *
+     * @return true iff the list has room
+     */
+    public boolean hasRoom() {
+        return size < backing.length;
     }
 
     @Override
@@ -47,7 +73,7 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
     @Override
     public boolean add(T item) throws IllegalArgumentException {
         if (item == null) {
-            throw new IllegalArgumentException("Items cannot be null");
+            throw new IllegalArgumentException("Items can't be null");
         }
         if (size >= backing.length) {
             throw new IllegalStateException("List is full");
@@ -64,22 +90,24 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
      * @param item
      *        the item to remove from the list
      * @return the item if found, null otherwise
+     * @throws IllegalArgumentException
+     *         if item is null
      */
     private T removeHelper(T item) throws IllegalArgumentException {
         if (item == null) {
             throw new IllegalArgumentException("Items cannot be null");
         }
         T retval = null;
-        int i = 0;
-        while (retval == null && i < size && i < backing.length) {
-            if (item.equals(backing[i])) {
-                retval = backing[i];
-                for (int j = i; j < (backing.length - 1); j++) {
+        int index = 0;
+        while (retval == null && index < size && index < backing.length) {
+            if (item.equals(backing[index])) {
+                retval = backing[index];
+                for (int j = index; j < (backing.length - 1); j++) {
                     backing[j] = backing[j + 1];
                 }
                 backing[backing.length - 1] = null;
             }
-            i++;
+            index++;
         }
         return retval;
     }
@@ -91,11 +119,11 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean remove(Object o) {
-        if (o == null) {
+    public boolean remove(Object obj) {
+        if (obj == null) {
             throw new IllegalArgumentException("Item cannot be null");
         }
-        T item = (T) o;
+        T item = (T) obj;
 
         T retval = removeHelper(item);
         if (retval != null) {
@@ -114,13 +142,16 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
     }
 
     /**
-     * Inner iterator
+     * Inner iterator.
      *
      * @author ngraves3
      *
      */
     private class Innerator implements Iterator<T> {
 
+        /**
+         * Keeps track of position.
+         */
         int index = 0;
 
         @Override

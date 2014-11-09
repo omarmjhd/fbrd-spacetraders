@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,29 +14,67 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import model.GameInstance;
-import model.Goods;
-import model.Marketplace;
-import model.Planet;
-import model.Player;
+
+import model.commerce.Goods;
+import model.commerce.Marketplace;
+import model.core.GameInstance;
+import model.core.Planet;
+import model.core.Player;
+
 import view.Main;
 
 /**
  *
  * @author jwinchester6
  */
-public class MarketplaceController implements Initializable{
+public class MarketplaceController implements Initializable {
+    /**
+     * market title.
+     */
     public Text marketTitle;
+    /**
+     * ship's good.
+     */
     public ListView<Goods> shipView;
+    /**
+     * market's good.
+     */
     public ListView<Goods> marketView;
+    /**
+     * buy button.
+     */
     public Button buyButton;
+    /**
+     * sell button.
+     */
     public Button sellButton;
+    /**
+     * player's money.
+     */
     public Label playerMoney;
+    /**
+     * current planet.
+     */
     private Planet currentPlanet;
+    /**
+     * planet's marketplace.
+     */
     private Marketplace marketplace;
+    /**
+     * game instance.
+     */
     private GameInstance gm;
+    /**
+     * the player.
+     */
     private Player player;
+    /**
+     * market's goods.
+     */
     private ObservableList<Goods> marketGoods = FXCollections.observableArrayList();
+    /**
+     * shipy's goods.
+     */
     private ObservableList<Goods> shipGoods = FXCollections.observableArrayList();
 
     @Override
@@ -74,22 +113,27 @@ public class MarketplaceController implements Initializable{
         // Loads the ListViews and displays the players cash
         marketView.setItems(marketGoods);
         shipView.setItems(shipGoods);
-        marketView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {return; }
-            if (marketplace.getPrice(newValue) > player.getMoney()) {
-                buyButton.setDisable(true);
-            } else if (marketplace.getPrice(newValue) <= player.getMoney()
-                    && player.cargoRoomLeft() != 0){
-                buyButton.setDisable(false);
-            }
-        });
+        marketView.getSelectionModel()
+                        .selectedItemProperty()
+                        .addListener((observable, oldValue, newValue) -> {
+                                if (newValue == null) {
+                                    return;
+                                }
+                                if (marketplace.getPrice(newValue) > player.getMoney()) {
+                                    buyButton.setDisable(true);
+                                } else if (marketplace.getPrice(newValue) <= player.getMoney()
+                                                && player.cargoRoomLeft() != 0) {
+                                    buyButton.setDisable(false);
+                                }
+                            });
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
     /**
-     * buys the selected item and does some validation
+     * Buys the selected item and does some validation.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void buy(ActionEvent actionEvent) {
         Goods boughtGood = marketView.getSelectionModel().getSelectedItem();
@@ -122,9 +166,10 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * Sells the selected item and does some validation
+     * Sells the selected item and does some validation.
      *
      * @param actionEvent
+     *        the trigger
      */
     public void sell(ActionEvent actionEvent) {
         if (shipView.getSelectionModel().getSelectedItem() == null) {
@@ -143,14 +188,20 @@ public class MarketplaceController implements Initializable{
         playerMoney.setText(String.valueOf(player.getMoney()));
     }
 
+    /**
+     * List Cell subclass that displays items correctly.
+     *
+     */
     class GoodsCell extends ListCell<Goods> {
 
         @Override
         public void updateItem(Goods item, boolean empty) {
             super.updateItem(item, empty);
+
             //second null check an ugly way to stop marketplace from crashing
             if (item != null && marketplace.getPrice(item) != null) {
                 setText(item.toString() + "  " + marketplace.getPrice(item));
+
             } else {
                 setText("");
             }
@@ -158,8 +209,10 @@ public class MarketplaceController implements Initializable{
     }
 
     /**
-     * goes back to the planet screen
+     * goes back to the planet screen.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void goToPlanet(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");

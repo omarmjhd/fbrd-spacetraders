@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,14 +22,16 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import model.*;
-import org.controlsfx.dialog.Dialogs;
-import view.Main;
 
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.ResourceBundle;
+import org.controlsfx.dialog.Dialogs;
+
+import model.core.GameInstance;
+import model.core.Player;
+import model.core.Point;
+import model.core.SolarSystem;
+import model.events.RandomEvent;
+
+import view.Main;
 
 /**
  * @version 2.0
@@ -34,35 +40,92 @@ import java.util.ResourceBundle;
  */
 public class MapScreenController implements Initializable {
 
+    /**
+     * don't change this.
+     */
     public AnchorPane root;
+    /**
+     * the map.
+     */
     public Pane mapPane;
+    /**
+     * travel button.
+     */
     public Button travelButton;
+    /**
+     * not enough fuel.
+     */
     public Text fuelError;
+    /**
+     * ship's fuel.
+     */
     public Label currentFuelLabel;
+    /**
+     * shows distance = fuel.
+     */
     public Label travelDistanceLabel;
-    public Label randomEventLabel;
+    /**
+     * game instance.
+     */
     private GameInstance gm;
-    private HashSet<SolarSystem> universe;
+    /**
+     * the universe.
+     */
+    private Set<SolarSystem> universe;
+    /**
+     * clicked planet.
+     */
     private boolean clickedPlanet = false;
+    /**
+     * current circle of clicked planet.
+     */
     private Circle currentCircle;
+    /**
+     * current line to travel.
+     */
     private Line currentLine;
+    /**
+     * player location.
+     */
     private Point playerLocation;
+    /**
+     * current point chosen by player.
+     */
     private Point currentCirclePoint;
+    /**
+     * travel distance to chosen planet.
+     */
     private int travelDistance;
+    /**
+     * astronaut image.
+     */
     private Image astronaut;
+    /**
+     * view of the astronaut.
+     */
     private ImageView astronautView;
+    /**
+     * the player.
+     */
     private Player player;
 
+    /**
+     * The list of colors used for planets.
+     */
     @FXML
+    private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "cadetblue",
+                                  "CHARTREUSE", "coral", "cornflowerblue",
+                                  "crimson", "cyan", "darkcyan", "goldenrod"};
 
-    private String[] colorList = {"blue", "aqua", "aquamarine", "BLUEVIOLET", "blue", "cadetblue", "CHARTREUSE",
-                                "coral", "cornflowerblue", "crimson", "cyan", "darkcyan", "goldenrod"};
+    /**
+     * Location of planet screen.
+     */
+    private String planetScreen = "screens/planetscreen.fxml";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
-
         travelDistanceLabel.setText("");
         playerLocation = gm.getCurrentSolarSystem().getPosition();
 
@@ -87,89 +150,107 @@ public class MapScreenController implements Initializable {
 
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
 
-        EventHandler<MouseEvent> handleLabels = event -> {
-            if (clickedPlanet) {
-                travelDistance = playerLocation.distance(currentCirclePoint);
-                travelDistanceLabel.setText("" + travelDistance);
-                checkFuel();
-            }
-        };
-
-        EventHandler<MouseEvent> drawClickedCircle = event -> {
-            //if haven't already chosen a planet, just highlight clicked planet
-            Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
-            Point chosenPlanet = new Point((int) clickedCircle.getCenterX(), (int) clickedCircle.getCenterY());
-            if (!clickedPlanet) {
-                currentCircle = clickedCircle;
-                currentCirclePoint = chosenPlanet;
-                currentCircle.setStroke(Color.RED);
-                currentCircle.setStrokeWidth(10);
-                clickedPlanet = true;
-            } else {
-//            changes the current chosen planet
-                currentCircle.setStroke(null);
-                currentCircle = clickedCircle;
-                currentCirclePoint = chosenPlanet;
-                currentCircle.setStroke(Color.RED);
-                currentCircle.setStrokeWidth(10);
-            }
-        };
-
-        EventHandler<MouseEvent> drawLine = event -> {
-            if (clickedPlanet) {
-                currentLine.setStroke(null);
-                currentLine.setEndX(currentCirclePoint.getX());
-                currentLine.setEndY(currentCirclePoint.getY());
-                currentLine.setStroke(Color.RED);
-                currentLine.setStrokeWidth(3);
-            }
-        };
 
         mapPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
-        Random random = new Random();
-        int b = 0;
+        int colorIndex = 0;
         for (SolarSystem s:  universe) {
             Point point = s.getPosition();
-            if (b >= colorList.length) { b =0;}
+            if (colorIndex >= colorList.length) {
+                colorIndex = 0;
+            }
             Circle circle = new Circle(point.getX(), point.getY(), 5,
-                    Paint.valueOf(colorList[b]));
+                                            Paint.valueOf(colorList[colorIndex]));
             circle.addEventHandler(MouseEvent.MOUSE_CLICKED, drawClickedCircle);
             mapPane.addEventHandler(MouseEvent.MOUSE_CLICKED, drawLine);
             mapPane.addEventHandler(MouseEvent.MOUSE_CLICKED, handleLabels);
             circle.setUserData(s);
             mapPane.getChildren().add(circle);
 
-            b++;
+            colorIndex++;
         }
 
     }
 
     /**
-     * Changes to the marketplace for chosen solar system
+     * Changes the labels when a new planet is clicked.
+     */
+    EventHandler<MouseEvent> handleLabels = event -> {
+        if (clickedPlanet) {
+            travelDistance = playerLocation.distance(currentCirclePoint);
+            travelDistanceLabel.setText("" + travelDistance);
+            checkFuel();
+        }
+    };
+
+    /**
+     * Draws a circle on the clicked planet.
+     */
+    EventHandler<MouseEvent> drawClickedCircle = event -> {
+        /**If haven't already chosen a planet, just highlight clicked planet.*/
+        Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
+        /**The planet that is clicked.*/
+        Point chosenPlanet = new Point((int) clickedCircle.getCenterX(),
+                (int) clickedCircle.getCenterY());
+        if (!clickedPlanet) {
+            currentCircle = clickedCircle;
+            currentCirclePoint = chosenPlanet;
+            currentCircle.setStroke(Color.RED);
+            currentCircle.setStrokeWidth(10);
+            clickedPlanet = true;
+        } else {
+        //changes the current chosen planet
+            currentCircle.setStroke(null);
+            currentCircle = clickedCircle;
+            currentCirclePoint = chosenPlanet;
+            currentCircle.setStroke(Color.RED);
+            currentCircle.setStrokeWidth(10);
+        }
+    };
+
+    /**
+     * Draws a line between the two planets.
+     */
+    EventHandler<MouseEvent> drawLine = event -> {
+        if (clickedPlanet) {
+            currentLine.setStroke(null);
+            currentLine.setEndX(currentCirclePoint.getX());
+            currentLine.setEndY(currentCirclePoint.getY());
+            currentLine.setStroke(Color.RED);
+            currentLine.setStrokeWidth(3);
+        }
+    };
+
+
+    /**
+     * Changes to the marketplace for chosen solar system.
+     *
      * @param actionEvent
+     *        the trigger
      */
     public void travel(ActionEvent actionEvent) {
         SolarSystem selectedSystem = (SolarSystem) currentCircle.getUserData();
         gm.setCurrentSolarSystem(selectedSystem);
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
+        gm.getPlayer().travel(travelDistance);
         RandomEvent randomEvent = new RandomEvent(player);
         String event = randomEvent.event();
         if (!event.equals("")) {
             Dialogs.create().owner(Main.getPrimaryStage())
-                    .title("Something has happened...").message(event).lightweight().showInformation();
+                            .title("Something has happened...").message(event)
+                            .lightweight().showInformation();
         }
-        gm.getPlayer().travel(travelDistance);
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
-        Main.setScene("screens/planetscreen.fxml");
+        gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
+        Main.setScene(planetScreen);
     }
 
     /**
-     * If the distance is too far for the amount of fuel, disables travel button
-     * and adds error Text
+     * If the distance is too far for the amount of fuel, disables travel button.
+     * and adds error Text.
      */
     private void checkFuel() {
-       if (clickedPlanet) {
+        if (clickedPlanet) {
             if (travelDistance > gm.getPlayer().getCurrentFuel()) {
                 travelButton.setDisable(true);
                 fuelError.setText("Not enough fuel :(");
@@ -177,19 +258,21 @@ public class MapScreenController implements Initializable {
                 travelButton.setDisable(false);
                 fuelError.setText("");
             }
-       } else {
-           travelButton.setDisable(false);
-           fuelError.setText("");
-       }
+        } else {
+            travelButton.setDisable(false);
+            fuelError.setText("");
+        }
     }
 
     /**
-     * makes the planet screen
+     * makes the planet screen.
      *
      * @param actionEvent
+     *        the trigger
+     *
      */
     public void returnToPlanet(ActionEvent actionEvent) {
-        Main.setScene("screens/planetscreen.fxml");
+        Main.setScene(planetScreen);
     }
 
 }

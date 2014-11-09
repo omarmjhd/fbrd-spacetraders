@@ -1,16 +1,39 @@
-package model;
+package model.commerce;
 
-public class Shipyard {
+import java.io.Serializable;
+import model.core.Player;
+import model.core.Ship;
+import model.upgrades.HasPrice;
 
-    /* Knows about market to get prices for goods */
+/**
+ * Class representing the Shipyard where a player can upgrade and swap ships.
+ *
+ * @author ngraves3
+ *
+ */
+public class Shipyard implements Serializable {
+
+    /**
+     * Knows about market to get prices for goods.
+     */
     private Marketplace marketplace;
 
-    /* Knows about player to get ship */
+    /**
+     * Knows about player to get ship and add/remove money.
+     */
     private Player player;
 
-    public Shipyard(Marketplace marketplace, Player player) {
-        this.marketplace = marketplace;
-        this.player = player;
+    /**
+     * Constructor for shipyard.
+     *
+     * @param marketplaceArg
+     *        the market to draw cargo prices from
+     * @param playerArg
+     *        the player buying the ship
+     */
+    public Shipyard(Marketplace marketplaceArg, Player playerArg) {
+        this.marketplace = marketplaceArg;
+        this.player = playerArg;
     }
 
     /**
@@ -25,10 +48,16 @@ public class Shipyard {
     public int costToBuy(Ship shipToBuy) {
 
         int total = shipToBuy.getPrice();
+
         for (Goods cargo : player.getCargo()) {
             total -= marketplace.getPrice(cargo);
-            //implement other price modifiers like shields, goods, cargo
         }
+
+        for (HasPrice upgrade : player.getUpgrades()) {
+            total -= upgrade.getPrice();
+        }
+
+        total -= player.getShipBasePrice();
 
         return total;
     }
