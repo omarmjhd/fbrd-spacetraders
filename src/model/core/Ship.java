@@ -1,15 +1,15 @@
 package model.core;
 
+import model.commerce.Goods;
+import model.upgrades.AbstractGadget;
+import model.upgrades.Crew;
+import model.upgrades.Shield;
+import model.upgrades.Weapon;
+
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.Map;
 import java.util.TreeMap;
-
-import model.commerce.Goods;
-import model.upgrades.Crew;
-import model.upgrades.AbstractGadget;
-import model.upgrades.Shield;
-import model.upgrades.Weapon;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -24,7 +24,7 @@ import model.upgrades.Weapon;
  * @author ngraves3
  *
  */
-public class Ship implements Serializable {
+public final class Ship implements Serializable {
 
     /**
      * makes a flea.
