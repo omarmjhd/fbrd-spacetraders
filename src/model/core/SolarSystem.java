@@ -71,7 +71,8 @@ public class SolarSystem implements Serializable {
 
         for (Planet p: planets) {
 
-            planetString.append(" " + p.toString());
+            planetString.append(" ");
+            planetString.append(p.toString());
 
         }
 

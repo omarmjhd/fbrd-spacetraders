@@ -370,7 +370,8 @@ public final class GameInstance implements Serializable {
 
         for (SolarSystem s: solarSystems) {
 
-            gameString.append(" " + s.toString());
+            gameString.append(" ");
+            gameString.append(s.toString());
 
         }
         String term = "\n\n";
