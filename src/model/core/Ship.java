@@ -262,8 +262,8 @@ public final class Ship implements Serializable {
     }
 
     /**
-     * Returns whether the ship is visible
-     * 
+     * Returns whether the ship is visible.
+     *
      * @return whether the ship can be seen
      */
     public boolean isVisible() {
