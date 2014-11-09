@@ -187,8 +187,9 @@ public class MapScreenController implements Initializable {
      * Draws a circle on the clicked planet.
      */
     EventHandler<MouseEvent> drawClickedCircle = event -> {
-        //if haven't already chosen a planet, just highlight clicked planet
+        /**If haven't already chosen a planet, just highlight clicked planet.*/
         Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
+        /**The planet that is clicked.*/
         Point chosenPlanet = new Point((int) clickedCircle.getCenterX(),
                 (int) clickedCircle.getCenterY());
         if (!clickedPlanet) {
@@ -207,7 +208,7 @@ public class MapScreenController implements Initializable {
         }
     };
 
-    /*
+    /**
      * Draws a line between the two planets.
      */
     EventHandler<MouseEvent> drawLine = event -> {
