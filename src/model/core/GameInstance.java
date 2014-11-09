@@ -328,9 +328,12 @@ public final class GameInstance implements Serializable {
      */
     public boolean loadGameInstance(String saveFileLocation) {
 
+        FileInputStream openFile = null;
+        ObjectInputStream restore = null;
+
         try {
-            FileInputStream openFile = new FileInputStream(saveFileLocation);
-            ObjectInputStream restore = new ObjectInputStream(openFile);
+            openFile = new FileInputStream(saveFileLocation);
+            restore = new ObjectInputStream(openFile);
 
             HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
             HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
@@ -355,6 +358,16 @@ public final class GameInstance implements Serializable {
             f.printStackTrace();
         } catch (ClassNotFoundException g) {
             g.printStackTrace();
+        } finally {
+
+            try {
+                openFile.close();
+                restore.close();
+
+            } catch (IOException h) {
+                h.printStackTrace();
+            }
+
         }
 
 
