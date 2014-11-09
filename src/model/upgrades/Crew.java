@@ -1,5 +1,7 @@
 package model.upgrades;
 
+import java.io.Serializable;
+
 import model.core.HasSkills;
 import model.core.SkillSet;
 
@@ -10,7 +12,7 @@ import model.core.SkillSet;
  * @author ngraves3
  *
  */
-public class Crew implements HasPrice, HasSkills {
+public class Crew implements HasPrice, HasSkills, Serializable {
 
     /**
      * The crew member's skills.
