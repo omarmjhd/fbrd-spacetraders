@@ -1,9 +1,9 @@
 package model.events;
 
+import java.util.Random;
+
 import model.commerce.Goods;
 import model.core.Player;
-
-import java.util.Random;
 
 /**
  * A class representing random events. These are things such as losing fuel, gaining or losing an
@@ -69,7 +69,7 @@ public class RandomEvent {
      * @author ngraves3
      *
      */
-    private class MoneyEvent extends RandomEvent {
+    private static class MoneyEvent extends RandomEvent {
 
         /**
          * Phrases for gaining money.
@@ -128,7 +128,7 @@ public class RandomEvent {
      * @author ngraves3
      *
      */
-    private class GoodsEvent extends RandomEvent {
+    private static class GoodsEvent extends RandomEvent {
 
         /**
          * Phrases for losing an item.
@@ -196,7 +196,7 @@ public class RandomEvent {
      * @author ngraves3
      *
      */
-    private class FuelEvent extends RandomEvent {
+    private static class FuelEvent extends RandomEvent {
 
         /**
          * Phrases for losing fuel.
