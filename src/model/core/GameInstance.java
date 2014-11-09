@@ -298,8 +298,7 @@ public final class GameInstance implements Serializable {
 
         try {
             if (!saveDirectoryCreated) {
-                file.mkdir();
-                saveDirectoryCreated = true;
+                saveDirectoryCreated = file.mkdir();
             }
             FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
@@ -361,6 +360,7 @@ public final class GameInstance implements Serializable {
         } finally {
 
             try {
+
                 openFile.close();
                 restore.close();
 
