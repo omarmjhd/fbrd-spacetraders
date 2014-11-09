@@ -142,15 +142,14 @@ public class ConfigScreenController implements Initializable {
                 Main.setScene("screens/mapscreen.fxml");
             }
         } else if (total > 15) {
-            Action response =
-                    Dialogs.create()
+             Dialogs.create()
                     .owner(Main.getPrimaryStage())
                     .title("Too Many Skill Points")
                     .message("You have used " + total + " skill points."
-                                    + " You are only allowed 15. \n Try again.")
+                            + " You are only allowed 15. \n Try again.")
                     .lightweight().showWarning();
         } else {
-            Action response = Dialogs.create()
+            Dialogs.create()
                     .owner(Main.getPrimaryStage())
                     .title("Invalid Name")
                     .message("You have not entered a name.")

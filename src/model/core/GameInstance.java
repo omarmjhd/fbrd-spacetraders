@@ -38,7 +38,7 @@ public final class GameInstance implements Serializable {
     /**
      * The points which are the locations of the solar systems.
      */
-    private HashSet<Point> points = new HashSet<>();
+    private Set<Point> points = new HashSet<>();
     /**
      * Player's current location.
      */
@@ -372,14 +372,13 @@ public final class GameInstance implements Serializable {
 
         for (SolarSystem s: solarSystems) {
 
-            gameString.append(" ");
-            gameString.append(s.toString());
+            gameString.append(" ").append(s.toString());
 
         }
         String term = "\n\n";
-        gameString.append(term + " Current Player: " + player.toString() + term);
-        gameString.append("Current Planet: " + currentPlanet.toString() + term);
-        gameString.append("Current SolarSystem: " + currentSolarSystem.toString() + term);
+        gameString.append(term).append(" Current Player: ").append(player.toString()).append(term);
+        gameString.append("Current Planet: ").append(currentPlanet.toString()).append(term);
+        gameString.append("Current SolarSystem: ").append(currentSolarSystem.toString()).append(term);
 
 
         return gameString.toString();
