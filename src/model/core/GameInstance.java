@@ -378,20 +378,21 @@ public final class GameInstance implements Serializable {
     @Override
     public String toString() {
 
-        String gameString = "SOLAR: ";
+        StringBuilder gameString = new StringBuilder();
+        gameString.append("SOLAR: ");
 
         for (SolarSystem s: solarSystems) {
 
-            gameString = gameString + " " + s.toString();
+            gameString.append(" " + s.toString());
 
         }
         String term = "\n\n";
-        gameString += "\n\n Current Player: " + player.toString() + term;
-        gameString += "Current Planet: " + currentPlanet.toString() + term;
-        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + term;
+        gameString.append(term + " Current Player: " + player.toString() + term);
+        gameString.append("Current Planet: " + currentPlanet.toString() + term);
+        gameString.append("Current SolarSystem: " + currentSolarSystem.toString() + term);
 
 
-        return gameString;
+        return gameString.toString();
     }
 
 }
