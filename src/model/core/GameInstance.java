@@ -327,29 +327,29 @@ public final class GameInstance implements Serializable {
      */
     public boolean loadGameInstance(String saveFileLocation) {
 
-        FileInputStream openFile = null;
-        ObjectInputStream restore = null;
+        try (FileInputStream openFile = new FileInputStream(saveFileLocation)) {
+            try (ObjectInputStream restore = new ObjectInputStream(openFile)) {
 
-        try {
-            openFile = new FileInputStream(saveFileLocation);
-            restore = new ObjectInputStream(openFile);
+                HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
+                HashSet<SolarSystem> solarSystemsRestored =
+                                (HashSet<SolarSystem>) restore.readObject();
+                Player restoredPlayer = (Player) restore.readObject();
+                Planet restoredCurrentPlanet = (Planet) restore.readObject();
+                SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
 
-            HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
-            HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
-            Player restoredPlayer = (Player) restore.readObject();
-            Planet restoredCurrentPlanet = (Planet) restore.readObject();
-            SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
+                this.setPlanets(planetsRestored);
+                this.setSolarSystems(solarSystemsRestored);
+                this.setPlayer(restoredPlayer);
+                this.setCurrentSolarSystem(restoredCurrentSolarSystem);
+                this.setCurrentPlanet(restoredCurrentPlanet);
 
-            this.setPlanets(planetsRestored);
-            this.setSolarSystems(solarSystemsRestored);
-            this.setPlayer(restoredPlayer);
-            this.setCurrentSolarSystem(restoredCurrentSolarSystem);
-            this.setCurrentPlanet(restoredCurrentPlanet);
+                openFile.close();
+                restore.close();
 
-            openFile.close();
-            restore.close();
+                return true;
+            } catch (IOException ioe) {
 
-            return true;
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -357,17 +357,6 @@ public final class GameInstance implements Serializable {
             f.printStackTrace();
         } catch (ClassNotFoundException g) {
             g.printStackTrace();
-        } finally {
-
-            try {
-
-                openFile.close();
-                restore.close();
-
-            } catch (IOException h) {
-                h.printStackTrace();
-            }
-
         }
 
 
