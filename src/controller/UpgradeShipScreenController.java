@@ -60,17 +60,9 @@ public class UpgradeShipScreenController implements Initializable {
      */
     public ListView<HasPrice> shipView;
     /**
-     * game instance.
-     */
-    private GameInstance gi;
-    /**
      * the player.
      */
     private Player player;
-    /**
-     * tech level.
-     */
-    private TechLevel techLevel;
     /**
      * player's ship.
      */
@@ -90,9 +82,15 @@ public class UpgradeShipScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gi = GameInstance.getInstance();
+        /*
+      game instance.
+     */
+        GameInstance gi = GameInstance.getInstance();
         player = gi.getPlayer();
-        techLevel = gi.getCurrentPlanet().getTechLevel();
+        /*
+      tech level.
+     */
+        TechLevel techLevel = gi.getCurrentPlanet().getTechLevel();
         ship = player.getShip();
         playerMoney.setText(Integer.toString(player.getMoney()));
 
@@ -108,16 +106,15 @@ public class UpgradeShipScreenController implements Initializable {
         // Populates the market
         if (techLevel == TechLevel.HI_TECH) {
             int chance = random.nextInt(3);
-            switch (chance) {
-                case 0:
-                    shipyardUpgrades.add(new CargoGadget(player.getShip()));
-                    break;
-                case 1:
-                    shipyardUpgrades.add(new CloakingGadget(player.getShip()));
-                    break;
-                case 2:
-                    shipyardUpgrades.add(new FuelGadget(player.getShip()));
-                    break;
+            if (chance == 0) {
+                shipyardUpgrades.add(new CargoGadget(player.getShip()));
+
+            } else if (chance == 1) {
+                shipyardUpgrades.add(new CloakingGadget(player.getShip()));
+
+            } else if (chance == 2) {
+                shipyardUpgrades.add(new FuelGadget(player.getShip()));
+
             }
 
         }
