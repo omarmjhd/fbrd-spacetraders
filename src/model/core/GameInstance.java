@@ -1,11 +1,18 @@
 package model.core;
 
-import model.commerce.Goods;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import model.commerce.Goods;
 
 /**
  * Singleton game monitor. The game model will control the passing of turns and
@@ -321,9 +328,12 @@ public final class GameInstance implements Serializable {
      */
     public boolean loadGameInstance(String saveFileLocation) {
 
+        FileInputStream openFile = null;
+        ObjectInputStream restore = null;
+
         try {
-            FileInputStream openFile = new FileInputStream(saveFileLocation);
-            ObjectInputStream restore = new ObjectInputStream(openFile);
+            openFile = new FileInputStream(saveFileLocation);
+            restore = new ObjectInputStream(openFile);
 
             HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
             HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
@@ -338,6 +348,7 @@ public final class GameInstance implements Serializable {
             this.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
+            restore.close();
 
             return true;
 
@@ -347,6 +358,16 @@ public final class GameInstance implements Serializable {
             f.printStackTrace();
         } catch (ClassNotFoundException g) {
             g.printStackTrace();
+        } finally {
+
+            try {
+                openFile.close();
+                restore.close();
+
+            } catch (IOException h) {
+                h.printStackTrace();
+            }
+
         }
 
 
@@ -357,20 +378,22 @@ public final class GameInstance implements Serializable {
     @Override
     public String toString() {
 
-        String gameString = "SOLAR: ";
+        StringBuilder gameString = new StringBuilder();
+        gameString.append("SOLAR: ");
 
         for (SolarSystem s: solarSystems) {
 
-            gameString = gameString + " " + s.toString();
+            gameString.append(" ");
+            gameString.append(s.toString());
 
         }
         String term = "\n\n";
-        gameString += "\n\n Current Player: " + player.toString() + term;
-        gameString += "Current Planet: " + currentPlanet.toString() + term;
-        gameString += "Current SolarSystem: " + currentSolarSystem.toString() + term;
+        gameString.append(term + " Current Player: " + player.toString() + term);
+        gameString.append("Current Planet: " + currentPlanet.toString() + term);
+        gameString.append("Current SolarSystem: " + currentSolarSystem.toString() + term);
 
 
-        return gameString;
+        return gameString.toString();
     }
 
 }

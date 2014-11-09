@@ -1,5 +1,7 @@
 package model.upgrades;
 
+import java.io.Serializable;
+
 import model.core.Ship;
 import model.core.Utilities;
 
@@ -12,7 +14,7 @@ import model.core.Utilities;
  * @author ngraves3
  *
  */
-public abstract class AbstractGadget extends AbstractCommand implements HasPrice {
+public abstract class AbstractGadget extends AbstractCommand implements HasPrice, Serializable {
 
     /**
      * name of the gadget.
@@ -31,7 +33,7 @@ public abstract class AbstractGadget extends AbstractCommand implements HasPrice
 
     /**
      * Constructor for an abstract gadget.
-     * 
+     *
      * @param nameArg
      *        name of gadget
      * @param shipArg

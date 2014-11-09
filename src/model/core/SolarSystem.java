@@ -67,16 +67,17 @@ public class SolarSystem implements Serializable {
 
     @Override
     public String toString() {
-        String planetString = "";
+        StringBuilder planetString = new StringBuilder();
 
         for (Planet p: planets) {
 
-            planetString = planetString + " " + p.toString();
+            planetString.append(" ");
+            planetString.append(p.toString());
 
         }
 
-        return "Solar System Name: " + name + "\nPoint: " + pos.toString()
-                        + "\n" + planetString;
+        return "Solar System Name: " + name + "\nPoint: " + pos.toString() + "\n"
+                        + planetString.toString();
 
     }
 
