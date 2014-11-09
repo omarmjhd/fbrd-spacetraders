@@ -3,9 +3,10 @@ package model_tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import model.commerce.Goods;
 import model.commerce.Marketplace;
 import model.core.Player;
@@ -21,7 +22,7 @@ public class MarketplaceTests {
     public void setUp() throws Exception {
         proxy = new Player("Proxy", 5, 5, 5, 5, 5);
 
-        tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
+        tech = TechLevel.values()[1];
         market = new Marketplace(tech, proxy);
 
     }
@@ -53,8 +54,10 @@ public class MarketplaceTests {
             //add checks to make sure the money and supply is updated correctly
             if (g.minTechToUse().ordinal() > tech.ordinal()) {
                 //Ensure player can only sell to appropriate TechLevel
+                System.out.println("Didn't sell");
                 assertFalse(market.playerSells(g));
             } else {
+                System.out.println(g);
                 /*
                  * Constants beforehand
                  */
