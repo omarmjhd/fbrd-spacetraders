@@ -345,6 +345,7 @@ public final class GameInstance implements Serializable {
             this.setCurrentPlanet(restoredCurrentPlanet);
 
             openFile.close();
+            restore.close();
 
             return true;
 
