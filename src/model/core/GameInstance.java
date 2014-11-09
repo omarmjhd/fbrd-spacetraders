@@ -1,11 +1,18 @@
 package model.core;
 
-import model.commerce.Goods;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import model.commerce.Goods;
 
 /**
  * Singleton game monitor. The game model will control the passing of turns and
