@@ -1,18 +1,11 @@
 package model.core;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import model.commerce.Goods;
+
+import java.io.*;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
-import model.commerce.Goods;
 
 /**
  * Singleton game monitor. The game model will control the passing of turns and
@@ -21,7 +14,7 @@ import model.commerce.Goods;
  * @author ngraves3
  *
  */
-public class GameInstance implements Serializable {
+public final class GameInstance implements Serializable {
 
     /**
      * The player playing.
@@ -270,9 +263,9 @@ public class GameInstance implements Serializable {
             if (startingLocation == i) {
 
                 setCurrentPlanet(planet);
-                System.out.println(getCurrentPlanet());
+                //System.out.println(getCurrentPlanet());
                 setCurrentSolarSystem(solarsystem);
-                System.out.println(getCurrentSolarSystem());
+                //System.out.println(getCurrentSolarSystem());
 
             }
 

@@ -1,9 +1,9 @@
 package model.events;
 
-import java.util.Random;
-
 import model.commerce.Goods;
 import model.core.Player;
+
+import java.util.Random;
 
 /**
  * A class representing random events. These are things such as losing fuel, gaining or losing an
@@ -38,6 +38,29 @@ public class RandomEvent {
     public RandomEvent(Player playerArg) {
         this.player = playerArg;
         rand = new Random();
+    }
+
+    /**
+     * this method makes a random event happen in the game universe. It will
+     * randomly choose one type of random event and execute it. It has a 10%
+     * chance of executing an event
+     *
+     * @return the message from the event
+     */
+    public String event() {
+        if (events == null) {
+            events = new RandomEvent[] {new MoneyEvent(player), new GoodsEvent(player),
+                    new FuelEvent(player)};
+        }
+
+        if (rand.nextInt(10) == 0) {
+
+            int eventType = rand.nextInt(events.length);
+            return events[eventType].event();
+        }
+
+
+        return "";
     }
 
     /**
@@ -166,6 +189,7 @@ public class RandomEvent {
 
     }
 
+
     /**
      * Inner class to handle random events with fuel.
      *
@@ -173,6 +197,7 @@ public class RandomEvent {
      *
      */
     private class FuelEvent extends RandomEvent {
+
         /**
          * Phrases for losing fuel.
          */
@@ -205,30 +230,7 @@ public class RandomEvent {
 
         }
 
-    }
 
-
-    /**
-     * this method makes a random event happen in the game universe. It will
-     * randomly choose one type of random event and execute it. It has a 10%
-     * chance of executing an event
-     *
-     * @return the message from the event
-     */
-    public String event() {
-        if (events == null) {
-            events = new RandomEvent[] {new MoneyEvent(player), new GoodsEvent(player),
-                                        new FuelEvent(player)};
-        }
-
-        if (rand.nextInt(10) == 0) {
-
-            int eventType = rand.nextInt(events.length);
-            return events[eventType].event();
-        }
-
-
-        return "";
     }
 
 }
