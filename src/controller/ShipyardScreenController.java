@@ -62,14 +62,6 @@ public class ShipyardScreenController implements Initializable {
      */
     private Ship currentShip;
     /**
-     * current planet.
-     */
-    private Planet currentPlanet;
-    /**
-     * gamer instance.
-     */
-    private GameInstance gm;
-    /**
      * the player.
      */
     private Player player;
@@ -85,19 +77,16 @@ public class ShipyardScreenController implements Initializable {
      * the ship that the player chose.
      */
     private Ship playership;
-    /**
-     * shut up checkstyle.
-     */
-    private String newLine = "\n";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.gm = GameInstance.getInstance();
+        GameInstance gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
         playership = player.getShip();
         playershipLabel.setText(
                 playership.toString());
-        currentPlanet = gm.getCurrentPlanet();
+
+        Planet currentPlanet = gm.getCurrentPlanet();
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
@@ -151,6 +140,8 @@ public class ShipyardScreenController implements Initializable {
         }
 
         Map<String, Integer> specs = currentShip.specs();
+
+        String newLine = "\n";
         String text = cur + newLine;
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Integer> e : specs.entrySet()) {

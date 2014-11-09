@@ -38,7 +38,7 @@ public final class GameInstance implements Serializable {
     /**
      * The points which are the locations of the solar systems.
      */
-    private HashSet<Point> points = new HashSet<>();
+    private Set<Point> points = new HashSet<>();
     /**
      * Player's current location.
      */
@@ -298,8 +298,7 @@ public final class GameInstance implements Serializable {
 
         try {
             if (!saveDirectoryCreated) {
-                file.mkdir();
-                saveDirectoryCreated = true;
+                saveDirectoryCreated = file.mkdir();
             }
             FileOutputStream saveFile = new FileOutputStream(file.getAbsoluteFile() + File.separator + player.getName() + ".sav");
             ObjectOutputStream save = new ObjectOutputStream(saveFile);
@@ -328,29 +327,29 @@ public final class GameInstance implements Serializable {
      */
     public boolean loadGameInstance(String saveFileLocation) {
 
-        FileInputStream openFile = null;
-        ObjectInputStream restore = null;
+        try (FileInputStream openFile = new FileInputStream(saveFileLocation)) {
+            try (ObjectInputStream restore = new ObjectInputStream(openFile)) {
 
-        try {
-            openFile = new FileInputStream(saveFileLocation);
-            restore = new ObjectInputStream(openFile);
+                HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
+                HashSet<SolarSystem> solarSystemsRestored =
+                                (HashSet<SolarSystem>) restore.readObject();
+                Player restoredPlayer = (Player) restore.readObject();
+                Planet restoredCurrentPlanet = (Planet) restore.readObject();
+                SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
 
-            HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
-            HashSet<SolarSystem> solarSystemsRestored = (HashSet<SolarSystem>) restore.readObject();
-            Player restoredPlayer = (Player) restore.readObject();
-            Planet restoredCurrentPlanet = (Planet) restore.readObject();
-            SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
+                this.setPlanets(planetsRestored);
+                this.setSolarSystems(solarSystemsRestored);
+                this.setPlayer(restoredPlayer);
+                this.setCurrentSolarSystem(restoredCurrentSolarSystem);
+                this.setCurrentPlanet(restoredCurrentPlanet);
 
-            this.setPlanets(planetsRestored);
-            this.setSolarSystems(solarSystemsRestored);
-            this.setPlayer(restoredPlayer);
-            this.setCurrentSolarSystem(restoredCurrentSolarSystem);
-            this.setCurrentPlanet(restoredCurrentPlanet);
+                openFile.close();
+                restore.close();
 
-            openFile.close();
-            restore.close();
+                return true;
+            } catch (IOException ioe) {
 
-            return true;
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -358,16 +357,6 @@ public final class GameInstance implements Serializable {
             f.printStackTrace();
         } catch (ClassNotFoundException g) {
             g.printStackTrace();
-        } finally {
-
-            try {
-                openFile.close();
-                restore.close();
-
-            } catch (IOException h) {
-                h.printStackTrace();
-            }
-
         }
 
 
@@ -383,14 +372,13 @@ public final class GameInstance implements Serializable {
 
         for (SolarSystem s: solarSystems) {
 
-            gameString.append(" ");
-            gameString.append(s.toString());
+            gameString.append(" ").append(s.toString());
 
         }
         String term = "\n\n";
-        gameString.append(term + " Current Player: " + player.toString() + term);
-        gameString.append("Current Planet: " + currentPlanet.toString() + term);
-        gameString.append("Current SolarSystem: " + currentSolarSystem.toString() + term);
+        gameString.append(term).append(" Current Player: ").append(player.toString()).append(term);
+        gameString.append("Current Planet: ").append(currentPlanet.toString()).append(term);
+        gameString.append("Current SolarSystem: ").append(currentSolarSystem.toString()).append(term);
 
 
         return gameString.toString();
