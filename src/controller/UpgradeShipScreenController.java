@@ -76,6 +76,7 @@ public class UpgradeShipScreenController implements Initializable {
      * random number generator.
      */
     private Random random = new Random();
+    private TechLevel techLevel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -87,7 +88,7 @@ public class UpgradeShipScreenController implements Initializable {
         /*
       tech level.
      */
-        TechLevel techLevel = gi.getCurrentPlanet().getTechLevel();
+        techLevel = gi.getCurrentPlanet().getTechLevel();
         ship = player.getShip();
         playerMoney.setText(Integer.toString(player.getMoney()));
 

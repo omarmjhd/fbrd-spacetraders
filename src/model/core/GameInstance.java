@@ -1,18 +1,11 @@
 package model.core;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import model.commerce.Goods;
+
+import java.io.*;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
-import model.commerce.Goods;
 
 /**
  * Singleton game monitor. The game model will control the passing of turns and
@@ -239,6 +232,9 @@ public final class GameInstance implements Serializable {
             throw new IllegalArgumentException(
                             "Number is bigger than planet names");
         }
+        solarSystems.clear();
+        planets.clear();
+        points.clear();
         Random rand = new Random();
         int startingLocation = rand.nextInt(number) - 1;
 
@@ -384,4 +380,7 @@ public final class GameInstance implements Serializable {
         return gameString.toString();
     }
 
+    public Set<Point> getPoints() {
+        return points;
+    }
 }
