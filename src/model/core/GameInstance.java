@@ -17,6 +17,10 @@ import java.util.Set;
 public final class GameInstance implements Serializable {
 
     /**
+     * Reference to the Singleton GameInstance.
+     */
+    private static GameInstance instance = new GameInstance();
+    /**
      * The player playing.
      */
     private Player player;
@@ -60,7 +64,6 @@ public final class GameInstance implements Serializable {
         "Klaestron", "Korma", "Kravat", "Krios", "Laertes", "Largo", "Lave", "Ligon", "Lowry",
         "Magrat", "Malcoria", "Melina", "Mentar", "Merik", "Mintaka", "Montor", "Mordan",
         "Myrthe"};
-
     /**
      * Solar system names for the game. May or may not use all.
      */
@@ -79,11 +82,6 @@ public final class GameInstance implements Serializable {
         "Zalkon", "Zuul"};
 
     /**
-     * Reference to the Singleton GameInstance.
-     */
-    private static GameInstance instance = new GameInstance();
-
-    /**
      * Private constructor for Singleton. Prevents others from accessing
      */
     private GameInstance() { //private constructor for singleton
@@ -96,101 +94,6 @@ public final class GameInstance implements Serializable {
      */
     public static GameInstance getInstance() {
         return instance;
-    }
-
-    /**
-     * Gets the player's current planet.
-     *
-     * @return player's current planet
-     */
-    public Planet getCurrentPlanet() {
-        return currentPlanet;
-    }
-
-    /**
-     * Sets the player's location to a planet.
-     *
-     * @param destination
-     *        the planet to go to
-     */
-    public void setCurrentPlanet(Planet destination) {
-        this.currentPlanet = destination;
-    }
-
-    /**
-     * Sets a player for this game instance.
-     *
-     * @param data
-     *        the Player to use for this instance
-     */
-    public void setPlayer(Player data) {
-        player = data;
-    }
-
-    /**
-     * Returns the player for the instance of this game.
-     *
-     * @return the Player
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
-     * Returns the solar system the player is in.
-     *
-     * @return the current solar system
-     */
-    public SolarSystem getCurrentSolarSystem() {
-        return currentSolarSystem;
-    }
-
-    /**
-     * Sets the current solar system to whatever is passed in.
-     *
-     * @param destination
-     *        the new solar system
-     */
-    public void setCurrentSolarSystem(SolarSystem destination) {
-        currentSolarSystem = destination;
-    }
-
-    /**
-     * Returns a Set of the solar systems.
-     *
-     * @return Set of solar systems
-     */
-    public Set<SolarSystem> getSolarSystems() {
-        return solarSystems;
-    }
-
-    /**
-     * Returns a set of the planets.
-     *
-     * @return set of planets
-     */
-    public Set<Planet> getPlanets() {
-        return planets;
-    }
-
-    /**
-     * Sets the planet to the Set<Planet> arg.
-     *
-     * @param planetSet
-     *        the planets to use as set of planets
-     */
-    public void setPlanets(Set<Planet> planetSet) {
-        this.planets = planetSet;
-    }
-
-    /**
-     * Sets the solar systems to the given set.
-     *
-     * @param solarSystemSet
-     *        the set of solarSystems to use
-     */
-    public void setSolarSystems(Set<SolarSystem> solarSystemSet) {
-        this.solarSystems = solarSystemSet;
     }
 
     /**
@@ -210,7 +113,7 @@ public final class GameInstance implements Serializable {
     public void createUniverse(int number) {
         if (number >= planetNames.length || number >= solarSystemNames.length) {
             throw new IllegalArgumentException(
-                            "Number is bigger than planet names");
+                    "Number is bigger than planet names");
         }
         solarSystems.clear();
         planets.clear();
@@ -231,15 +134,15 @@ public final class GameInstance implements Serializable {
             points.add(point);
 
             Planet planet =
-                            new Planet(planetNames[planetCount],
-                                            Goods.values()[resourceNum],
-                                            TechLevel.values()[techLevelNum]);
+                    new Planet(planetNames[planetCount],
+                            Goods.values()[resourceNum],
+                            TechLevel.values()[techLevelNum]);
             planets.add(planet);
 
             planetCount++;
             SolarSystem solarsystem =
-                            new SolarSystem(solarSystemNames[solarSystemCount],
-                                            point, planet);
+                    new SolarSystem(solarSystemNames[solarSystemCount],
+                            point, planet);
             solarSystemCount++;
 
             solarSystems.add(solarsystem);
@@ -256,14 +159,6 @@ public final class GameInstance implements Serializable {
         }
 
     }
-
-    /**
-     * Ends the turn. Probably dont need ths.
-     */
-    public void endTurn() {
-        //Do something to end the turn or whatever
-    }
-
 
     /**
      * Saves the game.
@@ -309,7 +204,7 @@ public final class GameInstance implements Serializable {
 
                 HashSet<Planet> planetsRestored = (HashSet<Planet>) restore.readObject();
                 HashSet<SolarSystem> solarSystemsRestored =
-                                (HashSet<SolarSystem>) restore.readObject();
+                        (HashSet<SolarSystem>) restore.readObject();
                 Player restoredPlayer = (Player) restore.readObject();
                 Planet restoredCurrentPlanet = (Planet) restore.readObject();
                 SolarSystem restoredCurrentSolarSystem = (SolarSystem) restore.readObject();
@@ -327,7 +222,6 @@ public final class GameInstance implements Serializable {
             } catch (IOException ioe) {
 
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException f) {
@@ -336,10 +230,106 @@ public final class GameInstance implements Serializable {
             g.printStackTrace();
         }
 
-
         return false;
 
     }
+
+    /**
+     * Gets the player's current planet.
+     *
+     * @return player's current planet
+     */
+    public Planet getCurrentPlanet() {
+        return currentPlanet;
+    }
+
+    /**
+     * Sets the player's location to a planet.
+     *
+     * @param destination
+     *        the planet to go to
+     */
+    public void setCurrentPlanet(Planet destination) {
+        this.currentPlanet = destination;
+    }
+
+    /**
+     * Returns the player for the instance of this game.
+     *
+     * @return the Player
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Sets a player for this game instance.
+     *
+     * @param data
+     *        the Player to use for this instance
+     */
+    public void setPlayer(Player data) {
+        player = data;
+    }
+
+    /**
+     * Returns the solar system the player is in.
+     *
+     * @return the current solar system
+     */
+    public SolarSystem getCurrentSolarSystem() {
+        return currentSolarSystem;
+    }
+
+    /**
+     * Sets the current solar system to whatever is passed in.
+     *
+     * @param destination
+     *        the new solar system
+     */
+    public void setCurrentSolarSystem(SolarSystem destination) {
+        currentSolarSystem = destination;
+    }
+
+    /**
+     * Returns a Set of the solar systems.
+     *
+     * @return Set of solar systems
+     */
+    public Set<SolarSystem> getSolarSystems() {
+        return solarSystems;
+    }
+
+    /**
+     * Sets the solar systems to the given set.
+     *
+     * @param solarSystemSet
+     *        the set of solarSystems to use
+     */
+    public void setSolarSystems(Set<SolarSystem> solarSystemSet) {
+        this.solarSystems = solarSystemSet;
+    }
+
+    /**
+     * Returns a set of the planets.
+     *
+     * @return set of planets
+     */
+    public Set<Planet> getPlanets() {
+        return planets;
+    }
+
+    /**
+     * Sets the planet to the Set<Planet> arg.
+     *
+     * @param planetSet
+     *        the planets to use as set of planets
+     */
+    public void setPlanets(Set<Planet> planetSet) {
+        this.planets = planetSet;
+    }
+
+
 
     @Override
     public String toString() {
