@@ -1,9 +1,5 @@
 package controller;
 
-import java.net.URL;
-import java.util.Random;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
-
-import org.controlsfx.dialog.Dialogs;
-
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Ship;
@@ -27,8 +20,12 @@ import model.upgrades.FuelGadget;
 import model.upgrades.HasPrice;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
-
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 /**
  * Created by Joshua on 10/26/2014.
@@ -104,8 +101,45 @@ public class UpgradeShipScreenController implements Initializable {
             }
         });
         shipView.setCellFactory(shipyardView.getCellFactory());
+        populateMarket();
 
-        // Populates the market
+
+        shipUpgrades.addAll(player.getUpgrades());
+
+        // Loads the ListViews and displays the players cash
+        shipyardView.setItems(shipyardUpgrades);
+        shipView.setItems(shipUpgrades);
+        shipyardView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                        if (newValue == null) {
+                            return;
+                        }
+                        if (newValue.getPrice() > player.getMoney()) {
+                            buyButton.setDisable(true);
+                        } else if (newValue.getPrice() <= player.getMoney()) {
+                            if (Shield.class.isInstance(newValue)
+                                    && ship.getShields().size() < ship.shieldsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (Weapon.class.isInstance(newValue)
+                                    && ship.getWeapons().size() < ship.weaponsSize() ) {
+                                buyButton.setDisable(false);
+                            } else if (AbstractGadget.class.isInstance(newValue)
+                                    && ship.getGadgets().size() < ship.gadgetSize() ) {
+                                buyButton.setDisable(false);
+                            } else {
+                                buyButton.setDisable(true);
+                            }
+                        }
+                    }
+            );
+    }
+
+    /**
+     *
+     * Populates the market.
+     */
+    private void populateMarket() {
         if (techLevel == TechLevel.HI_TECH) {
             int chance = random.nextInt(3);
             switch (chance) {
@@ -140,36 +174,6 @@ public class UpgradeShipScreenController implements Initializable {
                 }
             }
         }
-
-        shipUpgrades.addAll(player.getUpgrades());
-
-        // Loads the ListViews and displays the players cash
-        shipyardView.setItems(shipyardUpgrades);
-        shipView.setItems(shipUpgrades);
-        shipyardView.getSelectionModel()
-                .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                        if (newValue == null) {
-                            return;
-                        }
-                        if (newValue.getPrice() > player.getMoney()) {
-                            buyButton.setDisable(true);
-                        } else if (newValue.getPrice() <= player.getMoney()) {
-                            if (Shield.class.isInstance(newValue)
-                                    && ship.getShields().size() < ship.shieldsSize() ) {
-                                buyButton.setDisable(false);
-                            } else if (Weapon.class.isInstance(newValue)
-                                    && ship.getWeapons().size() < ship.weaponsSize() ) {
-                                buyButton.setDisable(false);
-                            } else if (AbstractGadget.class.isInstance(newValue)
-                                    && ship.getGadgets().size() < ship.gadgetSize() ) {
-                                buyButton.setDisable(false);
-                            } else {
-                                buyButton.setDisable(true);
-                            }
-                        }
-                    }
-            );
     }
 
     /**

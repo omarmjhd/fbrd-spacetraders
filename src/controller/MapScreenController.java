@@ -1,9 +1,5 @@
 package controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Set;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,16 +18,17 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
-import org.controlsfx.dialog.Dialogs;
-
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
 import model.events.RandomEvent;
-
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * @version 2.0
@@ -149,7 +146,17 @@ public class MapScreenController implements Initializable {
 
 
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
+        mapPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
+        createMap();
+
+    }
+
+    /**
+     * Creates the map for the map screen.
+     *
+     */
+    private void createMap() {
         EventHandler<MouseEvent> handleLabels = event -> {
             if (clickedPlanet) {
                 travelDistance = playerLocation.distance(currentCirclePoint);
@@ -189,7 +196,6 @@ public class MapScreenController implements Initializable {
             }
         };
 
-        mapPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
 
         int colorIndex = 0;
         for (SolarSystem s:  universe) {
@@ -207,7 +213,6 @@ public class MapScreenController implements Initializable {
 
             colorIndex++;
         }
-
     }
 
     /**

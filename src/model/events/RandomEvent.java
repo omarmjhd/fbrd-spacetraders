@@ -50,7 +50,7 @@ public class RandomEvent {
     public String event() {
         if (events == null) {
             events = new RandomEvent[] {new MoneyEvent(player), new GoodsEvent(player),
-                    new FuelEvent(player)};
+                                        new FuelEvent(player)};
         }
 
         if (rand.nextInt(10) == 0) {
