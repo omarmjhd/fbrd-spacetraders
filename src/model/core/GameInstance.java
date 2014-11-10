@@ -37,7 +37,7 @@ public final class GameInstance implements Serializable {
      */
     private Planet currentPlanet;
     /**
-     * Players current loation.
+     * Players current location.
      */
     private SolarSystem currentSolarSystem;
     /**
@@ -61,12 +61,6 @@ public final class GameInstance implements Serializable {
         "Magrat", "Malcoria", "Melina", "Mentar", "Merik", "Mintaka", "Montor", "Mordan",
         "Myrthe"};
 
-
-    /**
-     * Keeps track of how many planets are being made.
-     */
-    private int planetCount = 0;
-
     /**
      * Solar system names for the game. May or may not use all.
      */
@@ -83,20 +77,6 @@ public final class GameInstance implements Serializable {
         "Xenon", "Xerxes",
         "Yew", "Yojimbo",
         "Zalkon", "Zuul"};
-    /**
-     * Flag to keep track of solar systems made.
-     */
-    private int solarSystemCount = 0;
-
-    /**
-     * Local instance of all the Goods. Not sure why we need this.
-     */
-    private Goods[] resources = Goods.values();
-
-    /**
-     * Local instance of all the tech levels. Not sure why we need this.
-     */
-    private TechLevel[] techLevels = TechLevel.values();
 
     /**
      * Reference to the Singleton GameInstance.
@@ -168,11 +148,11 @@ public final class GameInstance implements Serializable {
     /**
      * Sets the current solar system to whatever is passed in.
      *
-     * @param desination
+     * @param destination
      *        the new solar system
      */
-    public void setCurrentSolarSystem(SolarSystem desination) {
-        currentSolarSystem = desination;
+    public void setCurrentSolarSystem(SolarSystem destination) {
+        currentSolarSystem = destination;
     }
 
     /**
@@ -237,11 +217,12 @@ public final class GameInstance implements Serializable {
         points.clear();
         Random rand = new Random();
         int startingLocation = rand.nextInt(number) - 1;
-
+        int planetCount = 0;
+        int solarSystemCount = 0;
         for (int i = 0; i < number; i++) {
 
-            int resourceNum =  rand.nextInt(resources.length);
-            int techLevelNum = rand.nextInt(techLevels.length);
+            int resourceNum =  rand.nextInt(Goods.values().length);
+            int techLevelNum = rand.nextInt(TechLevel.values().length);
 
             Point point = new Point(rand.nextInt(340) + 5, rand.nextInt(340) + 5);
             while (points.contains(point)) {
@@ -251,8 +232,8 @@ public final class GameInstance implements Serializable {
 
             Planet planet =
                             new Planet(planetNames[planetCount],
-                                            resources[resourceNum],
-                                            techLevels[techLevelNum]);
+                                            Goods.values()[resourceNum],
+                                            TechLevel.values()[techLevelNum]);
             planets.add(planet);
 
             planetCount++;
