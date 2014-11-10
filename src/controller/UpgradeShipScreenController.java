@@ -76,6 +76,9 @@ public class UpgradeShipScreenController implements Initializable {
      * random number generator.
      */
     private Random random = new Random();
+    /**
+     * The tech level.
+     */
     private TechLevel techLevel;
 
     @Override

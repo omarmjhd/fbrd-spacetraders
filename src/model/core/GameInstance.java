@@ -2,7 +2,14 @@ package model.core;
 
 import model.commerce.Goods;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -112,8 +119,10 @@ public final class GameInstance implements Serializable {
      */
     public void createUniverse(int number) {
         if (number >= planetNames.length || number >= solarSystemNames.length) {
-            throw new IllegalArgumentException(
-                    "Number is bigger than planet names");
+            throw new IllegalArgumentException("Number is bigger than planet names");
+        }
+        if (number < 1) {
+            throw new IllegalArgumentException("Number must be positive");
         }
         solarSystems.clear();
         planets.clear();
@@ -148,12 +157,8 @@ public final class GameInstance implements Serializable {
             solarSystems.add(solarsystem);
 
             if (startingLocation == i) {
-
                 setCurrentPlanet(planet);
-                //System.out.println(getCurrentPlanet());
                 setCurrentSolarSystem(solarsystem);
-                //System.out.println(getCurrentSolarSystem());
-
             }
 
         }
@@ -329,8 +334,6 @@ public final class GameInstance implements Serializable {
         this.planets = planetSet;
     }
 
-
-
     @Override
     public String toString() {
 
@@ -351,6 +354,11 @@ public final class GameInstance implements Serializable {
         return gameString.toString();
     }
 
+    /**
+     * Returns the set of points.
+     *
+     * @return the set of points
+     */
     public Set<Point> getPoints() {
         return points;
     }
