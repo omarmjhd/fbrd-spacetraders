@@ -1,15 +1,15 @@
 package model.core;
 
+import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.Map;
+import java.util.TreeMap;
+
 import model.commerce.Goods;
 import model.upgrades.AbstractGadget;
 import model.upgrades.Crew;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
-
-import java.io.Serializable;
-import java.util.AbstractList;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
@@ -259,6 +259,15 @@ public final class Ship implements Serializable {
      */
     public void setVisible(boolean canSee) {
         this.isVisible = canSee;
+    }
+
+    /**
+     * Returns whether the ship is visible.
+     *
+     * @return whether the ship can be seen
+     */
+    public boolean isVisible() {
+        return isVisible;
     }
 
     /**

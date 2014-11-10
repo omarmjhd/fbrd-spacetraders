@@ -25,7 +25,7 @@ public class Main extends Application {
     /**
      * The GameInstance.
      */
-    private static GameInstance game;
+    private static GameInstance game = GameInstance.getInstance();
 
     /**
      * Starts the game.
@@ -38,7 +38,6 @@ public class Main extends Application {
         Main.primaryStage = primaryStageArg;
         primaryStage.setTitle("Space Traders!");
         primaryStage.setResizable(false);
-        Main.game = GameInstance.getInstance();
 
         Main.setScene("screens/startscreen.fxml");
     }

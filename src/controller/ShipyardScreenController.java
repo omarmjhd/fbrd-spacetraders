@@ -62,14 +62,6 @@ public class ShipyardScreenController implements Initializable {
      */
     private Ship currentShip;
     /**
-     * current planet.
-     */
-    private Planet currentPlanet;
-    /**
-     * gamer instance.
-     */
-    private GameInstance gm;
-    /**
      * the player.
      */
     private Player player;
@@ -85,19 +77,16 @@ public class ShipyardScreenController implements Initializable {
      * the ship that the player chose.
      */
     private Ship playership;
-    /**
-     * shut up checkstyle.
-     */
-    private String newLine = "\n";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.gm = GameInstance.getInstance();
+        GameInstance gm = GameInstance.getInstance();
         this.player = gm.getPlayer();
         playership = player.getShip();
         playershipLabel.setText(
                 playership.toString());
-        currentPlanet = gm.getCurrentPlanet();
+
+        Planet currentPlanet = gm.getCurrentPlanet();
         shipyard = currentPlanet.getShipyard();
         shipyardTitle.setText(currentPlanet.getName() + " Shipyard");
 
@@ -106,8 +95,7 @@ public class ShipyardScreenController implements Initializable {
 
         //shows which are available on each planet
         if (currentPlanet.getTechLevel().equals(TechLevel.POST_INDUSTRIAL)) {
-            options =
-                    FXCollections.observableArrayList(
+            options = FXCollections.observableArrayList(
                     Ship.flea().toString()
             );
         } else if (currentPlanet.getTechLevel().equals(TechLevel.HI_TECH)) {
@@ -150,11 +138,16 @@ public class ShipyardScreenController implements Initializable {
         } else if (cur.equals("Bumblebee")) {
             currentShip = Ship.bumblebee();
         }
+
         Map<String, Integer> specs = currentShip.specs();
+
+        String newLine = "\n";
         String text = cur + newLine;
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, Integer> e : specs.entrySet()) {
-            text += e.getKey() + ": " + e.getValue() + newLine;
+            sb.append(e.getKey()).append(": ").append(e.getValue()).append(newLine);
         }
+        text += sb;
 
         //ship cost label
         shipAttributes.setText(text);
