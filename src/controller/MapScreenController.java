@@ -1,9 +1,5 @@
 package controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Set;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,16 +18,17 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
-import org.controlsfx.dialog.Dialogs;
-
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
 import model.events.RandomEvent;
-
+import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * @version 2.0
@@ -149,9 +146,56 @@ public class MapScreenController implements Initializable {
 
 
         currentFuelLabel.setText("" + gm.getPlayer().getCurrentFuel());
-
-
         mapPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("black"), null, null)));
+
+        createMap();
+
+    }
+
+    /**
+     * Creates the map for the map screen.
+     *
+     */
+    private void createMap() {
+        EventHandler<MouseEvent> handleLabels = event -> {
+            if (clickedPlanet) {
+                travelDistance = playerLocation.distance(currentCirclePoint);
+                travelDistanceLabel.setText("" + travelDistance);
+                checkFuel();
+            }
+        };
+
+        EventHandler<MouseEvent> drawClickedCircle = event -> {
+            //if haven't already chosen a planet, just highlight clicked planet
+            Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
+            Point chosenPlanet = new Point((int) clickedCircle.getCenterX(),
+                            (int) clickedCircle.getCenterY());
+            if (!clickedPlanet) {
+                currentCircle = clickedCircle;
+                currentCirclePoint = chosenPlanet;
+                currentCircle.setStroke(Color.RED);
+                currentCircle.setStrokeWidth(10);
+                clickedPlanet = true;
+            } else {
+//            changes the current chosen planet
+                currentCircle.setStroke(null);
+                currentCircle = clickedCircle;
+                currentCirclePoint = chosenPlanet;
+                currentCircle.setStroke(Color.RED);
+                currentCircle.setStrokeWidth(10);
+            }
+        };
+
+        EventHandler<MouseEvent> drawLine = event -> {
+            if (clickedPlanet) {
+                currentLine.setStroke(null);
+                currentLine.setEndX(currentCirclePoint.getX());
+                currentLine.setEndY(currentCirclePoint.getY());
+                currentLine.setStroke(Color.RED);
+                currentLine.setStrokeWidth(3);
+            }
+        };
+
 
         int colorIndex = 0;
         for (SolarSystem s:  universe) {
@@ -169,58 +213,7 @@ public class MapScreenController implements Initializable {
 
             colorIndex++;
         }
-
     }
-
-    /**
-     * Changes the labels when a new planet is clicked.
-     */
-    EventHandler<MouseEvent> handleLabels = event -> {
-        if (clickedPlanet) {
-            travelDistance = playerLocation.distance(currentCirclePoint);
-            travelDistanceLabel.setText("" + travelDistance);
-            checkFuel();
-        }
-    };
-
-    /**
-     * Draws a circle on the clicked planet.
-     */
-    EventHandler<MouseEvent> drawClickedCircle = event -> {
-        /**If haven't already chosen a planet, just highlight clicked planet.*/
-        Circle clickedCircle = (Circle) event.getPickResult().getIntersectedNode();
-        /**The planet that is clicked.*/
-        Point chosenPlanet = new Point((int) clickedCircle.getCenterX(),
-                (int) clickedCircle.getCenterY());
-        if (!clickedPlanet) {
-            currentCircle = clickedCircle;
-            currentCirclePoint = chosenPlanet;
-            currentCircle.setStroke(Color.RED);
-            currentCircle.setStrokeWidth(10);
-            clickedPlanet = true;
-        } else {
-        //changes the current chosen planet
-            currentCircle.setStroke(null);
-            currentCircle = clickedCircle;
-            currentCirclePoint = chosenPlanet;
-            currentCircle.setStroke(Color.RED);
-            currentCircle.setStrokeWidth(10);
-        }
-    };
-
-    /**
-     * Draws a line between the two planets.
-     */
-    EventHandler<MouseEvent> drawLine = event -> {
-        if (clickedPlanet) {
-            currentLine.setStroke(null);
-            currentLine.setEndX(currentCirclePoint.getX());
-            currentLine.setEndY(currentCirclePoint.getY());
-            currentLine.setStroke(Color.RED);
-            currentLine.setStrokeWidth(3);
-        }
-    };
-
 
     /**
      * Changes to the marketplace for chosen solar system.
