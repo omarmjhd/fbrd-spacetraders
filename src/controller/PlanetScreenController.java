@@ -2,6 +2,7 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,11 +14,14 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+
 import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
+
 import view.Main;
 
 /**
@@ -98,7 +102,7 @@ public class PlanetScreenController implements Initializable {
         gi = GameInstance.getInstance();
         curPlanet = gi.getCurrentPlanet();
         player = gi.getPlayer();
-        int totalFuelCost = calculateFuelQuantity() * player.getFuelCost();
+        int totalFuelCost = player.getRefuelCost();
         buyFuel.setText(refuel + totalFuelCost + credits);
         planetPane.setBackground(new Background(new BackgroundFill(Paint
                         .valueOf("black"), null, null)));
@@ -140,21 +144,6 @@ public class PlanetScreenController implements Initializable {
     }
 
     /**
-     * Ensures player doesn't over buy fuel.
-     *
-     * @return amount of fuel player can buy
-     */
-    private int calculateFuelQuantity() {
-        int fuelAmount = player.getMaxFuel() - player.getCurrentFuel();
-
-        if ((fuelAmount * player.getFuelCost()) > player.getMoney()) {
-            fuelAmount = player.getMoney() / player.getFuelCost();
-        }
-
-        return fuelAmount;
-    }
-
-    /**
      * Fills the player's ship with fuel. fuel update after buying.
      *
      * @param actionEvent
@@ -162,7 +151,7 @@ public class PlanetScreenController implements Initializable {
      */
     public void buyFuel(ActionEvent actionEvent) {
 
-        player.buyFuel(calculateFuelQuantity());
+        player.buyFuel();
         planetText.setText(curPlanet.toString() + fuelStr + player.getCurrentFuel() + moneyStr
                         + player.getMoney());
         buyFuel.setText(refuel + 0 + credits);

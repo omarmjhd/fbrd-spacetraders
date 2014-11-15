@@ -3,6 +3,7 @@ package model.core;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+
 import model.commerce.Goods;
 import model.upgrades.Crew;
 import model.upgrades.HasPrice;
@@ -220,13 +221,35 @@ public class Player implements HasSkills, Serializable {
 
     /**
      * Adds fuel to the player's ship and removes the appropriate amount of money from the player.
-     *
-     * @param quantity
-     *        the amount of fuel
      */
-    public void buyFuel(int quantity) {
+    public void buyFuel() {
+        int quantity = calculateFuelQuantity();
         ship.buyFuel(quantity);
         subtractMoney(quantity * getFuelCost());
+    }
+
+    /**
+     * Returns the total cost of refueling a ship.
+     *
+     * @return cost of refueling
+     */
+    public int getRefuelCost() {
+        return calculateFuelQuantity() * getFuelCost();
+    }
+
+    /**
+     * Calculates the amount of fuel a player can buy based on money and fuel cost.
+     *
+     * @return quantity of fuel a player can buy
+     */
+    private int calculateFuelQuantity() {
+        int fuelAmount = ship.getMaxFuel() - ship.getCurrentFuel();
+
+        if ((fuelAmount * ship.getFuelCost()) > money) {
+            fuelAmount = money / ship.getFuelCost();
+        }
+
+        return fuelAmount;
     }
 
     @Override
