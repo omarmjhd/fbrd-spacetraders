@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import model.core.Ship;
-import model.upgrades.Shield;
+import java.util.AbstractList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.AbstractList;
+import model.core.Ship;
+import model.upgrades.Shield;
 
 /**
  * JUnit test for the addShield method in Ship.
@@ -24,7 +24,7 @@ public class ShipTest {
      * Creates a new Firefly Ship.
      */
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
 
         Ship ship = Ship.firefly();
         shields = ship.getShields();

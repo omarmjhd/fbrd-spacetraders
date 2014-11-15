@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+
+import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Ship;
@@ -20,12 +27,8 @@ import model.upgrades.FuelGadget;
 import model.upgrades.HasPrice;
 import model.upgrades.Shield;
 import model.upgrades.Weapon;
-import org.controlsfx.dialog.Dialogs;
-import view.Main;
 
-import java.net.URL;
-import java.util.Random;
-import java.util.ResourceBundle;
+import view.Main;
 
 /**
  * Created by Joshua on 10/26/2014.
@@ -129,12 +132,15 @@ public class UpgradeShipScreenController implements Initializable {
                             } else if (AbstractGadget.class.isInstance(newValue)
                                     && ship.getGadgets().size() < ship.gadgetSize() ) {
                                 buyButton.setDisable(false);
-                            } else {
+                                } else {
                                 buyButton.setDisable(true);
                             }
                         }
                     }
             );
+        if (shipUpgrades.size() > 0) {
+            sellButton.setDisable(false);
+        }
     }
 
     /**

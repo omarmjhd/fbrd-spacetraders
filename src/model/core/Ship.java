@@ -76,6 +76,32 @@ public final class Ship implements Serializable {
     }
 
     /**
+     * Factory method to make Ships.
+     *
+     * @param shipName
+     *        the name of the ship to make
+     * @return the ship created, else null
+     */
+    public static Ship makeShip(String shipName) {
+
+        String name = shipName.toLowerCase();
+
+        if (name.equals("flea")) {
+            return Ship.flea();
+        } else if (name.equals("gnat")) {
+            return Ship.gnat();
+        } else if (name.equals("firefly")) {
+            return Ship.firefly();
+        } else if (name.equals("mosquito")) {
+            return Ship.mosquito();
+        } else if (name.equals("bumblebee")) {
+            return Ship.bumblebee();
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * ship cargo.
      */
     private AbstractPresizedList<Goods> cargo;

@@ -21,8 +21,7 @@ public class MarketplaceTests {
     @Before
     public void setUp() throws Exception {
         proxy = new Player("Proxy", 5, 5, 5, 5, 5);
-
-        tech = TechLevel.values()[1];
+        tech = TechLevel.values()[0];
         market = new Marketplace(tech, proxy);
 
     }

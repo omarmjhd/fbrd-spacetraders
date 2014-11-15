@@ -1,14 +1,15 @@
 package model_tests;
 
-import model.core.GameInstance;
-import model.core.Planet;
-import model.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
+import model.core.GameInstance;
+import model.core.Planet;
+import model.core.Point;
 
 public class GameInstanceTest {
 
@@ -17,7 +18,7 @@ public class GameInstanceTest {
     private Set<Point> points;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         gi = GameInstance.getInstance();
         planets = gi.getPlanets();
         points = gi.getPoints();

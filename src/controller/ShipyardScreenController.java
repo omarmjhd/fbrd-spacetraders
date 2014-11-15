@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,12 +13,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
 import model.commerce.Shipyard;
 import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
+
 import view.Main;
 
 /**
@@ -127,17 +130,8 @@ public class ShipyardScreenController implements Initializable {
      */
     public void chooseShip(ActionEvent actionEvent) {
         String cur = shipComboBox.getValue();
-        if (cur.equals("Flea")) {
-            currentShip = Ship.flea();
-        } else if (cur.equals("Gnat")) {
-            currentShip = Ship.gnat();
-        } else if (cur.equals("Firefly")) {
-            currentShip = Ship.firefly();
-        } else if (cur.equals("Mosquito")) {
-            currentShip = Ship.mosquito();
-        } else if (cur.equals("Bumblebee")) {
-            currentShip = Ship.bumblebee();
-        }
+
+        currentShip = Ship.makeShip(cur);
 
         Map<String, Integer> specs = currentShip.specs();
 
@@ -188,7 +182,7 @@ public class ShipyardScreenController implements Initializable {
 
     /**
      * Does the actual action of selling your ship.
-     * 
+     *
      * @param actionEvent
      *        the trigger
      */
