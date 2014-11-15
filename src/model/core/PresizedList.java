@@ -1,7 +1,6 @@
 package model.core;
 
 import java.io.Serializable;
-import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -17,7 +16,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T>
  */
-public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
+public class PresizedList<T> extends AbstractPresizedList<T> implements Iterable<T>,
                 Serializable {
 
     /**
@@ -47,6 +46,7 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
      *
      * @return max quantity of elements
      */
+    @Override
     public int maxSize() {
         return backing.length;
     }
@@ -56,6 +56,7 @@ public class PresizedList<T> extends AbstractList<T> implements Iterable<T>,
      *
      * @return true iff the list has room
      */
+    @Override
     public boolean hasRoom() {
         return size < backing.length;
     }

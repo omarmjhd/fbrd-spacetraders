@@ -3,6 +3,7 @@ package model.upgrades;
 import java.util.List;
 
 import model.commerce.Goods;
+import model.core.AbstractPresizedList;
 import model.core.PresizedList;
 import model.core.Ship;
 
@@ -55,7 +56,8 @@ public class CargoGadget extends AbstractGadget {
             effectApplied = true;
             //TODO add cargo room to ship
             List<Goods> currentCargo = ship.getCargo();
-            PresizedList<Goods> bigger = new PresizedList<>(ship.cargoSize() + additionalSize);
+            AbstractPresizedList<Goods> bigger =
+                            new PresizedList<>(ship.cargoSize() + additionalSize);
             for (Goods cargo : currentCargo) {
                 bigger.add(cargo);
             }
@@ -72,7 +74,8 @@ public class CargoGadget extends AbstractGadget {
         if (effectApplied) {
             List<Goods> currentCargo = ship.getCargo();
             if ((ship.cargoSize() - additionalSize) >= currentCargo.size()) {
-                PresizedList<Goods> smaller = new PresizedList<>(ship.cargoSize() - additionalSize);
+                AbstractPresizedList<Goods> smaller =
+                                new PresizedList<>(ship.cargoSize() - additionalSize);
                 for (Goods cargo : currentCargo) {
                     smaller.add(cargo);
                 }

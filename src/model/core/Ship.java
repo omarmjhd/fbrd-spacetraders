@@ -78,27 +78,27 @@ public final class Ship implements Serializable {
     /**
      * ship cargo.
      */
-    private PresizedList<Goods> cargo;
+    private AbstractPresizedList<Goods> cargo;
 
     /**
      * ship weapons.
      */
-    private PresizedList<Weapon> weapons;
+    private AbstractPresizedList<Weapon> weapons;
 
     /**
      * Ship shields.
      */
-    private PresizedList<Shield> shields;
+    private AbstractPresizedList<Shield> shields;
 
     /**
      * Ship gadgets.
      */
-    private PresizedList<AbstractGadget> gadgets;
+    private AbstractPresizedList<AbstractGadget> gadgets;
 
     /**
      * Ship crew.
      */
-    private PresizedList<Crew> crew;
+    private AbstractPresizedList<Crew> crew;
 
     /**
      * Maximum fuel this ship can hold.
