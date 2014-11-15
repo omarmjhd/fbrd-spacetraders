@@ -237,7 +237,7 @@ public final class Ship implements Serializable {
      * @param newCargo
      *        the new backing cargo for the ship
      */
-    public void setCargo(PresizedList<Goods> newCargo) {
+    public void setCargo(AbstractPresizedList<Goods> newCargo) {
         this.cargo = newCargo;
     }
 
