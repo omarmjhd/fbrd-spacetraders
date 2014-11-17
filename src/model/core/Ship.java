@@ -82,7 +82,7 @@ public final class Ship implements Serializable {
      *        the name of the ship to make
      * @return the ship created, else null
      */
-    public static Ship makeShip(String shipName) {
+    public static Ship shipFactory(String shipName) {
 
         String name = shipName.toLowerCase();
 
