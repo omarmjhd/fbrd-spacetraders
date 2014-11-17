@@ -131,7 +131,7 @@ public class ShipyardScreenController implements Initializable {
     public void chooseShip(ActionEvent actionEvent) {
         String cur = shipComboBox.getValue();
 
-        currentShip = Ship.makeShip(cur);
+        currentShip = Ship.shipFactory(cur);
 
         Map<String, Integer> specs = currentShip.specs();
 
