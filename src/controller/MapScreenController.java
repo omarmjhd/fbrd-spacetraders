@@ -173,7 +173,7 @@ public class MapScreenController implements Initializable {
             if (!clickedPlanet) {
                 currentCircle = clickedCircle;
                 currentCirclePoint = chosenPlanet;
-                currentCircle.setStroke(Color.RED);
+                currentCircle.setStroke(Color.WHITE);
                 currentCircle.setStrokeWidth(10);
                 clickedPlanet = true;
             } else {
@@ -181,7 +181,7 @@ public class MapScreenController implements Initializable {
                 currentCircle.setStroke(null);
                 currentCircle = clickedCircle;
                 currentCirclePoint = chosenPlanet;
-                currentCircle.setStroke(Color.RED);
+                currentCircle.setStroke(Color.WHITE);
                 currentCircle.setStrokeWidth(10);
             }
         };
@@ -191,7 +191,7 @@ public class MapScreenController implements Initializable {
                 currentLine.setStroke(null);
                 currentLine.setEndX(currentCirclePoint.getX());
                 currentLine.setEndY(currentCirclePoint.getY());
-                currentLine.setStroke(Color.RED);
+                currentLine.setStroke(Color.WHITE);
                 currentLine.setStrokeWidth(3);
             }
         };
