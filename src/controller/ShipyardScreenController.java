@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.net.URL;
@@ -57,6 +58,10 @@ public class ShipyardScreenController implements Initializable {
      */
     public Label playershipLabel;
     /**
+     * need to be able to change the text for ship cost.
+     */
+    public Label shipCostText;
+    /**
      * current shipyard.
      */
     private Shipyard shipyard;
@@ -80,6 +85,7 @@ public class ShipyardScreenController implements Initializable {
      * the ship that the player chose.
      */
     private Ship playership;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -146,10 +152,12 @@ public class ShipyardScreenController implements Initializable {
         //ship cost label
         shipAttributes.setText(text);
         costToBuy = shipyard.costToBuy(currentShip);
-        shipCost.setText("" + costToBuy);
+        shipCost.setText("" + Math.abs(costToBuy));
         if (costToBuy <= 0) {
+            shipCostText.setText("You receive: ");
             shipCost.setTextFill(Color.GREEN);
         } else {
+            shipCostText.setText(("Ship cost: "));
             shipCost.setTextFill(Color.RED);
         }
 

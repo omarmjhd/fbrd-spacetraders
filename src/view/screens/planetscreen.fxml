@@ -43,7 +43,7 @@
             <Font name="Courier New" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="travelButton" layoutX="400.0" layoutY="376.0" mnemonicParsing="false" onAction="#leaveSystem" prefHeight="78.0" prefWidth="222.0" text="Leave The System!" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="travelButton" layoutX="400.0" layoutY="376.0" mnemonicParsing="false" onAction="#leaveSystem" prefHeight="78.0" prefWidth="222.0" text="Back to the universe!" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Courier New Bold Italic" size="21.0" />
          </font>
