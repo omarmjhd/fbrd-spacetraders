@@ -1,0 +1,9 @@
+A list of things we have done that warrant extra credit points:
+
+Gradle build file
+Command pattern in Gadgets (CommandPattern, AbstractCommand, AbstractGadget
+Template Method pattern in AbstractCommand (the effect()-uneffect() part)
+Factory Method in model.core.Ship (Ship.makeShip(String))
+Trading Skill affects Marketplace prices
+Singleton design pattern (GameInstance.java)
+
