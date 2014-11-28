@@ -25,7 +25,6 @@ public abstract class AbstractCommand implements CommandPattern {
     public boolean applyEffect() {
         if (effect()) {
             stack.push(true);
-            effect();
             return true;
         }
         return false;
