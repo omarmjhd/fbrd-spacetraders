@@ -1,5 +1,9 @@
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,17 +22,17 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+
+import org.controlsfx.dialog.Dialogs;
+
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
+import model.events.EventFactory;
 import model.events.RandomEvent;
-import org.controlsfx.dialog.Dialogs;
-import view.Main;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Set;
+import view.Main;
 
 /**
  * @version 2.0
@@ -226,7 +230,7 @@ public class MapScreenController implements Initializable {
         gm.setCurrentSolarSystem(selectedSystem);
         gm.setCurrentPlanet(selectedSystem.getPlanets().get(0));
         gm.getPlayer().travel(travelDistance);
-        RandomEvent randomEvent = new RandomEvent(player);
+        RandomEvent randomEvent = EventFactory.createRandomEvent(player);
         String event = randomEvent.event();
         if (!event.equals("")) {
             Dialogs.create().owner(Main.getPrimaryStage())
