@@ -127,14 +127,15 @@ public class Encounter {
                         return "The police inspected your cargo and didn't find anything suspicious. " +
                                 "They apologize for the inconvenience.";
                     }
+	       
+		    while (cargo.contains(Goods.FIREARMS)) {
+			cargo.remove(Goods.FIREARMS);
+		    }
 
-                    if (cargo.contains(Goods.FIREARMS)) {
-                        ship.removeCargo(Goods.FIREARMS);
-                    }
+		    while (cargo.contains(Goods.NARCOTICS)) {
+			cargo.remove(Goods.NARCOTICS);
+		    }
 
-                    if (cargo.contains(Goods.NARCOTICS)) {
-                        ship.removeCargo(Goods.NARCOTICS);
-                    }
                     return "FREEZE! The police inspected your cargo and found illegal goods! " +
                             "The items have been taken from your possession.";
 
