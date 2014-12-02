@@ -46,7 +46,7 @@ public class Marketplace implements Serializable {
     private Player player;
 
     /**
-     * Price modifer based on player's trade skill.
+     * Price modifier based on player's trade skill.
      */
     private int tradeSkillModifier;
 
