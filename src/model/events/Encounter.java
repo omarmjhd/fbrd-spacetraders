@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import model.commerce.Goods;
+import model.commerce.Marketplace;
 
 import model.core.Player;
 import model.core.Ship;
@@ -24,11 +25,6 @@ public class Encounter {
      * Player's cargo.
      */
     private List<Goods> cargo;
-
-    /**
-     * Set of map of goods this planet can sell inherently (i.e. produce).
-     */
-    private Map<Goods, Integer> purchasePrices;
 
     /**
      * Trader's cargo.
@@ -59,6 +55,11 @@ public class Encounter {
      * Trade modifier based on player's trade skill level.
      */
     private int tradeSkillModifier;
+
+    /**
+     * Use a marketplace for the trader.
+     */
+    private Marketplace marketplace;
 
     /**
      * Array of encounters.
@@ -108,12 +109,7 @@ public class Encounter {
                 encounterType = "trader";
                 /* Generates random tech level for setting prices for the trader. */
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
-                for (Goods g : Goods.values()) {
-                    purchasePrices.put(g, Math.max(g.price(tech) - tradeSkillModifier, 1));
-                }
-                for (Goods g : purchasePrices.keySet()) {
-                    traderCargo.add(g);
-                }
+                marketplace = new Marketplace(tech, player);
             } else if (type == 1) {
                 encounterType = "pirate";
             } else if (type == 2) {
@@ -202,12 +198,7 @@ public class Encounter {
      */
     public boolean sell(Goods item) {
 
-        Goods removed = player.removeCargo(item);
-        if (removed != null) {
-            player.addMoney(purchasePrices.get(removed));
-            return true;
-        }
-        return false;
+        return marketplace.playerSells(item);
     }
 
     /**
@@ -219,12 +210,7 @@ public class Encounter {
      */
     public boolean buy(Goods item) {
 
-        if (player.cargoRoomLeft() >= 1 && traderCargo.remove(item)) {
-            player.addCargo(item);
-            player.subtractMoney(purchasePrices.get(item));
-            return true;
-        }
-        return false;
+        return marketplace.playerBuys(item);
     }
 
 }
