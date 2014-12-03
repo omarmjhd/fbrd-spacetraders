@@ -1,11 +1,10 @@
-package model.events;
+package model.encounters;
 
 import java.util.List;
 import java.util.Random;
 
 import model.commerce.Goods;
 import model.commerce.Marketplace;
-
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
@@ -91,7 +90,7 @@ public class Encounter {
 
         if (encounters == null) {
 
-            encounters = new String[] {
+            encounters = new String[]{
                     "null encounter",
                     "You encountered a trader!",
                     "You encountered a pirate!",
@@ -101,93 +100,99 @@ public class Encounter {
 
         if (encounterType == null) {
 //            if (rand.nextInt(10) == 0) {
-          int type = rand.nextInt(encounters.length);
+            int type = rand.nextInt(encounters.length);
 //            int type = 1;
-            if (type == 0) {
+//                if (rand.nextInt(10) == 0) {
 
-                return null;
+                if (type == 0) {
 
-            } else if (type == 1) {
+                    return null;
 
-                encounterType = "trader";
+                } else if (type == 1) {
+
+                    encounterType = "trader";
                 /* Generates random tech level for setting prices for the trader. */
-                TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
-                marketplace = new Marketplace(tech, player);
+                    TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
+                    marketplace = new Marketplace(tech, player);
 
-            } else if (type == 2) {
+                } else if (type == 2) {
 
-                encounterType = "pirate";
+                    encounterType = "pirate";
 
-            } else if (type == 3) {
-                encounterType = "police";
-                Ship ship = player.getShip();
-                boolean isVisible = ship.isVisible();
+                } else if (type == 3) {
+                    encounterType = "police";
+                    Ship ship = player.getShip();
+                    boolean isVisible = ship.isVisible();
 
-                if (!isVisible) {
+                    if (!isVisible) {
 
-                    return "You managed to pass the police without notice because of your cloaking gadget!";
+                        return "You managed to pass the police without notice because of your cloaking gadget!";
 
-                } else {
+                    } else {
 
-                    if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
-                        return "The police inspected your cargo and didn't find anything suspicious. \n" +
-                                "They apologize for the inconvenience.";
+                        if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
+                            return "The police inspected your cargo and didn't find anything suspicious. \n" +
+                                    "They apologize for the inconvenience.";
+                        }
+
+                        while (cargo.contains(Goods.FIREARMS)) {
+                            cargo.remove(Goods.FIREARMS);
+                        }
+
+                        while (cargo.contains(Goods.NARCOTICS)) {
+                            cargo.remove(Goods.NARCOTICS);
+                        }
+
+                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
+                                "The items have been taken from your possession.";
                     }
-
-                    while (cargo.contains(Goods.FIREARMS)) {
-                        cargo.remove(Goods.FIREARMS);
-                    }
-
-                    while (cargo.contains(Goods.NARCOTICS)) {
-                        cargo.remove(Goods.NARCOTICS);
-                    }
-
-                    return "FREEZE! The police inspected your cargo and found illegal goods! " +
-                            "The items have been taken from your possession.";
                 }
-            }
-//          }
-            return encounters[type];
-        } else {
-            int type = 1;
-            if (encounterType.equals("trader")) {
-                type = 1;
-                TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
-                marketplace = new Marketplace(tech, player);
-            } else  if (encounterType.equals("pirate")) {
-                type = 2;
-            }  else if (encounterType.equals("police")) {
-                type = 3;
-                Ship ship = player.getShip();
-                boolean isVisible = ship.isVisible();
+                return encounters[type];
 
-                if (!isVisible) {
+            } else {
+                // The below lines always throw a NPE because we are in the branch where
+                // encounterType == null
+                int type = 0;
+                if (encounterType.equals("trader")) {
+                    type = 1;
+                    TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
+                    marketplace = new Marketplace(tech, player);
+                } else if (encounterType.equals("pirate")) {
+                    type = 2;
+                } else if (encounterType.equals("police")) {
+                    type = 3;
+                    Ship ship = player.getShip();
+                    boolean isVisible = ship.isVisible();
 
-                    return "You managed to pass the police without notice because of your cloaking gadget!";
+                    if (!isVisible) {
 
-                } else {
+                        return "You managed to pass the police without notice because of your cloaking gadget!";
 
-                    if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
-                        return "The police inspected your cargo and didn't find anything suspicious. \n" +
-                                "They apologize for the inconvenience.";
+                    } else {
+
+                        if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
+                            return "The police inspected your cargo and didn't find anything suspicious. \n" +
+                                    "They apologize for the inconvenience.";
+                        }
+
+                        while (cargo.contains(Goods.FIREARMS)) {
+                            cargo.remove(Goods.FIREARMS);
+                        }
+
+                        while (cargo.contains(Goods.NARCOTICS)) {
+                            cargo.remove(Goods.NARCOTICS);
+                        }
+
+                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
+                                "The items have been taken from your possession.";
+
                     }
-
-                    while (cargo.contains(Goods.FIREARMS)) {
-                        cargo.remove(Goods.FIREARMS);
-                    }
-
-                    while (cargo.contains(Goods.NARCOTICS)) {
-                        cargo.remove(Goods.NARCOTICS);
-                    }
-
-                    return "FREEZE! The police inspected your cargo and found illegal goods! " +
-                            "The items have been taken from your possession.";
-
                 }
-            }
             return encounters[type];
+            }
         }
-    }
+
+
 
     /**
      * Attack the encounter.

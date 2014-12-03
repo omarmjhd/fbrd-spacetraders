@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+
 import model.core.GameInstance;
 import model.core.Player;
-import model.events.Encounter;
+import model.encounters.Encounter;
+
 import view.Main;
 
 import java.net.URL;

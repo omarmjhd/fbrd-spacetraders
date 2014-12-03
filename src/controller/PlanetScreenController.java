@@ -21,7 +21,7 @@ import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
-import model.events.Encounter;
+import model.encounters.Encounter;
 
 import view.Main;
 

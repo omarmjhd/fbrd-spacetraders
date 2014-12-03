@@ -8,14 +8,15 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+
 import model.commerce.Goods;
 import model.commerce.Marketplace;
-
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
-import model.events.Encounter;
+import model.encounters.Encounter;
+
 import view.Main;
 
 
