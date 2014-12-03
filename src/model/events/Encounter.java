@@ -125,7 +125,7 @@ public class Encounter {
                 } else {
 
                     if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
-                        return "The police inspected your cargo and didn't find anything suspicious. " +
+                        return "The police inspected your cargo and didn't find anything suspicious. \n" +
                                 "They apologize for the inconvenience.";
                     }
 	       

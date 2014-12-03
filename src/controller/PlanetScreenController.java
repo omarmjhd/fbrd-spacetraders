@@ -21,6 +21,7 @@ import model.core.GameInstance;
 import model.core.Planet;
 import model.core.Player;
 import model.core.TechLevel;
+import model.events.Encounter;
 
 import view.Main;
 
@@ -93,10 +94,30 @@ public class PlanetScreenController implements Initializable {
      */
     private String moneyStr = "\nMoney: ";
 
+    /**
+     * encounter to instantiate each time a planet is visited.
+     */
+    private Encounter encounter;
+
+    /**
+     * the type of encounter it is.
+     */
+    private String type;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        encounter = new Encounter(player);
+        type = encounter.encounter();
+        if (type != null) {
+            if (type.equals("trader")) {
+//                Main.setScene("screens/traderscreen.fxml");
+            } else if (type.equals("pirate")) {
+//                Main.setScene("screens/piratescreen.fxml");
+            } else if (type.equals("police")) {
+//                Main.setScene("screens/policescreen.fxml");
+            }
+        }
         astronaut = new Image("file:assets/astronaut.png");
         astronautView.setImage(astronaut);
         gi = GameInstance.getInstance();
