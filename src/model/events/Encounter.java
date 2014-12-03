@@ -87,6 +87,7 @@ public class Encounter {
         if (encounters == null) {
 
             encounters = new String[] {
+                    "null encounter",
                     "You encountered a trader!",
                     "You encountered a pirate!",
                     "You encountered the police!"};
@@ -99,16 +100,20 @@ public class Encounter {
 
             if (type == 0) {
 
+                return null;
+
+            } else if (type == 1) {
+
                 encounterType = "trader";
                 /* Generates random tech level for setting prices for the trader. */
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
                 marketplace = new Marketplace(tech, player);
 
-            } else if (type == 1) {
+            } else if (type == 2) {
 
                 encounterType = "pirate";
 
-            } else if (type == 2) {
+            } else if (type == 3) {
 
                 Ship ship = player.getShip();
                 boolean isVisible = ship.isVisible();
