@@ -98,27 +98,67 @@ public class Encounter {
 
         }
 
-        if (rand.nextInt(10) == 0) {
+        if (encounterType != null) {
 
-            int type = rand.nextInt(encounters.length);
+            if (rand.nextInt(10) == 0) {
 
-            if (type == 0) {
+                int type = rand.nextInt(encounters.length);
 
-                return null;
+                if (type == 0) {
 
-            } else if (type == 1) {
+                    return null;
 
-                encounterType = "trader";
-                /* Generates random tech level for setting prices for the trader. */
+                } else if (type == 1) {
+
+                    encounterType = "trader";
+                    /* Generates random tech level for setting prices for the trader. */
+                    TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
+                    marketplace = new Marketplace(tech, player);
+
+                } else if (type == 2) {
+
+                    encounterType = "pirate";
+
+                } else if (type == 3) {
+
+                    Ship ship = player.getShip();
+                    boolean isVisible = ship.isVisible();
+
+                    if (!isVisible) {
+
+                        return "You managed to pass the police without notice because of your cloaking gadget!";
+
+                    } else {
+
+                        if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
+                            return "The police inspected your cargo and didn't find anything suspicious. \n" +
+                                    "They apologize for the inconvenience.";
+                        }
+
+                        while (cargo.contains(Goods.FIREARMS)) {
+                            cargo.remove(Goods.FIREARMS);
+                        }
+
+                        while (cargo.contains(Goods.NARCOTICS)) {
+                            cargo.remove(Goods.NARCOTICS);
+                        }
+
+                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
+                                "The items have been taken from your possession.";
+                    }
+                }
+                return encounters[type];
+            }
+        } else {
+            int type = 0;
+            if (encounterType.equals("trader")) {
+                type = 1;
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
                 marketplace = new Marketplace(tech, player);
-
-            } else if (type == 2) {
-
-                encounterType = "pirate";
-
-            } else if (type == 3) {
-
+            } else  if (encounterType.equals("pirate")) {
+                type = 2;
+            }  else if (encounterType.equals("police")) {
+                type = 3;
                 Ship ship = player.getShip();
                 boolean isVisible = ship.isVisible();
 
@@ -132,14 +172,14 @@ public class Encounter {
                         return "The police inspected your cargo and didn't find anything suspicious. \n" +
                                 "They apologize for the inconvenience.";
                     }
-	       
-		            while (cargo.contains(Goods.FIREARMS)) {
-			            cargo.remove(Goods.FIREARMS);
-		            }
 
-		            while (cargo.contains(Goods.NARCOTICS)) {
-			            cargo.remove(Goods.NARCOTICS);
-		            }
+                    while (cargo.contains(Goods.FIREARMS)) {
+                        cargo.remove(Goods.FIREARMS);
+                    }
+
+                    while (cargo.contains(Goods.NARCOTICS)) {
+                        cargo.remove(Goods.NARCOTICS);
+                    }
 
                     return "FREEZE! The police inspected your cargo and found illegal goods! " +
                             "The items have been taken from your possession.";
@@ -225,6 +265,10 @@ public class Encounter {
 
         return marketplace.playerBuys(item);
 
+    }
+
+    public String getEncounterType() {
+        return encounterType;
     }
 
 }

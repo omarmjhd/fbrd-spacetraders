@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -15,6 +16,7 @@ import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
 import model.events.Encounter;
+import view.Main;
 
 
 /**
@@ -58,7 +60,14 @@ public class PoliceController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        gm = GameInstance.getInstance();
         player = gm.getPlayer();
         encounter = new Encounter(player, "police");
+        encounterMessage.setText(encounter.encounter());
+    }
+
+    public void planetAction(ActionEvent actionEvent) {
+
+        Main.setScene("screens/planetscreen.fxml");
     }
 }
