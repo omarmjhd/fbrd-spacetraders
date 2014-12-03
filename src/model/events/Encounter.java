@@ -1,7 +1,6 @@
 package model.events;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import model.commerce.Goods;
@@ -27,11 +26,6 @@ public class Encounter {
     private List<Goods> cargo;
 
     /**
-     * Trader's cargo.
-     */
-    private List<Goods> traderCargo;
-
-    /**
      * Random used for generating effect of player's skill levels.
      */
     private Random rand;
@@ -50,11 +44,6 @@ public class Encounter {
      * Fight modifier based on player's fight skill level.
      */
     private int fightSkillModifier;
-
-    /**
-     * Trade modifier based on player's trade skill level.
-     */
-    private int tradeSkillModifier;
 
     /**
      * Use a marketplace for the trader.
@@ -93,25 +82,32 @@ public class Encounter {
     public String encounter() {
 
         fightSkillModifier = player.getFightingSkill();
-        tradeSkillModifier = player.getTradeSkill();
         cargo = player.getCargo();
 
         if (encounters == null) {
+
             encounters = new String[] {
                     "You encountered a trader!",
                     "You encountered a pirate!",
                     "You encountered the police!"};
+
         }
 
         if (rand.nextInt(10) == 0) {
+
             int type = rand.nextInt(encounters.length);
+
             if (type == 0) {
+
                 encounterType = "trader";
                 /* Generates random tech level for setting prices for the trader. */
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
                 marketplace = new Marketplace(tech, player);
+
             } else if (type == 1) {
+
                 encounterType = "pirate";
+
             } else if (type == 2) {
 
                 Ship ship = player.getShip();
@@ -119,7 +115,7 @@ public class Encounter {
 
                 if (!isVisible) {
 
-                    return "You managed to pass the police without notice with your cloaking gadget!";
+                    return "You managed to pass the police without notice because of your cloaking gadget!";
 
                 } else {
 
@@ -128,13 +124,13 @@ public class Encounter {
                                 "They apologize for the inconvenience.";
                     }
 	       
-		    while (cargo.contains(Goods.FIREARMS)) {
-			cargo.remove(Goods.FIREARMS);
-		    }
+		            while (cargo.contains(Goods.FIREARMS)) {
+			            cargo.remove(Goods.FIREARMS);
+		            }
 
-		    while (cargo.contains(Goods.NARCOTICS)) {
-			cargo.remove(Goods.NARCOTICS);
-		    }
+		            while (cargo.contains(Goods.NARCOTICS)) {
+			            cargo.remove(Goods.NARCOTICS);
+		            }
 
                     return "FREEZE! The police inspected your cargo and found illegal goods! " +
                             "The items have been taken from your possession.";
@@ -143,7 +139,6 @@ public class Encounter {
             }
             return encounters[type];
         }
-
         return "";
     }
 
@@ -158,10 +153,15 @@ public class Encounter {
         playerHealth -= new Random().nextInt(2);
 
         if (encounterHealth <= 0) {
+
             return String.format("You beat the %s!", encounterType);
+
         }
+
         if (playerHealth <= 0) {
+
             return "You died.";
+
         }
 
         return "";
@@ -200,6 +200,7 @@ public class Encounter {
     public boolean sell(Goods item) {
 
         return marketplace.playerSells(item);
+
     }
 
     /**
@@ -212,6 +213,7 @@ public class Encounter {
     public boolean buy(Goods item) {
 
         return marketplace.playerBuys(item);
+
     }
 
 }
