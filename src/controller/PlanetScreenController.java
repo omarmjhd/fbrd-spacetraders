@@ -107,15 +107,18 @@ public class PlanetScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        encounter = new Encounter(player);
-        type = encounter.encounter();
-        if (type != null) {
-            if (type.equals("trader")) {
-//                Main.setScene("screens/traderscreen.fxml");
-            } else if (type.equals("pirate")) {
-//                Main.setScene("screens/piratescreen.fxml");
-            } else if (type.equals("police")) {
-//                Main.setScene("screens/policescreen.fxml");
+        //TODO: MAKE IT SO THAT THIS ONLY HAPPENS ONCE PER CALL TO PLANET
+        if (encounter != null) {
+            encounter = new Encounter(player);
+            type = encounter.encounter();
+            if (type != null) {
+                if (type.equals("trader")) {
+                    Main.setScene("screens/traderscreen.fxml");
+                } else if (type.equals("pirate")) {
+                    Main.setScene("screens/piratescreen.fxml");
+                } else if (type.equals("police")) {
+                    Main.setScene("screens/policescreen.fxml");
+                }
             }
         }
         astronaut = new Image("file:assets/astronaut.png");

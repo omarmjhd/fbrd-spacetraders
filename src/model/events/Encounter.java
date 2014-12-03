@@ -74,6 +74,10 @@ public class Encounter {
 
     }
 
+    public Encounter(Player player, String type) {
+        encounterType = type;
+    }
+
     /**
      * Encounter with a trader, pirate, or police.
      *

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
@@ -15,6 +16,11 @@
 
 <AnchorPane maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartScreenController">
    <children>
+      <ImageView fitHeight="480.0" fitWidth="640.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/tradership.png" />
+         </image>
+      </ImageView>
       <Canvas height="480.0" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Text fontSmoothingType="LCD" layoutX="253.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRADER" wrappingWidth="288.13671875" AnchorPane.leftAnchor="253.0" AnchorPane.topAnchor="89.86181640625">
          <font>
@@ -29,32 +35,22 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Text layoutX="176.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You encountered a...">
+      <Text fill="WHITE" layoutX="176.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You encountered a...">
          <font>
             <Font name="Courier New" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="tradeButton" layoutX="18.0" layoutY="309.0" mnemonicParsing="false" onAction="#tradeAction" prefHeight="47.0" prefWidth="165.0" text="Trade" textAlignment="CENTER">
+      <Button fx:id="tradeButton" layoutX="72.0" layoutY="309.0" mnemonicParsing="false" onAction="#tradeAction" prefHeight="47.0" prefWidth="165.0" text="Trade" textAlignment="CENTER">
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="fleeButton" layoutX="459.0" layoutY="309.0" mnemonicParsing="false" onAction="#fleeAction" prefHeight="47.0" prefWidth="165.0" text="Flee" textAlignment="CENTER">
+      <Text fx:id="encounterMessage" fill="WHITE" layoutX="232.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
          <font>
-            <Font name="Courier New Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="fightButton" layoutX="238.0" layoutY="309.0" mnemonicParsing="false" onAction="#fightAction" prefHeight="47.0" prefWidth="165.0" text="Fight" textAlignment="CENTER">
-         <font>
-            <Font name="Courier New Bold" size="15.0" />
-         </font>
-      </Button>
-      <Text fx:id="encounterMessage" layoutX="255.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
-         <font>
-            <Font size="14.0" />
+            <Font name="Courier New" size="14.0" />
          </font>
       </Text>
-      <Button fx:id="planetButton" layoutX="238.0" layoutY="389.0" mnemonicParsing="false" onAction="#planetAction" prefHeight="47.0" prefWidth="165.0" text="To the planet" textAlignment="CENTER">
+      <Button fx:id="planetButton" layoutX="397.0" layoutY="309.0" mnemonicParsing="false" onAction="#planetAction" prefHeight="47.0" prefWidth="165.0" text="To the planet" textAlignment="CENTER">
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font>
