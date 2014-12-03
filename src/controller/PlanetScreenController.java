@@ -135,9 +135,10 @@ public class PlanetScreenController implements Initializable {
         //ENCOUNTERS
         if (encounter == null) {
             encounter = new Encounter(player);
-            encounter.encounter();
+            String isEncounter = encounter.encounter();
             type = encounter.getEncounterType();
-            if (type != null) {
+            if (isEncounter != null) {
+                System.out.print(type);
                 if (type.equals("trader")) {
                     Main.setScene("screens/traderscreen.fxml");
                 } else if (type.equals("pirate")) {

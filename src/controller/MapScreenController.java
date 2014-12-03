@@ -128,7 +128,8 @@ public class MapScreenController implements Initializable {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
         travelDistanceLabel.setText("");
-        playerLocation = gm.getCurrentSolarSystem().getPosition();
+        playerLocation = gm.getCurrentSolarSystem().
+                getPosition();
 
         //currentLine initialization
         currentLine = new Line();

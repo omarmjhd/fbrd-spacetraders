@@ -33,12 +33,12 @@ public class Encounter {
     /**
      * Starting health of encounter.
      */
-    private int encounterHealth = 15;
+    private int encounterHealth = 10;
 
     /**
      * Starting health of player.
      */
-    private int playerHealth = 15;
+    private int playerHealth = 10;
 
     /**
      * Fight modifier based on player's fight skill level.
@@ -75,6 +75,7 @@ public class Encounter {
     }
 
     public Encounter(Player player, String type) {
+        this.player = player;
         encounterType = type;
     }
 
@@ -98,59 +99,57 @@ public class Encounter {
 
         }
 
-        if (encounterType != null) {
+        if (encounterType == null) {
+//            if (rand.nextInt(10) == 0) {
+          int type = rand.nextInt(encounters.length);
+//            int type = 1;
+            if (type == 0) {
 
-            if (rand.nextInt(10) == 0) {
+                return null;
 
-                int type = rand.nextInt(encounters.length);
+            } else if (type == 1) {
 
-                if (type == 0) {
+                encounterType = "trader";
+                /* Generates random tech level for setting prices for the trader. */
+                TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
+                marketplace = new Marketplace(tech, player);
 
-                    return null;
+            } else if (type == 2) {
 
-                } else if (type == 1) {
+                encounterType = "pirate";
 
-                    encounterType = "trader";
-                    /* Generates random tech level for setting prices for the trader. */
-                    TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
-                    marketplace = new Marketplace(tech, player);
+            } else if (type == 3) {
+                encounterType = "police";
+                Ship ship = player.getShip();
+                boolean isVisible = ship.isVisible();
 
-                } else if (type == 2) {
+                if (!isVisible) {
 
-                    encounterType = "pirate";
+                    return "You managed to pass the police without notice because of your cloaking gadget!";
 
-                } else if (type == 3) {
+                } else {
 
-                    Ship ship = player.getShip();
-                    boolean isVisible = ship.isVisible();
-
-                    if (!isVisible) {
-
-                        return "You managed to pass the police without notice because of your cloaking gadget!";
-
-                    } else {
-
-                        if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
-                            return "The police inspected your cargo and didn't find anything suspicious. \n" +
-                                    "They apologize for the inconvenience.";
-                        }
-
-                        while (cargo.contains(Goods.FIREARMS)) {
-                            cargo.remove(Goods.FIREARMS);
-                        }
-
-                        while (cargo.contains(Goods.NARCOTICS)) {
-                            cargo.remove(Goods.NARCOTICS);
-                        }
-
-                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
-                                "The items have been taken from your possession.";
+                    if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
+                        return "The police inspected your cargo and didn't find anything suspicious. \n" +
+                                "They apologize for the inconvenience.";
                     }
+
+                    while (cargo.contains(Goods.FIREARMS)) {
+                        cargo.remove(Goods.FIREARMS);
+                    }
+
+                    while (cargo.contains(Goods.NARCOTICS)) {
+                        cargo.remove(Goods.NARCOTICS);
+                    }
+
+                    return "FREEZE! The police inspected your cargo and found illegal goods! " +
+                            "The items have been taken from your possession.";
                 }
-                return encounters[type];
             }
+//          }
+            return encounters[type];
         } else {
-            int type = 0;
+            int type = 1;
             if (encounterType.equals("trader")) {
                 type = 1;
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
@@ -188,7 +187,6 @@ public class Encounter {
             }
             return encounters[type];
         }
-        return "";
     }
 
     /**
@@ -269,6 +267,14 @@ public class Encounter {
 
     public String getEncounterType() {
         return encounterType;
+    }
+
+    public int getEncounterHealth() {
+        return encounterHealth;
+    }
+
+    public int getPlayerHealth() {
+        return playerHealth;
     }
 
 }

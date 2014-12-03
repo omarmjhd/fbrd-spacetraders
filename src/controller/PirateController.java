@@ -39,6 +39,10 @@ public class PirateController implements Initializable {
      */
     public Button surrenderButton;
     /**
+     * Button that displays after the fight is over.
+     */
+    public Button toPlanet;
+    /**
      * To talk to the player.
      */
     public Text encounterMessage;
@@ -61,21 +65,52 @@ public class PirateController implements Initializable {
         player = gm.getPlayer();
         encounter = new Encounter(player, "pirate");
         encounterMessage.setText("");
+        toPlanet.setVisible(false);
     }
+
+    /**
+     * Sends player to planet.
+     * @param actionEvent
+     */
     public void planetAction(ActionEvent actionEvent) {
 
         Main.setScene("screens/planetscreen.fxml");
     }
+
+    /**
+     * Flees.
+     * @param actionEvent
+     */
     public void fleeAction(ActionEvent actionEvent) {
 
-        Main.setScene("screens/planetscreen.fxml");
+        encounterMessage.setText(encounter.flee());
+        toPlanet.setVisible(true);
     }
+
+    /**
+     * Surrenders.
+     * @param actionEvent
+     */
     public void surrenderAction(ActionEvent actionEvent) {
 
-        Main.setScene("screens/planetscreen.fxml");
+        encounterMessage.setText(encounter.surrender());
+        toPlanet.setVisible(true);
     }
-    public void fightAction(ActionEvent actionEvent) {
 
-        encounter.fight();
+    /**
+     * Fights.
+     * @param actionEvent
+     */
+    public void fightAction(ActionEvent actionEvent) {
+        encounterMessage.setText(encounter.fight());
+        pirateHealthBar.setProgress(encounter.getEncounterHealth() / 10.0);
+        playerHealthBar.setProgress(encounter.getPlayerHealth() / 10.0);
+        if (encounter.getEncounterHealth() <= 0) {
+            toPlanet.setVisible(true);
+        }
+        if (encounter.getPlayerHealth() <= 0) {
+            //TODO: GAME OVER
+            toPlanet.setVisible(true);
+        }
     }
 }
