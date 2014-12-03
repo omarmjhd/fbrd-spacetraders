@@ -1,11 +1,10 @@
-package model.events;
+package model.encounters;
 
 import java.util.List;
 import java.util.Random;
 
 import model.commerce.Goods;
 import model.commerce.Marketplace;
-
 import model.core.Player;
 import model.core.Ship;
 import model.core.TechLevel;
@@ -98,7 +97,7 @@ public class Encounter {
 
         }
 
-        if (encounterType != null) {
+        if (encounterType == null) {
 
             if (rand.nextInt(10) == 0) {
 
@@ -151,6 +150,8 @@ public class Encounter {
             }
         } else {
             int type = 0;
+            // The below lines always throw a NPE because we are in the branch where
+            // encounterType == null
             if (encounterType.equals("trader")) {
                 type = 1;
                 TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
