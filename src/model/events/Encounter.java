@@ -182,11 +182,13 @@ public class Encounter {
     /**
      * Surrenders all goods to the encounter.
      */
-    public void surrender() {
+    public String surrender() {
 
         for (Goods g : cargo) {
             player.removeCargo(g);
         }
+
+        return String.format("You surrendered your goods to the %s.", encounterType);
 
     }
 
