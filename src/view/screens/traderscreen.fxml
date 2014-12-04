@@ -45,7 +45,7 @@
             <Font name="Courier New Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="encounterMessage" fill="WHITE" layoutX="232.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
+      <Text fx:id="encounterMessage" fill="WHITE" layoutX="21.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
          <font>
             <Font name="Courier New" size="14.0" />
          </font>

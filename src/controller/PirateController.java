@@ -81,6 +81,7 @@ public class PirateController implements Initializable {
         gm = GameInstance.getInstance();
         player = gm.getPlayer();
         encounter = new Encounter(player, "pirate");
+        encounter.encounter();
         encounterMessage.setText("");
         toPlanet.setVisible(false);
         background = new Image("file:assets/pirateship.jpg");
@@ -109,6 +110,10 @@ public class PirateController implements Initializable {
     public void fleeAction(ActionEvent actionEvent) {
 
         encounterMessage.setText(encounter.flee());
+        fightButton.setVisible(false);
+        surrenderButton.setVisible(false);
+        fleeButton.setVisible(false);
+        fightButton.setVisible(false);
         toPlanet.setVisible(true);
     }
 
@@ -119,6 +124,10 @@ public class PirateController implements Initializable {
     public void surrenderAction(ActionEvent actionEvent) {
 
         encounterMessage.setText(encounter.surrender());
+        surrenderButton.setVisible(false);
+        fightButton.setVisible(false);
+        fleeButton.setVisible(false);
+        toPlanet.setVisible(true);
         toPlanet.setVisible(true);
     }
 

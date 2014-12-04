@@ -75,6 +75,7 @@ public class TraderController implements Initializable{
         gm = GameInstance.getInstance();
         player = gm.getPlayer();
         encounter = new Encounter(player, "trader");
+        encounter.encounter();
         background = new Image("file:assets/tradership.png");
         backgroundView = new ImageView(background);
         pane.getChildren().add(backgroundView);
@@ -84,20 +85,46 @@ public class TraderController implements Initializable{
         backgroundView.setY(0);
         backgroundView.toBack();
         Random ran = new Random();
-        int goodindex = ran.nextInt(Goods.values().length - 1);
+        int goodindex = ran.nextInt(Goods.values().length);
         cargo = Goods.values()[goodindex];
         encounterMessage.setText("This trader is selling and buying " +
-                cargo.toString() +" for " + cargo.price(TechLevel.HI_TECH) + ".");
+                cargo.toString() +" for " + encounter.getMarketplace().getPrice(cargo) + ".");
+        if (player.cargoRoomLeft() < 1) {
+            buyButton.setDisable(true);
+        }
+        if (encounter.getMarketplace().getPrice(cargo) > player.getMoney()) {
+            buyButton.setDisable(true);
+        }
+        if (player.getCargo().contains(cargo) == false) {
+            sellButton.setDisable(true);
+        }
     }
 
     public void planetAction(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
     }
     public void sellAction(ActionEvent actionEvent) {
-
-        encounter.getMarketplace().playerSells(cargo);
+        encounter.sell(cargo);
+        if (player.getCargo().contains(cargo) == false) {
+            sellButton.setDisable(true);
+        }
+        if (encounter.getMarketplace().getMerchandise().contains(cargo) == true) {
+            buyButton.setDisable(false);
+        }
     }
     public void buyAction(ActionEvent actionEvent) {
-        encounter.getMarketplace().playerBuys(cargo);
+        encounter.buy(cargo);
+        if (player.cargoRoomLeft() < 1) {
+            buyButton.setDisable(true);
+        }
+        if (encounter.getMarketplace().getPrice(cargo) > player.getMoney()) {
+            buyButton.setDisable(true);
+        }
+        if (encounter.getMarketplace().getMerchandise().contains(cargo) == false) {
+            buyButton.setDisable(true);
+        }
+        if (player.getCargo().contains(cargo) == true) {
+            sellButton.setDisable(false);
+        }
     }
 }

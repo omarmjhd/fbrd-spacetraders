@@ -59,6 +59,11 @@ public class Encounter {
      */
     private String encounterType;
 
+    /**
+     * Boolean.
+     */
+    private boolean contrabandFound;
+
 
     /**
      * Constructor for the encounters.
@@ -71,13 +76,21 @@ public class Encounter {
         this.player = player;
         rand = new Random();
         fightSkillModifier = player.getFightingSkill() + 1;
-
+        contrabandFound = false;
     }
 
     public Encounter(Player player, String type) {
         this.player = player;
         encounterType = type;
         fightSkillModifier = player.getFightingSkill() + 1;
+        contrabandFound = false;
+    }
+
+    public Encounter(Player player, String type, boolean contraband) {
+        this.player = player;
+        encounterType = type;
+        fightSkillModifier = player.getFightingSkill() + 1;
+        contrabandFound = true;
     }
 
     /**
@@ -280,6 +293,15 @@ public class Encounter {
         return playerHealth;
     }
 
-    public Marketplace getMarketplace() {return marketplace; };
+    public Marketplace getMarketplace() {
+        return marketplace;
+    }
+
+    public boolean contrabandFound() {
+        if (cargo.contains(Goods.FIREARMS) || cargo.contains(Goods.NARCOTICS)) {
+            return true;
+        }
+        return false;
+    }
 
 }
