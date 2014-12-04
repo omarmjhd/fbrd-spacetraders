@@ -200,7 +200,7 @@ public class Encounter {
     public String fight() {
 
         encounterHealth -= fightSkillModifier;
-        playerHealth -= new Random().nextInt(2);
+        playerHealth -= new Random().nextInt(4);
 
         if (encounterHealth <= 0) {
 

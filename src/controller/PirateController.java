@@ -137,7 +137,7 @@ public class PirateController implements Initializable {
             toPlanet.setVisible(true);
         }
         if (encounter.getPlayerHealth() <= 0) {
-            Main.setScene("screens/gameoverscreen");
+            Main.setScene("screens/gameoverscreen.fxml");
         }
     }
 }

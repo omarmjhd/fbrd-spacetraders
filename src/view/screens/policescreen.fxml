@@ -45,7 +45,7 @@
             <Font name="Courier New Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="encounterMessage" fill="WHITE" layoutX="34.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The police inspected your cargo and didn't find anything suspicious.">
+      <Text fx:id="encounterMessage" fill="WHITE" layoutX="34.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEST TEXT">
          <font>
             <Font name="Courier New" size="14.0" />
          </font>
