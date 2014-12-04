@@ -131,10 +131,16 @@ public class PirateController implements Initializable {
         pirateHealthBar.setProgress(encounter.getEncounterHealth() / 10.0);
         playerHealthBar.setProgress(encounter.getPlayerHealth() / 10.0);
         if (encounter.getEncounterHealth() <= 0) {
+            fleeButton.setVisible(false);
+            surrenderButton.setVisible(false);
+            fightButton.setVisible(false);
             toPlanet.setVisible(true);
         }
         if (encounter.getPlayerHealth() <= 0) {
             //TODO: GAME OVER
+            fleeButton.setVisible(false);
+            surrenderButton.setVisible(false);
+            fightButton.setVisible(false);
             toPlanet.setVisible(true);
         }
     }
