@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
@@ -43,6 +44,10 @@ public class TraderController implements Initializable{
      */
     public Text encounterMessage;
     /**
+     * Money.
+     */
+    public Label playerMoney;
+    /**
      * background image.
      */
     private Image background;
@@ -74,6 +79,7 @@ public class TraderController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         gm = GameInstance.getInstance();
         player = gm.getPlayer();
+        playerMoney.setText("" + player.getMoney());
         encounter = new Encounter(player, "trader");
         encounter.encounter();
         background = new Image("file:assets/tradership.png");
@@ -111,6 +117,7 @@ public class TraderController implements Initializable{
         if (encounter.getMarketplace().getMerchandise().contains(cargo) == true) {
             buyButton.setDisable(false);
         }
+        playerMoney.setText("" + player.getMoney());
     }
     public void buyAction(ActionEvent actionEvent) {
         encounter.buy(cargo);
@@ -126,5 +133,6 @@ public class TraderController implements Initializable{
         if (player.getCargo().contains(cargo) == true) {
             sellButton.setDisable(false);
         }
+        playerMoney.setText("" + player.getMoney());
     }
 }
