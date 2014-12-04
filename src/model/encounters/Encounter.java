@@ -280,4 +280,6 @@ public class Encounter {
         return playerHealth;
     }
 
+    public Marketplace getMarketplace() {return marketplace; };
+
 }

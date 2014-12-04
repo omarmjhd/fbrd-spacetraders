@@ -9,13 +9,16 @@ import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import model.commerce.Goods;
 import model.core.GameInstance;
 import model.core.Player;
+import model.core.TechLevel;
 import model.encounters.Encounter;
 
 import view.Main;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -24,9 +27,13 @@ import java.util.ResourceBundle;
 public class TraderController implements Initializable{
 
     /**
-     * Button to go to a trade screen.
+     * Button to buy.
      */
-    public Button tradeButton;
+    public Button buyButton;
+    /**
+     * Sell.
+     */
+    public Button sellButton;
     /**
      * Button to continue to the planet
      */
@@ -59,12 +66,15 @@ public class TraderController implements Initializable{
      * encounter to use.
      */
     private Encounter encounter;
+    /**
+     * private good for the trader to sell/buy.
+     */
+    private Goods cargo;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gm = GameInstance.getInstance();
         player = gm.getPlayer();
         encounter = new Encounter(player, "trader");
-        encounterMessage.setText("");
         background = new Image("file:assets/tradership.png");
         backgroundView = new ImageView(background);
         pane.getChildren().add(backgroundView);
@@ -73,13 +83,21 @@ public class TraderController implements Initializable{
         backgroundView.setX(0);
         backgroundView.setY(0);
         backgroundView.toBack();
+        Random ran = new Random();
+        int goodindex = ran.nextInt(Goods.values().length - 1);
+        cargo = Goods.values()[goodindex];
+        encounterMessage.setText("This trader is selling and buying " +
+                cargo.toString() +" for " + cargo.price(TechLevel.HI_TECH) + ".");
     }
 
     public void planetAction(ActionEvent actionEvent) {
         Main.setScene("screens/planetscreen.fxml");
     }
-    public void tradeAction(ActionEvent actionEvent) {
+    public void sellAction(ActionEvent actionEvent) {
 
-        Main.setScene("screens/marketplacescreen.fxml");
+        encounter.getMarketplace().playerSells(cargo);
+    }
+    public void buyAction(ActionEvent actionEvent) {
+        encounter.getMarketplace().playerBuys(cargo);
     }
 }

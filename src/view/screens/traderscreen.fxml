@@ -40,17 +40,22 @@
             <Font name="Courier New" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="tradeButton" layoutX="72.0" layoutY="309.0" mnemonicParsing="false" onAction="#tradeAction" prefHeight="47.0" prefWidth="165.0" text="Trade" textAlignment="CENTER">
+      <Button fx:id="buyButton" layoutX="77.0" layoutY="262.0" mnemonicParsing="false" onAction="#buyAction" prefHeight="47.0" prefWidth="165.0" text="Buy" textAlignment="CENTER">
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font>
       </Button>
-      <Text fx:id="encounterMessage" fill="WHITE" layoutX="232.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
+      <Text fx:id="encounterMessage" fill="WHITE" layoutX="232.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trader text goes here">
          <font>
             <Font name="Courier New" size="14.0" />
          </font>
       </Text>
       <Button fx:id="planetButton" layoutX="397.0" layoutY="309.0" mnemonicParsing="false" onAction="#planetAction" prefHeight="47.0" prefWidth="165.0" text="To the planet" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="sellButton" layoutX="77.0" layoutY="333.0" mnemonicParsing="false" onAction="#sellAction" prefHeight="47.0" prefWidth="165.0" text="Sell" textAlignment="CENTER">
          <font>
             <Font name="Courier New Bold" size="15.0" />
          </font>
