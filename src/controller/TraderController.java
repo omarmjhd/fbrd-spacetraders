@@ -90,9 +90,8 @@ public class TraderController implements Initializable{
         backgroundView.setX(0);
         backgroundView.setY(0);
         backgroundView.toBack();
-        Random ran = new Random();
-        int goodindex = ran.nextInt(Goods.values().length);
-        cargo = Goods.values()[goodindex];
+
+        cargo = encounter.getMarketplace().getMerchandise().get(0);
         encounterMessage.setText("This trader is selling and buying " +
                 cargo.toString() +" for " + encounter.getMarketplace().getPrice(cargo) + ".");
         if (player.cargoRoomLeft() < 1) {
