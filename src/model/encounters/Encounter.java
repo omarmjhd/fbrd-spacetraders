@@ -1,6 +1,8 @@
 package model.encounters;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 import model.commerce.Goods;
@@ -200,8 +202,14 @@ public class Encounter {
      */
     public String surrender() {
 
-        for (Goods g : cargo) {
-            player.removeCargo(g);
+        Queue<Goods> removeQueue = new LinkedList<>();
+
+        for (Goods g : player.getCargo()) {
+            removeQueue.add(g);
+        }
+
+        while (!removeQueue.isEmpty()) {
+            player.removeCargo(removeQueue.remove());
         }
 
         return String.format("You surrendered your goods to the %s.", encounterType);
