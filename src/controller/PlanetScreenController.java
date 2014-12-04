@@ -25,6 +25,8 @@ import model.encounters.Encounter;
 
 import view.Main;
 
+import javax.swing.*;
+
 /**
  * @author Joshua on 10/6/2014.
  */
@@ -93,21 +95,8 @@ public class PlanetScreenController implements Initializable {
      * string to make checkstyle happy.
      */
     private String moneyStr = "\nMoney: ";
-
-    /**
-     * encounter to instantiate each time a planet is visited.
-     */
-    private Encounter encounter;
-
-    /**
-     * the type of encounter it is.
-     */
-    private String type;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         astronaut = new Image("file:assets/astronaut.png");
         astronautView.setImage(astronaut);
         gi = GameInstance.getInstance();
@@ -132,23 +121,10 @@ public class PlanetScreenController implements Initializable {
         }
         planetText.setText(curPlanet.toString() + fuelStr + player.getCurrentFuel() + moneyStr
                         + player.getMoney());
-        //ENCOUNTERS
-        if (encounter == null) {
-            encounter = new Encounter(player);
-            String isEncounter = encounter.encounter();
-            type = encounter.getEncounterType();
-            if (isEncounter != null) {
-                System.out.print(type);
-                if (type.equals("trader")) {
-                    Main.setScene("screens/traderscreen.fxml");
-                } else if (type.equals("pirate")) {
-                    Main.setScene("screens/piratescreen.fxml");
-                } else if (type.equals("police")) {
-                    Main.setScene("screens/policescreen.fxml");
-                }
-            }
-        }
+
     }
+
+//    public void goToTrade(ActionEvent actionEvent) { Main.setScene("screens/traderscreen.fxml"); }
 
     /**
      * Displays the marketplace scene.
@@ -158,6 +134,7 @@ public class PlanetScreenController implements Initializable {
      */
     public void goToMarket(ActionEvent actionEvent) {
         Main.setScene("screens/marketplacescreen.fxml");
+//        Main.setScene("screens/traderscreen.fxml");
     }
 
     /**

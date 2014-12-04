@@ -23,6 +23,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
+import model.encounters.Encounter;
 import org.controlsfx.dialog.Dialogs;
 
 import model.core.GameInstance;
@@ -109,6 +110,15 @@ public class MapScreenController implements Initializable {
      * the player.
      */
     private Player player;
+    /**
+     * encounter to instantiate each time a planet is visited.
+     */
+    private Encounter encounter;
+
+    /**
+     * the type of encounter it is.
+     */
+    private String type;
 
     /**
      * The list of colors used for planets.
@@ -240,7 +250,28 @@ public class MapScreenController implements Initializable {
         }
         gm.getCurrentPlanet().enterMarket(gm.getPlayer());
         gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
-        Main.setScene(planetScreen);
+
+        //ENCOUNTERS
+        if (encounter == null) {
+            encounter = new Encounter(player);
+            String isEncounter = encounter.encounter();
+            type = encounter.getEncounterType();
+            if (isEncounter != null) {
+                System.out.print(type);
+                if (type.equals("trader")) {
+                    System.out.println("trade screen should show");
+                    Main.setScene("screens/traderscreen.fxml");
+                    System.out.println("something went wrong");
+                } else if (type.equals("pirate")) {
+                    Main.setScene("screens/piratescreen.fxml");
+                } else if (type.equals("police")) {
+                    Main.setScene("screens/policescreen.fxml");
+                }
+            } else {
+                Main.setScene(planetScreen);
+            }
+        }
+
     }
 
     /**
@@ -270,6 +301,7 @@ public class MapScreenController implements Initializable {
      *
      */
     public void returnToPlanet(ActionEvent actionEvent) {
+
         Main.setScene(planetScreen);
     }
 

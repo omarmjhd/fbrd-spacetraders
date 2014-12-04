@@ -85,7 +85,7 @@ public class Encounter {
      */
     public String encounter() {
 
-        fightSkillModifier = player.getFightingSkill();
+        fightSkillModifier = player.getFightingSkill() + 1;
         cargo = player.getCargo();
 
         if (encounters == null) {
@@ -99,11 +99,7 @@ public class Encounter {
         }
 
         if (encounterType == null) {
-//            if (rand.nextInt(10) == 0) {
             int type = rand.nextInt(encounters.length);
-//            int type = 1;
-//                if (rand.nextInt(10) == 0) {
-
                 if (type == 0) {
 
                     return null;
