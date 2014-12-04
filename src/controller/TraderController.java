@@ -104,6 +104,9 @@ public class TraderController implements Initializable{
         if (player.getCargo().contains(cargo) == false) {
             sellButton.setDisable(true);
         }
+        if (encounter.getMarketplace().getMerchandise().contains(cargo) == false) {
+            buyButton.setDisable(true);
+        }
     }
 
     public void planetAction(ActionEvent actionEvent) {

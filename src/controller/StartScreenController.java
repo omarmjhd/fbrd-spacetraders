@@ -1,8 +1,16 @@
 package controller;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
@@ -15,7 +23,33 @@ import view.Main;
 /**
  * @author Joshua on 9/30/2014.
  */
-public class StartScreenController {
+public class StartScreenController implements Initializable {
+    /**
+     * background image.
+     */
+    private Image background;
+    /**
+     * view of the astronaut.
+     */
+    public ImageView backgroundView;
+    /**
+     * the pane.
+     */
+    public Pane pane;
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        background = new Image("file:assets/space.jpg");
+        backgroundView = new ImageView(background);
+        pane.getChildren().add(backgroundView);
+        backgroundView.setPreserveRatio(true);
+        backgroundView.setFitHeight(480);
+        backgroundView.setX(0);
+        backgroundView.setY(0);
+        backgroundView.toBack();
+    }
 
     /**
      * Ends the game when the quit button is pressed.
