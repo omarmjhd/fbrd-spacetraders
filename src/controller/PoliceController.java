@@ -7,7 +7,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import model.commerce.Goods;
 import model.commerce.Marketplace;
@@ -31,9 +34,21 @@ public class PoliceController implements Initializable{
      */
     public Button planetButton;
     /**
+     * the pane.
+     */
+    public Pane pane;
+    /**
      * Text showing what's happening with the encounter
      */
     public Text encounterMessage;
+    /**
+     * background image.
+     */
+    private Image background;
+    /**
+     * view of the astronaut.
+     */
+    public ImageView backgroundView;
     /**
      * Player affected by the encounter.
      */
@@ -65,6 +80,14 @@ public class PoliceController implements Initializable{
         player = gm.getPlayer();
         encounter = new Encounter(player, "police");
         encounterMessage.setText(encounter.encounter());
+        background = new Image("file:assets/policeship.jpg");
+        backgroundView = new ImageView(background);
+        pane.getChildren().add(backgroundView);
+        backgroundView.setPreserveRatio(true);
+        backgroundView.setFitHeight(480);
+        backgroundView.setX(0);
+        backgroundView.setY(0);
+        backgroundView.toBack();
     }
 
     public void planetAction(ActionEvent actionEvent) {

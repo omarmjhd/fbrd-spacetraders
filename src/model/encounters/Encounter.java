@@ -70,12 +70,14 @@ public class Encounter {
 
         this.player = player;
         rand = new Random();
+        fightSkillModifier = player.getFightingSkill() + 1;
 
     }
 
     public Encounter(Player player, String type) {
         this.player = player;
         encounterType = type;
+        fightSkillModifier = player.getFightingSkill() + 1;
     }
 
     /**
@@ -85,7 +87,7 @@ public class Encounter {
      */
     public String encounter() {
 
-        fightSkillModifier = player.getFightingSkill() + 1;
+
         cargo = player.getCargo();
 
         if (encounters == null) {

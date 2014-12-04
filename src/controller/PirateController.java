@@ -4,7 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import model.commerce.Marketplace;
 import model.core.GameInstance;
@@ -45,9 +48,21 @@ public class PirateController implements Initializable {
      */
     public Button toPlanet;
     /**
+     * the pane.
+     */
+    public Pane pane;
+    /**
      * To talk to the player.
      */
     public Text encounterMessage;
+    /**
+     * background image.
+     */
+    private Image background;
+    /**
+     * view of the astronaut.
+     */
+    public ImageView backgroundView;
     /**
      * The player.
      */
@@ -68,6 +83,14 @@ public class PirateController implements Initializable {
         encounter = new Encounter(player, "pirate");
         encounterMessage.setText("");
         toPlanet.setVisible(false);
+        background = new Image("file:assets/pirateship.jpg");
+        backgroundView = new ImageView(background);
+        pane.getChildren().add(backgroundView);
+        backgroundView.setPreserveRatio(true);
+        backgroundView.setFitHeight(480);
+        backgroundView.setX(0);
+        backgroundView.setY(0);
+        backgroundView.toBack();
     }
 
     /**

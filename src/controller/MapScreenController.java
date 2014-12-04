@@ -138,8 +138,7 @@ public class MapScreenController implements Initializable {
         this.universe = GameInstance.getInstance().getSolarSystems();
         this.gm = GameInstance.getInstance();
         travelDistanceLabel.setText("");
-        playerLocation = gm.getCurrentSolarSystem().
-                getPosition();
+        playerLocation = gm.getCurrentSolarSystem().getPosition();
 
         //currentLine initialization
         currentLine = new Line();
@@ -252,26 +251,20 @@ public class MapScreenController implements Initializable {
         gm.getCurrentPlanet().enterShipyard(gm.getPlayer());
 
         //ENCOUNTERS
-        if (encounter == null) {
-            encounter = new Encounter(player);
-            String isEncounter = encounter.encounter();
-            type = encounter.getEncounterType();
-            if (isEncounter != null) {
-                System.out.print(type);
-                if (type.equals("trader")) {
-                    System.out.println("trade screen should show");
-                    Main.setScene("screens/traderscreen.fxml");
-                    System.out.println("something went wrong");
-                } else if (type.equals("pirate")) {
-                    Main.setScene("screens/piratescreen.fxml");
-                } else if (type.equals("police")) {
-                    Main.setScene("screens/policescreen.fxml");
-                }
-            } else {
-                Main.setScene(planetScreen);
+        encounter = new Encounter(player);
+        String isEncounter = encounter.encounter();
+        type = encounter.getEncounterType();
+        if (isEncounter != null) {
+            if (type.equals("trader")) {
+                Main.setScene("screens/traderscreen.fxml");
+            } else if (type.equals("pirate")) {
+                Main.setScene("screens/piratescreen.fxml");
+            } else if (type.equals("police")) {
+                Main.setScene("screens/policescreen.fxml");
             }
+        } else {
+            Main.setScene(planetScreen);
         }
-
     }
 
     /**
