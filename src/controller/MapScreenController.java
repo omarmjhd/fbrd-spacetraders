@@ -23,13 +23,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-import model.encounters.Encounter;
 import org.controlsfx.dialog.Dialogs;
 
 import model.core.GameInstance;
 import model.core.Player;
 import model.core.Point;
 import model.core.SolarSystem;
+import model.encounters.Encounter;
 import model.events.EventFactory;
 import model.events.RandomEvent;
 
@@ -294,6 +294,10 @@ public class MapScreenController implements Initializable {
      *
      */
     public void returnToPlanet(ActionEvent actionEvent) {
+
+        if (gm.getCurrentPlanet().getMarketplace() == null) {
+            gm.getCurrentPlanet().enterMarket(player);
+        }
 
         Main.setScene(planetScreen);
     }
