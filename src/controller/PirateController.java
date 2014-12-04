@@ -137,11 +137,7 @@ public class PirateController implements Initializable {
             toPlanet.setVisible(true);
         }
         if (encounter.getPlayerHealth() <= 0) {
-            //TODO: GAME OVER
-            fleeButton.setVisible(false);
-            surrenderButton.setVisible(false);
-            fightButton.setVisible(false);
-            toPlanet.setVisible(true);
+            Main.setScene("screens/gameoverscreen");
         }
     }
 }
