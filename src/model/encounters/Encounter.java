@@ -59,6 +59,11 @@ public class Encounter {
      */
     private String encounterType;
 
+    /**
+     * Boolean.
+     */
+    private boolean contrabandFound;
+
 
     /**
      * Constructor for the encounters.
@@ -71,13 +76,21 @@ public class Encounter {
         this.player = player;
         rand = new Random();
         fightSkillModifier = player.getFightingSkill() + 1;
-
+        contrabandFound = false;
     }
 
     public Encounter(Player player, String type) {
         this.player = player;
         encounterType = type;
         fightSkillModifier = player.getFightingSkill() + 1;
+        contrabandFound = false;
+    }
+
+    public Encounter(Player player, String type, boolean contraband) {
+        this.player = player;
+        encounterType = type;
+        fightSkillModifier = player.getFightingSkill() + 1;
+        contrabandFound = true;
     }
 
     /**
@@ -109,9 +122,6 @@ public class Encounter {
                 } else if (type == 1) {
 
                     encounterType = "trader";
-                /* Generates random tech level for setting prices for the trader. */
-                    TechLevel tech = TechLevel.values()[new Random().nextInt(TechLevel.values().length)];
-                    marketplace = new Marketplace(tech, player);
 
                 } else if (type == 2) {
 
@@ -119,34 +129,7 @@ public class Encounter {
 
                 } else if (type == 3) {
                     encounterType = "police";
-                    Ship ship = player.getShip();
-                    boolean isVisible = ship.isVisible();
-
-                    if (!isVisible) {
-
-                        return "You managed to pass the police without notice because of your cloaking gadget!";
-
-                    } else {
-
-                        if (!cargo.contains(Goods.FIREARMS) && !cargo.contains(Goods.NARCOTICS)) {
-                            return "The police inspected your cargo and didn't find anything suspicious. \n" +
-                                    "They apologize for the inconvenience.";
-                        }
-
-                        while (cargo.contains(Goods.FIREARMS)) {
-                            cargo.remove(Goods.FIREARMS);
-                        }
-
-                        while (cargo.contains(Goods.NARCOTICS)) {
-                            cargo.remove(Goods.NARCOTICS);
-                        }
-
-                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
-                                "The items have been taken from your possession.";
-                    }
                 }
-                return encounters[type];
-
             } else {
                 // The below lines always throw a NPE because we are in the branch where
                 // encounterType == null
@@ -181,13 +164,13 @@ public class Encounter {
                             cargo.remove(Goods.NARCOTICS);
                         }
 
-                        return "FREEZE! The police inspected your cargo and found illegal goods! " +
+                        return "FREEZE! The police inspected your cargo and found illegal goods! \n" +
                                 "The items have been taken from your possession.";
 
                     }
                 }
-            return encounters[type];
             }
+            return "";
         }
 
 
@@ -280,6 +263,15 @@ public class Encounter {
         return playerHealth;
     }
 
-    public Marketplace getMarketplace() {return marketplace; };
+    public Marketplace getMarketplace() {
+        return marketplace;
+    }
+
+    public boolean contrabandFound() {
+        if (cargo.contains(Goods.FIREARMS) || cargo.contains(Goods.NARCOTICS)) {
+            return true;
+        }
+        return false;
+    }
 
 }
