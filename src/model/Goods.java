@@ -59,8 +59,27 @@ public enum Goods {
                         + randomVariance;
     }
 
+    /**
+     * Returns lowest tech level for a planet to buy this goods
+     * 
+     * @return the above
+     */
     public TechLevel minTechToUse() {
         return minTechToUse;
+    }
+
+    /**
+     * Returns lowest tech needed to inherently sell the good
+     * 
+     * @return lowest tech level
+     */
+    public TechLevel minTechToProduce() {
+        return minTechProduce;
+    }
+
+    @Override
+    public String toString(){
+        return this.name().charAt(0) + name().substring(1,name().length()).toLowerCase();
     }
 
 }

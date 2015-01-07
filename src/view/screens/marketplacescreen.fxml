@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MarketplaceController">
    <children>
-      <Text fx:id="marketTitle" fontSmoothingType="LCD" layoutX="88.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" wrappingWidth="464.13671875" AnchorPane.topAnchor="13.0">
+      <Text fx:id="marketTitle" fontSmoothingType="LCD" layoutX="14.0" layoutY="52.13818359375" strokeType="OUTSIDE" strokeWidth="0.0" text=" Marketplace" textAlignment="CENTER" wrappingWidth="608.13671875" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
          <fill>
             <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
                <stops>
@@ -39,16 +39,19 @@
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="sellButton" layoutX="491.0" layoutY="414.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Sell!">
+      <Button fx:id="sellButton" disable="true" layoutX="491.0" layoutY="414.0" mnemonicParsing="false" onAction="#sell" prefHeight="40.0" prefWidth="122.0" text="Sell!">
          <font>
             <Font name="Courier New Bold" size="17.0" />
          </font>
       </Button>
       <Label layoutX="69.0" layoutY="372.0" text="Player Money:" AnchorPane.leftAnchor="69.0">
          <font>
-            <Font name="Courier New Bold" size="12.0" />
+            <Font name="Courier New Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="playerMoney" layoutX="163.0" layoutY="371.0" text="200" />
+      <Label fx:id="playerMoney" layoutX="187.0" layoutY="372.0" text="200">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>

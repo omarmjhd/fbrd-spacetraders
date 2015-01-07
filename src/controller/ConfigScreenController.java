@@ -1,8 +1,10 @@
 package controller;
 
 
-import javafx.application.Platform;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -13,15 +15,13 @@ import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
 
-import javax.naming.OperationNotSupportedException;
-
 /**
  * This class handles all button presses and handing of information from the
  * model to the view.
  *
  * @author Joshua Winchester
  */
-public class Controller {
+public class ConfigScreenController implements Initializable {
 
     public Slider engSlide;
     public Slider tradeSlide;
@@ -31,25 +31,9 @@ public class Controller {
     public TextField playerName;
     public Label skillPoints;
 
-    /**
-     * Ends the game when the quit button is pressed
-     *
-     * @param event
-     */
-    public void endGame(ActionEvent event) {
-        Platform.exit();
-    }
-
-    /**
-     * Loads the users old game and starts it
-     *
-     * TODO: Implement loading an old game
-     *
-     * @param actionEvent
-     * @throws OperationNotSupportedException
-     */
-    public void loadSavedGame(ActionEvent actionEvent) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("Loading a saved game is not yet implemented. \n Sorry :(");
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        sliderListener();
     }
 
     /**
@@ -75,15 +59,6 @@ public class Controller {
     }
 
     /**
-     * Starts a new game by sending the player to the character creation screen.
-     *
-     * @param actionEvent
-     */
-    public void startGame(ActionEvent actionEvent) {
-        Main.setScene("screens/configscreen.fxml");
-    }
-
-    /**
      * Updates the skillPoints Label
      *
      */
@@ -96,7 +71,7 @@ public class Controller {
        int investSkill = (int) investSlide.getValue();
 
        int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
-       currentInt = 30 - total;
+       currentInt = 15 - total;
 
        //displays the skillPoints left
        skillPoints.setText("" + currentInt);
@@ -117,7 +92,7 @@ public class Controller {
 
         int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
 
-        if (total <= 30 && !name.equals("")) {
+        if (total <= 15 && !name.equals("")) {
             Player player = new Player(name, pilotSkill, fightSkill, engSkill, tradeSkill, investSkill);
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Player Created!").message("Use this Character?: \n" + player.toString()).lightweight().showConfirm();
             if (response == Dialog.Actions.YES) {
@@ -129,8 +104,8 @@ public class Controller {
                 gm.createUniverse();
                 Main.setScene("screens/mapscreen.fxml");
             }
-        } else if (total >= 30) {
-            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
+        } else if (total > 15) {
+            Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 15. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }

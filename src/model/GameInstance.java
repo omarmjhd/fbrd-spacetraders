@@ -18,6 +18,7 @@ public class GameInstance {
     private HashSet<Point> points = new HashSet<>();
 
     private Planet currentPlanet;
+    private SolarSystem currentSolarSystem;
 
     private String[] planetNames = { "Acamar", "Adahn", "Aldea", "Andevian", "Antedi",
             "Balosnee", "Baratas", "Brax", "Bretel",
@@ -77,6 +78,12 @@ public class GameInstance {
         return player;
     }
 
+    public SolarSystem getSolarSystem() { return currentSolarSystem; };
+
+    public void setCurrentSolarSystem(SolarSystem desination) {
+        currentSolarSystem = desination;
+    };
+
     public HashSet<SolarSystem> getSolarSystems() {
         return solarSystems;
     }
@@ -100,8 +107,11 @@ public class GameInstance {
             throw new IllegalArgumentException(
                             "Number is bigger than planet names");
         }
+        Random rand = new Random();
+        int startingLocation = rand.nextInt(number) - 1;
+
         for (int i = 0; i < number; i++) {
-            Random rand = new Random();
+
             int resourceNum =  rand.nextInt(resources.length);
             int techLevelNum = rand.nextInt(techLevels.length);
 
@@ -114,7 +124,6 @@ public class GameInstance {
             Planet planet = new Planet(planetNames[planetCount], resources[resourceNum], techLevels[techLevelNum]);
             planets.add(planet);
 
-
             planetCount++;
             SolarSystem solarsystem = new SolarSystem(solarSystemNames[solarSystemCount], point, planet);
             System.out.println(solarsystem.toString());
@@ -122,6 +131,12 @@ public class GameInstance {
 
             solarSystems.add(solarsystem);
 
+            if (startingLocation == i) {
+
+                setCurrentPlanet(planet);
+                setCurrentSolarSystem(solarsystem);
+
+            }
 
         }
     }

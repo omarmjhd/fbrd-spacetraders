@@ -1,5 +1,7 @@
 package model;
 
+import java.util.AbstractList;
+
 /**
  * This class represents the Player and his state.
  *
@@ -61,10 +63,41 @@ public class Player {
         ship.addCargo(item);
     }
 
+    public AbstractList<Goods> getCargo() {
+        return ship.getCargo();
+    }
+
     public Goods removeCargo(Goods item) {
         return ship.removeCargo(item);
     }
 
+    /**
+     * Travels the distance. Uses distance units of fuel
+     *
+     * @param distance
+     *        distance to travel
+     */
+    public void travel(int distance) {
+        ship.travel(distance);
+    }
+
+    /**
+     * Gets the current amount of fuel
+     *
+     * @return fuel left in Ship
+     */
+    public int getCurrentFuel() {
+        return ship.getCurrentFuel();
+    }
+
+    /**
+     * Gets maxmium amount of fuel for the given Ship
+     * 
+     * @return maximum amount of fuel in Ship
+     */
+    public int getMaxFuel() {
+        return ship.getMaxFuel();
+    }
 
     @Override
     public String toString() {
@@ -75,9 +108,5 @@ public class Player {
         retval += "Trading Skill: " + TRADE_SKILL + "\n";
         retval += "Investing Skill: " + INVEST_SKILL + "\n";
         return retval;
-    }
-
-    public Ship getShip() {
-        return ship;
     }
 }

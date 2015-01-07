@@ -1,5 +1,7 @@
 package model;
 
+import java.util.AbstractList;
+
 /**
  * This class represents a Ship object. A ship contains cargo, weapons, shields,
  * gadgets, and crew. It also has fuel, a purchasing price, and NPC disposition
@@ -14,15 +16,15 @@ package model;
  */
 public enum Ship {
 
-    FLEA(10, 0, 0, 0, 1, 50, 1, 2000, 5, 25, -1, -1, 0),
+    FLEA(10, 0, 0, 0, 1, 500, 1, 2000, 5, 25, -1, -1, 0),
 
-    GNAT(15, 1, 0, 1, 1, 14, 2, 10000, 50, 100, 0, 0, 1),
+    GNAT(15, 1, 0, 1, 1, 140, 2, 10000, 50, 100, 0, 0, 1),
 
-    FIREFLY(20, 1, 1, 1, 1, 17, 3, 25000, 75, 100, 0, 0, 1),
+    FIREFLY(20, 1, 1, 1, 1, 170, 3, 25000, 75, 100, 0, 0, 1),
 
-    MOSQUITO(15, 2, 1, 1, 1, 13, 5, 30000, 100, 100, 0, 1, 1),
+    MOSQUITO(15, 2, 1, 1, 1, 130, 5, 30000, 100, 100, 0, 1, 1),
 
-    BUMBLEBEE(25, 1, 2, 2, 2, 15, 7, 60000, 125, 100, 0, 1, 2);
+    BUMBLEBEE(25, 1, 2, 2, 2, 150, 7, 60000, 125, 100, 0, 1, 2);
 
     private PresizedList<Goods> cargo;
 
@@ -75,6 +77,15 @@ public enum Ship {
     }
 
     /**
+     * Returns the list of cargo the Ship contains
+     *
+     * @return
+     */
+    public AbstractList<Goods> getCargo() {
+        return cargo;
+    }
+
+    /**
      * Adds cargo to the ship
      *
      * @param item
@@ -96,7 +107,12 @@ public enum Ship {
      *         if item is null
      */
     public Goods removeCargo(Goods item) throws IllegalArgumentException {
-        return cargo.remove(item);
+        boolean wasRemoved = cargo.remove(item);
+        if (wasRemoved) {
+            return item;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -110,6 +126,43 @@ public enum Ship {
         for (Goods item : cargo) {
             other.addCargo(item);
         }
+    }
+
+    /**
+     * Remove [distance] units of fuel after travelling distance.
+     *
+     * @param distance
+     *        the distance to travel
+     */
+    public void travel(int distance) {
+        currentFuel -= distance;
+    }
+
+    /**
+     * Returns the current amount of fuel
+     *
+     * @return current fuel
+     */
+    public int getCurrentFuel() {
+        return currentFuel;
+    }
+
+    /**
+     * Adds fuel to the ship.
+     *
+     * @param amount
+     */
+    public void buyFuel(int amount) {
+        currentFuel += amount;
+    }
+
+    /**
+     * Returns the maximum amount of fuel
+     *
+     * @return maxFuel
+     */
+    public int getMaxFuel() {
+        return maxFuel;
     }
 
     /*
@@ -136,23 +189,19 @@ public enum Ship {
         return gadgets.maxSize();
     }
 
-    public PresizedList<Goods> getCargo() {
-        return cargo;
-    }
-
-    public PresizedList<Weapon> getWeapons() {
+    public AbstractList<Weapon> getWeapons() {
         return weapons;
     }
 
-    public PresizedList<Shield> getShields() {
+    public AbstractList<Shield> getShields() {
         return shields;
     }
 
-    public PresizedList<Gadget> getGadgets() {
+    public AbstractList<Gadget> getGadgets() {
         return gadgets;
     }
 
-    public PresizedList<Crew> getCrew() {
+    public AbstractList<Crew> getCrew() {
         return crew;
     }
 }
