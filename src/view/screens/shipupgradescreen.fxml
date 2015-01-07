@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpgradeShipScreenController">
+   <children>
+      <Text fx:id="shipyardTitle" fontSmoothingType="LCD" layoutX="7.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Ship Upgrades" textAlignment="CENTER" wrappingWidth="608.13671875" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="22.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.6857142857142857" startY="0.2761904761904762">
+               <stops>
+                  <Stop color="#bf0101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <font>
+            <Font name="Courier New Bold Italic" size="35.0" />
+         </font>
+      </Text>
+      <Button fx:id="buyButton" layoutX="342.0" layoutY="362.0" mnemonicParsing="false" onAction="#buy" prefHeight="40.0" prefWidth="122.0" text="Buy!" AnchorPane.bottomAnchor="78.0" AnchorPane.rightAnchor="176.0">
+         <font>
+            <Font name="Courier New Bold" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="sellButton" disable="true" layoutX="474.0" layoutY="362.0" mnemonicParsing="false" onAction="#sell" prefHeight="40.0" prefWidth="122.0" text="Sell!" AnchorPane.bottomAnchor="78.0" AnchorPane.rightAnchor="45.0">
+         <font>
+            <Font name="Courier New Bold" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="91.0" layoutY="300.0" text="Player Money:" AnchorPane.leftAnchor="91.0">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerMoney" layoutX="209.0" layoutY="300.0" text="200" AnchorPane.leftAnchor="209.0">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="leaveButton" layoutX="338.0" layoutY="416.0" mnemonicParsing="false" onAction="#returnToShipyard" prefHeight="40.0" prefWidth="257.0" text="Back to Shipyard" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="45.0">
+         <font>
+            <Font name="Courier New Bold" size="14.0" />
+         </font>
+      </Button>
+      <ListView fx:id="shipyardView" layoutX="362.0" layoutY="80.0" prefHeight="200.0" prefWidth="240.0" AnchorPane.rightAnchor="44.0" />
+      <Label layoutX="356.0" layoutY="63.0" text="Shipyard" AnchorPane.rightAnchor="226.0">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="63.0" text="Your Ship" AnchorPane.leftAnchor="44.0">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font></Label>
+      <ListView fx:id="shipView" layoutX="44.0" layoutY="80.0" prefHeight="200.0" prefWidth="240.0" AnchorPane.leftAnchor="44.0" />
+   </children>
+</AnchorPane>

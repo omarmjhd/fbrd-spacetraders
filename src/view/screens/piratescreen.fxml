@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="pane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PirateController">
+   <children>
+      <ImageView fx:id="backgroundView" fitHeight="497.0" fitWidth="654.0" layoutX="-6.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/pirateship.jpg" />
+         </image>
+      </ImageView>
+      <Canvas fx:id="canvas" height="480.0" width="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Text fontSmoothingType="LCD" layoutX="253.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PIRATE" wrappingWidth="288.13671875" AnchorPane.leftAnchor="253.0" AnchorPane.topAnchor="89.86181640625">
+         <font>
+            <Font name="Courier New Bold Italic" size="35.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="0.919047619047619" startX="0.16666666666666663" startY="0.13333333333333336">
+               <stops>
+                  <Stop color="#bf0101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fill="WHITE" layoutX="176.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You encountered a...">
+         <font>
+            <Font name="Courier New" size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="surrenderButton" layoutX="14.0" layoutY="333.0" mnemonicParsing="false" onAction="#surrenderAction" prefHeight="47.0" prefWidth="165.0" text="Surrender" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="fleeButton" layoutX="459.0" layoutY="333.0" mnemonicParsing="false" onAction="#fleeAction" prefHeight="47.0" prefWidth="165.0" text="Flee" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="fightButton" layoutX="237.0" layoutY="333.0" mnemonicParsing="false" onAction="#fightAction" prefHeight="47.0" prefWidth="165.0" text="Fight" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Button>
+      <Text fx:id="encounterMessage" fill="WHITE" layoutX="231.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pirate text goes here">
+         <font>
+            <Font name="Courier New" size="14.0" />
+         </font>
+      </Text>
+      <ProgressBar fx:id="pirateHealthBar" layoutX="26.0" layoutY="101.0" prefWidth="200.0" progress="1.0">
+         <effect>
+            <ColorAdjust hue="0.98" />
+         </effect>
+      </ProgressBar>
+      <ProgressBar fx:id="playerHealthBar" layoutX="424.0" layoutY="260.0" prefWidth="200.0" progress="1.0">
+         <effect>
+            <ColorAdjust hue="-0.53" />
+         </effect>
+      </ProgressBar>
+      <Text fill="WHITE" layoutX="26.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pirate's health">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="424.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your health">
+         <font>
+            <Font name="Courier New" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="toPlanet" layoutX="237.0" layoutY="401.0" mnemonicParsing="false" onAction="#planetAction" prefHeight="47.0" prefWidth="165.0" text="To Planet" textAlignment="CENTER">
+         <font>
+            <Font name="Courier New Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
