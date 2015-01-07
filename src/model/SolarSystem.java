@@ -1,8 +1,7 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A SolarSystem has a position in the universe and contains planets, which have
@@ -15,7 +14,7 @@ public class SolarSystem {
 
     private String name;
     private Point pos;
-    private Set<Planet> planets;
+    private ArrayList<Planet> planets;
 
     public SolarSystem(String name, int x, int y, Planet... varPlanets) {
         this(name, new Point(x, y), varPlanets);
@@ -24,7 +23,7 @@ public class SolarSystem {
     public SolarSystem(String name, Point pos, Planet... varPlanets) {
         this.name = name;
         this.pos = pos;
-        planets = new HashSet<Planet>();
+        planets = new ArrayList<>();
         for (Planet p : varPlanets) {
             planets.add(p);
         }
@@ -37,7 +36,7 @@ public class SolarSystem {
     public SolarSystem(String name, Point pos, Collection<Planet> varPlanets) {
         this.name = name;
         this.pos = pos;
-        planets = new HashSet<Planet>();
+        planets = new ArrayList<>();
         planets.addAll(varPlanets);
 
     }
@@ -72,4 +71,7 @@ public class SolarSystem {
 
     }
 
+    public ArrayList<Planet> getPlanets() {
+        return planets;
+    }
 }

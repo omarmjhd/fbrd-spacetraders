@@ -3,15 +3,17 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javax.naming.OperationNotSupportedException;
-import model.GameModel;
+import model.GameInstance;
 import model.Player;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
 import view.Main;
+
+import javax.naming.OperationNotSupportedException;
 
 /**
  * This class handles all button presses and handing of information from the
@@ -27,6 +29,7 @@ public class Controller {
     public Slider investSlide;
     public Slider pilotSlide;
     public TextField playerName;
+    public Label skillPoints;
 
     /**
      * Ends the game when the quit button is pressed
@@ -50,13 +53,54 @@ public class Controller {
     }
 
     /**
-     * Stats a new game by sending the player to the character creation screen.
+     * Listens for change in slider values and calls sliders()
+     */
+    public void sliderListener() {
+        // Handle Slider value change events.
+        engSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        tradeSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        fightSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        investSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+        pilotSlide.valueProperty().addListener((observable, oldValue, newValue) -> {
+            sliders();
+        });
+    }
+
+    /**
+     * Starts a new game by sending the player to the character creation screen.
      *
      * @param actionEvent
      */
     public void startGame(ActionEvent actionEvent) {
         Main.setScene("screens/configscreen.fxml");
     }
+
+    /**
+     * Updates the skillPoints Label
+     *
+     */
+   public void sliders() {
+       int currentInt = 0;
+       int pilotSkill = (int) pilotSlide.getValue();
+       int fightSkill = (int) fightSlide.getValue();
+       int engSkill = (int) engSlide.getValue();
+       int tradeSkill = (int) tradeSlide.getValue();
+       int investSkill = (int) investSlide.getValue();
+
+       int total = pilotSkill + fightSkill + engSkill + tradeSkill + investSkill;
+       currentInt = 30 - total;
+
+       //displays the skillPoints left
+       skillPoints.setText("" + currentInt);
+   }
 
     /**
      * Creates the Game from the slider values when the user presses the button.
@@ -81,16 +125,15 @@ public class Controller {
                 Main.getGame().getPlayer().addMoney(1000);
                 System.out.println("Player Created");
                 System.out.println(Main.getGame().getPlayer());
-                GameModel gm = GameModel.getInstance();
+                GameInstance gm = GameInstance.getInstance();
                 gm.createUniverse();
+                Main.setScene("screens/mapscreen.fxml");
             }
         } else if (total >= 30) {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Too Many Skill Points").message("You have used " + total + " skill points. You are only allowed 30. \n Try again.").lightweight().showWarning();
         } else {
             Action response = Dialogs.create().owner(Main.getPrimaryStage()).title("Invalid Name").message("You have not entered a name.").lightweight().showWarning();
         }
-
-
 
     }
 
